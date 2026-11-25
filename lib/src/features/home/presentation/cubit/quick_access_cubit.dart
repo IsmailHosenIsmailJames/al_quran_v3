@@ -103,9 +103,10 @@ class QuickAccessCubit extends Cubit<List<QuickAccessModel>> {
   }
 
   void removeQuickAccess(QuickAccessModel quickAccessModel) {
-    List<QuickAccessModel> copyState = ([...state]..removeWhere(
-      (element) => element.surahNumber == quickAccessModel.surahNumber,
-    ));
+    List<QuickAccessModel> copyState = ([...state]
+      ..removeWhere(
+        (element) => element.surahNumber == quickAccessModel.surahNumber,
+      ));
     copyState.sort((a, b) => b.createdAt.compareTo(a.createdAt));
     emit(copyState);
     Hive.box(
@@ -118,10 +119,9 @@ class QuickAccessCubit extends Cubit<List<QuickAccessModel>> {
     int index = state.indexWhere(
       (element) => element.surahNumber == quickAccessModel.surahNumber,
     );
-    List<QuickAccessModel> copyState =
-        [...state]
-          ..removeAt(index)
-          ..insert(index, quickAccessModel);
+    List<QuickAccessModel> copyState = [...state]
+      ..removeAt(index)
+      ..insert(index, quickAccessModel);
 
     copyState.sort((a, b) => b.createdAt.compareTo(a.createdAt));
     emit(copyState);
@@ -135,7 +135,10 @@ class QuickAccessCubit extends Cubit<List<QuickAccessModel>> {
     final raw = Hive.box("user").get("quick_access", defaultValue: null);
     if (raw != null && raw is List) {
       final items = raw
-          .map((e) => QuickAccessModel.fromJson(Map<String, dynamic>.from(e as Map)))
+          .map(
+            (e) =>
+                QuickAccessModel.fromJson(Map<String, dynamic>.from(e as Map)),
+          )
           .toList();
       items.sort((a, b) => b.createdAt.compareTo(a.createdAt));
       emit(items);

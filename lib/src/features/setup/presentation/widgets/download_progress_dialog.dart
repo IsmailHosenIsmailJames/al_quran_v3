@@ -4,7 +4,7 @@ import "package:al_quran_v3/src/features/setup/presentation/bloc/download_state.
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -308,12 +308,12 @@ class DownloadProgressDialog extends StatelessWidget {
                                 color: isActive
                                     ? themeState.primary
                                     : (isDone
-                                        ? (isDark
-                                            ? Colors.white
-                                            : Colors.grey.shade900)
-                                        : (isDark
-                                            ? Colors.grey.shade400
-                                            : Colors.grey.shade600)),
+                                          ? (isDark
+                                                ? Colors.white
+                                                : Colors.grey.shade900)
+                                          : (isDark
+                                                ? Colors.grey.shade400
+                                                : Colors.grey.shade600)),
                               ),
                             ),
                             const Gap(1),
@@ -357,9 +357,9 @@ class DownloadProgressDialog extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: const Color(0xFF16A34A).withValues(
-              alpha: isDark ? 0.2 : 0.1,
-            ),
+            color: const Color(
+              0xFF16A34A,
+            ).withValues(alpha: isDark ? 0.2 : 0.1),
           ),
           child: const Icon(
             Icons.check_circle_rounded,
@@ -403,9 +403,9 @@ class DownloadProgressDialog extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: const Color(0xFFDC2626).withValues(
-              alpha: isDark ? 0.2 : 0.1,
-            ),
+            color: const Color(
+              0xFFDC2626,
+            ).withValues(alpha: isDark ? 0.2 : 0.1),
           ),
           child: const Icon(
             Icons.error_outline_rounded,

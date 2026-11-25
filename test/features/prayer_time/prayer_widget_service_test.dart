@@ -24,26 +24,38 @@ void main() {
 
     // Mock HomeWidget platform channel
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMethodCallHandler(const MethodChannel("home_widget"), (call) async {
-      return true;
-    });
+        .setMockMethodCallHandler(const MethodChannel("home_widget"), (
+          call,
+        ) async {
+          return true;
+        });
   });
 
   group("PrayerWidgetService Unit Tests", () {
     test("prayerTitle returns correct title for all prayers", () {
       final l10n = AppLocalizationsEn();
       expect(PrayerWidgetService.prayerTitle(Prayer.fajr, l10n), l10n.fajr);
-      expect(PrayerWidgetService.prayerTitle(Prayer.sunrise, l10n), l10n.sunrise);
+      expect(
+        PrayerWidgetService.prayerTitle(Prayer.sunrise, l10n),
+        l10n.sunrise,
+      );
       expect(PrayerWidgetService.prayerTitle(Prayer.dhuhr, l10n), l10n.dhuhr);
       expect(PrayerWidgetService.prayerTitle(Prayer.asr, l10n), l10n.asr);
-      expect(PrayerWidgetService.prayerTitle(Prayer.maghrib, l10n), l10n.maghrib);
+      expect(
+        PrayerWidgetService.prayerTitle(Prayer.maghrib, l10n),
+        l10n.maghrib,
+      );
       expect(PrayerWidgetService.prayerTitle(Prayer.isha, l10n), l10n.isha);
-      expect(PrayerWidgetService.prayerTitle(Prayer.tahajjud, l10n), l10n.tahajjud);
+      expect(
+        PrayerWidgetService.prayerTitle(Prayer.tahajjud, l10n),
+        l10n.tahajjud,
+      );
     });
 
     test("PrayerTimeline accurately resolves upcoming event", () {
       const coords = Coordinates(23.8103, 90.4125); // Dhaka
-      final params = CalculationMethodParameters.karachi()..madhab = Madhab.hanafi;
+      final params = CalculationMethodParameters.karachi()
+        ..madhab = Madhab.hanafi;
       final pt = PrayerTimes(
         coordinates: coords,
         date: DateTime.now(),
@@ -64,21 +76,24 @@ void main() {
       expect(timeline.durationUntilNext.isNegative, isFalse);
     });
 
-    test("PrayerWidgetService generates valid 7-day multi-day JSON timeline", () async {
-      final locState = LocationQiblaPrayerDataState(
-        latLon: const LatLon(latitude: 23.8103, longitude: 90.4125), // Dhaka
-        calculationMethod: CalculationMethodParameters.karachi(),
-        madhab: Madhab.hanafi,
-      );
+    test(
+      "PrayerWidgetService generates valid 7-day multi-day JSON timeline",
+      () async {
+        final locState = LocationQiblaPrayerDataState(
+          latLon: const LatLon(latitude: 23.8103, longitude: 90.4125), // Dhaka
+          calculationMethod: CalculationMethodParameters.karachi(),
+          madhab: Madhab.hanafi,
+        );
 
-      final now = DateTime.now();
+        final now = DateTime.now();
 
-      // Verify that updateWidgets executes cleanly
-      await PrayerWidgetService.updateWidgets(
-        locationState: locState,
-        currentTime: now,
-        locationNameOverride: "Dhaka",
-      );
-    });
+        // Verify that updateWidgets executes cleanly
+        await PrayerWidgetService.updateWidgets(
+          locationState: locState,
+          currentTime: now,
+          locationNameOverride: "Dhaka",
+        );
+      },
+    );
   });
 }

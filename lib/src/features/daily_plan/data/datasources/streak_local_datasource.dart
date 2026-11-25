@@ -177,8 +177,10 @@ class StreakLocalDataSource {
           !activeKhatam.isCompleted) {
         final updatedKhatam = KhatamPlanModel.fromEntity(
           activeKhatam.copyWith(
-            completedPages:
-                (activeKhatam.completedPages + 1).clamp(0, activeKhatam.totalPages),
+            completedPages: (activeKhatam.completedPages + 1).clamp(
+              0,
+              activeKhatam.totalPages,
+            ),
           ),
         );
         await saveKhatamPlan(updatedKhatam);

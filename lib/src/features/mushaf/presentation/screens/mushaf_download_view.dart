@@ -5,7 +5,7 @@ import "package:al_quran_v3/src/features/mushaf/presentation/cubit/mushaf_state.
 import "package:al_quran_v3/src/features/mushaf/presentation/widgets/mushaf_feature_card.dart";
 import "package:cached_network_image/cached_network_image.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:shimmer/shimmer.dart";
@@ -114,10 +114,10 @@ class MushafDownloadView extends StatelessWidget {
               fit: BoxFit.cover,
               alignment: Alignment.topCenter,
               placeholder: (context, url) => Shimmer.fromColors(
-                baseColor:
-                    isDark ? Colors.grey.shade800 : Colors.grey.shade300,
-                highlightColor:
-                    isDark ? Colors.grey.shade700 : Colors.grey.shade100,
+                baseColor: isDark ? Colors.grey.shade800 : Colors.grey.shade300,
+                highlightColor: isDark
+                    ? Colors.grey.shade700
+                    : Colors.grey.shade100,
                 child: Container(
                   color: isDark ? Colors.grey.shade900 : Colors.white,
                 ),
@@ -167,10 +167,7 @@ class MushafDownloadView extends StatelessWidget {
                   const Gap(2),
                   Text(
                     l10n.kfgqpcDescription,
-                    style: const TextStyle(
-                      color: Colors.white70,
-                      fontSize: 13,
-                    ),
+                    style: const TextStyle(color: Colors.white70, fontSize: 13),
                   ),
                 ],
               ),
@@ -242,8 +239,8 @@ class MushafDownloadView extends StatelessWidget {
                         state.downloadStatus.isNotEmpty
                             ? state.downloadStatus
                             : (isExtracting
-                                ? l10n.settingUpOfflinePages
-                                : l10n.fetchingLayoutArchive),
+                                  ? l10n.settingUpOfflinePages
+                                  : l10n.fetchingLayoutArchive),
                         style: TextStyle(
                           fontSize: 12,
                           color: isDark
@@ -272,10 +269,10 @@ class MushafDownloadView extends StatelessWidget {
                     ? state.downloadProgress
                     : null,
                 minHeight: 8,
-                backgroundColor:
-                    themeState.primary.withValues(alpha: isDark ? 0.15 : 0.1),
-                valueColor:
-                    AlwaysStoppedAnimation<Color>(themeState.primary),
+                backgroundColor: themeState.primary.withValues(
+                  alpha: isDark ? 0.15 : 0.1,
+                ),
+                valueColor: AlwaysStoppedAnimation<Color>(themeState.primary),
               ),
             ),
             const Gap(10),
@@ -299,16 +296,17 @@ class MushafDownloadView extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.red.withValues(alpha: isDark ? 0.12 : 0.06),
           borderRadius: BorderRadius.circular(18),
-          border: Border.all(
-            color: Colors.red.withValues(alpha: 0.3),
-          ),
+          border: Border.all(color: Colors.red.withValues(alpha: 0.3)),
         ),
         child: Column(
           children: [
             Row(
               children: [
-                const Icon(FluentIcons.warning_24_regular,
-                    color: Colors.red, size: 24),
+                const Icon(
+                  FluentIcons.warning_24_regular,
+                  color: Colors.red,
+                  size: 24,
+                ),
                 const Gap(12),
                 Expanded(
                   child: Text(
@@ -347,8 +345,10 @@ class MushafDownloadView extends StatelessWidget {
                 onPressed: () {
                   context.read<MushafCubit>().downloadMushaf();
                 },
-                icon: const Icon(FluentIcons.arrow_clockwise_24_regular,
-                    size: 18),
+                icon: const Icon(
+                  FluentIcons.arrow_clockwise_24_regular,
+                  size: 18,
+                ),
                 label: Text(
                   l10n.retryDownload,
                   style: const TextStyle(fontWeight: FontWeight.bold),
@@ -384,13 +384,11 @@ class MushafDownloadView extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 13.5,
                   fontWeight: FontWeight.w600,
-                  color:
-                      isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                  color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
                 ),
               ),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
                   color: themeState.primary.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(8),

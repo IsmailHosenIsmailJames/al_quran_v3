@@ -1,5 +1,5 @@
 import "package:al_quran_v3/src/features/quran_resources/data/utils/location_resources_function.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 import "package:injectable/injectable.dart";
@@ -7,7 +7,8 @@ import "package:injectable/injectable.dart";
 part 'manual_location_selection_cubit.freezed.dart';
 
 @freezed
-abstract class ManualLocationSelectionState with _$ManualLocationSelectionState {
+abstract class ManualLocationSelectionState
+    with _$ManualLocationSelectionState {
   const factory ManualLocationSelectionState({
     @Default(0.0) double? downloadProgress,
     String? country,
@@ -53,10 +54,13 @@ class ManualLocationSelectionCubit extends Cubit<ManualLocationSelectionState> {
 
     changeData(isLoading: true, isError: false, isSuccess: false);
     Map? data = await LocationResourcesFunction.loadLocationResources();
-    
+
     if (data == null) {
       // Data not found locally, download it
-      bool downloaded = await LocationResourcesFunction.downloadLocationResources(context: context);
+      bool downloaded =
+          await LocationResourcesFunction.downloadLocationResources(
+            context: context,
+          );
       if (downloaded) {
         data = await LocationResourcesFunction.loadLocationResources();
       }
@@ -70,17 +74,13 @@ class ManualLocationSelectionCubit extends Cubit<ManualLocationSelectionState> {
         isError: false,
       );
     } else {
-      changeData(
-        isLoading: false,
-        isSuccess: false,
-        isError: true,
-      );
+      changeData(isLoading: false, isSuccess: false, isError: true);
     }
   }
 
   void selectCountry(String country) {
     if (state.locationData == null) return;
-    
+
     // Flatten cities from all admin regions of the country
     final countryData = state.locationData![country];
     List flattenedCities = [];
@@ -91,9 +91,11 @@ class ManualLocationSelectionCubit extends Cubit<ManualLocationSelectionState> {
         }
       }
     }
-    
+
     // Sort cities alphabetically
-    flattenedCities.sort((a, b) => (a['city'] as String).compareTo(b['city'] as String));
+    flattenedCities.sort(
+      (a, b) => (a['city'] as String).compareTo(b['city'] as String),
+    );
 
     changeData(
       country: country,

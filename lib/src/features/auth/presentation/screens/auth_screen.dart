@@ -5,7 +5,7 @@ import "package:al_quran_v3/src/features/auth/presentation/cubit/auth_cubit.dart
 import "package:al_quran_v3/src/features/auth/presentation/cubit/auth_state.dart";
 import "package:al_quran_v3/src/features/sync/presentation/cubit/sync_cubit.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
@@ -358,7 +358,10 @@ class _AuthScreenState extends State<AuthScreen> {
                     ),
                     const Spacer(),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2.5),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 7,
+                        vertical: 2.5,
+                      ),
                       decoration: BoxDecoration(
                         color: themeState.primary.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(6),
@@ -396,7 +399,9 @@ class _AuthScreenState extends State<AuthScreen> {
                   style: TextStyle(
                     fontSize: 12,
                     height: 1.38,
-                    color: isDark ? Colors.grey.shade400 : const Color(0xFF4B5563),
+                    color: isDark
+                        ? Colors.grey.shade400
+                        : const Color(0xFF4B5563),
                   ),
                 ),
               ],
@@ -433,9 +438,7 @@ class _AuthScreenState extends State<AuthScreen> {
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 6),
                 decoration: BoxDecoration(
-                  color: isDark
-                      ? const Color(0xFF1E1E1E)
-                      : Colors.white,
+                  color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
                   borderRadius: BorderRadius.circular(13),
                   border: Border.all(
                     color: isDark
@@ -455,11 +458,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(
-                      chip.$1,
-                      size: 20,
-                      color: themeState.primary,
-                    ),
+                    Icon(chip.$1, size: 20, color: themeState.primary),
                     const Gap(5),
                     Text(
                       chip.$2,
@@ -469,7 +468,9 @@ class _AuthScreenState extends State<AuthScreen> {
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w700,
-                        color: isDark ? Colors.grey.shade200 : Colors.grey.shade800,
+                        color: isDark
+                            ? Colors.grey.shade200
+                            : Colors.grey.shade800,
                       ),
                     ),
                   ],
@@ -499,9 +500,7 @@ class _AuthScreenState extends State<AuthScreen> {
             color: isDark ? Colors.white24 : Colors.grey.shade300,
             width: 1.1,
           ),
-          backgroundColor: isDark
-              ? const Color(0xFF1E1E1E)
-              : Colors.white,
+          backgroundColor: isDark ? const Color(0xFF1E1E1E) : Colors.white,
           elevation: isDark ? 0 : 0.5,
           shadowColor: Colors.black.withValues(alpha: 0.1),
         ),
@@ -582,8 +581,8 @@ class _AuthScreenState extends State<AuthScreen> {
                     color: _selectedTabIndex == 0
                         ? Colors.white
                         : (isDark
-                            ? Colors.grey.shade400
-                            : Colors.grey.shade700),
+                              ? Colors.grey.shade400
+                              : Colors.grey.shade700),
                   ),
                 ),
               ),
@@ -622,8 +621,8 @@ class _AuthScreenState extends State<AuthScreen> {
                     color: _selectedTabIndex == 1
                         ? Colors.white
                         : (isDark
-                            ? Colors.grey.shade400
-                            : Colors.grey.shade700),
+                              ? Colors.grey.shade400
+                              : Colors.grey.shade700),
                   ),
                 ),
               ),
@@ -760,9 +759,9 @@ class _AuthScreenState extends State<AuthScreen> {
                     final pass = _signInPasswordController.text;
                     if (email.isNotEmpty && pass.isNotEmpty) {
                       context.read<AuthCubit>().signInWithEmail(
-                            email: email,
-                            password: pass,
-                          );
+                        email: email,
+                        password: pass,
+                      );
                     }
                   },
             child: isLoading
@@ -928,10 +927,10 @@ class _AuthScreenState extends State<AuthScreen> {
                     final pass = _signUpPasswordController.text;
                     if (email.isNotEmpty && pass.isNotEmpty) {
                       context.read<AuthCubit>().signUpWithEmail(
-                            email: email,
-                            password: pass,
-                            displayName: name,
-                          );
+                        email: email,
+                        password: pass,
+                        displayName: name,
+                      );
                     }
                   },
             child: isLoading

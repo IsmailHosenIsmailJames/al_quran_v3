@@ -66,17 +66,20 @@ class SearchQuranUseCase {
     final queryTokens = filter.matchExactPhrase
         ? const <String>[]
         : lowerQuery
-            .split(RegExp(r"\s+"))
-            .where((t) => t.trim().isNotEmpty)
-            .toList();
+              .split(RegExp(r"\s+"))
+              .where((t) => t.trim().isNotEmpty)
+              .toList();
 
-    final shouldSearchArabic = filter.scope == SearchScope.arabic ||
+    final shouldSearchArabic =
+        filter.scope == SearchScope.arabic ||
         (filter.scope == SearchScope.all && isArabicQuery);
 
-    final shouldSearchTranslations = filter.scope == SearchScope.translations ||
+    final shouldSearchTranslations =
+        filter.scope == SearchScope.translations ||
         (filter.scope == SearchScope.all && !isArabicQuery);
 
-    final shouldSearchTafsirs = filter.scope == SearchScope.tafsir ||
+    final shouldSearchTafsirs =
+        filter.scope == SearchScope.tafsir ||
         (filter.scope == SearchScope.all && !isArabicQuery);
 
     // --- Search in Arabic Quran Script ---
@@ -117,7 +120,9 @@ class SearchQuranUseCase {
 
           final verseMap = entry.value;
           final String translationText = verseMap["t"]?.toString() ?? "";
-          final Map footnotes = verseMap["f"] is Map ? verseMap["f"] as Map : {};
+          final Map footnotes = verseMap["f"] is Map
+              ? verseMap["f"] as Map
+              : {};
 
           final bool matchInTranslation = _textMatchesQuery(
             translationText,
@@ -188,10 +193,7 @@ class SearchQuranUseCase {
               () => _AyahMatchCollector(ayahKey: ayahKey),
             );
             collector.tafsirMatches.add(
-              TafsirMatchItem(
-                bookInfo: book,
-                text: tafsirText,
-              ),
+              TafsirMatchItem(bookInfo: book, text: tafsirText),
             );
             collector.score += 1.5;
           }
@@ -245,7 +247,8 @@ class SearchQuranUseCase {
       directJump: directJump,
       surahMatches: surahMatches,
       ayahResults: ayahResults,
-      totalCount: ayahResults.length +
+      totalCount:
+          ayahResults.length +
           surahMatches.length +
           (directJump != null ? 1 : 0),
     );

@@ -37,7 +37,7 @@ import "package:al_quran_v3/src/core/localization/language_cubit.dart";
 import "package:awesome_notifications/awesome_notifications.dart";
 import "package:dartx/dartx_io.dart";
 import "package:flutter/foundation.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:intl/intl.dart";
 import "package:permission_handler/permission_handler.dart";
 import "package:shared_preferences/shared_preferences.dart";
@@ -83,7 +83,8 @@ class ReminderScheduler {
 
     if (soundType == "adhan") {
       soundSource = "resource://raw/adhan";
-    } else if (soundType == "default_sound" || soundType == "notification_sound") {
+    } else if (soundType == "default_sound" ||
+        soundType == "notification_sound") {
       soundSource = "resource://raw/notification_sound";
     } else if (soundType == "system_alarm") {
       notifRingtoneType = DefaultRingtoneType.Alarm;
@@ -137,8 +138,8 @@ class ReminderScheduler {
       final nativeSoundUri = soundType == "adhan"
           ? "resource://raw/adhan"
           : ((soundType == "default_sound" || soundType == "notification_sound")
-              ? "resource://raw/notification_sound"
-              : soundUri ?? soundType);
+                ? "resource://raw/notification_sound"
+                : soundUri ?? soundType);
 
       await RingtoneService.createOrUpdateNotificationChannel(
         channelKey: notifChannelKey,
@@ -199,12 +200,14 @@ class ReminderScheduler {
 
     final notifChannelKey = getNotificationChannelKey();
     final alarmChannelKey = getAlarmChannelKey();
-    final localTimeZone = await AwesomeNotifications().getLocalTimeZoneIdentifier();
+    final localTimeZone = await AwesomeNotifications()
+        .getLocalTimeZoneIdentifier();
 
     for (int i = 0; i < next7DaysPrayerTimes.length; i++) {
       final prayerTimesToday = next7DaysPrayerTimes[i];
       for (Prayer prayerName in prayerTimesToday.keys) {
-        final mode = reminderState.prayerReminderModes?[prayerName] ??
+        final mode =
+            reminderState.prayerReminderModes?[prayerName] ??
             getPrayerReminderMode(prayerName);
 
         if (mode.isOff) continue;
@@ -225,9 +228,7 @@ class ReminderScheduler {
               id: _notificationId(prayerName, time),
               title:
                   "${getPrayerGroupName(prayerName, appLocalizations)} - ${getPrayerNameWithSomeDetails(prayerName, appLocalizations)}",
-              body: DateFormat.jm(
-                locale.languageCode,
-              ).format(time),
+              body: DateFormat.jm(locale.languageCode).format(time),
               category: category,
               notificationLayout: NotificationLayout.Default,
               wakeUpScreen: true,
@@ -273,10 +274,14 @@ class ReminderScheduler {
   }
 
   /// Snoozes a prayer alarm for [minutes] minutes.
-  static Future<void> snoozePrayerAlarm(Prayer prayer, {int minutes = 10}) async {
+  static Future<void> snoozePrayerAlarm(
+    Prayer prayer, {
+    int minutes = 10,
+  }) async {
     final now = DateTime.now();
     final snoozeTime = now.add(Duration(minutes: minutes));
-    final localTimeZone = await AwesomeNotifications().getLocalTimeZoneIdentifier();
+    final localTimeZone = await AwesomeNotifications()
+        .getLocalTimeZoneIdentifier();
     final alarmChannelKey = getAlarmChannelKey();
 
     await AwesomeNotifications().createNotification(
@@ -584,8 +589,8 @@ class ReminderScheduler {
       final currentMode = getPrayerReminderMode(prayer);
       final newMode = currentMode.isOff
           ? (prayer == Prayer.fajr
-              ? PrayerReminderMode.alarm
-              : PrayerReminderMode.notification)
+                ? PrayerReminderMode.alarm
+                : PrayerReminderMode.notification)
           : currentMode;
       await _sharedPreferences.setString(
         "prayer_${prayer.name}_reminder_mode",
@@ -603,19 +608,21 @@ class ReminderScheduler {
   }
 
   static PrayerReminderMode getPrayerReminderMode(Prayer prayer) {
-    final savedModeStr =
-        _sharedPreferences.getString("prayer_${prayer.name}_reminder_mode");
+    final savedModeStr = _sharedPreferences.getString(
+      "prayer_${prayer.name}_reminder_mode",
+    );
     if (savedModeStr != null) {
       return PrayerReminderMode.fromString(savedModeStr);
     }
 
-    final legacyEnabled =
-        _sharedPreferences.getBool("prayer_${prayer.name}_enabled");
+    final legacyEnabled = _sharedPreferences.getBool(
+      "prayer_${prayer.name}_enabled",
+    );
     if (legacyEnabled != null) {
       return legacyEnabled
           ? (prayer == Prayer.fajr
-              ? PrayerReminderMode.alarm
-              : PrayerReminderMode.notification)
+                ? PrayerReminderMode.alarm
+                : PrayerReminderMode.notification)
           : PrayerReminderMode.off;
     }
 
@@ -690,7 +697,10 @@ class ReminderScheduler {
   }
 
   static Future<void> setReminderTimeAdjustment(Prayer prayer, int time) async {
-    await _sharedPreferences.setInt("prayer_${prayer.name}_reminder_time", time);
+    await _sharedPreferences.setInt(
+      "prayer_${prayer.name}_reminder_time",
+      time,
+    );
   }
 
   static bool getEnforceAlarmSound() {
@@ -699,7 +709,10 @@ class ReminderScheduler {
   }
 
   static Future<void> setEnforceAlarmSound(bool value) async {
-    await _sharedPreferences.setBool("prayer_reminder_enforce_alarm_sound", value);
+    await _sharedPreferences.setBool(
+      "prayer_reminder_enforce_alarm_sound",
+      value,
+    );
   }
 
   static double getSoundVolume() {

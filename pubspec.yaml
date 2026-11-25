@@ -22,7 +22,7 @@ dependencies:
   gap: ^3.0.1
   fluentui_system_icons: ^1.1.273
   intl: ^0.20.2
-  html: 0.15.6
+  html: ^0.15.7
   http: ^1.4.0
   archive: ^4.0.5
   meta: ^1.18.0
@@ -83,6 +83,8 @@ dependencies:
   firebase_database: ^13.1.0
   file_picker: ^13.4.0
 
+  cupertino_ui: any
+  material_ui: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

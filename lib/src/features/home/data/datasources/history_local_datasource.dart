@@ -12,7 +12,9 @@ class HistoryLocalDataSource {
   List<HistoryElementModel> getHistory() {
     final rawList = _box.get(_historyKey, defaultValue: []);
     return List<HistoryElementModel>.from(
-      rawList.map((e) => HistoryElementModel.fromJson(Map<String, dynamic>.from(e))),
+      rawList.map(
+        (e) => HistoryElementModel.fromJson(Map<String, dynamic>.from(e)),
+      ),
     );
   }
 

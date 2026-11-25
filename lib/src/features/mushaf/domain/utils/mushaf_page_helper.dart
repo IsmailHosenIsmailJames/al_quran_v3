@@ -72,9 +72,36 @@ class MushafPageHelper {
 
   /// Standard Madani 604-page Mushaf starting page for each Juz (1..30).
   static const List<int> juzStartPages = [
-    1, 22, 42, 62, 82, 102, 122, 142, 162, 182,
-    202, 222, 242, 262, 282, 302, 322, 342, 362, 382,
-    402, 422, 442, 462, 482, 502, 522, 542, 562, 582,
+    1,
+    22,
+    42,
+    62,
+    82,
+    102,
+    122,
+    142,
+    162,
+    182,
+    202,
+    222,
+    242,
+    262,
+    282,
+    302,
+    322,
+    342,
+    362,
+    382,
+    402,
+    422,
+    442,
+    462,
+    482,
+    502,
+    522,
+    542,
+    562,
+    582,
   ];
 
   /// Get Juz number (1 to 30) for a given page number (1 to 604).
@@ -181,7 +208,8 @@ class MushafPageHelper {
 
       final startSurahNum = int.tryParse(fvk.split(":").first) ?? 1;
       final startSurahIndex = (startSurahNum - 1).clamp(0, 113);
-      final startSurahName = startSurahIndex < canonicalSurahTransliterations.length
+      final startSurahName =
+          startSurahIndex < canonicalSurahTransliterations.length
           ? canonicalSurahTransliterations[startSurahIndex]
           : "Surah $startSurahNum";
 

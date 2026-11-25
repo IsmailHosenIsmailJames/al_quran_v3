@@ -6,7 +6,7 @@ import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_r
 import "package:al_quran_v3/src/features/prayer_time/presentation/helpers/prayer_time_helper.dart";
 import "package:dartx/dartx_io.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
@@ -53,14 +53,10 @@ class PrayerItemCard extends StatelessWidget {
           : themeState.primary.withValues(alpha: 0.08);
       borderColor = themeState.primary;
     } else if (isNext) {
-      cardBg = isDark
-          ? Colors.white.withValues(alpha: 0.04)
-          : Colors.white;
+      cardBg = isDark ? Colors.white.withValues(alpha: 0.04) : Colors.white;
       borderColor = themeState.primary.withValues(alpha: 0.4);
     } else {
-      cardBg = isDark
-          ? Colors.white.withValues(alpha: 0.04)
-          : Colors.white;
+      cardBg = isDark ? Colors.white.withValues(alpha: 0.04) : Colors.white;
       borderColor = isDark
           ? Colors.white.withValues(alpha: 0.08)
           : Colors.grey.shade200;
@@ -75,10 +71,7 @@ class PrayerItemCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: cardBg,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: borderColor,
-          width: isActive ? 1.5 : 1.0,
-        ),
+        border: Border.all(color: borderColor, width: isActive ? 1.5 : 1.0),
         boxShadow: [
           if (!isDark && !isActive)
             BoxShadow(
@@ -100,10 +93,10 @@ class PrayerItemCard extends StatelessWidget {
                 color: isActive
                     ? themeState.primary
                     : isNext
-                        ? themeState.primary.withValues(alpha: isDark ? 0.2 : 0.12)
-                        : (isDark
-                            ? Colors.white.withValues(alpha: 0.06)
-                            : (isPassed
+                    ? themeState.primary.withValues(alpha: isDark ? 0.2 : 0.12)
+                    : (isDark
+                          ? Colors.white.withValues(alpha: 0.06)
+                          : (isPassed
                                 ? Colors.grey.shade100
                                 : themeState.primary.withValues(alpha: 0.08))),
                 borderRadius: BorderRadius.circular(12),
@@ -113,8 +106,10 @@ class PrayerItemCard extends StatelessWidget {
                 color: isActive
                     ? Colors.white
                     : (isPassed
-                        ? (isDark ? Colors.grey.shade600 : Colors.grey.shade400)
-                        : themeState.primary),
+                          ? (isDark
+                                ? Colors.grey.shade600
+                                : Colors.grey.shade400)
+                          : themeState.primary),
                 size: 22,
               ),
             ),
@@ -131,8 +126,9 @@ class PrayerItemCard extends StatelessWidget {
                         localizedName,
                         style: TextStyle(
                           fontSize: 16,
-                          fontWeight:
-                              isActive ? FontWeight.w700 : FontWeight.w600,
+                          fontWeight: isActive
+                              ? FontWeight.w700
+                              : FontWeight.w600,
                           color: primaryTextColor,
                         ),
                       ),
@@ -186,10 +182,12 @@ class PrayerItemCard extends StatelessWidget {
                       fontFamily: "Amiri",
                       fontSize: 13,
                       color: isPassed
-                          ? (isDark ? Colors.grey.shade600 : Colors.grey.shade400)
+                          ? (isDark
+                                ? Colors.grey.shade600
+                                : Colors.grey.shade400)
                           : (isDark
-                              ? Colors.grey.shade400
-                              : Colors.grey.shade600),
+                                ? Colors.grey.shade400
+                                : Colors.grey.shade600),
                     ),
                   ),
                 ],
@@ -219,7 +217,8 @@ class PrayerItemCard extends StatelessWidget {
                 final isMasterEnabled =
                     reminderState.isPrayerRemindNotificationEnabled ?? false;
                 final isPrayerEnabled =
-                    isMasterEnabled && (reminderState.enabledPrayers?[prayer] ?? true);
+                    isMasterEnabled &&
+                    (reminderState.enabledPrayers?[prayer] ?? true);
                 final offset =
                     reminderState.reminderTimeAdjustment?[prayer] ?? 0;
 
@@ -227,10 +226,9 @@ class PrayerItemCard extends StatelessWidget {
                   onTap: () async {
                     final status = await Permission.notification.status;
                     if (!status.isGranted) {
-                      final requested =
-                          await Permission.notification.request();
-                      final exactAlarm =
-                          await Permission.scheduleExactAlarm.request();
+                      final requested = await Permission.notification.request();
+                      final exactAlarm = await Permission.scheduleExactAlarm
+                          .request();
                       if (!requested.isGranted || !exactAlarm.isGranted) {
                         Fluttertoast.showToast(
                           msg: l10n.allowNotificationPermission,
@@ -262,15 +260,15 @@ class PrayerItemCard extends StatelessWidget {
                     child: Icon(
                       isPrayerEnabled
                           ? (offset != 0
-                              ? FluentIcons.alert_badge_24_filled
-                              : FluentIcons.alert_24_filled)
+                                ? FluentIcons.alert_badge_24_filled
+                                : FluentIcons.alert_24_filled)
                           : FluentIcons.alert_off_24_regular,
                       size: 20,
                       color: isPrayerEnabled
                           ? themeState.primary
                           : (isDark
-                              ? Colors.grey.shade600
-                              : Colors.grey.shade400),
+                                ? Colors.grey.shade600
+                                : Colors.grey.shade400),
                     ),
                   ),
                 );

@@ -8,7 +8,7 @@ import "package:al_quran_v3/src/features/audio/presentation/screens/audio_settin
 import "package:al_quran_v3/src/features/audio/presentation/widgets/reciter_overview.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/foundation.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -83,8 +83,7 @@ Widget getReciterViewWidget(
                   ),
                 ),
               ),
-            if (showSettingsIconButton && showDownloadIconButton)
-              const Gap(6),
+            if (showSettingsIconButton && showDownloadIconButton) const Gap(6),
             if (showDownloadIconButton)
               Container(
                 decoration: BoxDecoration(

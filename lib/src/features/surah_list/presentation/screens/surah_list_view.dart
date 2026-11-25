@@ -8,7 +8,7 @@ import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model
 import "package:al_quran_v3/src/features/surah_list/presentation/cubit/surah_search_cubit.dart";
 import "package:al_quran_v3/src/features/surah_list/presentation/cubit/surah_search_state.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -104,7 +104,10 @@ class _SurahListViewState extends State<SurahListView> {
                       TextButton.icon(
                         onPressed: () {
                           searchController.clear();
-                          _searchCubit.onSearchChanged("", languageCode: langCode);
+                          _searchCubit.onSearchChanged(
+                            "",
+                            languageCode: langCode,
+                          );
                         },
                         icon: const Icon(Icons.clear_rounded, size: 16),
                         label: Text(
@@ -133,7 +136,10 @@ class _SurahListViewState extends State<SurahListView> {
             children: [
               _buildSearchBar(l10n, isDark, langCode, filteredSurah.length),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 4.0,
+                ),
                 child: GridView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
@@ -159,7 +165,12 @@ class _SurahListViewState extends State<SurahListView> {
           itemCount: filteredSurah.length + 1,
           itemBuilder: (context, index) {
             if (index == 0) {
-              return _buildSearchBar(l10n, isDark, langCode, filteredSurah.length);
+              return _buildSearchBar(
+                l10n,
+                isDark,
+                langCode,
+                filteredSurah.length,
+              );
             }
 
             final surah = filteredSurah[index - 1];
@@ -197,10 +208,7 @@ class _SurahListViewState extends State<SurahListView> {
               child: TextField(
                 controller: searchController,
                 onChanged: (value) {
-                  _searchCubit.onSearchChanged(
-                    value,
-                    languageCode: langCode,
-                  );
+                  _searchCubit.onSearchChanged(value, languageCode: langCode);
                 },
                 style: const TextStyle(fontSize: 13.5),
                 decoration: InputDecoration(
@@ -233,10 +241,7 @@ class _SurahListViewState extends State<SurahListView> {
                 constraints: const BoxConstraints(),
                 onPressed: () {
                   searchController.clear();
-                  _searchCubit.onSearchChanged(
-                    "",
-                    languageCode: langCode,
-                  );
+                  _searchCubit.onSearchChanged("", languageCode: langCode);
                   setState(() {});
                 },
               )
@@ -258,8 +263,7 @@ class _SurahListViewState extends State<SurahListView> {
                   style: TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.w600,
-                    color:
-                        isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                    color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
                   ),
                 ),
               ),
@@ -269,4 +273,3 @@ class _SurahListViewState extends State<SurahListView> {
     );
   }
 }
-

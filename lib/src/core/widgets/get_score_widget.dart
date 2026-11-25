@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "dart:math" as math;
 
 Color _getColorForPercentage(double percentage) {
@@ -83,21 +83,18 @@ class _ScorePainter extends CustomPainter {
     final Offset center = size.center(Offset.zero);
     final Rect rect = Rect.fromCircle(center: center, radius: radius);
 
-    final backgroundPaint =
-        Paint()
-          ..color = internalBackgroundColor
-          ..style = PaintingStyle.fill;
+    final backgroundPaint = Paint()
+      ..color = internalBackgroundColor
+      ..style = PaintingStyle.fill;
 
-    final foregroundPaint =
-        Paint()
-          ..color = color
-          ..style = PaintingStyle.fill;
+    final foregroundPaint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
 
-    final borderPaint =
-        Paint()
-          ..color = borderColor
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = borderWidth;
+    final borderPaint = Paint()
+      ..color = borderColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = borderWidth;
 
     const double startAngle = -math.pi / 2;
     final double sweepAngle = (clampedPercentage / 100.0) * 2 * math.pi;

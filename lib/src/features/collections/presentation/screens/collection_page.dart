@@ -1,7 +1,8 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/di/injection.dart";
 import "package:al_quran_v3/src/features/collections/data/datasources/collections_local_datasource.dart";
-export "package:al_quran_v3/src/features/collections/data/datasources/collections_local_datasource.dart" show CollectionType;
+export "package:al_quran_v3/src/features/collections/data/datasources/collections_local_datasource.dart"
+    show CollectionType;
 import "package:al_quran_v3/src/features/collections/domain/entities/note_collection_model.dart";
 import "package:al_quran_v3/src/features/collections/domain/entities/pinned_collection_model.dart";
 import "package:al_quran_v3/src/features/collections/domain/entities/sorting_methods_type.dart";
@@ -12,7 +13,7 @@ import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:dartx/dartx.dart";
 import "package:flex_color_picker/flex_color_picker.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_animate/flutter_animate.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
@@ -63,12 +64,12 @@ class _CollectionPageState extends State<CollectionPage> {
     });
     try {
       if (_selectedCollectionType == CollectionType.notes) {
-        _listOfNoteCollection =
-            await getIt<CollectionsRepository>().fetchNoteCollections();
+        _listOfNoteCollection = await getIt<CollectionsRepository>()
+            .fetchNoteCollections();
         _filteredNoteCollection = List.from(_listOfNoteCollection);
       } else {
-        _listOfPinnedCollection =
-            await getIt<CollectionsRepository>().fetchPinnedCollections();
+        _listOfPinnedCollection = await getIt<CollectionsRepository>()
+            .fetchPinnedCollections();
         _filteredPinnedCollection = List.from(_listOfPinnedCollection);
       }
     } catch (e) {
@@ -90,19 +91,17 @@ class _CollectionPageState extends State<CollectionPage> {
     final query = _searchTextFieldController.text.toLowerCase();
     setState(() {
       if (_selectedCollectionType == CollectionType.notes) {
-        _filteredNoteCollection =
-            _listOfNoteCollection
-                .where(
-                  (collection) => collection.name.toLowerCase().contains(query),
-                )
-                .toList();
+        _filteredNoteCollection = _listOfNoteCollection
+            .where(
+              (collection) => collection.name.toLowerCase().contains(query),
+            )
+            .toList();
       } else {
-        _filteredPinnedCollection =
-            _listOfPinnedCollection
-                .where(
-                  (collection) => collection.name.toLowerCase().contains(query),
-                )
-                .toList();
+        _filteredPinnedCollection = _listOfPinnedCollection
+            .where(
+              (collection) => collection.name.toLowerCase().contains(query),
+            )
+            .toList();
       }
     });
   }
@@ -138,21 +137,21 @@ class _CollectionPageState extends State<CollectionPage> {
                     duration: const Duration(milliseconds: 200),
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
-                      color:
-                          _selectedCollectionType == CollectionType.notes
-                              ? themeState.primary
-                              : Colors.transparent,
+                      color: _selectedCollectionType == CollectionType.notes
+                          ? themeState.primary
+                          : Colors.transparent,
                       borderRadius: BorderRadius.circular(12),
-                      boxShadow:
-                          _selectedCollectionType == CollectionType.notes
-                              ? [
-                                BoxShadow(
-                                  color: themeState.primary.withValues(alpha: 0.3),
-                                  blurRadius: 8,
-                                  offset: const Offset(0, 2),
+                      boxShadow: _selectedCollectionType == CollectionType.notes
+                          ? [
+                              BoxShadow(
+                                color: themeState.primary.withValues(
+                                  alpha: 0.3,
                                 ),
-                              ]
-                              : null,
+                                blurRadius: 8,
+                                offset: const Offset(0, 2),
+                              ),
+                            ]
+                          : null,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -160,10 +159,9 @@ class _CollectionPageState extends State<CollectionPage> {
                         Icon(
                           FluentIcons.note_24_filled,
                           size: 18,
-                          color:
-                              _selectedCollectionType == CollectionType.notes
-                                  ? Colors.white
-                                  : colorScheme.onSurfaceVariant,
+                          color: _selectedCollectionType == CollectionType.notes
+                              ? Colors.white
+                              : colorScheme.onSurfaceVariant,
                         ),
                         const Gap(8),
                         Text(
@@ -173,8 +171,8 @@ class _CollectionPageState extends State<CollectionPage> {
                             fontSize: 14,
                             color:
                                 _selectedCollectionType == CollectionType.notes
-                                    ? Colors.white
-                                    : colorScheme.onSurfaceVariant,
+                                ? Colors.white
+                                : colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -196,21 +194,22 @@ class _CollectionPageState extends State<CollectionPage> {
                     duration: const Duration(milliseconds: 200),
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
-                      color:
-                          _selectedCollectionType == CollectionType.pinned
-                              ? themeState.primary
-                              : Colors.transparent,
+                      color: _selectedCollectionType == CollectionType.pinned
+                          ? themeState.primary
+                          : Colors.transparent,
                       borderRadius: BorderRadius.circular(12),
                       boxShadow:
                           _selectedCollectionType == CollectionType.pinned
-                              ? [
-                                BoxShadow(
-                                  color: themeState.primary.withValues(alpha: 0.3),
-                                  blurRadius: 8,
-                                  offset: const Offset(0, 2),
+                          ? [
+                              BoxShadow(
+                                color: themeState.primary.withValues(
+                                  alpha: 0.3,
                                 ),
-                              ]
-                              : null,
+                                blurRadius: 8,
+                                offset: const Offset(0, 2),
+                              ),
+                            ]
+                          : null,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -220,8 +219,8 @@ class _CollectionPageState extends State<CollectionPage> {
                           size: 18,
                           color:
                               _selectedCollectionType == CollectionType.pinned
-                                  ? Colors.white
-                                  : colorScheme.onSurfaceVariant,
+                              ? Colors.white
+                              : colorScheme.onSurfaceVariant,
                         ),
                         const Gap(8),
                         Text(
@@ -231,8 +230,8 @@ class _CollectionPageState extends State<CollectionPage> {
                             fontSize: 14,
                             color:
                                 _selectedCollectionType == CollectionType.pinned
-                                    ? Colors.white
-                                    : colorScheme.onSurfaceVariant,
+                                ? Colors.white
+                                : colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -287,7 +286,9 @@ class _CollectionPageState extends State<CollectionPage> {
                       ),
                       hintStyle: TextStyle(
                         fontSize: 14,
-                        color: colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
+                        color: colorScheme.onSurfaceVariant.withValues(
+                          alpha: 0.7,
+                        ),
                       ),
                       contentPadding: const EdgeInsets.symmetric(vertical: 12),
                     ),
@@ -305,7 +306,9 @@ class _CollectionPageState extends State<CollectionPage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                       side: BorderSide(
-                        color: colorScheme.outlineVariant.withValues(alpha: 0.3),
+                        color: colorScheme.outlineVariant.withValues(
+                          alpha: 0.3,
+                        ),
                       ),
                     ),
                   ),
@@ -343,103 +346,100 @@ class _CollectionPageState extends State<CollectionPage> {
                                     top: Radius.circular(28),
                                   ),
                           ),
-                      padding: const EdgeInsets.all(20.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            width: 40,
-                            height: 4,
-                            decoration: BoxDecoration(
-                              color: colorScheme.onSurfaceVariant.withValues(
-                                alpha: 0.3,
-                              ),
-                              borderRadius: BorderRadius.circular(2),
-                            ),
-                          ),
-                          const Gap(16),
-                          Row(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Icon(
-                                FluentIcons.arrow_sort_24_filled,
-                                size: 20,
+                              Container(
+                                width: 40,
+                                height: 4,
+                                decoration: BoxDecoration(
+                                  color: colorScheme.onSurfaceVariant
+                                      .withValues(alpha: 0.3),
+                                  borderRadius: BorderRadius.circular(2),
+                                ),
                               ),
-                              const Gap(10),
-                              Text(
-                                l10n.sortBy,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                              const Gap(16),
+                              Row(
+                                children: [
+                                  const Icon(
+                                    FluentIcons.arrow_sort_24_filled,
+                                    size: 20,
+                                  ),
+                                  const Gap(10),
+                                  Text(
+                                    l10n.sortBy,
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const Divider(height: 24),
+                              Flexible(
+                                child: ListView.separated(
+                                  shrinkWrap: true,
+                                  itemCount: SortingMethodsType.values.length,
+                                  separatorBuilder: (context, index) =>
+                                      const Gap(4),
+                                  itemBuilder: (context, index) {
+                                    SortingMethodsType current =
+                                        SortingMethodsType.values[index];
+                                    final isSelected =
+                                        current.name == sortMethod;
+                                    return ListTile(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      tileColor: isSelected
+                                          ? colorScheme.primaryContainer
+                                                .withValues(alpha: 0.4)
+                                          : null,
+                                      onTap: () async {
+                                        await Hive.box("user").put(
+                                          "selected_sorting_method",
+                                          current.name,
+                                        );
+                                        await _fetchData();
+                                        Navigator.pop(context);
+                                      },
+                                      leading: Icon(
+                                        isSelected
+                                            ? Icons.radio_button_on
+                                            : Icons.radio_button_off,
+                                        color: isSelected
+                                            ? context
+                                                  .read<ThemeCubit>()
+                                                  .state
+                                                  .primary
+                                            : colorScheme.onSurfaceVariant,
+                                      ),
+                                      title: Text(
+                                        current.toReadableString(l10n),
+                                        style: TextStyle(
+                                          fontWeight: isSelected
+                                              ? FontWeight.bold
+                                              : FontWeight.normal,
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                             ],
                           ),
-                          const Divider(height: 24),
-                          Flexible(
-                            child: ListView.separated(
-                              shrinkWrap: true,
-                              itemCount: SortingMethodsType.values.length,
-                              separatorBuilder:
-                                  (context, index) => const Gap(4),
-                              itemBuilder: (context, index) {
-                                SortingMethodsType current =
-                                    SortingMethodsType.values[index];
-                                final isSelected = current.name == sortMethod;
-                                return ListTile(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  tileColor:
-                                      isSelected
-                                          ? colorScheme.primaryContainer
-                                              .withValues(alpha: 0.4)
-                                          : null,
-                                  onTap: () async {
-                                    await Hive.box("user").put(
-                                      "selected_sorting_method",
-                                      current.name,
-                                    );
-                                    await _fetchData();
-                                    Navigator.pop(context);
-                                  },
-                                  leading: Icon(
-                                    isSelected
-                                        ? Icons.radio_button_on
-                                        : Icons.radio_button_off,
-                                    color:
-                                        isSelected
-                                            ? context
-                                                .read<ThemeCubit>()
-                                                .state
-                                                .primary
-                                            : colorScheme.onSurfaceVariant,
-                                  ),
-                                  title: Text(
-                                    current.toReadableString(l10n),
-                                    style: TextStyle(
-                                      fontWeight:
-                                          isSelected
-                                              ? FontWeight.bold
-                                              : FontWeight.normal,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
+                        );
+                      },
                     );
                   },
-                );
-              },
-            ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
-    ),
-  ),
-);
+    );
   }
 
   Widget _buildEmptyState(Color svgColor, AppLocalizations l10n) {
@@ -448,39 +448,45 @@ class _CollectionPageState extends State<CollectionPage> {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                color: colorScheme.surfaceContainerHighest.withValues(
-                  alpha: 0.5,
-                ),
-                shape: BoxShape.circle,
-              ),
-              child: SvgPicture.asset(
-                "assets/img/empty-folder-svgrepo-com.svg",
-                height: 80,
-                colorFilter: ColorFilter.mode(
-                  Theme.of(context).iconTheme.color?.withValues(alpha: 0.5) ??
-                      svgColor.withValues(alpha: 0.5),
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
-            const Gap(20),
-            Text(
-              l10n.noCollectionAddedYet(_selectedCollectionType.name),
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.w600,
-                color: colorScheme.onSurfaceVariant,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ).animate().fadeIn(duration: 300.ms).scale(begin: const Offset(0.9, 0.9)),
+        child:
+            Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(24),
+                      decoration: BoxDecoration(
+                        color: colorScheme.surfaceContainerHighest.withValues(
+                          alpha: 0.5,
+                        ),
+                        shape: BoxShape.circle,
+                      ),
+                      child: SvgPicture.asset(
+                        "assets/img/empty-folder-svgrepo-com.svg",
+                        height: 80,
+                        colorFilter: ColorFilter.mode(
+                          Theme.of(
+                                context,
+                              ).iconTheme.color?.withValues(alpha: 0.5) ??
+                              svgColor.withValues(alpha: 0.5),
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                    ),
+                    const Gap(20),
+                    Text(
+                      l10n.noCollectionAddedYet(_selectedCollectionType.name),
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: colorScheme.onSurfaceVariant,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                )
+                .animate()
+                .fadeIn(duration: 300.ms)
+                .scale(begin: const Offset(0.9, 0.9)),
       ),
     );
   }
@@ -496,16 +502,14 @@ class _CollectionPageState extends State<CollectionPage> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    Color svgColor =
-        Theme.brightnessOf(context) == Brightness.dark
-            ? Colors.grey.shade100
-            : Colors.grey.shade900;
+    Color svgColor = Theme.brightnessOf(context) == Brightness.dark
+        ? Colors.grey.shade100
+        : Colors.grey.shade900;
 
     final bool isNotes = _selectedCollectionType == CollectionType.notes;
-    final bool hasItems =
-        isNotes
-            ? _filteredNoteCollection.isNotEmpty
-            : _filteredPinnedCollection.isNotEmpty;
+    final bool hasItems = isNotes
+        ? _filteredNoteCollection.isNotEmpty
+        : _filteredPinnedCollection.isNotEmpty;
 
     return Scaffold(
       appBar: AppBar(
@@ -523,107 +527,104 @@ class _CollectionPageState extends State<CollectionPage> {
           _buildSearchAndFilterBar(svgColor, l10n),
           const Gap(6),
           Expanded(
-            child:
-                _isLoading
-                    ? Center(
-                      child: CircularProgressIndicator(
-                        backgroundColor:
-                            context.read<ThemeCubit>().state.primaryShade100,
+            child: _isLoading
+                ? Center(
+                    child: CircularProgressIndicator(
+                      backgroundColor: context
+                          .read<ThemeCubit>()
+                          .state
+                          .primaryShade100,
+                    ),
+                  )
+                : _errorMessage != null
+                ? Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        _errorMessage!,
+                        style: TextStyle(color: Colors.red.shade700),
                       ),
-                    )
-                    : _errorMessage != null
-                    ? Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          _errorMessage!,
-                          style: TextStyle(color: Colors.red.shade700),
-                        ),
-                      ),
-                    )
-                    : hasItems
-                    ? LayoutBuilder(
-                      builder: (context, constraints) {
-                        final width = constraints.maxWidth;
-                        final isMultiColumn = width >= 640;
-                        final crossAxisCount = width >= 1024 ? 3 : 2;
+                    ),
+                  )
+                : hasItems
+                ? LayoutBuilder(
+                    builder: (context, constraints) {
+                      final width = constraints.maxWidth;
+                      final isMultiColumn = width >= 640;
+                      final crossAxisCount = width >= 1024 ? 3 : 2;
 
-                        Widget content;
-                        if (isMultiColumn) {
-                          content = GridView.builder(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16.0,
-                              vertical: 10.0,
-                            ),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: crossAxisCount,
-                                  crossAxisSpacing: 12,
-                                  mainAxisSpacing: 12,
-                                  mainAxisExtent: 88,
-                                ),
-                            itemCount:
-                                isNotes
-                                    ? _filteredNoteCollection.length
-                                    : _filteredPinnedCollection.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              final widgetItem =
-                                  isNotes
-                                      ? _getNoteCollectionWidget(
-                                        _filteredNoteCollection[index],
-                                        l10n,
-                                        margin: EdgeInsets.zero,
-                                      )
-                                      : _getPinnedCollectionWidget(
-                                        _filteredPinnedCollection[index],
-                                        l10n,
-                                        margin: EdgeInsets.zero,
-                                      );
-                              return widgetItem
-                                  .animate(delay: (index * 30).ms)
-                                  .fadeIn(duration: 250.ms)
-                                  .slideY(begin: 0.08, end: 0);
-                            },
-                          );
-                        } else {
-                          content = ListView.builder(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 14.0,
-                              vertical: 6.0,
-                            ),
-                            itemCount:
-                                isNotes
-                                    ? _filteredNoteCollection.length
-                                    : _filteredPinnedCollection.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              final widgetItem =
-                                  isNotes
-                                      ? _getNoteCollectionWidget(
-                                        _filteredNoteCollection[index],
-                                        l10n,
-                                      )
-                                      : _getPinnedCollectionWidget(
-                                        _filteredPinnedCollection[index],
-                                        l10n,
-                                      );
-                              return widgetItem
-                                  .animate(delay: (index * 40).ms)
-                                  .fadeIn(duration: 250.ms)
-                                  .slideY(begin: 0.08, end: 0);
-                            },
-                          );
-                        }
-
-                        return Align(
-                          alignment: Alignment.topCenter,
-                          child: ConstrainedBox(
-                            constraints: const BoxConstraints(maxWidth: 1200),
-                            child: content,
+                      Widget content;
+                      if (isMultiColumn) {
+                        content = GridView.builder(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0,
+                            vertical: 10.0,
                           ),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: crossAxisCount,
+                                crossAxisSpacing: 12,
+                                mainAxisSpacing: 12,
+                                mainAxisExtent: 88,
+                              ),
+                          itemCount: isNotes
+                              ? _filteredNoteCollection.length
+                              : _filteredPinnedCollection.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final widgetItem = isNotes
+                                ? _getNoteCollectionWidget(
+                                    _filteredNoteCollection[index],
+                                    l10n,
+                                    margin: EdgeInsets.zero,
+                                  )
+                                : _getPinnedCollectionWidget(
+                                    _filteredPinnedCollection[index],
+                                    l10n,
+                                    margin: EdgeInsets.zero,
+                                  );
+                            return widgetItem
+                                .animate(delay: (index * 30).ms)
+                                .fadeIn(duration: 250.ms)
+                                .slideY(begin: 0.08, end: 0);
+                          },
                         );
-                      },
-                    )
-                    : _buildEmptyState(svgColor, l10n),
+                      } else {
+                        content = ListView.builder(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 14.0,
+                            vertical: 6.0,
+                          ),
+                          itemCount: isNotes
+                              ? _filteredNoteCollection.length
+                              : _filteredPinnedCollection.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final widgetItem = isNotes
+                                ? _getNoteCollectionWidget(
+                                    _filteredNoteCollection[index],
+                                    l10n,
+                                  )
+                                : _getPinnedCollectionWidget(
+                                    _filteredPinnedCollection[index],
+                                    l10n,
+                                  );
+                            return widgetItem
+                                .animate(delay: (index * 40).ms)
+                                .fadeIn(duration: 250.ms)
+                                .slideY(begin: 0.08, end: 0);
+                          },
+                        );
+                      }
+
+                      return Align(
+                        alignment: Alignment.topCenter,
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 1200),
+                          child: content,
+                        ),
+                      );
+                    },
+                  )
+                : _buildEmptyState(svgColor, l10n),
           ),
         ],
       ),
@@ -758,7 +759,9 @@ class _CollectionPageState extends State<CollectionPage> {
                                       autofocus: true,
                                       decoration: InputDecoration(
                                         border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(12),
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -767,49 +770,50 @@ class _CollectionPageState extends State<CollectionPage> {
                                       width: double.infinity,
                                       height: 44,
                                       child: ElevatedButton.icon(
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                            12,
+                                        style: ElevatedButton.styleFrom(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                              12,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      onPressed: () async {
-                                        if (nameController.text
-                                            .trim()
-                                            .isEmpty) {
-                                          Fluttertoast.showToast(
-                                            msg: l10n.emptyNameNotAllowed,
-                                          );
-                                          return;
-                                        }
-                                        final updatedPinnedCollection =
-                                            pinnedCollectionModel.copyWith(
-                                              name: nameController.text.trim(),
+                                        onPressed: () async {
+                                          if (nameController.text
+                                              .trim()
+                                              .isEmpty) {
+                                            Fluttertoast.showToast(
+                                              msg: l10n.emptyNameNotAllowed,
                                             );
+                                            return;
+                                          }
+                                          final updatedPinnedCollection =
+                                              pinnedCollectionModel.copyWith(
+                                                name: nameController.text
+                                                    .trim(),
+                                              );
 
-                                        await getIt<CollectionsRepository>()
-                                            .savePinnedCollectionModelAsMap(
-                                              updatedPinnedCollection,
-                                            );
-                                        await _fetchData();
-                                        Navigator.pop(context);
-                                        Fluttertoast.showToast(
-                                          msg: l10n.updatedTo(
-                                            updatedPinnedCollection.name,
-                                          ),
-                                        );
-                                      },
-                                      label: Text(l10n.save),
-                                      icon: const Icon(Icons.done),
+                                          await getIt<CollectionsRepository>()
+                                              .savePinnedCollectionModelAsMap(
+                                                updatedPinnedCollection,
+                                              );
+                                          await _fetchData();
+                                          Navigator.pop(context);
+                                          Fluttertoast.showToast(
+                                            msg: l10n.updatedTo(
+                                              updatedPinnedCollection.name,
+                                            ),
+                                          );
+                                        },
+                                        label: Text(l10n.save),
+                                        icon: const Icon(Icons.done),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
                       );
                     },
                     child: Row(
@@ -846,15 +850,11 @@ class _CollectionPageState extends State<CollectionPage> {
                   PopupMenuItem(
                     onTap: () async {
                       await getIt<CollectionsRepository>()
-                          .deletePinnedCollectionByID(
-                            pinnedCollectionModel.id,
-                          );
+                          .deletePinnedCollectionByID(pinnedCollectionModel.id);
                       await _fetchData();
 
                       Fluttertoast.showToast(
-                        msg: l10n.collectionDeleted(
-                          pinnedCollectionModel.name,
-                        ),
+                        msg: l10n.collectionDeleted(pinnedCollectionModel.name),
                       );
                     },
                     child: Row(
@@ -880,10 +880,9 @@ class _CollectionPageState extends State<CollectionPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder:
-                      (context) => CollectionContentView(
-                        pinnedCollectionModel: pinnedCollectionModel,
-                      ),
+                  builder: (context) => CollectionContentView(
+                    pinnedCollectionModel: pinnedCollectionModel,
+                  ),
                 ),
               );
             },
@@ -1019,7 +1018,9 @@ class _CollectionPageState extends State<CollectionPage> {
                                       autofocus: true,
                                       decoration: InputDecoration(
                                         border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(12),
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -1028,49 +1029,50 @@ class _CollectionPageState extends State<CollectionPage> {
                                       width: double.infinity,
                                       height: 44,
                                       child: ElevatedButton.icon(
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                            12,
+                                        style: ElevatedButton.styleFrom(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                              12,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      onPressed: () async {
-                                        if (nameController.text
-                                            .trim()
-                                            .isEmpty) {
-                                          Fluttertoast.showToast(
-                                            msg: l10n.emptyNameNotAllowed,
-                                          );
-                                          return;
-                                        }
-                                        final updatedNoteCollection =
-                                            noteCollectionModel.copyWith(
-                                              name: nameController.text.trim(),
+                                        onPressed: () async {
+                                          if (nameController.text
+                                              .trim()
+                                              .isEmpty) {
+                                            Fluttertoast.showToast(
+                                              msg: l10n.emptyNameNotAllowed,
                                             );
+                                            return;
+                                          }
+                                          final updatedNoteCollection =
+                                              noteCollectionModel.copyWith(
+                                                name: nameController.text
+                                                    .trim(),
+                                              );
 
-                                        await getIt<CollectionsRepository>()
-                                            .saveNoteCollectionModelAsMap(
-                                              updatedNoteCollection,
-                                            );
-                                        await _fetchData();
-                                        Navigator.pop(context);
-                                        Fluttertoast.showToast(
-                                          msg: l10n.updatedTo(
-                                            updatedNoteCollection.name,
-                                          ),
-                                        );
-                                      },
-                                      label: Text(l10n.save),
-                                      icon: const Icon(Icons.done),
+                                          await getIt<CollectionsRepository>()
+                                              .saveNoteCollectionModelAsMap(
+                                                updatedNoteCollection,
+                                              );
+                                          await _fetchData();
+                                          Navigator.pop(context);
+                                          Fluttertoast.showToast(
+                                            msg: l10n.updatedTo(
+                                              updatedNoteCollection.name,
+                                            ),
+                                          );
+                                        },
+                                        label: Text(l10n.save),
+                                        icon: const Icon(Icons.done),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
                       );
                     },
                     child: Row(
@@ -1134,10 +1136,9 @@ class _CollectionPageState extends State<CollectionPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder:
-                      (context) => CollectionContentView(
-                        noteCollectionModel: noteCollectionModel,
-                      ),
+                  builder: (context) => CollectionContentView(
+                    noteCollectionModel: noteCollectionModel,
+                  ),
                 ),
               );
             },

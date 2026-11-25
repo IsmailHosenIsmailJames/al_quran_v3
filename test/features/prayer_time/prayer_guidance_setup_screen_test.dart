@@ -10,7 +10,7 @@ import "package:al_quran_v3/src/features/prayer_time/data/services/background_no
 import "package:al_quran_v3/src/features/prayer_time/domain/models/prayer_reminder_mode.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_cubit.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/screens/prayer_guidance_setup_screen.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:hive_ce/hive.dart";
@@ -63,100 +63,110 @@ void main() {
     );
   }
 
-  testWidgets("PrayerGuidanceSetupScreen renders Location section and bottom bar with Skip and Save buttons",
-      (tester) async {
-    tester.view.physicalSize = const Size(1080, 5000);
-    tester.view.devicePixelRatio = 2.0;
+  testWidgets(
+    "PrayerGuidanceSetupScreen renders Location section and bottom bar with Skip and Save buttons",
+    (tester) async {
+      tester.view.physicalSize = const Size(1080, 5000);
+      tester.view.devicePixelRatio = 2.0;
 
-    await tester.pumpWidget(createWidgetUnderTest(isFromSettings: false));
-    await tester.pumpAndSettle();
+      await tester.pumpWidget(createWidgetUnderTest(isFromSettings: false));
+      await tester.pumpAndSettle();
 
-    // Verify title
-    expect(find.text("Prayer Settings"), findsNWidgets(2)); // AppBar + Section
+      // Verify title
+      expect(
+        find.text("Prayer Settings"),
+        findsNWidgets(2),
+      ); // AppBar + Section
 
-    // Verify Location Required card
-    expect(find.text("Prayer Location Required"), findsOneWidget);
-    expect(find.text("Allow Location"), findsOneWidget);
-    expect(find.text("Manual Location"), findsOneWidget);
+      // Verify Location Required card
+      expect(find.text("Prayer Location Required"), findsOneWidget);
+      expect(find.text("Allow Location"), findsOneWidget);
+      expect(find.text("Manual Location"), findsOneWidget);
 
-    // Verify Skip button in AppBar
-    expect(find.text("Skip"), findsOneWidget);
+      // Verify Skip button in AppBar
+      expect(find.text("Skip"), findsOneWidget);
 
-    // Verify Save & Get Started in bottom bar
-    expect(find.text("Save & Get Started"), findsOneWidget);
+      // Verify Save & Get Started in bottom bar
+      expect(find.text("Save & Get Started"), findsOneWidget);
 
-    // Verify Quick Presets are present
-    expect(find.text("Quick Presets"), findsOneWidget);
-    expect(find.text("Balanced"), findsOneWidget);
-    expect(find.text("All Alarms"), findsOneWidget);
-    expect(find.text("All Notifications"), findsOneWidget);
+      // Verify Quick Presets are present
+      expect(find.text("Quick Presets"), findsOneWidget);
+      expect(find.text("Balanced"), findsOneWidget);
+      expect(find.text("All Alarms"), findsOneWidget);
+      expect(find.text("All Notifications"), findsOneWidget);
 
-    // Verify all 6 prayers are present
-    expect(find.text("Fajr"), findsOneWidget);
-    expect(find.text("Sunrise"), findsOneWidget);
-    expect(find.text("Dhuhr"), findsOneWidget);
-    expect(find.text("Asr"), findsOneWidget);
-    expect(find.text("Maghrib"), findsOneWidget);
-    expect(find.text("Isha"), findsOneWidget);
+      // Verify all 6 prayers are present
+      expect(find.text("Fajr"), findsOneWidget);
+      expect(find.text("Sunrise"), findsOneWidget);
+      expect(find.text("Dhuhr"), findsOneWidget);
+      expect(find.text("Asr"), findsOneWidget);
+      expect(find.text("Maghrib"), findsOneWidget);
+      expect(find.text("Isha"), findsOneWidget);
 
-    addTearDown(() {
-      tester.view.resetPhysicalSize();
-      tester.view.resetDevicePixelRatio();
-    });
-  });
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+    },
+  );
 
-  testWidgets("Setting location updates UI to show Selected Location and Change button",
-      (tester) async {
-    tester.view.physicalSize = const Size(1080, 2400);
-    tester.view.devicePixelRatio = 2.0;
+  testWidgets(
+    "Setting location updates UI to show Selected Location and Change button",
+    (tester) async {
+      tester.view.physicalSize = const Size(1080, 2400);
+      tester.view.devicePixelRatio = 2.0;
 
-    await tester.pumpWidget(createWidgetUnderTest(isFromSettings: false));
-    await tester.pumpAndSettle();
+      await tester.pumpWidget(createWidgetUnderTest(isFromSettings: false));
+      await tester.pumpAndSettle();
 
-    expect(find.text("Prayer Location Required"), findsOneWidget);
+      expect(find.text("Prayer Location Required"), findsOneWidget);
 
-    // Save location to cubit
-    await locationCubit.saveLocationData(
-      const LatLon(latitude: 23.8103, longitude: 90.4125),
-      save: true,
-    );
-    await tester.pumpAndSettle();
+      // Save location to cubit
+      await locationCubit.saveLocationData(
+        const LatLon(latitude: 23.8103, longitude: 90.4125),
+        save: true,
+      );
+      await tester.pumpAndSettle();
 
-    // Verify UI updated to Selected Location
-    expect(find.text("Selected Location"), findsOneWidget);
-    expect(find.text("Change"), findsOneWidget);
+      // Verify UI updated to Selected Location
+      expect(find.text("Selected Location"), findsOneWidget);
+      expect(find.text("Change"), findsOneWidget);
 
-    addTearDown(() {
-      tester.view.resetPhysicalSize();
-      tester.view.resetDevicePixelRatio();
-    });
-  });
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+    },
+  );
 
-  testWidgets("PrayerGuidanceSetupScreen in settings mode shows Save & Return without Skip",
-      (tester) async {
-    tester.view.physicalSize = const Size(1080, 2400);
-    tester.view.devicePixelRatio = 2.0;
+  testWidgets(
+    "PrayerGuidanceSetupScreen in settings mode shows Save & Return without Skip",
+    (tester) async {
+      tester.view.physicalSize = const Size(1080, 2400);
+      tester.view.devicePixelRatio = 2.0;
 
-    await tester.pumpWidget(createWidgetUnderTest(isFromSettings: true));
-    await tester.pumpAndSettle();
+      await tester.pumpWidget(createWidgetUnderTest(isFromSettings: true));
+      await tester.pumpAndSettle();
 
-    // In settings mode, title is Prayer Reminders Guide & Setup
-    expect(find.text("Prayer Reminders Guide & Setup"), findsOneWidget);
+      // In settings mode, title is Prayer Reminders Guide & Setup
+      expect(find.text("Prayer Reminders Guide & Setup"), findsOneWidget);
 
-    // No Skip button
-    expect(find.text("Skip"), findsNothing);
+      // No Skip button
+      expect(find.text("Skip"), findsNothing);
 
-    // Save & Return button in bottom bar
-    expect(find.text("Save & Return"), findsOneWidget);
+      // Save & Return button in bottom bar
+      expect(find.text("Save & Return"), findsOneWidget);
 
-    addTearDown(() {
-      tester.view.resetPhysicalSize();
-      tester.view.resetDevicePixelRatio();
-    });
-  });
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+    },
+  );
 
-  testWidgets("Tapping presets updates reminder modes in cubit",
-      (tester) async {
+  testWidgets("Tapping presets updates reminder modes in cubit", (
+    tester,
+  ) async {
     tester.view.physicalSize = const Size(1080, 2400);
     tester.view.devicePixelRatio = 2.0;
 
@@ -168,8 +178,10 @@ void main() {
     await tester.pumpAndSettle();
 
     // Verify All Alarms selected
-    expect(ReminderScheduler.getPrayerReminderMode(Prayer.dhuhr),
-        equals(PrayerReminderMode.alarm));
+    expect(
+      ReminderScheduler.getPrayerReminderMode(Prayer.dhuhr),
+      equals(PrayerReminderMode.alarm),
+    );
 
     addTearDown(() {
       tester.view.resetPhysicalSize();
@@ -177,8 +189,9 @@ void main() {
     });
   });
 
-  testWidgets("Lifecycle resume triggers permission checks automatically",
-      (tester) async {
+  testWidgets("Lifecycle resume triggers permission checks automatically", (
+    tester,
+  ) async {
     tester.view.physicalSize = const Size(1080, 2400);
     tester.view.devicePixelRatio = 2.0;
 
@@ -200,24 +213,26 @@ void main() {
     });
   });
 
-  testWidgets("PrayerGuidanceSetupScreen renders on narrow 320px screen without any overflows",
-      (tester) async {
-    tester.view.physicalSize = const Size(320, 600);
-    tester.view.devicePixelRatio = 1.0;
+  testWidgets(
+    "PrayerGuidanceSetupScreen renders on narrow 320px screen without any overflows",
+    (tester) async {
+      tester.view.physicalSize = const Size(320, 600);
+      tester.view.devicePixelRatio = 1.0;
 
-    await tester.pumpWidget(createWidgetUnderTest(isFromSettings: false));
-    await tester.pumpAndSettle();
+      await tester.pumpWidget(createWidgetUnderTest(isFromSettings: false));
+      await tester.pumpAndSettle();
 
-    // Verify bottom bar button is visible
-    expect(find.text("Save & Get Started"), findsOneWidget);
+      // Verify bottom bar button is visible
+      expect(find.text("Save & Get Started"), findsOneWidget);
 
-    // Scroll to verify Fajr is rendered without overflow
-    await tester.scrollUntilVisible(find.text("Fajr"), 100);
-    expect(find.text("Fajr"), findsOneWidget);
+      // Scroll to verify Fajr is rendered without overflow
+      await tester.scrollUntilVisible(find.text("Fajr"), 100);
+      expect(find.text("Fajr"), findsOneWidget);
 
-    addTearDown(() {
-      tester.view.resetPhysicalSize();
-      tester.view.resetDevicePixelRatio();
-    });
-  });
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+    },
+  );
 }

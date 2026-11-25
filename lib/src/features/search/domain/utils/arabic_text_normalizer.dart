@@ -29,7 +29,9 @@ class ArabicTextNormalizer {
   static final RegExp _taaMarbutaRegex = RegExp(r"\u0629");
 
   // Non-letter symbols / Quranic glyphs
-  static final RegExp _extraSymbolsRegex = RegExp(r"[\uFD3E\uFD3F\u060C\u061B\u061F]");
+  static final RegExp _extraSymbolsRegex = RegExp(
+    r"[\uFD3E\uFD3F\u060C\u061B\u061F]",
+  );
 
   /// Normalizes Arabic text by stripping Tashkeel, Tatweel, pause marks, and unifying letter forms.
   static String normalize(String text) {
@@ -39,7 +41,7 @@ class ArabicTextNormalizer {
         .replaceAll(_tashkeelRegex, "")
         .replaceAll(_tatweelRegex, "")
         .replaceAll(_alefRegex, "\u0627") // Replace with standard Alef 'ا'
-        .replaceAll(_yaaRegex, "\u064A")  // Replace with standard Yaa 'ي'
+        .replaceAll(_yaaRegex, "\u064A") // Replace with standard Yaa 'ي'
         .replaceAll(_taaMarbutaRegex, "\u0647") // Replace with standard Haa 'ه'
         .replaceAll(_extraSymbolsRegex, "")
         .trim();

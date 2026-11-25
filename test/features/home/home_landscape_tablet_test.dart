@@ -9,7 +9,7 @@ import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_r
 import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/fasting_sunnah_card.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/forbidden_prayer_times_card.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/prayer_times_horizontal_card.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:shared_preferences/shared_preferences.dart";
@@ -47,36 +47,36 @@ void main() {
         supportedLocales: AppLocalizations.supportedLocales,
         home: MediaQuery(
           data: MediaQueryData(size: size),
-          child: Scaffold(
-            body: child,
-          ),
+          child: Scaffold(body: child),
         ),
       ),
     );
   }
 
   group('Landscape and Tablet UI Tests', () {
-    testWidgets('Prayer landscape dashboard widgets render without overflow', (tester) async {
+    testWidgets('Prayer landscape dashboard widgets render without overflow', (
+      tester,
+    ) async {
       // Mobile Landscape Screen Size (840 x 390)
       tester.view.physicalSize = const Size(840, 390);
       tester.view.devicePixelRatio = 1.0;
       addTearDown(tester.view.resetPhysicalSize);
 
-      await tester.pumpWidget(buildTestableWidget(
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: PrayerTimesHorizontalCard(prayerTimes: prayerTimes),
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: FastingSunnahCard(prayerTimes: prayerTimes),
-            ),
-          ],
+      await tester.pumpWidget(
+        buildTestableWidget(
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: PrayerTimesHorizontalCard(prayerTimes: prayerTimes),
+              ),
+              const SizedBox(width: 10),
+              Expanded(child: FastingSunnahCard(prayerTimes: prayerTimes)),
+            ],
+          ),
+          size: const Size(840, 390),
         ),
-        size: const Size(840, 390),
-      ));
+      );
       await tester.pumpAndSettle();
 
       expect(find.text('Fajr'), findsOneWidget);
@@ -84,17 +84,21 @@ void main() {
       expect(tester.takeException(), isNull);
     });
 
-    testWidgets('ForbiddenPrayerTimesCard renders properly in landscape', (tester) async {
+    testWidgets('ForbiddenPrayerTimesCard renders properly in landscape', (
+      tester,
+    ) async {
       tester.view.physicalSize = const Size(840, 390);
       tester.view.devicePixelRatio = 1.0;
       addTearDown(tester.view.resetPhysicalSize);
 
-      await tester.pumpWidget(buildTestableWidget(
-        SingleChildScrollView(
-          child: ForbiddenPrayerTimesCard(prayerTimes: prayerTimes),
+      await tester.pumpWidget(
+        buildTestableWidget(
+          SingleChildScrollView(
+            child: ForbiddenPrayerTimesCard(prayerTimes: prayerTimes),
+          ),
+          size: const Size(840, 390),
         ),
-        size: const Size(840, 390),
-      ));
+      );
       await tester.pumpAndSettle();
 
       expect(find.text('Forbidden Salat Times'), findsOneWidget);

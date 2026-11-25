@@ -11,11 +11,11 @@ class BookSearchCubit extends Cubit<BookSearchState> {
     @factoryParam required bool isTafsir,
     @factoryParam required this.allResources,
   }) : super(
-          BookSearchState.initial(
-            isTafsir: isTafsir,
-            allResources: allResources,
-          ),
-        );
+         BookSearchState.initial(
+           isTafsir: isTafsir,
+           allResources: allResources,
+         ),
+       );
 
   void updateQuery(String query) {
     emit(state.copyWithQuery(query, allResources));

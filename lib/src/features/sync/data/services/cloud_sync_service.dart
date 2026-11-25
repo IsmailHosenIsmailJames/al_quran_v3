@@ -67,7 +67,9 @@ class CloudSyncService {
 
       // Notify reactive UI cubits that new data is available
       _syncCompletedController.add(null);
-      debugPrint("Realtime DB Cloud Sync completed successfully for user: $uid");
+      debugPrint(
+        "Realtime DB Cloud Sync completed successfully for user: $uid",
+      );
     } on FirebaseException catch (e) {
       if (e.code == "unavailable" ||
           e.code == "network-request-failed" ||
@@ -132,10 +134,14 @@ class CloudSyncService {
         final localUpdatedAt = _parseDateTime(localMap["updatedAt"]);
 
         // Handle collection-level deletion
-        if (cloudIsDeleted && (cloudDeletedAt.isAfter(localUpdatedAt) || cloudDeletedAt == localUpdatedAt)) {
+        if (cloudIsDeleted &&
+            (cloudDeletedAt.isAfter(localUpdatedAt) ||
+                cloudDeletedAt == localUpdatedAt)) {
           await box.put(colId, cloudMap);
           continue;
-        } else if (localIsDeleted && (localDeletedAt.isAfter(cloudUpdatedAt) || localDeletedAt == cloudUpdatedAt)) {
+        } else if (localIsDeleted &&
+            (localDeletedAt.isAfter(cloudUpdatedAt) ||
+                localDeletedAt == cloudUpdatedAt)) {
           try {
             await cloudRef.child(colId).set(_sanitize(localMap));
           } catch (_) {}
@@ -143,8 +149,12 @@ class CloudSyncService {
         }
 
         // Both active: Perform item-level notes merge
-        final NoteCollectionModel localCol = NoteCollectionModel.fromJson(deepConvertMap(localMap));
-        final NoteCollectionModel cloudCol = NoteCollectionModel.fromJson(deepConvertMap(cloudMap));
+        final NoteCollectionModel localCol = NoteCollectionModel.fromJson(
+          deepConvertMap(localMap),
+        );
+        final NoteCollectionModel cloudCol = NoteCollectionModel.fromJson(
+          deepConvertMap(cloudMap),
+        );
 
         final mergedNotesMap = <String, NoteModel>{};
         for (final note in cloudCol.notes) {
@@ -161,16 +171,24 @@ class CloudSyncService {
           }
         }
 
-        final newerUpdatedAt = localUpdatedAt.isAfter(cloudUpdatedAt) ? localUpdatedAt : cloudUpdatedAt;
-        final resolvedName = localUpdatedAt.isAfter(cloudUpdatedAt) ? localCol.name : cloudCol.name;
-        final resolvedColor = localUpdatedAt.isAfter(cloudUpdatedAt) ? localCol.colorHex : cloudCol.colorHex;
+        final newerUpdatedAt = localUpdatedAt.isAfter(cloudUpdatedAt)
+            ? localUpdatedAt
+            : cloudUpdatedAt;
+        final resolvedName = localUpdatedAt.isAfter(cloudUpdatedAt)
+            ? localCol.name
+            : cloudCol.name;
+        final resolvedColor = localUpdatedAt.isAfter(cloudUpdatedAt)
+            ? localCol.colorHex
+            : cloudCol.colorHex;
 
         final resolvedCol = NoteCollectionModel(
           id: colId,
           name: resolvedName,
           colorHex: resolvedColor,
           notes: mergedNotesMap.values.toList(),
-          createdAt: localCol.createdAt.isBefore(cloudCol.createdAt) ? localCol.createdAt : cloudCol.createdAt,
+          createdAt: localCol.createdAt.isBefore(cloudCol.createdAt)
+              ? localCol.createdAt
+              : cloudCol.createdAt,
           updatedAt: newerUpdatedAt,
           isDeleted: false,
           deletedAt: null,
@@ -246,10 +264,14 @@ class CloudSyncService {
         final localDeletedAt = _parseDateTime(localMap["deletedAt"]);
         final localUpdatedAt = _parseDateTime(localMap["updatedAt"]);
 
-        if (cloudIsDeleted && (cloudDeletedAt.isAfter(localUpdatedAt) || cloudDeletedAt == localUpdatedAt)) {
+        if (cloudIsDeleted &&
+            (cloudDeletedAt.isAfter(localUpdatedAt) ||
+                cloudDeletedAt == localUpdatedAt)) {
           await box.put(colId, cloudMap);
           continue;
-        } else if (localIsDeleted && (localDeletedAt.isAfter(cloudUpdatedAt) || localDeletedAt == cloudUpdatedAt)) {
+        } else if (localIsDeleted &&
+            (localDeletedAt.isAfter(cloudUpdatedAt) ||
+                localDeletedAt == cloudUpdatedAt)) {
           try {
             await cloudRef.child(colId).set(_sanitize(localMap));
           } catch (_) {}
@@ -257,8 +279,12 @@ class CloudSyncService {
         }
 
         // Both active: Perform item-level pinned items merge
-        final PinnedCollectionModel localCol = PinnedCollectionModel.fromJson(deepConvertMap(localMap));
-        final PinnedCollectionModel cloudCol = PinnedCollectionModel.fromJson(deepConvertMap(cloudMap));
+        final PinnedCollectionModel localCol = PinnedCollectionModel.fromJson(
+          deepConvertMap(localMap),
+        );
+        final PinnedCollectionModel cloudCol = PinnedCollectionModel.fromJson(
+          deepConvertMap(cloudMap),
+        );
 
         final mergedPinnedMap = <String, PinnedModel>{};
         for (final item in cloudCol.pinned) {
@@ -275,16 +301,24 @@ class CloudSyncService {
           }
         }
 
-        final newerUpdatedAt = localUpdatedAt.isAfter(cloudUpdatedAt) ? localUpdatedAt : cloudUpdatedAt;
-        final resolvedName = localUpdatedAt.isAfter(cloudUpdatedAt) ? localCol.name : cloudCol.name;
-        final resolvedColor = localUpdatedAt.isAfter(cloudUpdatedAt) ? localCol.colorHex : cloudCol.colorHex;
+        final newerUpdatedAt = localUpdatedAt.isAfter(cloudUpdatedAt)
+            ? localUpdatedAt
+            : cloudUpdatedAt;
+        final resolvedName = localUpdatedAt.isAfter(cloudUpdatedAt)
+            ? localCol.name
+            : cloudCol.name;
+        final resolvedColor = localUpdatedAt.isAfter(cloudUpdatedAt)
+            ? localCol.colorHex
+            : cloudCol.colorHex;
 
         final resolvedCol = PinnedCollectionModel(
           id: colId,
           name: resolvedName,
           colorHex: resolvedColor,
           pinned: mergedPinnedMap.values.toList(),
-          createdAt: localCol.createdAt.isBefore(cloudCol.createdAt) ? localCol.createdAt : cloudCol.createdAt,
+          createdAt: localCol.createdAt.isBefore(cloudCol.createdAt)
+              ? localCol.createdAt
+              : cloudCol.createdAt,
           updatedAt: newerUpdatedAt,
           isDeleted: false,
           deletedAt: null,
@@ -325,7 +359,9 @@ class CloudSyncService {
 
     final rawLocal = userBox.get("quran_browse_history", defaultValue: []);
     final localList = List<Map<String, dynamic>>.from(
-      (rawLocal is List ? rawLocal : []).map((e) => Map<String, dynamic>.from(e as Map)),
+      (rawLocal is List ? rawLocal : []).map(
+        (e) => Map<String, dynamic>.from(e as Map),
+      ),
     );
 
     List<Map<String, dynamic>> cloudItems = [];
@@ -333,7 +369,9 @@ class CloudSyncService {
       final data = docSnap.value;
       if (data is Map && data["items"] is List) {
         cloudItems = List<Map<String, dynamic>>.from(
-          (data["items"] as List).map((e) => Map<String, dynamic>.from(e as Map)),
+          (data["items"] as List).map(
+            (e) => Map<String, dynamic>.from(e as Map),
+          ),
         );
       }
     }
@@ -456,13 +494,22 @@ class CloudSyncService {
       final data = docSnap.value;
       if (data is Map) {
         if (data["selected_quran_script_type"] != null) {
-          await userBox.put("selected_quran_script_type", data["selected_quran_script_type"]);
+          await userBox.put(
+            "selected_quran_script_type",
+            data["selected_quran_script_type"],
+          );
         }
         if (data["preview_quran_script_font_size"] != null) {
-          await userBox.put("preview_quran_script_font_size", data["preview_quran_script_font_size"]);
+          await userBox.put(
+            "preview_quran_script_font_size",
+            data["preview_quran_script_font_size"],
+          );
         }
         if (data["quran_script_heigh_of_line"] != null) {
-          await userBox.put("quran_script_heigh_of_line", data["quran_script_heigh_of_line"]);
+          await userBox.put(
+            "quran_script_heigh_of_line",
+            data["quran_script_heigh_of_line"],
+          );
         }
         if (data["isAyahByAyah"] != null) {
           await userBox.put("isAyahByAyah", data["isAyahByAyah"]);
@@ -477,11 +524,19 @@ class CloudSyncService {
       final Map<String, dynamic> settingsMap = {
         "updatedAt": ServerValue.timestamp,
       };
-      if (scriptType != null) settingsMap["selected_quran_script_type"] = scriptType;
-      if (fontSize != null) settingsMap["preview_quran_script_font_size"] = fontSize;
-      if (lineHeight != null) settingsMap["quran_script_heigh_of_line"] = lineHeight;
+      if (scriptType != null) {
+        settingsMap["selected_quran_script_type"] = scriptType;
+      }
+      if (fontSize != null) {
+        settingsMap["preview_quran_script_font_size"] = fontSize;
+      }
+      if (lineHeight != null) {
+        settingsMap["quran_script_heigh_of_line"] = lineHeight;
+      }
       if (isAyahByAyah != null) settingsMap["isAyahByAyah"] = isAyahByAyah;
-      if (primaryTheme != null) settingsMap["primary_color_theme"] = primaryTheme;
+      if (primaryTheme != null) {
+        settingsMap["primary_color_theme"] = primaryTheme;
+      }
       if (themeMode != null) settingsMap["theme_mode_type"] = themeMode;
 
       if (settingsMap.length > 1) {
@@ -507,7 +562,10 @@ class CloudSyncService {
     if (docSnap != null && docSnap.exists && docSnap.value != null) {
       final data = docSnap.value;
       if (data is Map) {
-        await userBox.put("last_selected_reciter", Map<String, dynamic>.from(data));
+        await userBox.put(
+          "last_selected_reciter",
+          Map<String, dynamic>.from(data),
+        );
       }
     } else if (localReciter != null && localReciter is Map) {
       try {
@@ -538,11 +596,13 @@ class CloudSyncService {
         final cloudMap = Map<String, dynamic>.from(cloudData);
 
         // Merge active dates (union of local and cloud)
-        final localDates = (localStreak["activeDates"] as List<dynamic>?)
+        final localDates =
+            (localStreak["activeDates"] as List<dynamic>?)
                 ?.map((e) => e.toString())
                 .toSet() ??
             <String>{};
-        final cloudDates = (cloudMap["activeDates"] as List<dynamic>?)
+        final cloudDates =
+            (cloudMap["activeDates"] as List<dynamic>?)
                 ?.map((e) => e.toString())
                 .toSet() ??
             <String>{};
@@ -550,8 +610,7 @@ class CloudSyncService {
 
         final localCurrent =
             (localStreak["currentStreak"] as num?)?.toInt() ?? 0;
-        final cloudCurrent =
-            (cloudMap["currentStreak"] as num?)?.toInt() ?? 0;
+        final cloudCurrent = (cloudMap["currentStreak"] as num?)?.toInt() ?? 0;
         final mergedCurrent = max(localCurrent, cloudCurrent);
 
         final localBest = (localStreak["bestStreak"] as num?)?.toInt() ?? 0;
@@ -622,8 +681,9 @@ class CloudSyncService {
               (localPlan["completedPages"] as num?)?.toInt() ?? 0;
           final cloudCompleted =
               (cloudPlan["completedPages"] as num?)?.toInt() ?? 0;
-          final winner =
-              localCompleted >= cloudCompleted ? localPlan : cloudPlan;
+          final winner = localCompleted >= cloudCompleted
+              ? localPlan
+              : cloudPlan;
           await userBox.put("user_khatam_plan_data", winner);
           try {
             await docRef.set(_sanitize(winner));
@@ -661,4 +721,3 @@ class CloudSyncService {
     return DateTime.fromMillisecondsSinceEpoch(0);
   }
 }
-

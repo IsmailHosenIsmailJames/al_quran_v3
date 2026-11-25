@@ -10,8 +10,8 @@ class AuthCubit extends Cubit<AuthState> {
   StreamSubscription? _authSubscription;
 
   AuthCubit({required FirebaseAuthDataSource authDataSource})
-      : _authDataSource = authDataSource,
-        super(const AuthInitial()) {
+    : _authDataSource = authDataSource,
+      super(const AuthInitial()) {
     _init();
   }
 
@@ -120,7 +120,8 @@ class AuthCubit extends Cubit<AuthState> {
     final str = error.toString();
     if (str.contains("user-not-found")) {
       return "No account found with this email.";
-    } else if (str.contains("wrong-password") || str.contains("invalid-credential")) {
+    } else if (str.contains("wrong-password") ||
+        str.contains("invalid-credential")) {
       return "Incorrect password or email.";
     } else if (str.contains("email-already-in-use")) {
       return "An account with this email already exists.";
@@ -133,7 +134,10 @@ class AuthCubit extends Cubit<AuthState> {
     } else if (str.contains("network-request-failed")) {
       return "Network error. Please check your internet connection.";
     }
-    return str.replaceAll("Exception: ", "").replaceAll("[firebase_auth/", "").replaceAll("]", "");
+    return str
+        .replaceAll("Exception: ", "")
+        .replaceAll("[firebase_auth/", "")
+        .replaceAll("]", "");
   }
 
   @override

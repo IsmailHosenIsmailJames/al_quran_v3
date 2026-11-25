@@ -11,7 +11,7 @@ import "package:al_quran_v3/src/features/setup/presentation/bloc/setup_state.dar
 import "package:al_quran_v3/src/features/setup/presentation/widgets/book_select_bottom_sheet.dart";
 import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 

@@ -1,5 +1,5 @@
 import "package:al_quran_v3/src/core/utils/number_localization.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:hijri/hijri_calendar.dart";
 
 String hijriDate(BuildContext context) {

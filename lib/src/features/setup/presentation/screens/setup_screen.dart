@@ -13,7 +13,7 @@ import "package:al_quran_v3/src/features/setup/presentation/widgets/download_pro
 import "package:al_quran_v3/src/features/setup/presentation/widgets/language_selection_list.dart";
 import "package:al_quran_v3/src/features/setup/presentation/widgets/setup_preview_card.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter/rendering.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";

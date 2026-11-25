@@ -1,7 +1,7 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/meaning_of_surah.dart";
 import "package:al_quran_v3/src/core/utils/number_localization.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:gap/gap.dart";
 
 class JumpToAyahHeader extends StatelessWidget {

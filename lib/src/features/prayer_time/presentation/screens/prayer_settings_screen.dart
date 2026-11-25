@@ -19,7 +19,7 @@ import "package:al_quran_v3/src/features/prayer_time/presentation/screens/prayer
 import "package:awesome_notifications/awesome_notifications.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/foundation.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
@@ -45,21 +45,24 @@ class _PrayerSettingsState extends State<PrayerSettings> {
     final maghrib = modes[Prayer.maghrib] ?? PrayerReminderMode.notification;
     final isha = modes[Prayer.isha] ?? PrayerReminderMode.notification;
 
-    final isAllAlarm = fajr == PrayerReminderMode.alarm &&
+    final isAllAlarm =
+        fajr == PrayerReminderMode.alarm &&
         dhuhr == PrayerReminderMode.alarm &&
         asr == PrayerReminderMode.alarm &&
         maghrib == PrayerReminderMode.alarm &&
         isha == PrayerReminderMode.alarm;
     if (isAllAlarm) return "all_alarm";
 
-    final isAllNotification = fajr == PrayerReminderMode.notification &&
+    final isAllNotification =
+        fajr == PrayerReminderMode.notification &&
         dhuhr == PrayerReminderMode.notification &&
         asr == PrayerReminderMode.notification &&
         maghrib == PrayerReminderMode.notification &&
         isha == PrayerReminderMode.notification;
     if (isAllNotification) return "all_notification";
 
-    final isBalanced = fajr == PrayerReminderMode.alarm &&
+    final isBalanced =
+        fajr == PrayerReminderMode.alarm &&
         dhuhr == PrayerReminderMode.notification &&
         asr == PrayerReminderMode.notification &&
         maghrib == PrayerReminderMode.notification &&
@@ -121,30 +124,15 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                   const Gap(16),
 
                   // 3. Sound & Adhan Card
-                  _buildAudioAndAdhanCard(
-                    context,
-                    themeState,
-                    isDark,
-                    l10n,
-                  ),
+                  _buildAudioAndAdhanCard(context, themeState, isDark, l10n),
                   const Gap(16),
 
                   // 4. Per-Prayer Alert Modes Card
-                  _buildPrayerAlertModesCard(
-                    context,
-                    themeState,
-                    isDark,
-                    l10n,
-                  ),
+                  _buildPrayerAlertModesCard(context, themeState, isDark, l10n),
                   const Gap(16),
 
                   // 5. Device Readiness & Diagnostics Card
-                  _buildDiagnosticsCard(
-                    context,
-                    themeState,
-                    isDark,
-                    l10n,
-                  ),
+                  _buildDiagnosticsCard(context, themeState, isDark, l10n),
                   const Gap(32),
                 ],
               ],
@@ -547,17 +535,14 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                     selected: activePreset == "balanced",
                     onSelected: (selected) {
                       if (selected) {
-                        context
-                            .read<PrayerReminderCubit>()
-                            .applyBulkPreset("balanced");
+                        context.read<PrayerReminderCubit>().applyBulkPreset(
+                          "balanced",
+                        );
                       }
                     },
                   ),
                   ChoiceChip(
-                    avatar: const Icon(
-                      Icons.alarm_on_rounded,
-                      size: 16,
-                    ),
+                    avatar: const Icon(Icons.alarm_on_rounded, size: 16),
                     label: Text(
                       l10n.presetAllAlarms,
                       style: const TextStyle(fontSize: 11),
@@ -565,17 +550,14 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                     selected: activePreset == "all_alarm",
                     onSelected: (selected) {
                       if (selected) {
-                        context
-                            .read<PrayerReminderCubit>()
-                            .applyBulkPreset("all_alarm");
+                        context.read<PrayerReminderCubit>().applyBulkPreset(
+                          "all_alarm",
+                        );
                       }
                     },
                   ),
                   ChoiceChip(
-                    avatar: const Icon(
-                      FluentIcons.alert_24_regular,
-                      size: 16,
-                    ),
+                    avatar: const Icon(FluentIcons.alert_24_regular, size: 16),
                     label: Text(
                       l10n.presetAllNotifications,
                       style: const TextStyle(fontSize: 11),
@@ -583,9 +565,9 @@ class _PrayerSettingsState extends State<PrayerSettings> {
                     selected: activePreset == "all_notification",
                     onSelected: (selected) {
                       if (selected) {
-                        context
-                            .read<PrayerReminderCubit>()
-                            .applyBulkPreset("all_notification");
+                        context.read<PrayerReminderCubit>().applyBulkPreset(
+                          "all_notification",
+                        );
                       }
                     },
                   ),
@@ -1056,7 +1038,8 @@ class _PrayerSettingsState extends State<PrayerSettings> {
               // List of 6 Prayers
               ...prayers.map((prayerType) {
                 final int offsetMinutes =
-                    prayerReminderState.reminderTimeAdjustment?[prayerType] ?? 0;
+                    prayerReminderState.reminderTimeAdjustment?[prayerType] ??
+                    0;
                 final DateTime basePrayerTime =
                     widget.prayerTimes.timeForPrayer(prayerType)?.toLocal() ??
                     DateTime.now();
@@ -1116,13 +1099,8 @@ class _PrayerSettingsState extends State<PrayerSettings> {
     required AppLocalizations l10n,
   }) {
     return InkWell(
-      onTap: () => _showTimingOffsetSheet(
-        context,
-        prayerType,
-        themeState,
-        isDark,
-        l10n,
-      ),
+      onTap: () =>
+          _showTimingOffsetSheet(context, prayerType, themeState, isDark, l10n),
       borderRadius: BorderRadius.circular(10),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 4),
@@ -1132,9 +1110,7 @@ class _PrayerSettingsState extends State<PrayerSettings> {
             Container(
               padding: const EdgeInsets.all(7),
               decoration: BoxDecoration(
-                color: themeState.primary.withValues(
-                  alpha: isDark ? 0.2 : 0.1,
-                ),
+                color: themeState.primary.withValues(alpha: isDark ? 0.2 : 0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(

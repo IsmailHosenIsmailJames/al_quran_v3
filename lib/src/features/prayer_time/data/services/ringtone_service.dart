@@ -18,8 +18,9 @@ class RingtoneResult {
 }
 
 class RingtoneService {
-  static const MethodChannel _channel =
-      MethodChannel("com.ismail_hosen_james.al_quran_v3/ringtone");
+  static const MethodChannel _channel = MethodChannel(
+    "com.ismail_hosen_james.al_quran_v3/ringtone",
+  );
   static final StreamController<void> _stoppedController =
       StreamController<void>.broadcast();
   static bool _handlerRegistered = false;
@@ -116,8 +117,9 @@ class RingtoneService {
   static Future<bool> isIgnoringBatteryOptimizations() async {
     if (!isSupported) return true;
     try {
-      final res =
-          await _channel.invokeMethod<bool>("isIgnoringBatteryOptimizations");
+      final res = await _channel.invokeMethod<bool>(
+        "isIgnoringBatteryOptimizations",
+      );
       return res ?? true;
     } catch (e) {
       debugPrint("Error checking battery optimization: $e");
@@ -129,8 +131,9 @@ class RingtoneService {
   static Future<bool> requestIgnoreBatteryOptimizations() async {
     if (!isSupported) return false;
     try {
-      final res = await _channel
-          .invokeMethod<bool>("requestIgnoreBatteryOptimizations");
+      final res = await _channel.invokeMethod<bool>(
+        "requestIgnoreBatteryOptimizations",
+      );
       return res ?? false;
     } catch (e) {
       debugPrint("Error requesting battery optimization exemption: $e");
@@ -142,7 +145,9 @@ class RingtoneService {
   static Future<List<RingtoneResult>> getRingtones() async {
     if (!isSupported) return [];
     try {
-      final res = await _channel.invokeListMethod<Map<dynamic, dynamic>>("getRingtones");
+      final res = await _channel.invokeListMethod<Map<dynamic, dynamic>>(
+        "getRingtones",
+      );
       if (res != null) {
         return res.map((e) => RingtoneResult.fromMap(e)).toList();
       }
@@ -161,15 +166,13 @@ class RingtoneService {
   }) async {
     if (!isSupported) return true;
     try {
-      final res = await _channel.invokeMethod<bool>(
-        "createOrUpdateNotificationChannel",
-        {
-          "channelKey": channelKey,
-          "channelName": channelName,
-          "soundUri": soundUri,
-          "isAlarm": isAlarm,
-        },
-      );
+      final res = await _channel
+          .invokeMethod<bool>("createOrUpdateNotificationChannel", {
+            "channelKey": channelKey,
+            "channelName": channelName,
+            "soundUri": soundUri,
+            "isAlarm": isAlarm,
+          });
       return res ?? false;
     } catch (e) {
       debugPrint("Error creating native notification channel: $e");
@@ -193,7 +196,9 @@ class RingtoneService {
   static Future<bool> openFullScreenIntentSettings() async {
     if (!isSupported) return false;
     try {
-      final res = await _channel.invokeMethod<bool>("openFullScreenIntentSettings");
+      final res = await _channel.invokeMethod<bool>(
+        "openFullScreenIntentSettings",
+      );
       return res ?? false;
     } catch (e) {
       debugPrint("Error opening full-screen intent settings: $e");

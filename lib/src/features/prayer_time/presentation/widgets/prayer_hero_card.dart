@@ -5,7 +5,7 @@ import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/helpers/prayer_time_helper.dart";
 import "package:dartx/dartx_io.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:google_fonts/google_fonts.dart";
@@ -68,12 +68,16 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
     );
 
     final nextPrayerLocalized =
-        PrayerTimeHelper.localizedPrayerName(context, nextPrayer)
-            ?.capitalize() ??
+        PrayerTimeHelper.localizedPrayerName(
+          context,
+          nextPrayer,
+        )?.capitalize() ??
         "";
     final currentPrayerLocalized =
-        PrayerTimeHelper.localizedPrayerName(context, currentPrayer)
-            ?.capitalize() ??
+        PrayerTimeHelper.localizedPrayerName(
+          context,
+          currentPrayer,
+        )?.capitalize() ??
         "";
 
     final nextPrayerArabic = PrayerTimeHelper.arabicPrayerName(nextPrayer);
@@ -83,9 +87,7 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: isDark
-            ? const Color(0xFF1E1E1E)
-            : Colors.white,
+        color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
         borderRadius: BorderRadius.circular(20),
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -126,7 +128,10 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
             if (activeForbiddenWindow != null) ...[
               Container(
                 margin: const EdgeInsets.only(bottom: 14),
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.amber.withValues(alpha: isDark ? 0.2 : 0.12),
                   borderRadius: BorderRadius.circular(12),
@@ -138,7 +143,9 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
                   children: [
                     Icon(
                       FluentIcons.warning_24_filled,
-                      color: isDark ? Colors.amber.shade300 : Colors.amber.shade800,
+                      color: isDark
+                          ? Colors.amber.shade300
+                          : Colors.amber.shade800,
                       size: 20,
                     ),
                     const Gap(8),
@@ -148,7 +155,9 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
-                          color: isDark ? Colors.amber.shade200 : Colors.amber.shade900,
+                          color: isDark
+                              ? Colors.amber.shade200
+                              : Colors.amber.shade900,
                         ),
                       ),
                     ),
@@ -175,7 +184,9 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
                             : Colors.white.withValues(alpha: 0.85),
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                          color: themeState.primary.withValues(alpha: isDark ? 0.35 : 0.25),
+                          color: themeState.primary.withValues(
+                            alpha: isDark ? 0.35 : 0.25,
+                          ),
                         ),
                       ),
                       child: Row(
@@ -251,9 +262,7 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
                   ),
                 ),
                 _buildTimeSegment(
-                  (durationUntilNext.inMinutes % 60)
-                      .toString()
-                      .padLeft(2, "0"),
+                  (durationUntilNext.inMinutes % 60).toString().padLeft(2, "0"),
                   l10n.minutes.toUpperCase(),
                   themeState,
                   isDark,
@@ -270,9 +279,7 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
                   ),
                 ),
                 _buildTimeSegment(
-                  (durationUntilNext.inSeconds % 60)
-                      .toString()
-                      .padLeft(2, "0"),
+                  (durationUntilNext.inSeconds % 60).toString().padLeft(2, "0"),
                   l10n.seconds.toUpperCase(),
                   themeState,
                   isDark,
@@ -293,7 +300,9 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
                     backgroundColor: isDark
                         ? Colors.white.withValues(alpha: 0.08)
                         : Colors.grey.shade200,
-                    valueColor: AlwaysStoppedAnimation<Color>(themeState.primary),
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      themeState.primary,
+                    ),
                   ),
                 ),
                 const Gap(8),
@@ -304,7 +313,9 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
                       "${currentPrayerLocalized.isNotEmpty ? currentPrayerLocalized : l10n.current}: ${timeFormatter.format(currentPrayerTime.toLocal())}",
                       style: TextStyle(
                         fontSize: 11,
-                        color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                        color: isDark
+                            ? Colors.grey.shade400
+                            : Colors.grey.shade600,
                       ),
                     ),
                     Text(

@@ -21,10 +21,7 @@ class TafsirMatchItem {
   final ResourcesModel bookInfo;
   final String text;
 
-  const TafsirMatchItem({
-    required this.bookInfo,
-    required this.text,
-  });
+  const TafsirMatchItem({required this.bookInfo, required this.text});
 }
 
 /// A rich search result representing a single Ayah match.

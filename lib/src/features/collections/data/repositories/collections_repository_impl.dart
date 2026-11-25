@@ -48,7 +48,9 @@ class CollectionsRepositoryImpl implements CollectionsRepository {
   }
 
   @override
-  Future<void> saveNoteCollectionModelAsMap(NoteCollectionModel noteCollection) {
+  Future<void> saveNoteCollectionModelAsMap(
+    NoteCollectionModel noteCollection,
+  ) {
     return _localDataSource.saveNoteCollectionModelAsMap(noteCollection);
   }
 

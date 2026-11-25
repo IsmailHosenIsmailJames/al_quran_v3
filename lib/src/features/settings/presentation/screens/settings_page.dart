@@ -13,7 +13,7 @@ import "package:al_quran_v3/src/features/settings/presentation/screens/widget_se
 import "package:al_quran_v3/src/features/settings/presentation/widgets/others_settings.dart";
 import "package:al_quran_v3/src/features/settings/presentation/widgets/theme_settings.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -60,7 +60,9 @@ class _SettingsPageState extends State<SettingsPage> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? const Color(0xFF121212) : const Color(0xFFF8F9FA),
+      backgroundColor: isDark
+          ? const Color(0xFF121212)
+          : const Color(0xFFF8F9FA),
       appBar: widget.showAppBar
           ? AppBar(
               backgroundColor: Colors.transparent,
@@ -69,10 +71,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 appLocalizations.settings,
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-              actions: [
-                themeIconButton(context),
-                const Gap(8),
-              ],
+              actions: [themeIconButton(context), const Gap(8)],
             )
           : null,
       body: SafeArea(
@@ -139,7 +138,12 @@ class _SettingsPageState extends State<SettingsPage> {
               // Sidebar Header / Branding
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
-                child: _buildAppBrandingCard(context, themeState, isDark, compact: true),
+                child: _buildAppBrandingCard(
+                  context,
+                  themeState,
+                  isDark,
+                  compact: true,
+                ),
               ),
 
               Divider(
@@ -152,7 +156,10 @@ class _SettingsPageState extends State<SettingsPage> {
               // Categories List
               Expanded(
                 child: ListView.separated(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 12,
+                  ),
                   itemCount: categories.length,
                   separatorBuilder: (context, index) => const Gap(4),
                   itemBuilder: (context, index) {
@@ -161,7 +168,9 @@ class _SettingsPageState extends State<SettingsPage> {
 
                     return Material(
                       color: isSelected
-                          ? themeState.primary.withValues(alpha: isDark ? 0.2 : 0.1)
+                          ? themeState.primary.withValues(
+                              alpha: isDark ? 0.2 : 0.1,
+                            )
                           : Colors.transparent,
                       borderRadius: BorderRadius.circular(12),
                       child: InkWell(
@@ -196,8 +205,10 @@ class _SettingsPageState extends State<SettingsPage> {
                                   color: isSelected
                                       ? themeState.primary
                                       : (isDark
-                                          ? Colors.white.withValues(alpha: 0.05)
-                                          : Colors.grey.shade100),
+                                            ? Colors.white.withValues(
+                                                alpha: 0.05,
+                                              )
+                                            : Colors.grey.shade100),
                                   borderRadius: BorderRadius.circular(9),
                                 ),
                                 child: Icon(
@@ -206,8 +217,8 @@ class _SettingsPageState extends State<SettingsPage> {
                                   color: isSelected
                                       ? Colors.white
                                       : (isDark
-                                          ? Colors.grey.shade300
-                                          : Colors.grey.shade700),
+                                            ? Colors.grey.shade300
+                                            : Colors.grey.shade700),
                                 ),
                               ),
                               const Gap(12),
@@ -226,11 +237,11 @@ class _SettingsPageState extends State<SettingsPage> {
                                             : FontWeight.w500,
                                         color: isSelected
                                             ? (isDark
-                                                ? Colors.white
-                                                : themeState.primary)
+                                                  ? Colors.white
+                                                  : themeState.primary)
                                             : (isDark
-                                                ? Colors.grey.shade300
-                                                : Colors.grey.shade800),
+                                                  ? Colors.grey.shade300
+                                                  : Colors.grey.shade800),
                                       ),
                                     ),
                                     const Gap(1),
@@ -271,13 +282,18 @@ class _SettingsPageState extends State<SettingsPage> {
                     : Colors.grey.shade200,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
                 child: Row(
                   children: [
                     Icon(
                       FluentIcons.info_16_regular,
                       size: 14,
-                      color: isDark ? Colors.grey.shade500 : Colors.grey.shade400,
+                      color: isDark
+                          ? Colors.grey.shade500
+                          : Colors.grey.shade400,
                     ),
                     const Gap(8),
                     Expanded(
@@ -285,7 +301,9 @@ class _SettingsPageState extends State<SettingsPage> {
                         "Al Quran • Offline Ready",
                         style: TextStyle(
                           fontSize: 11,
-                          color: isDark ? Colors.grey.shade500 : Colors.grey.shade500,
+                          color: isDark
+                              ? Colors.grey.shade500
+                              : Colors.grey.shade500,
                         ),
                       ),
                     ),
@@ -305,10 +323,7 @@ class _SettingsPageState extends State<SettingsPage> {
               child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 200),
                 transitionBuilder: (child, animation) {
-                  return FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  );
+                  return FadeTransition(opacity: animation, child: child);
                 },
                 child: SingleChildScrollView(
                   key: ValueKey<int>(_selectedCategoryIndex),
@@ -363,10 +378,17 @@ class _SettingsPageState extends State<SettingsPage> {
                 itemBuilder: (context, index) {
                   final item = categories[index];
                   return ActionChip(
-                    avatar: Icon(item.icon, size: 15, color: themeState.primary),
+                    avatar: Icon(
+                      item.icon,
+                      size: 15,
+                      color: themeState.primary,
+                    ),
                     label: Text(
                       item.title,
-                      style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     backgroundColor: isDark
                         ? const Color(0xFF1E1E1E)
@@ -396,7 +418,10 @@ class _SettingsPageState extends State<SettingsPage> {
             Expanded(
               child: SingleChildScrollView(
                 controller: _mobileScrollController,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -427,7 +452,9 @@ class _SettingsPageState extends State<SettingsPage> {
                         title: appLocalizations.quranStyle,
                         themePrimary: themeState.primary,
                         isDark: isDark,
-                        child: const QuranScriptSettings(showAudioSpeedController: false),
+                        child: const QuranScriptSettings(
+                          showAudioSpeedController: false,
+                        ),
                       ),
                     ),
 
@@ -455,7 +482,12 @@ class _SettingsPageState extends State<SettingsPage> {
                         title: appLocalizations.accountAndSync,
                         themePrimary: themeState.primary,
                         isDark: isDark,
-                        child: _buildAccountTile(context, themeState, isDark, appLocalizations),
+                        child: _buildAccountTile(
+                          context,
+                          themeState,
+                          isDark,
+                          appLocalizations,
+                        ),
                       ),
                     ),
 
@@ -517,7 +549,8 @@ class _SettingsPageState extends State<SettingsPage> {
             _buildCategoryHeader(
               icon: FluentIcons.paint_brush_24_filled,
               title: appLocalizations.appTheme,
-              subtitle: "Customize light/dark theme mode and application accent colors",
+              subtitle:
+                  "Customize light/dark theme mode and application accent colors",
               themePrimary: themeState.primary,
               isDark: isDark,
             ),
@@ -539,7 +572,8 @@ class _SettingsPageState extends State<SettingsPage> {
             _buildCategoryHeader(
               icon: FluentIcons.book_letter_24_filled,
               title: appLocalizations.quranStyle,
-              subtitle: "Arabic script, Quran font sizes, line heights, and reading display elements",
+              subtitle:
+                  "Arabic script, Quran font sizes, line heights, and reading display elements",
               themePrimary: themeState.primary,
               isDark: isDark,
             ),
@@ -555,7 +589,8 @@ class _SettingsPageState extends State<SettingsPage> {
             _buildCategoryHeader(
               icon: FluentIcons.headphones_24_filled,
               title: appLocalizations.audioSettings,
-              subtitle: "Playback speed, online streaming preferences and reciter management",
+              subtitle:
+                  "Playback speed, online streaming preferences and reciter management",
               themePrimary: themeState.primary,
               isDark: isDark,
             ),
@@ -571,7 +606,8 @@ class _SettingsPageState extends State<SettingsPage> {
             _buildCategoryHeader(
               icon: FluentIcons.person_accounts_24_filled,
               title: appLocalizations.accountAndSync,
-              subtitle: "Sync bookmarks, pins, notes and reading history across all your devices",
+              subtitle:
+                  "Sync bookmarks, pins, notes and reading history across all your devices",
               themePrimary: themeState.primary,
               isDark: isDark,
             ),
@@ -581,7 +617,12 @@ class _SettingsPageState extends State<SettingsPage> {
               title: appLocalizations.accountAndSync,
               themePrimary: themeState.primary,
               isDark: isDark,
-              child: _buildAccountTile(context, themeState, isDark, appLocalizations),
+              child: _buildAccountTile(
+                context,
+                themeState,
+                isDark,
+                appLocalizations,
+              ),
             ),
           ],
         );
@@ -593,7 +634,8 @@ class _SettingsPageState extends State<SettingsPage> {
             _buildCategoryHeader(
               icon: FluentIcons.app_recent_24_filled,
               title: appLocalizations.homeAndLockWidgets,
-              subtitle: "Configure glanceable daily and pinned Ayah widgets for your home and lock screen",
+              subtitle:
+                  "Configure glanceable daily and pinned Ayah widgets for your home and lock screen",
               themePrimary: themeState.primary,
               isDark: isDark,
             ),
@@ -616,7 +658,8 @@ class _SettingsPageState extends State<SettingsPage> {
             _buildCategoryHeader(
               icon: FluentIcons.settings_24_filled,
               title: appLocalizations.others,
-              subtitle: "Application language, screen keep-awake and launch tab preferences",
+              subtitle:
+                  "Application language, screen keep-awake and launch tab preferences",
               themePrimary: themeState.primary,
               isDark: isDark,
             ),
@@ -754,8 +797,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 leading: CircleAvatar(
                   radius: 20,
                   backgroundColor: themeState.primaryShade200,
-                  backgroundImage:
-                      user?.photoUrl != null ? NetworkImage(user!.photoUrl!) : null,
+                  backgroundImage: user?.photoUrl != null
+                      ? NetworkImage(user!.photoUrl!)
+                      : null,
                   child: user?.photoUrl == null
                       ? Icon(
                           isAuth
@@ -768,10 +812,16 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 title: Text(
                   title,
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                  ),
                 ),
                 subtitle: Text(subtitle, style: const TextStyle(fontSize: 12)),
-                trailing: const Icon(FluentIcons.chevron_right_24_regular, size: 18),
+                trailing: const Icon(
+                  FluentIcons.chevron_right_24_regular,
+                  size: 18,
+                ),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -809,7 +859,10 @@ class _SettingsPageState extends State<SettingsPage> {
                   "Export or import JSON backup locally",
                   style: TextStyle(fontSize: 12),
                 ),
-                trailing: const Icon(FluentIcons.chevron_right_24_regular, size: 18),
+                trailing: const Icon(
+                  FluentIcons.chevron_right_24_regular,
+                  size: 18,
+                ),
                 onTap: () => LocalBackupDialog.show(context),
               ),
             ),

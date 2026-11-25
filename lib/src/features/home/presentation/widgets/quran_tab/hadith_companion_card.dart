@@ -2,7 +2,7 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/services/companion_apps_service.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:shared_preferences/shared_preferences.dart";
@@ -261,7 +261,9 @@ class _HadithCompanionCardState extends State<HadithCompanionCard> {
                     child: Icon(
                       Icons.close,
                       size: 18,
-                      color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                      color: isDark
+                          ? Colors.grey.shade400
+                          : Colors.grey.shade600,
                     ),
                   ),
                 ),

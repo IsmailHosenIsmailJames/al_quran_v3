@@ -18,10 +18,13 @@ void main() {
       expect(ArabicTextNormalizer.normalize("ٱلحمد"), "الحمد");
     });
 
-    test("normalizes Yaa / Alef Maksura variants (ى, ئ, ے) to standard Yaa (ي)", () {
-      expect(ArabicTextNormalizer.normalize("موسى"), "موسي");
-      expect(ArabicTextNormalizer.normalize("شاطئ"), "شاطي");
-    });
+    test(
+      "normalizes Yaa / Alef Maksura variants (ى, ئ, ے) to standard Yaa (ي)",
+      () {
+        expect(ArabicTextNormalizer.normalize("موسى"), "موسي");
+        expect(ArabicTextNormalizer.normalize("شاطئ"), "شاطي");
+      },
+    );
 
     test("normalizes Taa Marbuta (ة) to Haa (ه)", () {
       expect(ArabicTextNormalizer.normalize("رحمة"), " رحمه".trim());

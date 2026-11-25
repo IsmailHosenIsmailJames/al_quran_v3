@@ -1,7 +1,7 @@
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -120,7 +120,9 @@ class ThemeSettings extends StatelessWidget {
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: current.withValues(alpha: isSelected ? 0.4 : 0.2),
+                          color: current.withValues(
+                            alpha: isSelected ? 0.4 : 0.2,
+                          ),
                           blurRadius: isSelected ? 8 : 4,
                           offset: const Offset(0, 2),
                         ),
@@ -164,15 +166,15 @@ class ThemeSettings extends StatelessWidget {
             color: isSelected
                 ? themeState.primary
                 : (isDark
-                    ? Colors.white.withValues(alpha: 0.05)
-                    : Colors.white),
+                      ? Colors.white.withValues(alpha: 0.05)
+                      : Colors.white),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color: isSelected
                   ? themeState.primary
                   : (isDark
-                      ? Colors.white.withValues(alpha: 0.08)
-                      : Colors.grey.shade300),
+                        ? Colors.white.withValues(alpha: 0.08)
+                        : Colors.grey.shade300),
               width: isSelected ? 1.5 : 1.0,
             ),
           ),

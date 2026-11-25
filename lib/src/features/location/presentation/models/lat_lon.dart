@@ -9,10 +9,8 @@ abstract class LatLon with _$LatLon {
   const LatLon._();
 
   @JsonSerializable(explicitToJson: true)
-  const factory LatLon({
-    required double latitude,
-    required double longitude,
-  }) = _LatLon;
+  const factory LatLon({required double latitude, required double longitude}) =
+      _LatLon;
 
   factory LatLon.fromJson(Map<String, dynamic> json) => _$LatLonFromJson(json);
 

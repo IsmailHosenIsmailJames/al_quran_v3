@@ -2,13 +2,7 @@ import "package:al_quran_v3/src/core/resources/quran_resources/models/resources_
 import "package:al_quran_v3/src/features/search/data/models/search_filter_model.dart";
 import "package:al_quran_v3/src/features/search/data/models/search_result_model.dart";
 
-enum SearchStatus {
-  initial,
-  loading,
-  success,
-  empty,
-  error,
-}
+enum SearchStatus { initial, loading, success, empty, error }
 
 class QuranSearchState {
   final SearchStatus status;

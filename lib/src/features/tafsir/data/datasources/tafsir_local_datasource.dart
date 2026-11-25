@@ -12,13 +12,12 @@ class TafsirLocalDataSource {
     ResourcesModel book,
     String ayahKey,
   ) async {
-    final tafsirData = await QuranTafsirFunction.getTafsirForBook(book, ayahKey);
+    final tafsirData = await QuranTafsirFunction.getTafsirForBook(
+      book,
+      ayahKey,
+    );
     if (tafsirData == null) return null;
     final text = (tafsirData.tafsir['text'] as String?) ?? '';
-    return {
-      'bookName': book.name,
-      'ayahKey': ayahKey,
-      'text': text,
-    };
+    return {'bookName': book.name, 'ayahKey': ayahKey, 'text': text};
   }
 }

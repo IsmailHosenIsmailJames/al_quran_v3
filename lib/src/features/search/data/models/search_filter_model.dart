@@ -1,13 +1,7 @@
 import "package:al_quran_v3/src/core/resources/quran_resources/models/resources_model.dart";
 
 /// The active scope tab for search.
-enum SearchScope {
-  all,
-  translations,
-  arabic,
-  tafsir,
-  surahs,
-}
+enum SearchScope { all, translations, arabic, tafsir, surahs }
 
 /// Filter criteria for querying Quran resources.
 class SearchFilterModel {
@@ -38,8 +32,7 @@ class SearchFilterModel {
   }) {
     return SearchFilterModel(
       scope: scope ?? this.scope,
-      selectedTranslations:
-          selectedTranslations ?? this.selectedTranslations,
+      selectedTranslations: selectedTranslations ?? this.selectedTranslations,
       selectedTafsirs: selectedTafsirs ?? this.selectedTafsirs,
       surahNumber: clearSurahNumber ? null : (surahNumber ?? this.surahNumber),
       revelationType: revelationType ?? this.revelationType,
@@ -48,7 +41,5 @@ class SearchFilterModel {
   }
 
   bool get hasCustomFilters =>
-      surahNumber != null ||
-      revelationType != "all" ||
-      matchExactPhrase;
+      surahNumber != null || revelationType != "all" || matchExactPhrase;
 }

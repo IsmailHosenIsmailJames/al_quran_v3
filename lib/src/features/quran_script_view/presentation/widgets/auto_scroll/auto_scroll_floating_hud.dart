@@ -3,7 +3,7 @@ import "dart:ui";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/auto_scroll_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/auto_scroll_state.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -95,7 +95,9 @@ class AutoScrollFloatingHud extends StatelessWidget {
                           color: primary,
                           boxShadow: [
                             BoxShadow(
-                              color: primary.withValues(alpha: isDark ? 0.45 : 0.35),
+                              color: primary.withValues(
+                                alpha: isDark ? 0.45 : 0.35,
+                              ),
                               blurRadius: 12,
                               offset: const Offset(0, 4),
                             ),

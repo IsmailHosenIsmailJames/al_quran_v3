@@ -10,7 +10,7 @@ import "package:al_quran_v3/src/features/home/presentation/cubit/quran_history_c
 import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_view.dart";
 import "package:al_quran_v3/src/features/surah_info/presentation/widgets/surah_info_header_builder.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -32,8 +32,11 @@ class _TodayPlanHelperCardState extends State<TodayPlanHelperCard>
   @override
   void initState() {
     super.initState();
-    final isInitiallyCollapsed =
-        context.read<StreakCubit>().state.plan.isCollapsed;
+    final isInitiallyCollapsed = context
+        .read<StreakCubit>()
+        .state
+        .plan
+        .isCollapsed;
     _controller = AnimationController(
       duration: const Duration(milliseconds: 320),
       value: isInitiallyCollapsed ? 0.0 : 1.0,
@@ -48,10 +51,7 @@ class _TodayPlanHelperCardState extends State<TodayPlanHelperCard>
       curve: const Interval(0.2, 1.0, curve: Curves.easeIn),
     );
     _rotateAnimation = Tween<double>(begin: 0.0, end: 0.5).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.easeInOutCubic,
-      ),
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOutCubic),
     );
   }
 
@@ -107,8 +107,9 @@ class _TodayPlanHelperCardState extends State<TodayPlanHelperCard>
     final isFriday = DateTime.now().weekday == DateTime.friday;
     final sunnahSurahNumber = isFriday ? 18 : 67;
     final sunnahSurahName = isFriday ? "Surah Al-Kahf" : "Surah Al-Mulk";
-    final sunnahSurahSubtitle =
-        isFriday ? "Friday Sunnah • Verses 1–110" : "Night Sunnah • 30 Verses";
+    final sunnahSurahSubtitle = isFriday
+        ? "Friday Sunnah • Verses 1–110"
+        : "Night Sunnah • 30 Verses";
 
     return BlocConsumer<StreakCubit, StreakState>(
       listenWhen: (prev, curr) =>
@@ -188,7 +189,7 @@ class _TodayPlanHelperCardState extends State<TodayPlanHelperCard>
                                   completedGoals == 3
                                       ? Icons.check_circle_rounded
                                       : FluentIcons
-                                          .task_list_square_ltr_20_regular,
+                                            .task_list_square_ltr_20_regular,
                                   size: 18,
                                   color: completedGoals == 3
                                       ? Colors.green
@@ -219,14 +220,16 @@ class _TodayPlanHelperCardState extends State<TodayPlanHelperCard>
                                           vertical: 1.5,
                                         ),
                                         decoration: BoxDecoration(
-                                          color: (completedGoals == 3
-                                                  ? Colors.green
-                                                  : primary)
-                                              .withValues(
-                                            alpha: isDark ? 0.18 : 0.1,
+                                          color:
+                                              (completedGoals == 3
+                                                      ? Colors.green
+                                                      : primary)
+                                                  .withValues(
+                                                    alpha: isDark ? 0.18 : 0.1,
+                                                  ),
+                                          borderRadius: BorderRadius.circular(
+                                            6,
                                           ),
-                                          borderRadius:
-                                              BorderRadius.circular(6),
                                         ),
                                         child: Text(
                                           "$completedGoals/3 Done",
@@ -265,8 +268,9 @@ class _TodayPlanHelperCardState extends State<TodayPlanHelperCard>
                     IconButton(
                       visualDensity: VisualDensity.compact,
                       icon: const Icon(Icons.calendar_month_rounded, size: 20),
-                      color:
-                          isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                      color: isDark
+                          ? Colors.grey.shade400
+                          : Colors.grey.shade600,
                       tooltip: "Consistency Heatmap",
                       onPressed: () {
                         HapticFeedback.selectionClick();
@@ -329,14 +333,16 @@ class _TodayPlanHelperCardState extends State<TodayPlanHelperCard>
                                     : "Daily Quran Reading",
                                 subtitle: streak.isActiveToday
                                     ? (state.khatamPlan != null
-                                        ? "${streak.todayPagesRead} of ${state.khatamPlan!.roundedDailyPagesQuota} pages read today (${streak.todayAyahsRead} ayahs)"
-                                        : "${streak.todayAyahsRead} ayahs read today")
+                                          ? "${streak.todayPagesRead} of ${state.khatamPlan!.roundedDailyPagesQuota} pages read today (${streak.todayAyahsRead} ayahs)"
+                                          : "${streak.todayAyahsRead} ayahs read today")
                                     : (state.khatamPlan != null
-                                        ? "Target: ${state.khatamPlan!.roundedDailyPagesQuota} pages today (Adaptive)"
-                                        : "Read at least 1 page or Ayah"),
+                                          ? "Target: ${state.khatamPlan!.roundedDailyPagesQuota} pages today (Adaptive)"
+                                          : "Read at least 1 page or Ayah"),
                                 isDark: isDark,
                                 primary: primary,
-                                actionLabel: streak.isActiveToday ? "Resume" : "Read",
+                                actionLabel: streak.isActiveToday
+                                    ? "Resume"
+                                    : "Read",
                                 onAction: () => _openLastReadOrFatihah(context),
                               ),
 
@@ -353,7 +359,9 @@ class _TodayPlanHelperCardState extends State<TodayPlanHelperCard>
                                 actionLabel: "Open",
                                 onToggleCheck: () {
                                   HapticFeedback.selectionClick();
-                                  context.read<StreakCubit>().toggleSunnahSurah();
+                                  context
+                                      .read<StreakCubit>()
+                                      .toggleSunnahSurah();
                                 },
                                 onAction: () =>
                                     _openSurah(context, sunnahSurahNumber),
@@ -475,11 +483,7 @@ class _TodayPlanHelperCardState extends State<TodayPlanHelperCard>
                   ),
                 ),
                 const Gap(2),
-                Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  size: 9,
-                  color: primary,
-                ),
+                Icon(Icons.arrow_forward_ios_rounded, size: 9, color: primary),
               ],
             ),
           ),
@@ -561,15 +565,15 @@ class _TodayPlanHelperCardState extends State<TodayPlanHelperCard>
                       color: isChecked
                           ? primary.withValues(alpha: isDark ? 0.22 : 0.12)
                           : (isDark
-                              ? Colors.white.withValues(alpha: 0.04)
-                              : Colors.grey.shade100),
+                                ? Colors.white.withValues(alpha: 0.04)
+                                : Colors.grey.shade100),
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
                         color: isChecked
                             ? primary.withValues(alpha: isDark ? 0.45 : 0.35)
                             : (isDark
-                                ? Colors.white.withValues(alpha: 0.08)
-                                : Colors.grey.shade300),
+                                  ? Colors.white.withValues(alpha: 0.08)
+                                  : Colors.grey.shade300),
                         width: 1,
                       ),
                     ),
@@ -580,13 +584,14 @@ class _TodayPlanHelperCardState extends State<TodayPlanHelperCard>
                           label,
                           style: TextStyle(
                             fontSize: 11,
-                            fontWeight:
-                                isChecked ? FontWeight.bold : FontWeight.w500,
+                            fontWeight: isChecked
+                                ? FontWeight.bold
+                                : FontWeight.w500,
                             color: isChecked
                                 ? primary
                                 : (isDark
-                                    ? Colors.grey.shade300
-                                    : Colors.grey.shade700),
+                                      ? Colors.grey.shade300
+                                      : Colors.grey.shade700),
                           ),
                         ),
                         const Gap(2),
@@ -598,8 +603,8 @@ class _TodayPlanHelperCardState extends State<TodayPlanHelperCard>
                           color: isChecked
                               ? primary
                               : (isDark
-                                  ? Colors.grey.shade600
-                                  : Colors.grey.shade400),
+                                    ? Colors.grey.shade600
+                                    : Colors.grey.shade400),
                         ),
                       ],
                     ),
@@ -633,15 +638,15 @@ class _TodayPlanHelperCardState extends State<TodayPlanHelperCard>
           color: hasPlan
               ? primary.withValues(alpha: isDark ? 0.12 : 0.05)
               : (isDark
-                  ? Colors.white.withValues(alpha: 0.03)
-                  : Colors.grey.shade50),
+                    ? Colors.white.withValues(alpha: 0.03)
+                    : Colors.grey.shade50),
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
             color: hasPlan
                 ? primary.withValues(alpha: isDark ? 0.3 : 0.18)
                 : (isDark
-                    ? Colors.white.withValues(alpha: 0.06)
-                    : Colors.grey.shade200),
+                      ? Colors.white.withValues(alpha: 0.06)
+                      : Colors.grey.shade200),
             width: 0.8,
           ),
         ),
@@ -676,8 +681,9 @@ class _TodayPlanHelperCardState extends State<TodayPlanHelperCard>
                         : "Plan a 30, 60 or 90 day Khatam with adaptive quota",
                     style: TextStyle(
                       fontSize: 10.5,
-                      color:
-                          isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                      color: isDark
+                          ? Colors.grey.shade400
+                          : Colors.grey.shade600,
                     ),
                   ),
                 ],

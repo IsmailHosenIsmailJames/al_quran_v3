@@ -14,7 +14,8 @@ import "package:intl/intl.dart";
 /// Service responsible for synchronizing Quran Ayah data with native
 /// Home Screen and Lock Screen widgets on Android and iOS.
 class AyahWidgetService {
-  static const String appGroupId = "group.com.ismail_hosen_james.al_bayan_quran";
+  static const String appGroupId =
+      "group.com.ismail_hosen_james.al_bayan_quran";
   static const String smallWidgetAndroid = "AyahWidgetSmallProvider";
   static const String mediumWidgetAndroid = "AyahWidgetMediumProvider";
   static const String largeWidgetAndroid = "AyahWidgetLargeProvider";
@@ -77,13 +78,17 @@ class AyahWidgetService {
           ayah = userBox.get("widget_pinned_ayah", defaultValue: 255);
           theme = "Pinned Verse";
         } else if (mode == "last_read") {
-          final lastAyahStr = userBox.get("last_ayah_current", defaultValue: "1:1");
+          final lastAyahStr = userBox.get(
+            "last_ayah_current",
+            defaultValue: "1:1",
+          );
           final parts = lastAyahStr.toString().split(":");
           surah = int.tryParse(parts.first) ?? 1;
           ayah = int.tryParse(parts.last) ?? 1;
           theme = "Last Read";
         } else if (mode == "random") {
-          final randomSeed = (now.day * 31 + now.month * 7 + i * 13) % curatedAyahsList.length;
+          final randomSeed =
+              (now.day * 31 + now.month * 7 + i * 13) % curatedAyahsList.length;
           final item = curatedAyahsList[randomSeed];
           surah = item.surah;
           ayah = item.ayah;
@@ -98,10 +103,13 @@ class AyahWidgetService {
         }
 
         final surahIndex = surah - 1;
-        final surahName = (surahIndex >= 0 && surahIndex < canonicalSurahTransliterations.length)
+        final surahName =
+            (surahIndex >= 0 &&
+                surahIndex < canonicalSurahTransliterations.length)
             ? canonicalSurahTransliterations[surahIndex]
             : "Surah $surah";
-        final surahArabicName = (surahIndex >= 0 && surahIndex < canonicalSurahArabicNames.length)
+        final surahArabicName =
+            (surahIndex >= 0 && surahIndex < canonicalSurahArabicNames.length)
             ? canonicalSurahArabicNames[surahIndex]
             : "";
 
@@ -109,7 +117,8 @@ class AyahWidgetService {
         final surahMeta = metaDataSurah["$surah"];
         final isMakkah = surahMeta?["rp"] == "makkah";
         final versesCount = surahMeta?["vc"] ?? 0;
-        final surahType = "${isMakkah ? "Meccan" : "Medinan"} • $versesCount Verses";
+        final surahType =
+            "${isMakkah ? "Meccan" : "Medinan"} • $versesCount Verses";
 
         // Arabic text (clean plain Arabic for widgets without raw HTML tajweed tags)
         String arabicText = "";
@@ -135,10 +144,15 @@ class AyahWidgetService {
         // Translation text
         String translationText = "";
         try {
-          final translations = await QuranTranslationFunction.getTranslation("$surah:$ayah");
-          if (translations.isNotEmpty && translations.first.translation != null) {
+          final translations = await QuranTranslationFunction.getTranslation(
+            "$surah:$ayah",
+          );
+          if (translations.isNotEmpty &&
+              translations.first.translation != null) {
             final t = translations.first.translation!["t"];
-            if (t != null && t is String && !t.startsWith("Translation Not Found")) {
+            if (t != null &&
+                t is String &&
+                !t.startsWith("Translation Not Found")) {
               translationText = t;
             }
           }
@@ -170,23 +184,49 @@ class AyahWidgetService {
       if (todayPayload == null) return;
 
       // 1. Save Android Widget fields
-      final isDark = PlatformDispatcher.instance.platformBrightness == Brightness.dark;
+      final isDark =
+          PlatformDispatcher.instance.platformBrightness == Brightness.dark;
       await HomeWidget.saveWidgetData<bool>("ayah_is_dark_mode", isDark);
 
-      await HomeWidget.saveWidgetData<String>("ayah_surah_name", todayPayload["surah_name"]);
-      await HomeWidget.saveWidgetData<String>("ayah_surah_arabic_name", todayPayload["surah_arabic_name"]);
-      await HomeWidget.saveWidgetData<int>("ayah_surah_id", todayPayload["surah_id"]);
-      await HomeWidget.saveWidgetData<int>("ayah_number", todayPayload["ayah_number"]);
-      await HomeWidget.saveWidgetData<String>("ayah_reference", todayPayload["reference"]);
-      await HomeWidget.saveWidgetData<String>("ayah_surah_type", todayPayload["surah_type"]);
-      await HomeWidget.saveWidgetData<String>("ayah_arabic_text", todayPayload["arabic_text"]);
-      await HomeWidget.saveWidgetData<String>("ayah_translation_text", todayPayload["translation_text"]);
-      await HomeWidget.saveWidgetData<String>("ayah_theme", todayPayload["theme"]);
+      await HomeWidget.saveWidgetData<String>(
+        "ayah_surah_name",
+        todayPayload["surah_name"],
+      );
+      await HomeWidget.saveWidgetData<String>(
+        "ayah_surah_arabic_name",
+        todayPayload["surah_arabic_name"],
+      );
+      await HomeWidget.saveWidgetData<int>(
+        "ayah_surah_id",
+        todayPayload["surah_id"],
+      );
+      await HomeWidget.saveWidgetData<int>(
+        "ayah_number",
+        todayPayload["ayah_number"],
+      );
+      await HomeWidget.saveWidgetData<String>(
+        "ayah_reference",
+        todayPayload["reference"],
+      );
+      await HomeWidget.saveWidgetData<String>(
+        "ayah_surah_type",
+        todayPayload["surah_type"],
+      );
+      await HomeWidget.saveWidgetData<String>(
+        "ayah_arabic_text",
+        todayPayload["arabic_text"],
+      );
+      await HomeWidget.saveWidgetData<String>(
+        "ayah_translation_text",
+        todayPayload["translation_text"],
+      );
+      await HomeWidget.saveWidgetData<String>(
+        "ayah_theme",
+        todayPayload["theme"],
+      );
 
       // 2. Save 7-Day JSON timeline for iOS WidgetKit
-      final timelinePayload = {
-        "days": timelineDays,
-      };
+      final timelinePayload = {"days": timelineDays};
 
       await HomeWidget.saveWidgetData<String>(
         "ayah_timeline_json",
@@ -213,17 +253,39 @@ class AyahWidgetService {
 
   /// Clean English fallback translations for prominent verses
   static String _fallbackTranslation(int surah, int ayah) {
-    if (surah == 1 && ayah == 1) return "In the name of Allah, the Entirely Merciful, the Especially Merciful.";
-    if (surah == 1 && ayah == 2) return "[All] praise is [due] to Allah, Lord of the worlds.";
-    if (surah == 2 && ayah == 152) return "So remember Me; I will remember you. And be grateful to Me and do not deny Me.";
-    if (surah == 2 && ayah == 186) return "And when My servants ask you concerning Me, indeed I am near. I respond to the invocation of the supplicant when he calls upon Me.";
-    if (surah == 2 && ayah == 255) return "Allah - there is no deity except Him, the Ever-Living, the Sustainer of [all] existence.";
-    if (surah == 2 && ayah == 286) return "Allah does not charge a soul except [with that within] its capacity.";
-    if (surah == 3 && ayah == 139) return "So do not weaken and do not grieve, and you will be superior if you are [true] believers.";
-    if (surah == 3 && ayah == 159) return "And when you have decided, then rely upon Allah. Indeed, Allah loves those who rely [upon Him].";
-    if (surah == 13 && ayah == 28) return "Unquestionably, by the remembrance of Allah hearts are assured.";
-    if (surah == 14 && ayah == 7) return "If you are grateful, I will surely increase you [in favor].";
-    if (surah == 94 && (ayah == 5 || ayah == 6)) return "Indeed, with hardship [will be] ease.";
+    if (surah == 1 && ayah == 1) {
+      return "In the name of Allah, the Entirely Merciful, the Especially Merciful.";
+    }
+    if (surah == 1 && ayah == 2) {
+      return "[All] praise is [due] to Allah, Lord of the worlds.";
+    }
+    if (surah == 2 && ayah == 152) {
+      return "So remember Me; I will remember you. And be grateful to Me and do not deny Me.";
+    }
+    if (surah == 2 && ayah == 186) {
+      return "And when My servants ask you concerning Me, indeed I am near. I respond to the invocation of the supplicant when he calls upon Me.";
+    }
+    if (surah == 2 && ayah == 255) {
+      return "Allah - there is no deity except Him, the Ever-Living, the Sustainer of [all] existence.";
+    }
+    if (surah == 2 && ayah == 286) {
+      return "Allah does not charge a soul except [with that within] its capacity.";
+    }
+    if (surah == 3 && ayah == 139) {
+      return "So do not weaken and do not grieve, and you will be superior if you are [true] believers.";
+    }
+    if (surah == 3 && ayah == 159) {
+      return "And when you have decided, then rely upon Allah. Indeed, Allah loves those who rely [upon Him].";
+    }
+    if (surah == 13 && ayah == 28) {
+      return "Unquestionably, by the remembrance of Allah hearts are assured.";
+    }
+    if (surah == 14 && ayah == 7) {
+      return "If you are grateful, I will surely increase you [in favor].";
+    }
+    if (surah == 94 && (ayah == 5 || ayah == 6)) {
+      return "Indeed, with hardship [will be] ease.";
+    }
     if (surah == 112 && ayah == 1) return "Say, 'He is Allah, [who is] One.'";
     return "Reflect upon the words of your Lord and find peace in His guidance.";
   }

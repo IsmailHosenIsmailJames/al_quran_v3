@@ -1,7 +1,7 @@
 import 'package:al_quran_v3/src/core/theme/controller/theme_cubit.dart';
 import 'package:al_quran_v3/src/features/quran_resources/presentation/cubit/quran_resources_cubit.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ResourcesEmptyState extends StatelessWidget {
@@ -23,7 +23,9 @@ class ResourcesEmptyState extends StatelessWidget {
               width: 80,
               height: 80,
               decoration: BoxDecoration(
-                color: themeState.primary.withValues(alpha: isDark ? 0.15 : 0.08),
+                color: themeState.primary.withValues(
+                  alpha: isDark ? 0.15 : 0.08,
+                ),
                 shape: BoxShape.circle,
               ),
               child: Center(
@@ -38,9 +40,9 @@ class ResourcesEmptyState extends StatelessWidget {
             Text(
               "No resources found",
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
             ),
             if (query.isNotEmpty) ...[
               const SizedBox(height: 8),
@@ -48,9 +50,8 @@ class ResourcesEmptyState extends StatelessWidget {
                 'No resource matches "$query"',
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color:
-                          isDark ? Colors.grey.shade400 : Colors.grey.shade600,
-                    ),
+                  color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                ),
               ),
               const SizedBox(height: 20),
               OutlinedButton.icon(
@@ -67,8 +68,10 @@ class ResourcesEmptyState extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 18,
+                    vertical: 10,
+                  ),
                 ),
               ),
             ],
@@ -78,4 +81,3 @@ class ResourcesEmptyState extends StatelessWidget {
     );
   }
 }
-

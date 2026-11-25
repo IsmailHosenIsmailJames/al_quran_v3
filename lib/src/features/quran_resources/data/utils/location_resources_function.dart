@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:al_quran_v3/src/core/api/apis_urls.dart';
 import 'package:al_quran_v3/src/core/services/platform_services.dart';
 import 'package:al_quran_v3/src/core/utils/encode_decode.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as path;
 
@@ -25,7 +25,7 @@ class LocationResourcesFunction {
         if (appDataPath == null) return false;
 
         final file = File(path.join(appDataPath, _fileName));
-        
+
         // Ensure the directory exists
         if (!await file.parent.exists()) {
           await file.parent.create(recursive: true);

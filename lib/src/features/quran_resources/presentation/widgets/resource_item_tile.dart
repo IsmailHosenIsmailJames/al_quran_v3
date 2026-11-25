@@ -3,7 +3,7 @@ import 'package:al_quran_v3/src/core/theme/controller/theme_cubit.dart';
 import 'package:al_quran_v3/src/features/quran_resources/domain/entities/quran_resource_entity.dart';
 import 'package:al_quran_v3/src/features/quran_resources/presentation/cubit/quran_resources_cubit.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ResourceItemTile extends StatelessWidget {
@@ -36,8 +36,8 @@ class ResourceItemTile extends StatelessWidget {
           color: resource.isSelected
               ? themeState.primary
               : (isDark
-                  ? Colors.white.withValues(alpha: 0.06)
-                  : Colors.grey.shade200),
+                    ? Colors.white.withValues(alpha: 0.06)
+                    : Colors.grey.shade200),
           width: resource.isSelected ? 1.5 : 1.0,
         ),
       ),
@@ -45,7 +45,9 @@ class ResourceItemTile extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(12),
-          hoverColor: themeState.primary.withValues(alpha: isDark ? 0.08 : 0.04),
+          hoverColor: themeState.primary.withValues(
+            alpha: isDark ? 0.08 : 0.04,
+          ),
           onTap: () {
             if (isDownloading) return;
             if (!resource.isDownloaded) {
@@ -55,8 +57,10 @@ class ResourceItemTile extends StatelessWidget {
             }
           },
           child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 14.0, vertical: 10.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 14.0,
+              vertical: 10.0,
+            ),
             child: Row(
               children: [
                 Expanded(
@@ -95,8 +99,9 @@ class ResourceItemTile extends StatelessWidget {
                                 vertical: 2,
                               ),
                               decoration: BoxDecoration(
-                                color:
-                                    themeState.primary.withValues(alpha: 0.12),
+                                color: themeState.primary.withValues(
+                                  alpha: 0.12,
+                                ),
                                 borderRadius: BorderRadius.circular(6),
                               ),
                               child: Text(
@@ -138,10 +143,12 @@ class ResourceItemTile extends StatelessWidget {
                       child: CircularProgressIndicator(
                         value: downloadProgress > 0 ? downloadProgress : null,
                         strokeWidth: 2.5,
-                        valueColor:
-                            AlwaysStoppedAnimation<Color>(themeState.primary),
-                        backgroundColor:
-                            themeState.primary.withValues(alpha: 0.15),
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          themeState.primary,
+                        ),
+                        backgroundColor: themeState.primary.withValues(
+                          alpha: 0.15,
+                        ),
                       ),
                     ),
                   )
@@ -165,8 +172,8 @@ class ResourceItemTile extends StatelessWidget {
                       color: resource.isSelected
                           ? themeState.primary
                           : (isDark
-                              ? Colors.grey.shade600
-                              : Colors.grey.shade400),
+                                ? Colors.grey.shade600
+                                : Colors.grey.shade400),
                       size: 24,
                     ),
                     tooltip: resource.isSelected ? "Deselect" : "Select",
@@ -177,8 +184,9 @@ class ResourceItemTile extends StatelessWidget {
                     tooltip: "More options",
                     icon: Icon(
                       Icons.more_vert_rounded,
-                      color:
-                          isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                      color: isDark
+                          ? Colors.grey.shade400
+                          : Colors.grey.shade600,
                       size: 20,
                     ),
                     padding: EdgeInsets.zero,
@@ -232,4 +240,3 @@ class ResourceItemTile extends StatelessWidget {
     );
   }
 }
-

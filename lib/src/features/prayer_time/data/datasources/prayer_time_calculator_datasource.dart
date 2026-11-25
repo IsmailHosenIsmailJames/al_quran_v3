@@ -30,7 +30,10 @@ class PrayerTimeCalculatorDataSourceImpl
     required CalculationParameters params,
     required Madhab madhab,
   }) {
-    Coordinates coords = Coordinates(coordinates.latitude, coordinates.longitude);
+    Coordinates coords = Coordinates(
+      coordinates.latitude,
+      coordinates.longitude,
+    );
     CalculationParameters calcParams = params;
     calcParams.madhab = madhab;
 
@@ -57,12 +60,14 @@ class PrayerTimeCalculatorDataSourceImpl
 
     for (int day = 1; day <= daysInMonth; day++) {
       DateTime date = DateTime(year, month, day);
-      monthlyTimes.add(calculatePrayerTimes(
-        coordinates: coordinates,
-        date: date,
-        params: params,
-        madhab: madhab,
-      ));
+      monthlyTimes.add(
+        calculatePrayerTimes(
+          coordinates: coordinates,
+          date: date,
+          params: params,
+          madhab: madhab,
+        ),
+      );
     }
     return monthlyTimes;
   }

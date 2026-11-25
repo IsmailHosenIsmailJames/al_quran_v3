@@ -27,7 +27,7 @@ import "package:al_quran_v3/src/features/surah_info/presentation/widgets/surah_i
 import "package:audio_video_progress_bar/audio_video_progress_bar.dart";
 import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_html/flutter_html.dart";
 import "package:gap/gap.dart";
@@ -67,8 +67,9 @@ class _AudioPageState extends State<AudioPage> {
       builder: (context, themeState) {
         return BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
           builder: (context, ayahKeyState) {
-            final playlistIndex =
-                ayahKeyState.ayahList.indexOf(ayahKeyState.current);
+            final playlistIndex = ayahKeyState.ayahList.indexOf(
+              ayahKeyState.current,
+            );
             final currentIndex = playlistIndex >= 0 ? playlistIndex : 0;
 
             return SafeArea(
@@ -683,8 +684,10 @@ class _AudioPageState extends State<AudioPage> {
                         reciterInfoModel: context.read<ReciterCubit>().state,
                         instantPlay: true,
                         initialIndex: currentIndex - 1,
-                        preserveRange:
-                            context.read<AudioLoopCubit>().state.isRangeActive,
+                        preserveRange: context
+                            .read<AudioLoopCubit>()
+                            .state
+                            .isRangeActive,
                       );
                     } else {
                       AudioPlayerManager.seekToPreviousAyah();
@@ -704,8 +707,8 @@ class _AudioPageState extends State<AudioPage> {
                 onPressed: !AudioPlayerManager.hasActivePlayer
                     ? null
                     : () => AudioPlayerManager.seekRelative(
-                          const Duration(seconds: -5),
-                        ),
+                        const Duration(seconds: -5),
+                      ),
               );
             },
           ),
@@ -744,10 +747,14 @@ class _AudioPageState extends State<AudioPage> {
                         var targetIndex = currentIndex;
                         if (ayahKeysToPlay.length <= 1) {
                           final surahNumber =
-                              int.tryParse(ayahKeyState.current.split(":")[0]) ??
+                              int.tryParse(
+                                ayahKeyState.current.split(":")[0],
+                              ) ??
                               1;
                           final ayahNum =
-                              int.tryParse(ayahKeyState.current.split(":")[1]) ??
+                              int.tryParse(
+                                ayahKeyState.current.split(":")[1],
+                              ) ??
                               1;
                           final startAyahKey = "$surahNumber:1";
                           final endAyahKey = getEndAyahKeyFromSurahNumber(
@@ -758,8 +765,10 @@ class _AudioPageState extends State<AudioPage> {
                             endAyahKey: endAyahKey,
                           )..removeWhere((e) => e is! String);
                           ayahKeysToPlay = List<String>.from(temList);
-                          targetIndex =
-                              (ayahNum - 1).clamp(0, ayahKeysToPlay.length - 1);
+                          targetIndex = (ayahNum - 1).clamp(
+                            0,
+                            ayahKeysToPlay.length - 1,
+                          );
                         }
 
                         await AudioPlayerManager.playMultipleAyahAsPlaylist(
@@ -813,8 +822,8 @@ class _AudioPageState extends State<AudioPage> {
                 onPressed: !AudioPlayerManager.hasActivePlayer
                     ? null
                     : () => AudioPlayerManager.seekRelative(
-                          const Duration(seconds: 5),
-                        ),
+                        const Duration(seconds: 5),
+                      ),
               );
             },
           ),
@@ -835,8 +844,10 @@ class _AudioPageState extends State<AudioPage> {
                         reciterInfoModel: context.read<ReciterCubit>().state,
                         instantPlay: true,
                         initialIndex: currentIndex + 1,
-                        preserveRange:
-                            context.read<AudioLoopCubit>().state.isRangeActive,
+                        preserveRange: context
+                            .read<AudioLoopCubit>()
+                            .state
+                            .isRangeActive,
                       );
                     } else {
                       AudioPlayerManager.seekToNextAyah();

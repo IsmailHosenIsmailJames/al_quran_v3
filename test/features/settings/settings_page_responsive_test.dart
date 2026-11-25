@@ -21,7 +21,7 @@ import "package:al_quran_v3/src/features/settings/presentation/screens/app_langu
 import "package:al_quran_v3/src/features/settings/presentation/screens/settings_page.dart";
 import "package:al_quran_v3/src/features/settings/presentation/widgets/others_settings.dart";
 import "package:al_quran_v3/src/features/settings/presentation/widgets/theme_settings.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
@@ -106,7 +106,10 @@ void main() {
         // Verify top quick jump bar ActionChips exist
         expect(find.byType(ActionChip), findsWidgets);
         expect(find.widgetWithText(ActionChip, "App Theme"), findsOneWidget);
-        expect(find.widgetWithText(ActionChip, "Audio Settings"), findsOneWidget);
+        expect(
+          find.widgetWithText(ActionChip, "Audio Settings"),
+          findsOneWidget,
+        );
 
         // Verify theme settings section is rendered
         expect(find.byType(ThemeSettings), findsOneWidget);
@@ -157,48 +160,50 @@ void main() {
   });
 
   group("AppLanguageSettings Responsive UI Tests", () {
-    testWidgets(
-      "Wide screen (>=650px) renders GridView for languages",
-      (tester) async {
-        tester.view.physicalSize = const Size(1000, 800);
-        tester.view.devicePixelRatio = 1.0;
-        addTearDown(() {
-          tester.view.resetPhysicalSize();
-          tester.view.resetDevicePixelRatio();
-        });
+    testWidgets("Wide screen (>=650px) renders GridView for languages", (
+      tester,
+    ) async {
+      tester.view.physicalSize = const Size(1000, 800);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
 
-        await tester.pumpWidget(createTestWidget(child: const AppLanguageSettings()));
-        await tester.pump();
-        await tester.pump(const Duration(milliseconds: 300));
+      await tester.pumpWidget(
+        createTestWidget(child: const AppLanguageSettings()),
+      );
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
 
-        expect(find.byType(GridView), findsOneWidget);
-        expect(find.byType(ListView), findsNothing);
+      expect(find.byType(GridView), findsOneWidget);
+      expect(find.byType(ListView), findsNothing);
 
-        await tester.pumpWidget(const SizedBox());
-        await tester.pump();
-      },
-    );
+      await tester.pumpWidget(const SizedBox());
+      await tester.pump();
+    });
 
-    testWidgets(
-      "Narrow screen (<650px) renders ListView for languages",
-      (tester) async {
-        tester.view.physicalSize = const Size(400, 800);
-        tester.view.devicePixelRatio = 1.0;
-        addTearDown(() {
-          tester.view.resetPhysicalSize();
-          tester.view.resetDevicePixelRatio();
-        });
+    testWidgets("Narrow screen (<650px) renders ListView for languages", (
+      tester,
+    ) async {
+      tester.view.physicalSize = const Size(400, 800);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
 
-        await tester.pumpWidget(createTestWidget(child: const AppLanguageSettings()));
-        await tester.pump();
-        await tester.pump(const Duration(milliseconds: 300));
+      await tester.pumpWidget(
+        createTestWidget(child: const AppLanguageSettings()),
+      );
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
 
-        expect(find.byType(ListView), findsOneWidget);
-        expect(find.byType(GridView), findsNothing);
+      expect(find.byType(ListView), findsOneWidget);
+      expect(find.byType(GridView), findsNothing);
 
-        await tester.pumpWidget(const SizedBox());
-        await tester.pump();
-      },
-    );
+      await tester.pumpWidget(const SizedBox());
+      await tester.pump();
+    });
   });
 }

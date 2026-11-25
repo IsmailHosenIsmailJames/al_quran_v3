@@ -12,7 +12,7 @@ import "package:al_quran_v3/src/features/daily_plan/presentation/cubit/streak_st
 import "package:al_quran_v3/src/features/sync/presentation/cubit/sync_cubit.dart";
 import "package:al_quran_v3/src/features/sync/presentation/cubit/sync_state.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
@@ -29,12 +29,17 @@ class ProfileAccountScreen extends StatelessWidget {
       context: context,
       builder: (ctx) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
           title: Row(
             children: [
               const Icon(FluentIcons.warning_24_filled, color: Colors.red),
               const Gap(10),
-              Text(l10n.deleteAccountTitle, style: const TextStyle(fontWeight: FontWeight.bold)),
+              Text(
+                l10n.deleteAccountTitle,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
             ],
           ),
           content: Text(
@@ -82,12 +87,15 @@ class ProfileAccountScreen extends StatelessWidget {
         }
 
         final user = authState.user;
-        final displayName = (user.displayName != null && user.displayName!.trim().isNotEmpty)
+        final displayName =
+            (user.displayName != null && user.displayName!.trim().isNotEmpty)
             ? user.displayName!
             : (user.isAnonymous ? l10n.guestUser : "User");
         final email = (user.email != null && user.email!.trim().isNotEmpty)
             ? user.email!
-            : (user.isAnonymous ? "Guest Session (Local data only)" : "No email linked");
+            : (user.isAnonymous
+                  ? "Guest Session (Local data only)"
+                  : "No email linked");
 
         final notesCount = Hive.isBoxOpen(CollectionType.notes.name)
             ? Hive.box(CollectionType.notes.name).length
@@ -102,7 +110,9 @@ class ProfileAccountScreen extends StatelessWidget {
         final rawQuickAccess = Hive.isBoxOpen("user")
             ? Hive.box("user").get("quick_access")
             : null;
-        final quickAccessCount = (rawQuickAccess is List) ? rawQuickAccess.length : 0;
+        final quickAccessCount = (rawQuickAccess is List)
+            ? rawQuickAccess.length
+            : 0;
 
         StreakState? streakState;
         try {
@@ -113,7 +123,10 @@ class ProfileAccountScreen extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-            title: Text(l10n.accountAndSync, style: const TextStyle(fontWeight: FontWeight.bold)),
+            title: Text(
+              l10n.accountAndSync,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
@@ -136,10 +149,14 @@ class ProfileAccountScreen extends StatelessWidget {
                       CircleAvatar(
                         radius: 32,
                         backgroundColor: themeState.primaryShade200,
-                        backgroundImage: user.photoUrl != null ? NetworkImage(user.photoUrl!) : null,
+                        backgroundImage: user.photoUrl != null
+                            ? NetworkImage(user.photoUrl!)
+                            : null,
                         child: user.photoUrl == null
                             ? Icon(
-                                user.isAnonymous ? FluentIcons.person_question_mark_24_filled : FluentIcons.person_24_filled,
+                                user.isAnonymous
+                                    ? FluentIcons.person_question_mark_24_filled
+                                    : FluentIcons.person_24_filled,
                                 size: 32,
                                 color: themeState.primary,
                               )
@@ -152,26 +169,44 @@ class ProfileAccountScreen extends StatelessWidget {
                           children: [
                             Text(
                               displayName,
-                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17,
+                              ),
                             ),
                             const Gap(4),
                             Text(
                               email,
                               style: TextStyle(
                                 fontSize: 13,
-                                color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                                color: isDark
+                                    ? Colors.grey.shade400
+                                    : Colors.grey.shade600,
                               ),
                             ),
                             const Gap(6),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 3,
+                              ),
                               decoration: BoxDecoration(
-                                color: themeState.primary.withValues(alpha: 0.12),
+                                color: themeState.primary.withValues(
+                                  alpha: 0.12,
+                                ),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Text(
-                                user.isAnonymous ? "Guest Mode" : (user.email != null ? "Cloud Synced" : "Linked"),
-                                style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: themeState.primary),
+                                user.isAnonymous
+                                    ? "Guest Mode"
+                                    : (user.email != null
+                                          ? "Cloud Synced"
+                                          : "Linked"),
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold,
+                                  color: themeState.primary,
+                                ),
                               ),
                             ),
                           ],
@@ -187,27 +222,43 @@ class ProfileAccountScreen extends StatelessWidget {
                     width: double.infinity,
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: isDark ? const Color(0xFF2A2415) : const Color(0xFFFFFBEB),
+                      color: isDark
+                          ? const Color(0xFF2A2415)
+                          : const Color(0xFFFFFBEB),
                       borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: Colors.amber.shade400.withValues(alpha: 0.5)),
+                      border: Border.all(
+                        color: Colors.amber.shade400.withValues(alpha: 0.5),
+                      ),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           children: [
-                            Icon(FluentIcons.cloud_sync_24_filled, color: Colors.amber.shade700, size: 22),
+                            Icon(
+                              FluentIcons.cloud_sync_24_filled,
+                              color: Colors.amber.shade700,
+                              size: 22,
+                            ),
                             const Gap(8),
                             const Text(
                               "Upgrade Guest Account",
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                              ),
                             ),
                           ],
                         ),
                         const Gap(6),
                         Text(
                           "Link your Google or Email account to enable continuous cloud sync across all your devices.",
-                          style: TextStyle(fontSize: 12, color: isDark ? Colors.grey.shade300 : Colors.grey.shade700),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: isDark
+                                ? Colors.grey.shade300
+                                : Colors.grey.shade700,
+                          ),
                         ),
                         const Gap(12),
                         SizedBox(
@@ -216,16 +267,29 @@ class ProfileAccountScreen extends StatelessWidget {
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.amber.shade700,
                               foregroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
                             ),
                             onPressed: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (_) => const AuthScreen()),
+                                MaterialPageRoute(
+                                  builder: (_) => const AuthScreen(),
+                                ),
                               );
                             },
-                            icon: const Icon(FluentIcons.arrow_up_right_24_filled, size: 16),
-                            label: const Text("Link Account to Sync Cloud", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                            icon: const Icon(
+                              FluentIcons.arrow_up_right_24_filled,
+                              size: 16,
+                            ),
+                            label: const Text(
+                              "Link Account to Sync Cloud",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 13,
+                              ),
+                            ),
                           ),
                         ),
                       ],
@@ -250,16 +314,22 @@ class ProfileAccountScreen extends StatelessWidget {
                       }
 
                       final lastSyncedStr = lastSynced != null
-                          ? DateFormat("MMM d, yyyy • h:mm a").format(lastSynced)
+                          ? DateFormat(
+                              "MMM d, yyyy • h:mm a",
+                            ).format(lastSynced)
                           : "Not synced yet";
 
                       return Container(
                         width: double.infinity,
                         padding: const EdgeInsets.all(18),
                         decoration: BoxDecoration(
-                          color: isDark ? themeState.primary.withValues(alpha: 0.12) : themeState.primaryShade100,
+                          color: isDark
+                              ? themeState.primary.withValues(alpha: 0.12)
+                              : themeState.primaryShade100,
                           borderRadius: BorderRadius.circular(18),
-                          border: Border.all(color: themeState.primary.withValues(alpha: 0.25)),
+                          border: Border.all(
+                            color: themeState.primary.withValues(alpha: 0.25),
+                          ),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -269,7 +339,10 @@ class ProfileAccountScreen extends StatelessWidget {
                               children: [
                                 Row(
                                   children: [
-                                    Icon(FluentIcons.cloud_sync_24_filled, color: themeState.primary),
+                                    Icon(
+                                      FluentIcons.cloud_sync_24_filled,
+                                      color: themeState.primary,
+                                    ),
                                     const Gap(8),
                                     Text(
                                       l10n.syncedCloudBackup,
@@ -285,7 +358,9 @@ class ProfileAccountScreen extends StatelessWidget {
                                   const SizedBox(
                                     height: 18,
                                     width: 18,
-                                    child: CircularProgressIndicator(strokeWidth: 2),
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                    ),
                                   ),
                               ],
                             ),
@@ -294,17 +369,22 @@ class ProfileAccountScreen extends StatelessWidget {
                               "Last Synced: $lastSyncedStr",
                               style: TextStyle(
                                 fontSize: 12.5,
-                                color: isDark ? Colors.grey.shade300 : Colors.grey.shade700,
+                                color: isDark
+                                    ? Colors.grey.shade300
+                                    : Colors.grey.shade700,
                               ),
                             ),
                             const Gap(10),
-                            Divider(color: themeState.primary.withValues(alpha: 0.2)),
+                            Divider(
+                              color: themeState.primary.withValues(alpha: 0.2),
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       const Text(
                                         "Auto Cloud Sync",
@@ -318,17 +398,23 @@ class ProfileAccountScreen extends StatelessWidget {
                                         "Sync notes, pins, history, streaks & goals automatically",
                                         style: TextStyle(
                                           fontSize: 11,
-                                          color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                                          color: isDark
+                                              ? Colors.grey.shade400
+                                              : Colors.grey.shade600,
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
                                 Switch.adaptive(
-                                  value: context.watch<SyncCubit>().isAutoSyncEnabled,
+                                  value: context
+                                      .watch<SyncCubit>()
+                                      .isAutoSyncEnabled,
                                   activeTrackColor: themeState.primary,
                                   onChanged: (val) {
-                                    context.read<SyncCubit>().setAutoSyncEnabled(val);
+                                    context
+                                        .read<SyncCubit>()
+                                        .setAutoSyncEnabled(val);
                                   },
                                 ),
                               ],
@@ -341,14 +427,25 @@ class ProfileAccountScreen extends StatelessWidget {
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: themeState.primary,
                                   foregroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
                                   elevation: 1,
                                 ),
-                                onPressed: isSyncing ? null : () => context.read<SyncCubit>().sync(user.uid),
-                                icon: const Icon(FluentIcons.arrow_sync_24_regular, size: 18),
+                                onPressed: isSyncing
+                                    ? null
+                                    : () => context.read<SyncCubit>().sync(
+                                        user.uid,
+                                      ),
+                                icon: const Icon(
+                                  FluentIcons.arrow_sync_24_regular,
+                                  size: 18,
+                                ),
                                 label: Text(
                                   isSyncing ? l10n.syncing : l10n.syncNow,
-                                  style: const TextStyle(fontWeight: FontWeight.bold),
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ),
@@ -397,7 +494,9 @@ class ProfileAccountScreen extends StatelessWidget {
                         "Export notes, bookmarks, history, streaks & goals to a JSON file, or restore from a previous backup without internet.",
                         style: TextStyle(
                           fontSize: 12.5,
-                          color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                          color: isDark
+                              ? Colors.grey.shade400
+                              : Colors.grey.shade600,
                         ),
                       ),
                       const Gap(14),
@@ -433,8 +532,13 @@ class ProfileAccountScreen extends StatelessWidget {
 
                 // Synced Items Overview
                 Text(
-                  user.isAnonymous ? "Stored Local Items" : "Synchronized Items",
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  user.isAnonymous
+                      ? "Stored Local Items"
+                      : "Synchronized Items",
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
                 const Gap(10),
 
@@ -522,14 +626,19 @@ class ProfileAccountScreen extends StatelessWidget {
                   child: OutlinedButton.icon(
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                     onPressed: () async {
                       await context.read<AuthCubit>().signOut();
                       if (context.mounted) Navigator.pop(context);
                     },
                     icon: const Icon(FluentIcons.sign_out_24_regular),
-                    label: Text(l10n.signOut, style: const TextStyle(fontWeight: FontWeight.bold)),
+                    label: Text(
+                      l10n.signOut,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
 
@@ -545,7 +654,10 @@ class ProfileAccountScreen extends StatelessWidget {
                     ),
                     onPressed: () => _showDeleteAccountDialog(context, user),
                     icon: const Icon(FluentIcons.delete_24_regular, size: 18),
-                    label: Text(l10n.deleteAccount, style: const TextStyle(fontWeight: FontWeight.w600)),
+                    label: Text(
+                      l10n.deleteAccount,
+                      style: const TextStyle(fontWeight: FontWeight.w600),
+                    ),
                   ),
                 ),
 
@@ -572,7 +684,9 @@ class ProfileAccountScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: isDark ? Colors.white12 : Colors.grey.shade200),
+        border: Border.all(
+          color: isDark ? Colors.white12 : Colors.grey.shade200,
+        ),
         boxShadow: isDark
             ? null
             : [
@@ -601,7 +715,10 @@ class ProfileAccountScreen extends StatelessWidget {
               children: [
                 Text(
                   displayValue,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),

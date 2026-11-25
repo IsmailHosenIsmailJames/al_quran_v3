@@ -3,7 +3,7 @@ import "package:al_quran_v3/src/core/localization/languages.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/functions/theme_functions.dart";
 import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/quran_index_badge.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:shared_preferences/shared_preferences.dart";
@@ -15,19 +15,20 @@ void main() {
   });
 
   group("Quran Tab Widgets Tests", () {
-    testWidgets("QuranIndexBadge renders properly", (WidgetTester tester) async {
+    testWidgets("QuranIndexBadge renders properly", (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MultiBlocProvider(
           providers: [
             BlocProvider(create: (_) => ThemeCubit()),
-            BlocProvider(create: (_) => LanguageCubit(usedAppLanguageMap.first)),
+            BlocProvider(
+              create: (_) => LanguageCubit(usedAppLanguageMap.first),
+            ),
           ],
           child: const Directionality(
             textDirection: TextDirection.ltr,
-            child: QuranIndexBadge(
-              index: 114,
-              size: 44,
-            ),
+            child: QuranIndexBadge(index: 114, size: 44),
           ),
         ),
       );
@@ -37,12 +38,16 @@ void main() {
       expect(find.byType(QuranIndexBadge), findsOneWidget);
     });
 
-    testWidgets("QuranIndexBadge adapts with custom colors", (WidgetTester tester) async {
+    testWidgets("QuranIndexBadge adapts with custom colors", (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MultiBlocProvider(
           providers: [
             BlocProvider(create: (_) => ThemeCubit()),
-            BlocProvider(create: (_) => LanguageCubit(usedAppLanguageMap.first)),
+            BlocProvider(
+              create: (_) => LanguageCubit(usedAppLanguageMap.first),
+            ),
           ],
           child: const Directionality(
             textDirection: TextDirection.ltr,

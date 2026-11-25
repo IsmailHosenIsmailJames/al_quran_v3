@@ -2,7 +2,7 @@ import "package:al_quran_v3/src/core/resources/quran_resources/models/resources_
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_translation_function.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -79,15 +79,15 @@ class _DownloadedTranslationsSettingsState
             color: isSelected
                 ? themeState.primary.withValues(alpha: isDark ? 0.12 : 0.04)
                 : (isDark
-                    ? Colors.white.withValues(alpha: 0.03)
-                    : Colors.grey.shade50),
+                      ? Colors.white.withValues(alpha: 0.03)
+                      : Colors.grey.shade50),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color: isSelected
                   ? themeState.primary.withValues(alpha: 0.4)
                   : (isDark
-                      ? Colors.white.withValues(alpha: 0.06)
-                      : Colors.grey.shade200),
+                        ? Colors.white.withValues(alpha: 0.06)
+                        : Colors.grey.shade200),
             ),
           ),
           child: Row(
@@ -103,7 +103,9 @@ class _DownloadedTranslationsSettingsState
                   book.name,
                   style: TextStyle(
                     fontSize: 13.5,
-                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                    fontWeight: isSelected
+                        ? FontWeight.w600
+                        : FontWeight.normal,
                     color: isDark ? Colors.white : Colors.grey.shade900,
                   ),
                 ),

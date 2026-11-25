@@ -12,7 +12,7 @@ import "package:al_quran_v3/src/features/audio/presentation/screens/audio_settin
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/ayah_to_highlight.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/word_playing_state_cubit.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
@@ -59,66 +59,60 @@ void main() {
   }
 
   group("AudioSettings Responsive Tests", () {
-    testWidgets(
-      "Wide screen (>=800px) renders 2-column dashboard layout",
-      (tester) async {
-        tester.view.physicalSize = const Size(1200, 900);
-        tester.view.devicePixelRatio = 1.0;
-        addTearDown(() {
-          tester.view.resetPhysicalSize();
-          tester.view.resetDevicePixelRatio();
-        });
+    testWidgets("Wide screen (>=800px) renders 2-column dashboard layout", (
+      tester,
+    ) async {
+      tester.view.physicalSize = const Size(1200, 900);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
 
-        await tester.pumpWidget(
-          createTestWidget(
-            child: const AudioSettings(needAppBar: true),
-          ),
-        );
-        await tester.pump();
-        await tester.pump(const Duration(milliseconds: 300));
+      await tester.pumpWidget(
+        createTestWidget(child: const AudioSettings(needAppBar: true)),
+      );
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
 
-        // Verify title
-        expect(find.text("Audio Settings"), findsOneWidget);
+      // Verify title
+      expect(find.text("Audio Settings"), findsOneWidget);
 
-        // Verify section cards are rendered
-        expect(find.text("Playback Speed"), findsOneWidget);
-        expect(find.text("Streaming & Network"), findsOneWidget);
-        expect(find.text("Audio Cached"), findsOneWidget);
+      // Verify section cards are rendered
+      expect(find.text("Playback Speed"), findsOneWidget);
+      expect(find.text("Streaming & Network"), findsOneWidget);
+      expect(find.text("Audio Cached"), findsOneWidget);
 
-        await tester.pumpWidget(const SizedBox());
-        await tester.pump();
-      },
-    );
+      await tester.pumpWidget(const SizedBox());
+      await tester.pump();
+    });
 
-    testWidgets(
-      "Narrow screen (<800px) renders single-column layout",
-      (tester) async {
-        tester.view.physicalSize = const Size(450, 850);
-        tester.view.devicePixelRatio = 1.0;
-        addTearDown(() {
-          tester.view.resetPhysicalSize();
-          tester.view.resetDevicePixelRatio();
-        });
+    testWidgets("Narrow screen (<800px) renders single-column layout", (
+      tester,
+    ) async {
+      tester.view.physicalSize = const Size(450, 850);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
 
-        await tester.pumpWidget(
-          createTestWidget(
-            child: const AudioSettings(needAppBar: true),
-          ),
-        );
-        await tester.pump();
-        await tester.pump(const Duration(milliseconds: 300));
+      await tester.pumpWidget(
+        createTestWidget(child: const AudioSettings(needAppBar: true)),
+      );
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
 
-        // Verify title
-        expect(find.text("Audio Settings"), findsOneWidget);
+      // Verify title
+      expect(find.text("Audio Settings"), findsOneWidget);
 
-        // Verify sections
-        expect(find.text("Playback Speed"), findsOneWidget);
-        expect(find.text("Streaming & Network"), findsOneWidget);
-        expect(find.text("Audio Cached"), findsOneWidget);
+      // Verify sections
+      expect(find.text("Playback Speed"), findsOneWidget);
+      expect(find.text("Streaming & Network"), findsOneWidget);
+      expect(find.text("Audio Cached"), findsOneWidget);
 
-        await tester.pumpWidget(const SizedBox());
-        await tester.pump();
-      },
-    );
+      await tester.pumpWidget(const SizedBox());
+      await tester.pump();
+    });
   });
 }

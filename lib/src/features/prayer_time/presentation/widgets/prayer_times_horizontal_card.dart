@@ -11,7 +11,7 @@ import "package:al_quran_v3/src/features/prayer_time/presentation/screens/prayer
 import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/prayer_times_calendar_view.dart";
 import "package:dartx/dartx_io.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
@@ -44,9 +44,7 @@ class PrayerTimesHorizontalCard extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: isDark
-            ? Colors.white.withValues(alpha: 0.04)
-            : Colors.white,
+        color: isDark ? Colors.white.withValues(alpha: 0.04) : Colors.white,
         borderRadius: BorderRadius.circular(18),
         border: Border.all(
           color: isDark
@@ -92,17 +90,23 @@ class PrayerTimesHorizontalCard extends StatelessWidget {
                       reminderState.isPrayerRemindNotificationEnabled ?? false;
 
                   return InkWell(
-                    onTap: () => _toggleMasterReminder(context, isMasterEnabled, l10n),
+                    onTap: () =>
+                        _toggleMasterReminder(context, isMasterEnabled, l10n),
                     borderRadius: BorderRadius.circular(20),
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 250),
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
                         color: isMasterEnabled
-                            ? themeState.primary.withValues(alpha: isDark ? 0.25 : 0.12)
+                            ? themeState.primary.withValues(
+                                alpha: isDark ? 0.25 : 0.12,
+                              )
                             : (isDark
-                                ? Colors.white.withValues(alpha: 0.06)
-                                : Colors.grey.shade200),
+                                  ? Colors.white.withValues(alpha: 0.06)
+                                  : Colors.grey.shade200),
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
                           color: isMasterEnabled
@@ -121,8 +125,8 @@ class PrayerTimesHorizontalCard extends StatelessWidget {
                             color: isMasterEnabled
                                 ? themeState.primary
                                 : (isDark
-                                    ? Colors.grey.shade500
-                                    : Colors.grey.shade600),
+                                      ? Colors.grey.shade500
+                                      : Colors.grey.shade600),
                           ),
                           const Gap(4),
                           Text(
@@ -136,8 +140,8 @@ class PrayerTimesHorizontalCard extends StatelessWidget {
                               color: isMasterEnabled
                                   ? themeState.primary
                                   : (isDark
-                                      ? Colors.grey.shade400
-                                      : Colors.grey.shade600),
+                                        ? Colors.grey.shade400
+                                        : Colors.grey.shade600),
                             ),
                           ),
                         ],
@@ -261,15 +265,15 @@ class PrayerTimesHorizontalCard extends StatelessWidget {
           color: isActive
               ? themeState.primary.withValues(alpha: isDark ? 0.22 : 0.10)
               : (isNext
-                  ? themeState.primary.withValues(alpha: isDark ? 0.08 : 0.04)
-                  : Colors.transparent),
+                    ? themeState.primary.withValues(alpha: isDark ? 0.08 : 0.04)
+                    : Colors.transparent),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: isActive
                 ? themeState.primary.withValues(alpha: 0.45)
                 : (isNext
-                    ? themeState.primary.withValues(alpha: 0.25)
-                    : Colors.transparent),
+                      ? themeState.primary.withValues(alpha: 0.25)
+                      : Colors.transparent),
             width: isActive ? 1.2 : 1.0,
           ),
         ),
@@ -287,8 +291,10 @@ class PrayerTimesHorizontalCard extends StatelessWidget {
                 color: isActive
                     ? themeState.primary
                     : (isPassed
-                        ? (isDark ? Colors.grey.shade500 : Colors.grey.shade400)
-                        : (isDark ? Colors.white : Colors.grey.shade800)),
+                          ? (isDark
+                                ? Colors.grey.shade500
+                                : Colors.grey.shade400)
+                          : (isDark ? Colors.white : Colors.grey.shade800)),
               ),
             ),
             const Gap(4),
@@ -305,8 +311,12 @@ class PrayerTimesHorizontalCard extends StatelessWidget {
                   color: isActive
                       ? themeState.primary
                       : (isPassed
-                          ? (isDark ? Colors.grey.shade500 : Colors.grey.shade400)
-                          : (isDark ? Colors.grey.shade200 : Colors.grey.shade900)),
+                            ? (isDark
+                                  ? Colors.grey.shade500
+                                  : Colors.grey.shade400)
+                            : (isDark
+                                  ? Colors.grey.shade200
+                                  : Colors.grey.shade900)),
                 ),
               ),
             ),
@@ -320,14 +330,14 @@ class PrayerTimesHorizontalCard extends StatelessWidget {
                 color: isActive
                     ? themeState.primary
                     : (isNext
-                        ? themeState.primary.withValues(alpha: 0.5)
-                        : (isPassed
-                            ? (isDark
-                                ? Colors.grey.shade700
-                                : Colors.grey.shade300)
-                            : (isDark
-                                ? Colors.grey.shade600
-                                : Colors.grey.shade400))),
+                          ? themeState.primary.withValues(alpha: 0.5)
+                          : (isPassed
+                                ? (isDark
+                                      ? Colors.grey.shade700
+                                      : Colors.grey.shade300)
+                                : (isDark
+                                      ? Colors.grey.shade600
+                                      : Colors.grey.shade400))),
                 borderRadius: BorderRadius.circular(3),
               ),
             ),
@@ -352,10 +362,14 @@ class PrayerTimesHorizontalCard extends StatelessWidget {
           return;
         }
       }
-      await context.read<PrayerReminderCubit>().enablePrayerRemindNotification();
+      await context
+          .read<PrayerReminderCubit>()
+          .enablePrayerRemindNotification();
       Fluttertoast.showToast(msg: l10n.enablePrayerReminders);
     } else {
-      await context.read<PrayerReminderCubit>().disablePrayerRemindNotification();
+      await context
+          .read<PrayerReminderCubit>()
+          .disablePrayerRemindNotification();
       Fluttertoast.showToast(msg: l10n.reminderModeOff);
     }
   }
@@ -383,7 +397,8 @@ class PrayerTimesHorizontalCard extends StatelessWidget {
           builder: (context, reminderState) {
             final isMasterEnabled =
                 reminderState.isPrayerRemindNotificationEnabled ?? false;
-            final currentMode = reminderState.prayerReminderModes?[prayer] ??
+            final currentMode =
+                reminderState.prayerReminderModes?[prayer] ??
                 ReminderScheduler.getPrayerReminderMode(prayer);
             final currentAdjustment =
                 reminderState.reminderTimeAdjustment?[prayer] ?? 0;
@@ -436,7 +451,9 @@ class PrayerTimesHorizontalCard extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
-                                  color: isDark ? Colors.white : Colors.grey.shade900,
+                                  color: isDark
+                                      ? Colors.white
+                                      : Colors.grey.shade900,
                                 ),
                               ),
                               Text(
@@ -488,18 +505,18 @@ class PrayerTimesHorizontalCard extends StatelessWidget {
                         currentMode == PrayerReminderMode.off
                             ? l10n.reminderModeOff
                             : (currentMode == PrayerReminderMode.alarm
-                                ? l10n.fullScreenAlarmModeTitle
-                                : l10n.reminderModeNotification),
+                                  ? l10n.fullScreenAlarmModeTitle
+                                  : l10n.reminderModeNotification),
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
                           color: currentMode == PrayerReminderMode.off
                               ? (isDark
-                                  ? Colors.grey.shade500
-                                  : Colors.grey.shade600)
+                                    ? Colors.grey.shade500
+                                    : Colors.grey.shade600)
                               : (currentMode == PrayerReminderMode.alarm
-                                  ? const Color(0xFFE11D48)
-                                  : themeState.primary),
+                                    ? const Color(0xFFE11D48)
+                                    : themeState.primary),
                         ),
                       ),
                     ],
@@ -577,7 +594,9 @@ class PrayerTimesHorizontalCard extends StatelessWidget {
                     l10n.adjustReminderTimingDescription,
                     style: TextStyle(
                       fontSize: 12,
-                      color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                      color: isDark
+                          ? Colors.grey.shade400
+                          : Colors.grey.shade600,
                     ),
                   ),
                   const Gap(10),
@@ -611,8 +630,8 @@ class PrayerTimesHorizontalCard extends StatelessWidget {
                                         alpha: isDark ? 0.25 : 0.12,
                                       )
                                     : (isDark
-                                        ? Colors.white.withValues(alpha: 0.04)
-                                        : Colors.grey.shade100),
+                                          ? Colors.white.withValues(alpha: 0.04)
+                                          : Colors.grey.shade100),
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
                                   color: isSelected
@@ -631,8 +650,8 @@ class PrayerTimesHorizontalCard extends StatelessWidget {
                                   color: isSelected
                                       ? themeState.primary
                                       : (isDark
-                                          ? Colors.grey.shade300
-                                          : Colors.grey.shade800),
+                                            ? Colors.grey.shade300
+                                            : Colors.grey.shade800),
                                 ),
                               ),
                             ),
@@ -671,15 +690,15 @@ class PrayerTimesHorizontalCard extends StatelessWidget {
             color: isSelected
                 ? selectedColor.withValues(alpha: isDark ? 0.25 : 0.12)
                 : (isDark
-                    ? Colors.white.withValues(alpha: 0.04)
-                    : Colors.grey.shade100),
+                      ? Colors.white.withValues(alpha: 0.04)
+                      : Colors.grey.shade100),
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
               color: isSelected
                   ? selectedColor
                   : (isDark
-                      ? Colors.white.withValues(alpha: 0.08)
-                      : Colors.grey.shade300),
+                        ? Colors.white.withValues(alpha: 0.08)
+                        : Colors.grey.shade300),
               width: isSelected ? 1.5 : 1.0,
             ),
           ),
@@ -703,8 +722,8 @@ class PrayerTimesHorizontalCard extends StatelessWidget {
                     color: isSelected
                         ? (isDark ? Colors.white : selectedColor)
                         : (isDark
-                            ? Colors.grey.shade400
-                            : Colors.grey.shade700),
+                              ? Colors.grey.shade400
+                              : Colors.grey.shade700),
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,

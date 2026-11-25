@@ -21,7 +21,7 @@ import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/qu
 import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/preview/script_selection_segment_button.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_animate/flutter_animate.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
@@ -95,11 +95,7 @@ class QuranScriptSettings extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Column(
-                      children: [
-                        scriptCard,
-                        const Gap(14),
-                        typographyCard,
-                      ],
+                      children: [scriptCard, const Gap(14), typographyCard],
                     ),
                   ),
                   const Gap(16),
@@ -292,8 +288,9 @@ class QuranScriptSettings extends StatelessWidget {
             divisions: 42,
             themePrimary: themeState.primary,
             isDark: isDark,
-            onChanged: (val) =>
-                cubit.changeTranslationFontSize(double.parse(val.toStringAsFixed(1))),
+            onChanged: (val) => cubit.changeTranslationFontSize(
+              double.parse(val.toStringAsFixed(1)),
+            ),
           ),
         ],
       ),
@@ -357,8 +354,7 @@ class QuranScriptSettings extends StatelessWidget {
             title: appLocalizations.keepOpenWordByWord,
             value: quranViewState.alwaysOpenWordByWord,
             themePrimary: themeState.primary,
-            onChanged: (v) =>
-                cubit.setViewOptions(alwaysOpenWordByWord: v),
+            onChanged: (v) => cubit.setViewOptions(alwaysOpenWordByWord: v),
           ),
 
           const Divider(height: 1),
@@ -444,8 +440,7 @@ class QuranScriptSettings extends StatelessWidget {
             subtitle: appLocalizations.scrollWithRecitationDesc,
             value: quranViewState.scrollWithRecitation,
             themePrimary: themeState.primary,
-            onChanged: (v) =>
-                cubit.setViewOptions(scrollWithRecitation: v),
+            onChanged: (v) => cubit.setViewOptions(scrollWithRecitation: v),
           ),
         ],
       ),
@@ -537,10 +532,7 @@ class QuranScriptSettings extends StatelessWidget {
     );
   }
 
-  Widget _buildSectionContainer({
-    required Widget child,
-    required bool isDark,
-  }) {
+  Widget _buildSectionContainer({required Widget child, required bool isDark}) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -568,10 +560,7 @@ class QuranScriptSettings extends StatelessWidget {
         Expanded(
           child: Text(
             title,
-            style: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
+            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
           ),
         ),
       ],
@@ -746,8 +735,9 @@ class QuranScriptSettings extends StatelessWidget {
               onReciterChanged: (reciterInfoModel) async {
                 Navigator.pop(context);
                 final reciterCubit = context.read<ReciterCubit>();
-                final bool isSuccess =
-                    await reciterCubit.changeReciter(reciterInfoModel);
+                final bool isSuccess = await reciterCubit.changeReciter(
+                  reciterInfoModel,
+                );
 
                 if (!isSuccess && reciterInfoModel.hasWordSegments) {
                   Fluttertoast.showToast(
@@ -759,12 +749,14 @@ class QuranScriptSettings extends StatelessWidget {
                 }
 
                 if (!context.mounted) return;
-                final bool wasPlaying = AudioPlayerManager.hasActivePlayer &&
+                final bool wasPlaying =
+                    AudioPlayerManager.hasActivePlayer &&
                     AudioPlayerManager.audioPlayer.playing;
                 if (wasPlaying) {
                   final audioUiState = context.read<AudioUiCubit>().state;
                   final loopState = context.read<AudioLoopCubit>().state;
-                  if (ayahState.ayahList.length > 1 || loopState.isRangeActive) {
+                  if (ayahState.ayahList.length > 1 ||
+                      loopState.isRangeActive) {
                     await AudioPlayerManager.playMultipleAyahAsPlaylist(
                       startAyahKey: ayahState.ayahList.first,
                       endAyahKey: ayahState.ayahList.last,
@@ -789,10 +781,7 @@ class QuranScriptSettings extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 6, left: 4),
                 child: Text(
                   "Ayah highlight active (word-by-word timing unavailable for this reciter)",
-                  style: TextStyle(
-                    fontSize: 11.5,
-                    color: Colors.grey.shade600,
-                  ),
+                  style: TextStyle(fontSize: 11.5, color: Colors.grey.shade600),
                 ),
               ),
           ],
@@ -858,11 +847,9 @@ class QuranFontSelectionWidget extends StatelessWidget {
                   : l10n.indopakFont,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: titleStyle ??
-                  const TextStyle(
-                    fontSize: 13.5,
-                    fontWeight: FontWeight.w600,
-                  ),
+              style:
+                  titleStyle ??
+                  const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600),
             ),
           ),
           const Gap(10),
@@ -887,75 +874,74 @@ class QuranFontSelectionWidget extends StatelessWidget {
                       ? state.uthmaniFontName
                       : state.indopakFontName,
                   isExpanded: true,
-                  icon: const Icon(
-                    Icons.keyboard_arrow_down_rounded,
-                    size: 18,
+                  icon: const Icon(Icons.keyboard_arrow_down_rounded, size: 18),
+                  dropdownColor: isDark
+                      ? const Color(0xFF1E1E1E)
+                      : Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: isDark ? Colors.white : Colors.grey.shade900,
                   ),
-                dropdownColor: isDark ? const Color(0xFF1E1E1E) : Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
-                  color: isDark ? Colors.white : Colors.grey.shade900,
+                  items: state.quranScriptType == QuranScriptType.uthmani
+                      ? const [
+                          DropdownMenuItem(
+                            value: "QPC_Hafs",
+                            child: Text("QPC Hafs"),
+                          ),
+                          DropdownMenuItem(
+                            value: "me_quran_volt_newmet",
+                            child: Text("Me Quran"),
+                          ),
+                          DropdownMenuItem(
+                            value: "Amiri",
+                            child: Text("Amiri"),
+                          ),
+                          DropdownMenuItem(
+                            value: "AlQalamQuranMajeedWeb",
+                            child: Text("Al Qalam Quran Majeed"),
+                          ),
+                          DropdownMenuItem(
+                            value: "Lateef",
+                            child: Text("Lateef"),
+                          ),
+                        ]
+                      : const [
+                          DropdownMenuItem(
+                            value: "AlQuranNeov5x1",
+                            child: Text("Al Quran Neov5x1"),
+                          ),
+                          DropdownMenuItem(
+                            value: "IndopakNastaleeq",
+                            child: Text("Indopak Nastaleeq"),
+                          ),
+                          DropdownMenuItem(
+                            value: "noorehira",
+                            child: Text("Noore Hira"),
+                          ),
+                          DropdownMenuItem(
+                            value: "noorehuda",
+                            child: Text("Noore Huda"),
+                          ),
+                        ],
+                  onChanged: (value) {
+                    if (value == null) return;
+                    if (state.quranScriptType == QuranScriptType.uthmani) {
+                      context.read<QuranViewCubit>().changeUthmaniFontName(
+                        value,
+                      );
+                    } else {
+                      context.read<QuranViewCubit>().changeIndopakFontName(
+                        value,
+                      );
+                    }
+                  },
                 ),
-                items: state.quranScriptType == QuranScriptType.uthmani
-                    ? const [
-                        DropdownMenuItem(
-                          value: "QPC_Hafs",
-                          child: Text("QPC Hafs"),
-                        ),
-                        DropdownMenuItem(
-                          value: "me_quran_volt_newmet",
-                          child: Text("Me Quran"),
-                        ),
-                        DropdownMenuItem(
-                          value: "Amiri",
-                          child: Text("Amiri"),
-                        ),
-                        DropdownMenuItem(
-                          value: "AlQalamQuranMajeedWeb",
-                          child: Text("Al Qalam Quran Majeed"),
-                        ),
-                        DropdownMenuItem(
-                          value: "Lateef",
-                          child: Text("Lateef"),
-                        ),
-                      ]
-                    : const [
-                        DropdownMenuItem(
-                          value: "AlQuranNeov5x1",
-                          child: Text("Al Quran Neov5x1"),
-                        ),
-                        DropdownMenuItem(
-                          value: "IndopakNastaleeq",
-                          child: Text("Indopak Nastaleeq"),
-                        ),
-                        DropdownMenuItem(
-                          value: "noorehira",
-                          child: Text("Noore Hira"),
-                        ),
-                        DropdownMenuItem(
-                          value: "noorehuda",
-                          child: Text("Noore Huda"),
-                        ),
-                      ],
-                onChanged: (value) {
-                  if (value == null) return;
-                  if (state.quranScriptType == QuranScriptType.uthmani) {
-                    context.read<QuranViewCubit>().changeUthmaniFontName(
-                          value,
-                        );
-                  } else {
-                    context.read<QuranViewCubit>().changeIndopakFontName(
-                          value,
-                        );
-                  }
-                },
               ),
             ),
           ),
-        ),
-      ],
+        ],
       ),
     );
   }

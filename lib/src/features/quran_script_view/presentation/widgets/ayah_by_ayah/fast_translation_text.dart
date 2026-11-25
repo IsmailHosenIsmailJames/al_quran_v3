@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 /// A high-performance, zero-DOM text renderer for Quran translations and footnotes.
 ///

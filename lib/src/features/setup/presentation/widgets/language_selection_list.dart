@@ -6,7 +6,7 @@ import "package:al_quran_v3/src/features/setup/presentation/bloc/setup_bloc.dart
 import "package:al_quran_v3/src/features/setup/presentation/bloc/setup_event.dart";
 import "package:al_quran_v3/src/features/setup/presentation/bloc/setup_state.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -179,8 +179,7 @@ class _LanguageSelectionListState extends State<LanguageSelectionList> {
                       langCode,
                     );
                     final hasFootnote = setupState.doesHaveFootNote(langCode);
-                    final hasBadges =
-                        hasTafsir || hasWordByWord || hasFootnote;
+                    final hasBadges = hasTafsir || hasWordByWord || hasFootnote;
 
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 8),
@@ -189,9 +188,7 @@ class _LanguageSelectionListState extends State<LanguageSelectionList> {
                             ? themeState.primary.withValues(
                                 alpha: isDark ? 0.14 : 0.05,
                               )
-                            : (isDark
-                                ? const Color(0xFF1E1E1E)
-                                : Colors.white),
+                            : (isDark ? const Color(0xFF1E1E1E) : Colors.white),
                         borderRadius: BorderRadius.circular(14),
                         child: InkWell(
                           borderRadius: BorderRadius.circular(14),
@@ -199,9 +196,9 @@ class _LanguageSelectionListState extends State<LanguageSelectionList> {
                             context.read<LanguageCubit>().changeLanguage(
                               appLoc,
                             );
-                            context
-                                .read<SetupBloc>()
-                                .add(SetupLanguageChanged(appLoc));
+                            context.read<SetupBloc>().add(
+                              SetupLanguageChanged(appLoc),
+                            );
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(
@@ -214,8 +211,8 @@ class _LanguageSelectionListState extends State<LanguageSelectionList> {
                                 color: isSelected
                                     ? themeState.primary
                                     : (isDark
-                                        ? Colors.white.withValues(alpha: 0.06)
-                                        : Colors.grey.shade200),
+                                          ? Colors.white.withValues(alpha: 0.06)
+                                          : Colors.grey.shade200),
                                 width: isSelected ? 1.5 : 1.0,
                               ),
                               boxShadow: isDark || isSelected
@@ -245,8 +242,8 @@ class _LanguageSelectionListState extends State<LanguageSelectionList> {
                                       color: isSelected
                                           ? themeState.primary
                                           : (isDark
-                                              ? Colors.grey.shade600
-                                              : Colors.grey.shade400),
+                                                ? Colors.grey.shade600
+                                                : Colors.grey.shade400),
                                       width: 1.5,
                                     ),
                                   ),
@@ -269,10 +266,10 @@ class _LanguageSelectionListState extends State<LanguageSelectionList> {
                                     color: isSelected
                                         ? themeState.primary
                                         : (isDark
-                                            ? Colors.white.withValues(
-                                                alpha: 0.06,
-                                              )
-                                            : Colors.grey.shade100),
+                                              ? Colors.white.withValues(
+                                                  alpha: 0.06,
+                                                )
+                                              : Colors.grey.shade100),
                                     shape: BoxShape.circle,
                                   ),
                                   alignment: Alignment.center,
@@ -284,8 +281,8 @@ class _LanguageSelectionListState extends State<LanguageSelectionList> {
                                       color: isSelected
                                           ? Colors.white
                                           : (isDark
-                                              ? Colors.grey.shade300
-                                              : Colors.grey.shade700),
+                                                ? Colors.grey.shade300
+                                                : Colors.grey.shade700),
                                     ),
                                   ),
                                 ),
@@ -317,8 +314,7 @@ class _LanguageSelectionListState extends State<LanguageSelectionList> {
                                             ),
                                           ),
                                           if (appLoc.native.toLowerCase() !=
-                                              appLoc.english
-                                                  .toLowerCase()) ...[
+                                              appLoc.english.toLowerCase()) ...[
                                             const Gap(6),
                                             Text(
                                               "•  ${appLoc.english}",
@@ -355,16 +351,16 @@ class _LanguageSelectionListState extends State<LanguageSelectionList> {
                                                 context,
                                                 icon: FluentIcons
                                                     .book_letter_24_regular,
-                                                label: appLocalizations
-                                                    .wordByWord,
+                                                label:
+                                                    appLocalizations.wordByWord,
                                                 themeColor: themeState.primary,
                                                 isDark: isDark,
                                               ),
                                             if (hasFootnote)
                                               _buildFeatureBadge(
                                                 context,
-                                                icon: FluentIcons
-                                                    .note_20_regular,
+                                                icon:
+                                                    FluentIcons.note_20_regular,
                                                 label:
                                                     appLocalizations.footnote,
                                                 themeColor: themeState.primary,

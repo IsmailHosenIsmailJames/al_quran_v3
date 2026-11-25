@@ -14,7 +14,7 @@ import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/ay
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/word_playing_state_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_settings.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
@@ -74,9 +74,7 @@ void main() {
         });
 
         await tester.pumpWidget(
-          createTestWidget(
-            child: const QuranScriptSettings(asPage: true),
-          ),
+          createTestWidget(child: const QuranScriptSettings(asPage: true)),
         );
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 300));
@@ -104,9 +102,7 @@ void main() {
         });
 
         await tester.pumpWidget(
-          createTestWidget(
-            child: const QuranScriptSettings(asPage: true),
-          ),
+          createTestWidget(child: const QuranScriptSettings(asPage: true)),
         );
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 300));

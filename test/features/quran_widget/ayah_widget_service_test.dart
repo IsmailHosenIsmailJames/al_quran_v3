@@ -16,7 +16,10 @@ void main() {
     Hive.init(tempDir.path);
     SharedPreferences.setMockInitialValues({});
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMethodCallHandler(const MethodChannel("home_widget"), (call) async => true);
+        .setMockMethodCallHandler(
+          const MethodChannel("home_widget"),
+          (call) async => true,
+        );
   });
 
   tearDown(() async {
@@ -33,8 +36,12 @@ void main() {
       for (final item in curatedAyahsList) {
         expect(item.surah >= 1 && item.surah <= 114, isTrue);
         final maxVerses = metaDataSurah["${item.surah}"]?["vc"] ?? 0;
-        expect(item.ayah >= 1 && item.ayah <= maxVerses, isTrue,
-            reason: "Surah ${item.surah} Ayah ${item.ayah} exceeds verse count $maxVerses");
+        expect(
+          item.ayah >= 1 && item.ayah <= maxVerses,
+          isTrue,
+          reason:
+              "Surah ${item.surah} Ayah ${item.ayah} exceeds verse count $maxVerses",
+        );
       }
     });
 

@@ -7,7 +7,10 @@ class SaveSetupPreferencesUseCase {
 
   SaveSetupPreferencesUseCase(this.repository);
 
-  Future<void> execute({required String languageCode, required bool isComplete}) async {
+  Future<void> execute({
+    required String languageCode,
+    required bool isComplete,
+  }) async {
     await repository.saveAppLanguage(languageCode);
     await repository.saveSetupComplete(isComplete);
   }

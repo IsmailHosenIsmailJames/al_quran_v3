@@ -6,7 +6,7 @@ import "package:al_quran_v3/src/features/audio/data/models/recitation_info_model
 import "package:al_quran_v3/src/features/audio/data/resources/recitations.dart";
 import "package:cached_network_image/cached_network_image.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -77,7 +77,9 @@ class _ChangeReciterState extends State<ChangeReciter> {
       final name = reciter.name.toLowerCase();
       final style = (reciter.style ?? "").toLowerCase();
       final source = (reciter.source ?? "").toLowerCase();
-      return name.contains(query) || style.contains(query) || source.contains(query);
+      return name.contains(query) ||
+          style.contains(query) ||
+          source.contains(query);
     }).toList();
   }
 
@@ -160,7 +162,10 @@ class _ChangeReciterState extends State<ChangeReciter> {
                 fillColor: isDark
                     ? Colors.white.withValues(alpha: 0.06)
                     : Colors.grey.shade100,
-                contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 16,
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(roundedRadius),
                   borderSide: BorderSide(
@@ -225,7 +230,10 @@ class _ChangeReciterState extends State<ChangeReciter> {
                 : ListView.builder(
                     controller: _scrollController,
                     itemCount: filtered.length,
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 8,
+                    ),
                     itemBuilder: (context, index) {
                       final reciter = filtered[index];
                       final isSelected = _selectedReciter.link == reciter.link;
@@ -235,16 +243,18 @@ class _ChangeReciterState extends State<ChangeReciter> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(roundedRadius),
                           color: isSelected
-                              ? themeState.primary.withValues(alpha: isDark ? 0.2 : 0.12)
+                              ? themeState.primary.withValues(
+                                  alpha: isDark ? 0.2 : 0.12,
+                                )
                               : isDark
-                                  ? Colors.white.withValues(alpha: 0.03)
-                                  : Colors.black.withValues(alpha: 0.02),
+                              ? Colors.white.withValues(alpha: 0.03)
+                              : Colors.black.withValues(alpha: 0.02),
                           border: Border.all(
                             color: isSelected
                                 ? themeState.primary
                                 : isDark
-                                    ? Colors.white.withValues(alpha: 0.06)
-                                    : Colors.black.withValues(alpha: 0.06),
+                                ? Colors.white.withValues(alpha: 0.06)
+                                : Colors.black.withValues(alpha: 0.06),
                             width: isSelected ? 1.5 : 1,
                           ),
                         ),
@@ -272,15 +282,21 @@ class _ChangeReciterState extends State<ChangeReciter> {
                                           ? CachedNetworkImage(
                                               imageUrl: reciter.img!,
                                               fit: BoxFit.cover,
-                                              errorWidget: (context, url, error) =>
-                                                  Container(
-                                                color: themeState.primaryShade100,
-                                                child: Icon(
-                                                  FluentIcons.person_24_filled,
-                                                  color: themeState.primary,
-                                                  size: 28,
-                                                ),
-                                              ),
+                                              errorWidget:
+                                                  (
+                                                    context,
+                                                    url,
+                                                    error,
+                                                  ) => Container(
+                                                    color: themeState
+                                                        .primaryShade100,
+                                                    child: Icon(
+                                                      FluentIcons
+                                                          .person_24_filled,
+                                                      color: themeState.primary,
+                                                      size: 28,
+                                                    ),
+                                                  ),
                                             )
                                           : Container(
                                               color: themeState.primaryShade100,
@@ -297,16 +313,18 @@ class _ChangeReciterState extends State<ChangeReciter> {
                                   // Info
                                   Expanded(
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           reciter.name,
-                                          style: theme.textTheme.titleSmall?.copyWith(
-                                            fontWeight: FontWeight.w600,
-                                            color: isSelected
-                                                ? themeState.primary
-                                                : null,
-                                          ),
+                                          style: theme.textTheme.titleSmall
+                                              ?.copyWith(
+                                                fontWeight: FontWeight.w600,
+                                                color: isSelected
+                                                    ? themeState.primary
+                                                    : null,
+                                              ),
                                         ),
                                         const Gap(4),
                                         Row(
@@ -315,9 +333,16 @@ class _ChangeReciterState extends State<ChangeReciter> {
                                                 reciter.style!.isNotEmpty)
                                               Text(
                                                 l10n.style(reciter.style!),
-                                                style: theme.textTheme.bodySmall?.copyWith(
-                                                  color: theme.textTheme.bodySmall?.color?.withValues(alpha: 0.8),
-                                                ),
+                                                style: theme.textTheme.bodySmall
+                                                    ?.copyWith(
+                                                      color: theme
+                                                          .textTheme
+                                                          .bodySmall
+                                                          ?.color
+                                                          ?.withValues(
+                                                            alpha: 0.8,
+                                                          ),
+                                                    ),
                                               ),
                                             if (reciter.style != null &&
                                                 reciter.source != null)
@@ -326,19 +351,31 @@ class _ChangeReciterState extends State<ChangeReciter> {
                                                 reciter.source!.isNotEmpty)
                                               Text(
                                                 l10n.source(reciter.source!),
-                                                style: theme.textTheme.bodySmall?.copyWith(
-                                                  color: theme.textTheme.bodySmall?.color?.withValues(alpha: 0.8),
-                                                ),
+                                                style: theme.textTheme.bodySmall
+                                                    ?.copyWith(
+                                                      color: theme
+                                                          .textTheme
+                                                          .bodySmall
+                                                          ?.color
+                                                          ?.withValues(
+                                                            alpha: 0.8,
+                                                          ),
+                                                    ),
                                               ),
                                           ],
                                         ),
                                         if (reciter.segmentsUrl != null) ...[
                                           const Gap(4),
                                           Container(
-                                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 6,
+                                              vertical: 2,
+                                            ),
                                             decoration: BoxDecoration(
-                                              color: themeState.primary.withValues(alpha: 0.15),
-                                              borderRadius: BorderRadius.circular(4),
+                                              color: themeState.primary
+                                                  .withValues(alpha: 0.15),
+                                              borderRadius:
+                                                  BorderRadius.circular(4),
                                             ),
                                             child: Text(
                                               "Word-by-word synced",
@@ -368,8 +405,8 @@ class _ChangeReciterState extends State<ChangeReciter> {
                                         color: isSelected
                                             ? themeState.primary
                                             : isDark
-                                                ? Colors.grey.shade700
-                                                : Colors.grey.shade400,
+                                            ? Colors.grey.shade700
+                                            : Colors.grey.shade400,
                                         width: 1.5,
                                       ),
                                     ),
@@ -418,8 +455,8 @@ class _ChangeReciterState extends State<ChangeReciter> {
         color: isSelected
             ? Colors.white
             : isDark
-                ? Colors.grey.shade300
-                : Colors.grey.shade800,
+            ? Colors.grey.shade300
+            : Colors.grey.shade800,
       ),
       selectedColor: themeState.primary,
       backgroundColor: isDark
@@ -429,8 +466,8 @@ class _ChangeReciterState extends State<ChangeReciter> {
         color: isSelected
             ? Colors.transparent
             : (isDark
-                ? Colors.white.withValues(alpha: 0.08)
-                : Colors.grey.shade300),
+                  ? Colors.white.withValues(alpha: 0.08)
+                  : Colors.grey.shade300),
       ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       visualDensity: VisualDensity.compact,

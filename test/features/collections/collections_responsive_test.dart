@@ -12,7 +12,7 @@ import "package:al_quran_v3/src/features/collections/presentation/screens/collec
 import "package:al_quran_v3/src/features/collections/presentation/widgets/list_of_ayahs_views.dart";
 import "package:al_quran_v3/src/features/collections/presentation/widgets/popups/add_note_popup.dart";
 import "package:al_quran_v3/src/features/collections/presentation/widgets/popups/add_to_pinned_popup.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_loop_cubit.dart";
@@ -335,80 +335,78 @@ void main() {
   });
 
   group("Popups Responsive UI Tests", () {
-    testWidgets(
-      "showAddNotePopup uses maxWidth 560px on wide screen",
-      (tester) async {
-        tester.view.physicalSize = const Size(1000, 800);
-        tester.view.devicePixelRatio = 1.0;
-        addTearDown(() {
-          tester.view.resetPhysicalSize();
-          tester.view.resetDevicePixelRatio();
-        });
+    testWidgets("showAddNotePopup uses maxWidth 560px on wide screen", (
+      tester,
+    ) async {
+      tester.view.physicalSize = const Size(1000, 800);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
 
-        await tester.pumpWidget(
-          createTestWidget(
-            child: Builder(
-              builder: (context) {
-                return ElevatedButton(
-                  onPressed: () => showAddNotePopup(context, "1:1"),
-                  child: const Text("Open Add Note"),
-                );
-              },
-            ),
+      await tester.pumpWidget(
+        createTestWidget(
+          child: Builder(
+            builder: (context) {
+              return ElevatedButton(
+                onPressed: () => showAddNotePopup(context, "1:1"),
+                child: const Text("Open Add Note"),
+              );
+            },
           ),
-        );
-        await tester.pumpAndSettle();
+        ),
+      );
+      await tester.pumpAndSettle();
 
-        await tester.tap(find.text("Open Add Note"));
-        await tester.pumpAndSettle();
+      await tester.tap(find.text("Open Add Note"));
+      await tester.pumpAndSettle();
 
-        // Bottom sheet modal should be bounded to maxWidth 560
-        final constrainedBoxes = tester.widgetList<ConstrainedBox>(
-          find.byType(ConstrainedBox),
-        );
-        final hasPopupConstraint = constrainedBoxes.any(
-          (box) => box.constraints.maxWidth == 560,
-        );
-        expect(hasPopupConstraint, isTrue);
-      },
-    );
+      // Bottom sheet modal should be bounded to maxWidth 560
+      final constrainedBoxes = tester.widgetList<ConstrainedBox>(
+        find.byType(ConstrainedBox),
+      );
+      final hasPopupConstraint = constrainedBoxes.any(
+        (box) => box.constraints.maxWidth == 560,
+      );
+      expect(hasPopupConstraint, isTrue);
+    });
 
-    testWidgets(
-      "showAddToPinnedPopup uses maxWidth 560px on wide screen",
-      (tester) async {
-        tester.view.physicalSize = const Size(1000, 800);
-        tester.view.devicePixelRatio = 1.0;
-        addTearDown(() {
-          tester.view.resetPhysicalSize();
-          tester.view.resetDevicePixelRatio();
-        });
+    testWidgets("showAddToPinnedPopup uses maxWidth 560px on wide screen", (
+      tester,
+    ) async {
+      tester.view.physicalSize = const Size(1000, 800);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
 
-        await tester.pumpWidget(
-          createTestWidget(
-            child: Builder(
-              builder: (context) {
-                return ElevatedButton(
-                  onPressed: () => showAddToPinnedPopup(context, "1:1"),
-                  child: const Text("Open Add Pinned"),
-                );
-              },
-            ),
+      await tester.pumpWidget(
+        createTestWidget(
+          child: Builder(
+            builder: (context) {
+              return ElevatedButton(
+                onPressed: () => showAddToPinnedPopup(context, "1:1"),
+                child: const Text("Open Add Pinned"),
+              );
+            },
           ),
-        );
-        await tester.pumpAndSettle();
+        ),
+      );
+      await tester.pumpAndSettle();
 
-        await tester.tap(find.text("Open Add Pinned"));
-        await tester.pumpAndSettle();
+      await tester.tap(find.text("Open Add Pinned"));
+      await tester.pumpAndSettle();
 
-        // Bottom sheet modal should be bounded to maxWidth 560
-        final constrainedBoxes = tester.widgetList<ConstrainedBox>(
-          find.byType(ConstrainedBox),
-        );
-        final hasPopupConstraint = constrainedBoxes.any(
-          (box) => box.constraints.maxWidth == 560,
-        );
-        expect(hasPopupConstraint, isTrue);
-      },
-    );
+      // Bottom sheet modal should be bounded to maxWidth 560
+      final constrainedBoxes = tester.widgetList<ConstrainedBox>(
+        find.byType(ConstrainedBox),
+      );
+      final hasPopupConstraint = constrainedBoxes.any(
+        (box) => box.constraints.maxWidth == 560,
+      );
+      expect(hasPopupConstraint, isTrue);
+    });
   });
 }

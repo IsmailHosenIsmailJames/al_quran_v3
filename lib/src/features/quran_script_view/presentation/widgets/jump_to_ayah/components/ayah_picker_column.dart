@@ -3,7 +3,7 @@ import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/core/theme/values/values.dart";
 import "package:al_quran_v3/src/core/utils/number_localization.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:gap/gap.dart";
 
 class AyahPickerColumn extends StatefulWidget {
@@ -126,15 +126,15 @@ class _AyahPickerColumnState extends State<AyahPickerColumn> {
                           alpha: isDark ? 0.2 : 0.08,
                         )
                       : isDark
-                          ? Colors.white.withValues(alpha: 0.02)
-                          : Colors.white,
+                      ? Colors.white.withValues(alpha: 0.02)
+                      : Colors.white,
                   borderRadius: BorderRadius.circular(roundedRadius),
                   border: Border.all(
                     color: isHighlighted
                         ? widget.themeState.primary
                         : isDark
-                            ? Colors.white.withValues(alpha: 0.05)
-                            : Colors.grey.shade200,
+                        ? Colors.white.withValues(alpha: 0.05)
+                        : Colors.grey.shade200,
                     width: isHighlighted ? 1.5 : 1,
                   ),
                 ),
@@ -162,9 +162,7 @@ class _AyahPickerColumnState extends State<AyahPickerColumn> {
                               size: 16,
                               color: isCheckedInMultiMode
                                   ? widget.themeState.primary
-                                  : (isDark
-                                      ? Colors.white54
-                                      : Colors.black45),
+                                  : (isDark ? Colors.white54 : Colors.black45),
                             ),
                             const Gap(6),
                           ],

@@ -1,5 +1,6 @@
 class DailyPlanEntity {
-  final Map<String, bool> prayersCompleted; // "fajr", "dhuhr", "asr", "maghrib", "isha"
+  final Map<String, bool>
+  prayersCompleted; // "fajr", "dhuhr", "asr", "maghrib", "isha"
   final bool isSunnahSurahCompleted;
   final bool isCollapsed;
 

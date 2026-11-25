@@ -7,7 +7,7 @@ import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/qu
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_state.dart";
 import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
@@ -22,8 +22,8 @@ Widget getScriptSelectionSegmentedButtons(BuildContext context) {
         builder: (context, quranViewState) {
           final isTajweedActive =
               quranViewState.quranScriptType == QuranScriptType.uthmani
-                  ? quranViewState.useTajweedOnUthmani
-                  : quranViewState.useTajweedOnIndopak;
+              ? quranViewState.useTajweedOnUthmani
+              : quranViewState.useTajweedOnIndopak;
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,8 +40,9 @@ Widget getScriptSelectionSegmentedButtons(BuildContext context) {
                         : Colors.white,
                     selectedBackgroundColor: themeState.primary,
                     selectedForegroundColor: Colors.white,
-                    foregroundColor:
-                        isDark ? Colors.grey.shade300 : Colors.grey.shade800,
+                    foregroundColor: isDark
+                        ? Colors.grey.shade300
+                        : Colors.grey.shade800,
                     side: BorderSide(
                       color: isDark
                           ? Colors.white.withValues(alpha: 0.08)
@@ -70,8 +71,8 @@ Widget getScriptSelectionSegmentedButtons(BuildContext context) {
                     await QuranScriptFunction.loadScript(value.first);
                     if (context.mounted) {
                       context.read<QuranViewCubit>().changeQuranScriptType(
-                            value.first,
-                          );
+                        value.first,
+                      );
                     }
                   },
                 ),
@@ -91,15 +92,15 @@ Widget getScriptSelectionSegmentedButtons(BuildContext context) {
                           alpha: isDark ? 0.12 : 0.05,
                         )
                       : (isDark
-                          ? Colors.white.withValues(alpha: 0.03)
-                          : Colors.grey.shade50),
+                            ? Colors.white.withValues(alpha: 0.03)
+                            : Colors.grey.shade50),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
                     color: isTajweedActive
                         ? themeState.primary.withValues(alpha: 0.3)
                         : (isDark
-                            ? Colors.white.withValues(alpha: 0.06)
-                            : Colors.grey.shade200),
+                              ? Colors.white.withValues(alpha: 0.06)
+                              : Colors.grey.shade200),
                   ),
                 ),
                 child: Row(
@@ -110,8 +111,8 @@ Widget getScriptSelectionSegmentedButtons(BuildContext context) {
                       color: isTajweedActive
                           ? themeState.primary
                           : (isDark
-                              ? Colors.grey.shade400
-                              : Colors.grey.shade600),
+                                ? Colors.grey.shade400
+                                : Colors.grey.shade600),
                     ),
                     const Gap(10),
                     Expanded(

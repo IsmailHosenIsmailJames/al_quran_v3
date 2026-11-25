@@ -1,5 +1,5 @@
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
 /// A clean, solid TabBar header delegate for Quran categories.
@@ -20,7 +20,9 @@ class QuranTabBarHeaderDelegate extends SliverPersistentHeaderDelegate {
   ) {
     final themeState = context.watch<ThemeCubit>().state;
     final isDark = Theme.brightnessOf(context) == Brightness.dark;
-    final bgColor = isDark ? const Color(0xFF121212) : Theme.of(context).scaffoldBackgroundColor;
+    final bgColor = isDark
+        ? const Color(0xFF121212)
+        : Theme.of(context).scaffoldBackgroundColor;
 
     return Container(
       color: bgColor,
@@ -28,9 +30,7 @@ class QuranTabBarHeaderDelegate extends SliverPersistentHeaderDelegate {
       child: Container(
         height: 44,
         decoration: BoxDecoration(
-          color: isDark
-              ? const Color(0xFF1E1E1E)
-              : Colors.grey.shade100,
+          color: isDark ? const Color(0xFF1E1E1E) : Colors.grey.shade100,
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
             color: isDark
@@ -55,8 +55,9 @@ class QuranTabBarHeaderDelegate extends SliverPersistentHeaderDelegate {
           indicatorSize: TabBarIndicatorSize.tab,
           labelPadding: const EdgeInsets.symmetric(horizontal: 4),
           labelColor: Colors.white,
-          unselectedLabelColor:
-              isDark ? Colors.grey.shade400 : Colors.grey.shade700,
+          unselectedLabelColor: isDark
+              ? Colors.grey.shade400
+              : Colors.grey.shade700,
           labelStyle: const TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.bold,

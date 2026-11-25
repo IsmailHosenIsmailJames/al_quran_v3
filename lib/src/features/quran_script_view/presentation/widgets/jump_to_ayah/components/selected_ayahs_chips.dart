@@ -4,7 +4,7 @@ import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/core/theme/values/values.dart";
 import "package:al_quran_v3/src/core/utils/number_localization.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:gap/gap.dart";
 
 class SelectedAyahsChips extends StatelessWidget {
@@ -70,7 +70,10 @@ class SelectedAyahsChips extends StatelessWidget {
                   onTap: onClearAll,
                   borderRadius: BorderRadius.circular(4),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 2,
+                    ),
                     child: Text(
                       l10n.delete,
                       style: theme.textTheme.labelSmall?.copyWith(
@@ -106,14 +109,21 @@ class SelectedAyahsChips extends StatelessWidget {
                   final key = selectedAyahKeys[index];
                   final parts = key.split(":");
                   final surahId = int.tryParse(parts.first) ?? 1;
-                  final ayahId = int.tryParse(parts.length > 1 ? parts.last : "1") ?? 1;
+                  final ayahId =
+                      int.tryParse(parts.length > 1 ? parts.last : "1") ?? 1;
                   final surahName = getSurahName(context, surahId);
-                  final label = "$surahName ${localizedNumber(context, ayahId)}";
+                  final label =
+                      "$surahName ${localizedNumber(context, ayahId)}";
 
                   return Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 2,
+                    ),
                     decoration: BoxDecoration(
-                      color: themeState.primary.withValues(alpha: isDark ? 0.25 : 0.15),
+                      color: themeState.primary.withValues(
+                        alpha: isDark ? 0.25 : 0.15,
+                      ),
                       borderRadius: BorderRadius.circular(roundedRadius),
                       border: Border.all(
                         color: themeState.primary.withValues(alpha: 0.3),

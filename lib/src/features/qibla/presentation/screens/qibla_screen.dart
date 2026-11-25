@@ -11,7 +11,7 @@ import "package:al_quran_v3/src/features/location/presentation/screens/location_
 import "package:al_quran_v3/src/features/qibla/presentation/cubit/qibla_cubit.dart";
 import "package:al_quran_v3/src/features/qibla/presentation/cubit/qibla_state.dart";
 import "package:al_quran_v3/src/features/qibla/presentation/widgets/compass_painter.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
@@ -137,7 +137,9 @@ class _QiblaView extends StatelessWidget {
 
                             return Center(
                               child: ConstrainedBox(
-                                constraints: const BoxConstraints(maxWidth: 900),
+                                constraints: const BoxConstraints(
+                                  maxWidth: 900,
+                                ),
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 20,

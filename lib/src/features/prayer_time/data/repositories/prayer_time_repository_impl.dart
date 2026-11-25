@@ -11,10 +11,7 @@ class PrayerTimeRepositoryImpl implements PrayerTimeRepository {
   final PrayerTimeCalculatorDataSource _calculatorDataSource;
   final PrayerTimeLocalDataSource _localDataSource;
 
-  PrayerTimeRepositoryImpl(
-    this._calculatorDataSource,
-    this._localDataSource,
-  );
+  PrayerTimeRepositoryImpl(this._calculatorDataSource, this._localDataSource);
 
   @override
   PrayerTimeEntity getPrayerTimes({

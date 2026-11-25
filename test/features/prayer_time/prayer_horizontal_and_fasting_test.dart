@@ -8,7 +8,7 @@ import "package:al_quran_v3/src/features/prayer_time/data/services/background_no
 import "package:al_quran_v3/src/features/prayer_time/presentation/cubit/prayer_reminder_cubit.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/fasting_sunnah_card.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/prayer_times_horizontal_card.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:shared_preferences/shared_preferences.dart";
@@ -44,31 +44,38 @@ void main() {
       child: MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: Scaffold(
-          body: SingleChildScrollView(child: child),
-        ),
+        home: Scaffold(body: SingleChildScrollView(child: child)),
       ),
     );
   }
 
   group('PrayerTimesHorizontalCard Tests', () {
-    testWidgets('renders all 5 core prayers (Fajr, Dhuhr, Asr, Maghrib, Isha)', (tester) async {
-      await tester.pumpWidget(buildTestableWidget(
-        PrayerTimesHorizontalCard(prayerTimes: prayerTimes),
-      ));
-      await tester.pumpAndSettle();
+    testWidgets(
+      'renders all 5 core prayers (Fajr, Dhuhr, Asr, Maghrib, Isha)',
+      (tester) async {
+        await tester.pumpWidget(
+          buildTestableWidget(
+            PrayerTimesHorizontalCard(prayerTimes: prayerTimes),
+          ),
+        );
+        await tester.pumpAndSettle();
 
-      expect(find.text('Fajr'), findsOneWidget);
-      expect(find.text('Dhuhr'), findsOneWidget);
-      expect(find.text('Asr'), findsOneWidget);
-      expect(find.text('Maghrib'), findsOneWidget);
-      expect(find.text('Isha'), findsOneWidget);
-    });
+        expect(find.text('Fajr'), findsOneWidget);
+        expect(find.text('Dhuhr'), findsOneWidget);
+        expect(find.text('Asr'), findsOneWidget);
+        expect(find.text('Maghrib'), findsOneWidget);
+        expect(find.text('Isha'), findsOneWidget);
+      },
+    );
 
-    testWidgets('tapping on a prayer column opens reminder adjustment sheet', (tester) async {
-      await tester.pumpWidget(buildTestableWidget(
-        PrayerTimesHorizontalCard(prayerTimes: prayerTimes),
-      ));
+    testWidgets('tapping on a prayer column opens reminder adjustment sheet', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        buildTestableWidget(
+          PrayerTimesHorizontalCard(prayerTimes: prayerTimes),
+        ),
+      );
       await tester.pumpAndSettle();
 
       // Tap on Fajr
@@ -84,15 +91,18 @@ void main() {
   });
 
   group('FastingSunnahCard Tests', () {
-    testWidgets('renders Suhur End, Iftar Start, and Tahajjud Start in 3 columns', (tester) async {
-      await tester.pumpWidget(buildTestableWidget(
-        FastingSunnahCard(prayerTimes: prayerTimes),
-      ));
-      await tester.pumpAndSettle();
+    testWidgets(
+      'renders Suhur End, Iftar Start, and Tahajjud Start in 3 columns',
+      (tester) async {
+        await tester.pumpWidget(
+          buildTestableWidget(FastingSunnahCard(prayerTimes: prayerTimes)),
+        );
+        await tester.pumpAndSettle();
 
-      expect(find.text('Suhur End'), findsOneWidget);
-      expect(find.text('Iftar Start'), findsOneWidget);
-      expect(find.text('Tahajjud Start'), findsOneWidget);
-    });
+        expect(find.text('Suhur End'), findsOneWidget);
+        expect(find.text('Iftar Start'), findsOneWidget);
+        expect(find.text('Tahajjud Start'), findsOneWidget);
+      },
+    );
   });
 }

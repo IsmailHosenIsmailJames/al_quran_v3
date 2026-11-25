@@ -3,7 +3,7 @@ import "dart:math" as math;
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/core/utils/number_localization.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:vector_math/vector_math.dart" as vector;
 
 double transformAngle(double inputAngle) {
@@ -40,7 +40,9 @@ class CompassPainter extends CustomPainter {
 
     // Draw outer background circle
     Paint outerBgPaint = Paint()
-      ..color = isDark ? Colors.black.withValues(alpha: 0.3) : Colors.white.withValues(alpha: 0.6)
+      ..color = isDark
+          ? Colors.black.withValues(alpha: 0.3)
+          : Colors.white.withValues(alpha: 0.6)
       ..style = PaintingStyle.fill;
     canvas.drawCircle(Offset.zero, radius, outerBgPaint);
 
@@ -48,14 +50,18 @@ class CompassPainter extends CustomPainter {
     Paint ringPaint = Paint()
       ..color = isAligned
           ? accentColor.withValues(alpha: 0.4)
-          : (isDark ? Colors.white.withValues(alpha: 0.1) : Colors.black.withValues(alpha: 0.08))
+          : (isDark
+                ? Colors.white.withValues(alpha: 0.1)
+                : Colors.black.withValues(alpha: 0.08))
       ..style = PaintingStyle.stroke
       ..strokeWidth = isAligned ? 4.0 : 2.0;
     canvas.drawCircle(Offset.zero, radius - 2, ringPaint);
 
     // Draw inner target circle
     Paint centerCirclePaint = Paint()
-      ..color = isAligned ? accentColor : (isDark ? Colors.grey.shade800 : Colors.grey.shade300)
+      ..color = isAligned
+          ? accentColor
+          : (isDark ? Colors.grey.shade800 : Colors.grey.shade300)
       ..style = PaintingStyle.fill;
     canvas.drawCircle(Offset.zero, 28, centerCirclePaint);
 
@@ -65,16 +71,24 @@ class CompassPainter extends CustomPainter {
     double kaabaY = math.cos(kaabaRadian) * (radius - 12);
 
     Paint kaabaLinePaint = Paint()
-      ..color = isAligned ? accentColor : (isDark ? Colors.amber.shade400 : Colors.amber.shade700)
+      ..color = isAligned
+          ? accentColor
+          : (isDark ? Colors.amber.shade400 : Colors.amber.shade700)
       ..strokeWidth = isAligned ? 5.0 : 3.5
       ..strokeCap = StrokeCap.round;
     canvas.drawLine(const Offset(0, 0), Offset(kaabaX, kaabaY), kaabaLinePaint);
 
     // Draw Kaaba pointer head circle
     Paint kaabaHeadPaint = Paint()
-      ..color = isAligned ? accentColor : (isDark ? Colors.amber.shade400 : Colors.amber.shade700)
+      ..color = isAligned
+          ? accentColor
+          : (isDark ? Colors.amber.shade400 : Colors.amber.shade700)
       ..style = PaintingStyle.fill;
-    canvas.drawCircle(Offset(kaabaX, kaabaY), isAligned ? 8.0 : 6.0, kaabaHeadPaint);
+    canvas.drawCircle(
+      Offset(kaabaX, kaabaY),
+      isAligned ? 8.0 : 6.0,
+      kaabaHeadPaint,
+    );
 
     // Draw North (N) indicator triangle at degree 0
     double northRadian = vector.radians(0);

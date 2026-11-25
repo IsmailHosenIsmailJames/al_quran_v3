@@ -5,7 +5,7 @@ import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/
 import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
 import "package:al_quran_v3/src/features/surah_info/presentation/widgets/surah_info_header_builder.dart";
 import "package:dartx/dartx_io.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_html/flutter_html.dart";
 
 class SurahInfoView extends StatelessWidget {
@@ -65,9 +65,7 @@ class SurahInfoView extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                   margin: Margins.only(top: 12, bottom: 4),
                 ),
-                "p": Style(
-                  margin: Margins.only(bottom: 12),
-                ),
+                "p": Style(margin: Margins.only(bottom: 12)),
               },
               onLinkTap: (url, attributes, element) {
                 log(url.toString());
@@ -87,11 +85,10 @@ class SurahInfoView extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder:
-                              (context) => QuranScriptView(
-                                startKey: "$surahNumber:${1}",
-                                endKey: getEndAyahKeyFromSurahNumber(surahNumber),
-                              ),
+                          builder: (context) => QuranScriptView(
+                            startKey: "$surahNumber:${1}",
+                            endKey: getEndAyahKeyFromSurahNumber(surahNumber),
+                          ),
                         ),
                       );
                     }
@@ -103,11 +100,10 @@ class SurahInfoView extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder:
-                            (context) => QuranScriptView(
-                              startKey: startAyahKey,
-                              endKey: endAyahKey,
-                            ),
+                        builder: (context) => QuranScriptView(
+                          startKey: startAyahKey,
+                          endKey: endAyahKey,
+                        ),
                       ),
                     );
                   }

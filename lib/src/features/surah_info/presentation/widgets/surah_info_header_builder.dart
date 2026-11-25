@@ -21,7 +21,7 @@ import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_
 import "package:al_quran_v3/src/features/quran_script_view/data/processor/script_processor.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/foundation.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:just_audio/just_audio.dart" as just_audio;
@@ -61,20 +61,17 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
     if (!context.mounted) return;
 
     if (surahInfo == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.noResultsFound)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.noResultsFound)));
       return;
     }
 
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder:
-            (context) => SurahInfoView(
-              html: surahInfo!,
-              surahInfoModel: surahInfoModel,
-            ),
+        builder: (context) =>
+            SurahInfoView(html: surahInfo!, surahInfoModel: surahInfoModel),
       ),
     );
   }
@@ -125,7 +122,9 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                             TextSpan(
                               text:
                                   "${headerInfoModel.surahInfoModel.id}. ${getSurahName(context, headerInfoModel.surahInfoModel.id)}  - ",
-                              style: const TextStyle(fontWeight: FontWeight.bold),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             TextSpan(
                               text:
@@ -149,18 +148,20 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                             children: [
                               Text(l10n.verseCount),
                               Text(
-                                headerInfoModel.surahInfoModel.versesCount.toString(),
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                headerInfoModel.surahInfoModel.versesCount
+                                    .toString(),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ],
                           ),
                           if (QuranTranslationFunction.isInfoAvailable())
                             InkWell(
-                              onTap:
-                                  () => openSurahInfo(
-                                    context,
-                                    headerInfoModel.surahInfoModel,
-                                  ),
+                              onTap: () => openSurahInfo(
+                                context,
+                                headerInfoModel.surahInfoModel,
+                              ),
                               borderRadius: BorderRadius.circular(8),
                               child: Container(
                                 padding: const EdgeInsets.symmetric(
@@ -217,7 +218,9 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                       builder: (context, ayahKeyManagement) {
                         bool isPlaying = playerState.isPlaying;
                         bool isCurrentSurah =
-                            int.tryParse(ayahKeyManagement.current.split(":")[0]) ==
+                            int.tryParse(
+                              ayahKeyManagement.current.split(":")[0],
+                            ) ==
                             headerInfoModel.surahInfoModel.id;
                         bool isCurrentPlaying =
                             isPlaying &&
@@ -241,8 +244,9 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                                       builder: (context) => AudioDownloadScreen(
                                         initDownloadSurah:
                                             headerInfoModel.surahInfoModel,
-                                        reciterInfoModel:
-                                            context.read<ReciterCubit>().state,
+                                        reciterInfoModel: context
+                                            .read<ReciterCubit>()
+                                            .state,
                                       ),
                                     ),
                                   );
@@ -267,8 +271,9 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                                   AudioPlayerManager.playMultipleAyahAsPlaylist(
                                     startAyahKey: headerInfoModel.startAyahKey,
                                     endAyahKey: headerInfoModel.endAyahKey,
-                                    reciterInfoModel:
-                                        context.read<ReciterCubit>().state,
+                                    reciterInfoModel: context
+                                        .read<ReciterCubit>()
+                                        .state,
                                     isInsideQuran: true,
                                   );
                                 } else if (isCurrentPlaying &&
@@ -283,8 +288,9 @@ class SurahInfoHeaderBuilder extends StatelessWidget {
                                   AudioPlayerManager.playMultipleAyahAsPlaylist(
                                     startAyahKey: headerInfoModel.startAyahKey,
                                     endAyahKey: headerInfoModel.endAyahKey,
-                                    reciterInfoModel:
-                                        context.read<ReciterCubit>().state,
+                                    reciterInfoModel: context
+                                        .read<ReciterCubit>()
+                                        .state,
                                     isInsideQuran: true,
                                   );
                                 }

@@ -1,7 +1,7 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
 Widget themeIconButton(BuildContext context) =>
@@ -21,12 +21,11 @@ Widget themeIconButton(BuildContext context) =>
               themeController.setTheme(ThemeMode.dark);
             }
           },
-          icon:
-              state.themeMode == ThemeMode.dark
-                  ? const Icon(Icons.dark_mode)
-                  : state.themeMode == ThemeMode.light
-                  ? const Icon(Icons.light_mode)
-                  : const Icon(Icons.brightness_4),
+          icon: state.themeMode == ThemeMode.dark
+              ? const Icon(Icons.dark_mode)
+              : state.themeMode == ThemeMode.light
+              ? const Icon(Icons.light_mode)
+              : const Icon(Icons.brightness_4),
         );
       },
     );

@@ -1,5 +1,5 @@
 import "package:al_quran_v3/src/features/search/domain/utils/arabic_text_normalizer.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 /// A high-performance text highlighter for search matches in Arabic, English,
 /// Bengali, Urdu, and other languages.
@@ -74,22 +74,25 @@ class TextHighlighter {
           int lastIndex = 0;
           for (final match in wordMatches) {
             if (match.start > lastIndex) {
-              spans.add(TextSpan(
-                text: text.substring(lastIndex, match.start),
-                style: baseStyle,
-              ));
+              spans.add(
+                TextSpan(
+                  text: text.substring(lastIndex, match.start),
+                  style: baseStyle,
+                ),
+              );
             }
-            spans.add(TextSpan(
-              text: text.substring(match.start, match.end),
-              style: highlightStyle,
-            ));
+            spans.add(
+              TextSpan(
+                text: text.substring(match.start, match.end),
+                style: highlightStyle,
+              ),
+            );
             lastIndex = match.end;
           }
           if (lastIndex < text.length) {
-            spans.add(TextSpan(
-              text: text.substring(lastIndex),
-              style: baseStyle,
-            ));
+            spans.add(
+              TextSpan(text: text.substring(lastIndex), style: baseStyle),
+            );
           }
           return spans;
         }
@@ -101,23 +104,24 @@ class TextHighlighter {
     int lastIndex = 0;
     for (final match in matches) {
       if (match.start > lastIndex) {
-        spans.add(TextSpan(
-          text: text.substring(lastIndex, match.start),
-          style: baseStyle,
-        ));
+        spans.add(
+          TextSpan(
+            text: text.substring(lastIndex, match.start),
+            style: baseStyle,
+          ),
+        );
       }
-      spans.add(TextSpan(
-        text: text.substring(match.start, match.end),
-        style: highlightStyle,
-      ));
+      spans.add(
+        TextSpan(
+          text: text.substring(match.start, match.end),
+          style: highlightStyle,
+        ),
+      );
       lastIndex = match.end;
     }
 
     if (lastIndex < text.length) {
-      spans.add(TextSpan(
-        text: text.substring(lastIndex),
-        style: baseStyle,
-      ));
+      spans.add(TextSpan(text: text.substring(lastIndex), style: baseStyle));
     }
 
     return spans;

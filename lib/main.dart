@@ -51,11 +51,12 @@ import "package:al_quran_v3/src/features/home/presentation/cubit/quran_history_c
 import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_info.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/word_playing_state_cubit.dart";
 import "package:dartx/dartx_io.dart";
-import "package:flutter/cupertino.dart";
+import "package:cupertino_ui/cupertino_ui.dart";
 import "package:flutter/foundation.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
-import "package:flutter_localizations/flutter_localizations.dart";
+import "package:flutter_localizations/flutter_localizations.dart"
+    hide GlobalMaterialLocalizations, GlobalCupertinoLocalizations;
 import "package:flutter_native_splash/flutter_native_splash.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";

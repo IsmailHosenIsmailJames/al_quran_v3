@@ -2,7 +2,7 @@ import "package:al_quran_v3/src/features/quran_resources/data/utils/word_by_word
 import "package:al_quran_v3/src/features/quran_script_view/presentation/utils/show_popup_word_function.dart";
 import "package:al_quran_v3/src/features/quran_script_view/domain/utils/tajweed_rules.dart";
 import "package:flutter/gestures.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:html/parser.dart" show parseFragment;
 import "package:html/dom.dart" as dom;
 
@@ -30,7 +30,9 @@ List<_WordToken> _tokenizeTajweedWord(String rawWord) {
       }
     } else if (node.nodeType == dom.Node.ELEMENT_NODE) {
       final el = node as dom.Element;
-      final rule = el.localName == "rule" ? el.attributes["class"] : currentRule;
+      final rule = el.localName == "rule"
+          ? el.attributes["class"]
+          : currentRule;
       for (final child in el.nodes) {
         walk(child, rule);
       }
@@ -114,7 +116,9 @@ TextSpan parseTajweedWord({
       (isLight ? Colors.black : Colors.white);
 
   final TextStyle processingStyle = baseStyle.copyWith(color: defaultColor);
-  final int wIndex = wordIndex is int ? wordIndex : (int.tryParse(wordIndex.toString()) ?? 0);
+  final int wIndex = wordIndex is int
+      ? wordIndex
+      : (int.tryParse(wordIndex.toString()) ?? 0);
   if (words.isEmpty || wIndex < 0 || wIndex >= words.length) {
     return const TextSpan();
   }
@@ -155,7 +159,8 @@ TextSpan parseTajweedWord({
   final tokens = _tokenizeTajweedWord(rawWord);
   final List<TextSpan> spans = tokens.map((token) {
     Color color = defaultColor;
-    if (token.ruleClass != null && currentThemeColors.containsKey(token.ruleClass)) {
+    if (token.ruleClass != null &&
+        currentThemeColors.containsKey(token.ruleClass)) {
       color = currentThemeColors[token.ruleClass]!;
     }
     return TextSpan(

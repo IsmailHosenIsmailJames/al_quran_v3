@@ -2,7 +2,10 @@ import "package:al_quran_v3/src/features/setup/domain/entities/resource_entity.d
 import "package:al_quran_v3/src/core/resources/quran_resources/models/resources_model.dart";
 
 class ResourceMapper {
-  static ResourceEntity toEntity(ResourcesModel model, {bool isDownloaded = false}) {
+  static ResourceEntity toEntity(
+    ResourcesModel model, {
+    bool isDownloaded = false,
+  }) {
     return ResourceEntity(
       id: "${model.languageCode}_${model.fileName}",
       name: model.name,

@@ -65,8 +65,8 @@ class QiblaRepositoryImpl implements QiblaRepository {
 
   @override
   Future<void> vibrate() async {
-    bool hasCustomSupport =
-        await _vibrationDatasource.hasCustomVibrationsSupport();
+    bool hasCustomSupport = await _vibrationDatasource
+        .hasCustomVibrationsSupport();
     await _vibrationDatasource.vibrate(
       amplitude: hasCustomSupport ? 200 : -1,
       duration: 100,

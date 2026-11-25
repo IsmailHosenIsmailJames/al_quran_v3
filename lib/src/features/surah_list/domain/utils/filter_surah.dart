@@ -19,5 +19,3 @@ List<SurahInfoModel> getFilteredSurah(
     languageCode: langCode,
   );
 }
-
-

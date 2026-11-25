@@ -3,74 +3,354 @@ import "package:al_quran_v3/src/core/resources/quran_resources/meta/meta_data_su
 import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
 
 const List<String> canonicalSurahEnglishMeanings = [
-  "The Opening", "The Cow", "The Family of Imran", "The Women", "The Table Spread",
-  "The Cattle", "The Heights", "The Spoils of War", "The Repentance", "Jonah",
-  "Hud", "Joseph", "The Thunder", "Abraham", "The Rocky Tract", "The Honey Bees",
-  "The Night Journey", "The Cave", "Mary", "Ta-Ha", "The Prophets", "The Pilgrimage",
-  "The Believers", "The Light", "The Criterion", "The Poets", "The Ants", "The Stories",
-  "The Spider", "The Romans", "Luqman", "The Prostration", "The Combined Forces",
-  "Sheba", "The Originator", "Ya-Sin", "Those who set the Ranks", "Sad", "The Troops",
-  "The Forgiver", "Explained in Detail", "The Consultation", "The Ornaments of Gold",
-  "The Smoke", "The Crouching", "The Wind-Curved Sandhills", "Muhammad", "The Victory",
-  "The Rooms", "Qaf", "The Winnowing Winds", "The Mount", "The Star", "The Moon",
-  "The Beneficent", "The Inevitable", "The Iron", "The Pleading Woman", "The Exile",
-  "The Examined One", "The Ranks", "The Congregation", "The Hypocrites",
-  "The Mutual Disillusion", "The Divorce", "The Prohibition", "The Sovereignty",
-  "The Pen", "The Reality", "The Ascending Stairways", "Noah", "The Jinn",
-  "The Enshrouded One", "The Cloaked One", "The Resurrection", "Man", "The Emissaries",
-  "The Tidings", "Those who drag forth", "He Frowned", "The Overthrowing",
-  "The Cleaving", "The Defrauding", "The Splitting Asunder", "The Great Stars",
-  "The Night Comer", "The Most High", "The Overwhelming", "The Dawn", "The City",
-  "The Sun", "The Night", "The Morning Hours", "The Relief", "The Fig", "The Clot",
-  "The Power", "The Clear Proof", "The Earthquake", "The Courser", "The Calamity",
-  "The Rivalry in World Increase", "The Declining Day", "The Traducer", "The Elephant",
-  "Quraysh", "The Small Kindness", "The Abundance", "The Disbelievers", "The Help",
-  "The Palm Fibre", "The Sincerity", "The Daybreak", "Mankind"
+  "The Opening",
+  "The Cow",
+  "The Family of Imran",
+  "The Women",
+  "The Table Spread",
+  "The Cattle",
+  "The Heights",
+  "The Spoils of War",
+  "The Repentance",
+  "Jonah",
+  "Hud",
+  "Joseph",
+  "The Thunder",
+  "Abraham",
+  "The Rocky Tract",
+  "The Honey Bees",
+  "The Night Journey",
+  "The Cave",
+  "Mary",
+  "Ta-Ha",
+  "The Prophets",
+  "The Pilgrimage",
+  "The Believers",
+  "The Light",
+  "The Criterion",
+  "The Poets",
+  "The Ants",
+  "The Stories",
+  "The Spider",
+  "The Romans",
+  "Luqman",
+  "The Prostration",
+  "The Combined Forces",
+  "Sheba",
+  "The Originator",
+  "Ya-Sin",
+  "Those who set the Ranks",
+  "Sad",
+  "The Troops",
+  "The Forgiver",
+  "Explained in Detail",
+  "The Consultation",
+  "The Ornaments of Gold",
+  "The Smoke",
+  "The Crouching",
+  "The Wind-Curved Sandhills",
+  "Muhammad",
+  "The Victory",
+  "The Rooms",
+  "Qaf",
+  "The Winnowing Winds",
+  "The Mount",
+  "The Star",
+  "The Moon",
+  "The Beneficent",
+  "The Inevitable",
+  "The Iron",
+  "The Pleading Woman",
+  "The Exile",
+  "The Examined One",
+  "The Ranks",
+  "The Congregation",
+  "The Hypocrites",
+  "The Mutual Disillusion",
+  "The Divorce",
+  "The Prohibition",
+  "The Sovereignty",
+  "The Pen",
+  "The Reality",
+  "The Ascending Stairways",
+  "Noah",
+  "The Jinn",
+  "The Enshrouded One",
+  "The Cloaked One",
+  "The Resurrection",
+  "Man",
+  "The Emissaries",
+  "The Tidings",
+  "Those who drag forth",
+  "He Frowned",
+  "The Overthrowing",
+  "The Cleaving",
+  "The Defrauding",
+  "The Splitting Asunder",
+  "The Great Stars",
+  "The Night Comer",
+  "The Most High",
+  "The Overwhelming",
+  "The Dawn",
+  "The City",
+  "The Sun",
+  "The Night",
+  "The Morning Hours",
+  "The Relief",
+  "The Fig",
+  "The Clot",
+  "The Power",
+  "The Clear Proof",
+  "The Earthquake",
+  "The Courser",
+  "The Calamity",
+  "The Rivalry in World Increase",
+  "The Declining Day",
+  "The Traducer",
+  "The Elephant",
+  "Quraysh",
+  "The Small Kindness",
+  "The Abundance",
+  "The Disbelievers",
+  "The Help",
+  "The Palm Fibre",
+  "The Sincerity",
+  "The Daybreak",
+  "Mankind",
 ];
 
 const List<String> canonicalSurahBengaliNames = [
-  "আল-ফাতিহা", "আল-বাকারা", "আলে-ইমরান", "আন-নিসা", "আল-মায়িদাহ", "আল-আনআম",
-  "আল-আ'রাফ", "আল-আনফাল", "আত-তাওবাহ্", "ইউনুস", "হুদ", "ইউসুফ", "আর-রা'দ",
-  "ইব্রাহীম", "আল-হিজর", "আন-নাহল", "আল-ইসরা", "আল-কাহফ", "মারইয়াম", "ত্বা-হা",
-  "আল-আম্বিয়া", "আল-হজ্জ", "আল-মু'মিনূন", "আন-নূর", "আল-ফুরকান", "আশ-শু'আরা",
-  "আন-নামল", "আল-কাসাস", "আল-আনকাবূত", "আর-রূম", "লুকমান", "আস-সাজদাহ",
-  "আল-আহযাব", "সাবা", "ফাতির", "ইয়াসীন", "আস-সাফফাত", "সাদ", "আয-যুমার", "গাফির",
-  "ফুসসিলাত", "আশ-শূরা", "আয-যুখরুফ", "আদ-দুখান", "আল-জাসিয়াহ", "আল-আহকাফ",
-  "মুহাম্মাদ", "আল-ফাতহ", "আল-হুজুরাত", "ক্বাফ", "আয-যারিয়াত", "আত-তুর",
-  "আন-নাজম", "আল-কামার", "আর-রাহমান", "আল-ওয়াক্বি'য়াহ", "আল-হাদীদ",
-  "আল-মুজাদালাহ", "আল-হাশর", "আল-মুমতাহিনাহ", "আস-সফ", "আল-জুমুআহ", "আল-মুনাফিকূন",
-  "আত-তাগাবুন", "আত-তালাক", "আত-তাহরীম", "আল-মুলক", "আল-কালাম", "আল-হাক্কাহ",
-  "আল-মা'আরিজ", "নূহ", "আল-জিন", "আল-মুযযাম্মিল", "আল-মুদ্দাসসির", "আল-কিয়ামাহ",
-  "আল-ইনসান", "আল-মুরসালাত", "আন-নাবা", "আন-নাযি'য়াত", "আবাসা", "আত-তাকবীর",
-  "আল-ইনফিতার", "আল-মুতাফফিফীন", "আল-ইনশিকাক", "আল-বুরূজ", "আত-তারিক", "আল-আ'লা",
-  "আল-গাশিয়াহ", "আল-ফজর", "আল-বালাদ", "আশ-শামস", "আল-লাইল", "আদ-দুহা",
-  "আশ-শারহ", "আত-তীন", "আল-আলাক", "আল-কদর", "আল-বাইয়্যিনাহ", "আয-যিলযাল",
-  "আল-আদিয়াত", "আল-ক্বারি'য়াহ", "আত-তাকাসুর", "আল-আসর", "আল-হুমাযাহ", "আল-ফীল",
-  "কুরাইশ", "আল-মাউন", "আল-কাওসার", "আল-কাফিরূন", "আন-নাসর", "লাহাব", "আল-ইখলাস",
-  "আল-ফালাক", "আন-নাস"
+  "আল-ফাতিহা",
+  "আল-বাকারা",
+  "আলে-ইমরান",
+  "আন-নিসা",
+  "আল-মায়িদাহ",
+  "আল-আনআম",
+  "আল-আ'রাফ",
+  "আল-আনফাল",
+  "আত-তাওবাহ্",
+  "ইউনুস",
+  "হুদ",
+  "ইউসুফ",
+  "আর-রা'দ",
+  "ইব্রাহীম",
+  "আল-হিজর",
+  "আন-নাহল",
+  "আল-ইসরা",
+  "আল-কাহফ",
+  "মারইয়াম",
+  "ত্বা-হা",
+  "আল-আম্বিয়া",
+  "আল-হজ্জ",
+  "আল-মু'মিনূন",
+  "আন-নূর",
+  "আল-ফুরকান",
+  "আশ-শু'আরা",
+  "আন-নামল",
+  "আল-কাসাস",
+  "আল-আনকাবূত",
+  "আর-রূম",
+  "লুকমান",
+  "আস-সাজদাহ",
+  "আল-আহযাব",
+  "সাবা",
+  "ফাতির",
+  "ইয়াসীন",
+  "আস-সাফফাত",
+  "সাদ",
+  "আয-যুমার",
+  "গাফির",
+  "ফুসসিলাত",
+  "আশ-শূরা",
+  "আয-যুখরুফ",
+  "আদ-দুখান",
+  "আল-জাসিয়াহ",
+  "আল-আহকাফ",
+  "মুহাম্মাদ",
+  "আল-ফাতহ",
+  "আল-হুজুরাত",
+  "ক্বাফ",
+  "আয-যারিয়াত",
+  "আত-তুর",
+  "আন-নাজম",
+  "আল-কামার",
+  "আর-রাহমান",
+  "আল-ওয়াক্বি'য়াহ",
+  "আল-হাদীদ",
+  "আল-মুজাদালাহ",
+  "আল-হাশর",
+  "আল-মুমতাহিনাহ",
+  "আস-সফ",
+  "আল-জুমুআহ",
+  "আল-মুনাফিকূন",
+  "আত-তাগাবুন",
+  "আত-তালাক",
+  "আত-তাহরীম",
+  "আল-মুলক",
+  "আল-কালাম",
+  "আল-হাক্কাহ",
+  "আল-মা'আরিজ",
+  "নূহ",
+  "আল-জিন",
+  "আল-মুযযাম্মিল",
+  "আল-মুদ্দাসসির",
+  "আল-কিয়ামাহ",
+  "আল-ইনসান",
+  "আল-মুরসালাত",
+  "আন-নাবা",
+  "আন-নাযি'য়াত",
+  "আবাসা",
+  "আত-তাকবীর",
+  "আল-ইনফিতার",
+  "আল-মুতাফফিফীন",
+  "আল-ইনশিকাক",
+  "আল-বুরূজ",
+  "আত-তারিক",
+  "আল-আ'লা",
+  "আল-গাশিয়াহ",
+  "আল-ফজর",
+  "আল-বালাদ",
+  "আশ-শামস",
+  "আল-লাইল",
+  "আদ-দুহা",
+  "আশ-শারহ",
+  "আত-তীন",
+  "আল-আলাক",
+  "আল-কদর",
+  "আল-বাইয়্যিনাহ",
+  "আয-যিলযাল",
+  "আল-আদিয়াত",
+  "আল-ক্বারি'য়াহ",
+  "আত-তাকাসুর",
+  "আল-আসর",
+  "আল-হুমাযাহ",
+  "আল-ফীল",
+  "কুরাইশ",
+  "আল-মাউন",
+  "আল-কাওসার",
+  "আল-কাফিরূন",
+  "আন-নাসর",
+  "লাহাব",
+  "আল-ইখলাস",
+  "আল-ফালাক",
+  "আন-নাস",
 ];
 
 const List<String> canonicalSurahBengaliMeanings = [
-  "সূচনা", "গাভী", "ইমরানের পরিবার", "নারী", "খাদ্যের খাঞ্চা", "গৃহপালিত পশু",
-  "উঁচু স্থান", "যুদ্ধলব্ধ সম্পদ", "অনুতাপ", "ইউনুস", "হুদ", "ইউসুফ", "বজ্রপাত",
-  "ইব্রাহীম", "পাথুরে পাহাড়", "মৌমাছি", "রাত্রিকালীন ভ্রমণ", "গুহা", "মারইয়াম",
-  "ত্বা-হা", "নবীগণ", "হজ্জ", "মুমিনগণ", "আলো", "সত্য-মিথ্যার পার্থক্যকারী",
-  "কবিগণ", "পিপীলিকা", "ঘটনা", "মাকড়সা", "রোমান জাতি", "লুকমান", "সিজদা",
-  "জোটবদ্ধ বাহিনী", "সাবা", "স্রষ্টা", "ইয়াসীন", "সারিবদ্ধ দল", "সোয়াদ",
-  "দলসমূহ", "ক্ষমাশীল", "সুস্পষ্ট বিবরণ", "পরামর্শ", "সোনার অলংকার", "ধোঁয়া",
-  "নতজানু", "বালির পাহাড়", "মুহাম্মাদ", "বিজয়", "ভেতরের কক্ষসমূহ", "ক্বাফ",
-  "বিক্ষেপকারী বাতাস", "তুর পাহাড়", "নক্ষত্র", "চাঁদ", "পরম করুণাময়",
-  "অবশ্যম্ভাবী ঘটনা", "লোহা", "অভিযোগকারিণী", "সমাবেশ", "পরীক্ষিতা",
-  "সারিবদ্ধ সৈন্য", "শুক্রবার", "মুনাফিকগণ", "হার-জিত", "তালাক", "নিষিদ্ধকরণ",
-  "সার্বভৌমত্ব", "কলম", "অনিবার্য সত্য", "উচ্চমর্যাদা", "নূহ", "জিন",
-  "বস্ত্রাবৃত", "পোশাকাবৃত", "পুনরুত্থান", "মানবজাতি", "প্রেরিত দূত", "মহা সংবাদ",
-  "উৎপাটনকারী", "ভ্রুকুটি", "অন্ধকারাচ্ছন্ন", "বিদীর্ণ হওয়া", "প্রতারক",
-  "খণ্ড-বিখণ্ড", "নক্ষত্রমণ্ডল", "রাত্রিকালীন আগমনকারী", "সর্বোচ্চ", "আচ্ছন্নকারী",
-  "ভোর", "শহর", "সূর্য", "রাত", "পূর্বাহ্ণ", "বক্ষ প্রশস্তকরণ", "ডুমুর",
-  "রক্তপিণ্ড", "মর্যাদা", "সুস্পষ্ট প্রমাণ", "ভূমিকম্প", "অভিযানকারী অশ্ব",
-  "মহা বিপদ", "প্রাচুর্যের প্রতিযোগিতা", "যুগ", "পরনিন্দাকারী", "হাতি",
-  "কুরাইশ", "নিত্যব্যবহার্য বস্তু", "প্রাচুর্য", "অবিশ্বাসীরা", "সাহায্য",
-  "খেজুরগাছের দড়ি", "একত্ববাদ", "ঊষা", "মানবজাতি"
+  "সূচনা",
+  "গাভী",
+  "ইমরানের পরিবার",
+  "নারী",
+  "খাদ্যের খাঞ্চা",
+  "গৃহপালিত পশু",
+  "উঁচু স্থান",
+  "যুদ্ধলব্ধ সম্পদ",
+  "অনুতাপ",
+  "ইউনুস",
+  "হুদ",
+  "ইউসুফ",
+  "বজ্রপাত",
+  "ইব্রাহীম",
+  "পাথুরে পাহাড়",
+  "মৌমাছি",
+  "রাত্রিকালীন ভ্রমণ",
+  "গুহা",
+  "মারইয়াম",
+  "ত্বা-হা",
+  "নবীগণ",
+  "হজ্জ",
+  "মুমিনগণ",
+  "আলো",
+  "সত্য-মিথ্যার পার্থক্যকারী",
+  "কবিগণ",
+  "পিপীলিকা",
+  "ঘটনা",
+  "মাকড়সা",
+  "রোমান জাতি",
+  "লুকমান",
+  "সিজদা",
+  "জোটবদ্ধ বাহিনী",
+  "সাবা",
+  "স্রষ্টা",
+  "ইয়াসীন",
+  "সারিবদ্ধ দল",
+  "সোয়াদ",
+  "দলসমূহ",
+  "ক্ষমাশীল",
+  "সুস্পষ্ট বিবরণ",
+  "পরামর্শ",
+  "সোনার অলংকার",
+  "ধোঁয়া",
+  "নতজানু",
+  "বালির পাহাড়",
+  "মুহাম্মাদ",
+  "বিজয়",
+  "ভেতরের কক্ষসমূহ",
+  "ক্বাফ",
+  "বিক্ষেপকারী বাতাস",
+  "তুর পাহাড়",
+  "নক্ষত্র",
+  "চাঁদ",
+  "পরম করুণাময়",
+  "অবশ্যম্ভাবী ঘটনা",
+  "লোহা",
+  "অভিযোগকারিণী",
+  "সমাবেশ",
+  "পরীক্ষিতা",
+  "সারিবদ্ধ সৈন্য",
+  "শুক্রবার",
+  "মুনাফিকগণ",
+  "হার-জিত",
+  "তালাক",
+  "নিষিদ্ধকরণ",
+  "সার্বভৌমত্ব",
+  "কলম",
+  "অনিবার্য সত্য",
+  "উচ্চমর্যাদা",
+  "নূহ",
+  "জিন",
+  "বস্ত্রাবৃত",
+  "পোশাকাবৃত",
+  "পুনরুত্থান",
+  "মানবজাতি",
+  "প্রেরিত দূত",
+  "মহা সংবাদ",
+  "উৎপাটনকারী",
+  "ভ্রুকুটি",
+  "অন্ধকারাচ্ছন্ন",
+  "বিদীর্ণ হওয়া",
+  "প্রতারক",
+  "খণ্ড-বিখণ্ড",
+  "নক্ষত্রমণ্ডল",
+  "রাত্রিকালীন আগমনকারী",
+  "সর্বোচ্চ",
+  "আচ্ছন্নকারী",
+  "ভোর",
+  "শহর",
+  "সূর্য",
+  "রাত",
+  "পূর্বাহ্ণ",
+  "বক্ষ প্রশস্তকরণ",
+  "ডুমুর",
+  "রক্তপিণ্ড",
+  "মর্যাদা",
+  "সুস্পষ্ট প্রমাণ",
+  "ভূমিকম্প",
+  "অভিযানকারী অশ্ব",
+  "মহা বিপদ",
+  "প্রাচুর্যের প্রতিযোগিতা",
+  "যুগ",
+  "পরনিন্দাকারী",
+  "হাতি",
+  "কুরাইশ",
+  "নিত্যব্যবহার্য বস্তু",
+  "প্রাচুর্য",
+  "অবিশ্বাসীরা",
+  "সাহায্য",
+  "খেজুরগাছের দড়ি",
+  "একত্ববাদ",
+  "ঊষা",
+  "মানবজাতি",
 ];
 
 /// Represents an index record for a Surah containing multi-language search tokens.
@@ -203,24 +483,26 @@ class SurahSearchEngine {
       // Custom alias dictionary for common phonetic queries
       final variants = _generateVariants(surahId, canonicalEn, normalizedEn);
 
-      records.add(_SurahIndexedRecord(
-        surah: surah,
-        id: surahId,
-        canonicalEnglish: canonicalEn,
-        normalizedEnglish: normalizedEn,
-        englishVariants: variants,
-        englishMeaning: rawEnglishMeaning,
-        normalizedEnglishMeaning: normalizedEnMeaning,
-        arabicRaw: arabicRaw,
-        arabicNormalized: arabicNorm,
-        normalizedBengali: normalizedBn,
-        normalizedBengaliMeaning: normalizedBnMeaning,
-        localizedNames: localizedNames,
-        localizedMeanings: localizedMeanings,
-        idStrings: idStrings,
-        revelationPlace: surah.revelationPlace.toLowerCase(),
-        versesCount: surah.versesCount,
-      ));
+      records.add(
+        _SurahIndexedRecord(
+          surah: surah,
+          id: surahId,
+          canonicalEnglish: canonicalEn,
+          normalizedEnglish: normalizedEn,
+          englishVariants: variants,
+          englishMeaning: rawEnglishMeaning,
+          normalizedEnglishMeaning: normalizedEnMeaning,
+          arabicRaw: arabicRaw,
+          arabicNormalized: arabicNorm,
+          normalizedBengali: normalizedBn,
+          normalizedBengaliMeaning: normalizedBnMeaning,
+          localizedNames: localizedNames,
+          localizedMeanings: localizedMeanings,
+          idStrings: idStrings,
+          revelationPlace: surah.revelationPlace.toLowerCase(),
+          versesCount: surah.versesCount,
+        ),
+      );
     }
 
     _records = records;
@@ -274,15 +556,18 @@ class SurahSearchEngine {
           if (variant == normalizedLatinQuery || variant == lowerQuery) {
             score = score < 930 ? 930 : score;
             break;
-          } else if (variant.startsWith(normalizedLatinQuery) || variant.startsWith(lowerQuery)) {
+          } else if (variant.startsWith(normalizedLatinQuery) ||
+              variant.startsWith(lowerQuery)) {
             score = score < 830 ? 830 : score;
-          } else if (variant.contains(normalizedLatinQuery) || variant.contains(lowerQuery)) {
+          } else if (variant.contains(normalizedLatinQuery) ||
+              variant.contains(lowerQuery)) {
             score = score < 710 ? 710 : score;
           }
         }
 
         // 4. Arabic Match (Raw or Normalized, with/without diacritics)
-        if (record.arabicNormalized == normalizedArabicQuery || record.arabicRaw == trimmed) {
+        if (record.arabicNormalized == normalizedArabicQuery ||
+            record.arabicRaw == trimmed) {
           score = score < 950 ? 950 : score;
         } else if (record.arabicNormalized.startsWith(normalizedArabicQuery) ||
             record.arabicRaw.startsWith(trimmed)) {
@@ -293,32 +578,47 @@ class SurahSearchEngine {
         }
 
         // 5. Bengali Match (Name & Meaning, with/without prefix)
-        if (record.normalizedBengali.isNotEmpty && normalizedBengaliQuery.isNotEmpty) {
+        if (record.normalizedBengali.isNotEmpty &&
+            normalizedBengaliQuery.isNotEmpty) {
           if (record.normalizedBengali == normalizedBengaliQuery) {
             score = score < 950 ? 950 : score;
-          } else if (record.normalizedBengali.startsWith(normalizedBengaliQuery)) {
+          } else if (record.normalizedBengali.startsWith(
+            normalizedBengaliQuery,
+          )) {
             score = score < 860 ? 860 : score;
-          } else if (record.normalizedBengali.contains(normalizedBengaliQuery)) {
+          } else if (record.normalizedBengali.contains(
+            normalizedBengaliQuery,
+          )) {
             score = score < 760 ? 760 : score;
           }
         }
-        if (record.normalizedBengaliMeaning.isNotEmpty && normalizedBengaliQuery.isNotEmpty) {
+        if (record.normalizedBengaliMeaning.isNotEmpty &&
+            normalizedBengaliQuery.isNotEmpty) {
           if (record.normalizedBengaliMeaning == normalizedBengaliQuery) {
             score = score < 900 ? 900 : score;
-          } else if (record.normalizedBengaliMeaning.startsWith(normalizedBengaliQuery)) {
+          } else if (record.normalizedBengaliMeaning.startsWith(
+            normalizedBengaliQuery,
+          )) {
             score = score < 810 ? 810 : score;
-          } else if (record.normalizedBengaliMeaning.contains(normalizedBengaliQuery)) {
+          } else if (record.normalizedBengaliMeaning.contains(
+            normalizedBengaliQuery,
+          )) {
             score = score < 660 ? 660 : score;
           }
         }
 
         // 6. English Meaning Match (e.g. "The Cow", "Opening", "Cave")
         if (record.englishMeaning.isNotEmpty) {
-          if (record.englishMeaning == lowerQuery || record.normalizedEnglishMeaning == normalizedLatinQuery) {
+          if (record.englishMeaning == lowerQuery ||
+              record.normalizedEnglishMeaning == normalizedLatinQuery) {
             score = score < 900 ? 900 : score;
-          } else if (record.englishMeaning.startsWith(lowerQuery) || record.normalizedEnglishMeaning.startsWith(normalizedLatinQuery)) {
+          } else if (record.englishMeaning.startsWith(lowerQuery) ||
+              record.normalizedEnglishMeaning.startsWith(
+                normalizedLatinQuery,
+              )) {
             score = score < 800 ? 800 : score;
-          } else if (record.englishMeaning.contains(lowerQuery) || record.normalizedEnglishMeaning.contains(normalizedLatinQuery)) {
+          } else if (record.englishMeaning.contains(lowerQuery) ||
+              record.normalizedEnglishMeaning.contains(normalizedLatinQuery)) {
             score = score < 650 ? 650 : score;
           }
         }
@@ -361,11 +661,15 @@ class SurahSearchEngine {
   }
 
   static final RegExp _latinSurahPrefixRegex = RegExp(r"^(surah|sura)\s+");
-  static final RegExp _latinArticlePrefixRegex = RegExp(r"^(al|ar|an|as|at|az|ash|adh|ad)[-_\s]");
+  static final RegExp _latinArticlePrefixRegex = RegExp(
+    r"^(al|ar|an|as|at|az|ash|adh|ad)[-_\s]",
+  );
   static final RegExp _latinPunctRegex = RegExp(r"[-_'\s\.,`~]");
 
   static final RegExp _bengaliSurahPrefixRegex = RegExp(r"^সূ?রা\s*");
-  static final RegExp _bengaliArticlePrefixRegex = RegExp(r"^(আল|আত|আশ|আন|আর|আয|আদ|আলে|আস|আস্)[-\s']?");
+  static final RegExp _bengaliArticlePrefixRegex = RegExp(
+    r"^(আল|আত|আশ|আন|আর|আয|আদ|আলে|আস|আস্)[-\s']?",
+  );
   static final RegExp _bengaliPunctRegex = RegExp(r"[-_'\s\.,`~্]");
 
   static final RegExp _arabicTashkeelRegex = RegExp(r"[\u064B-\u065F\u0670]");
@@ -416,19 +720,25 @@ class SurahSearchEngine {
   /// Converts an integer to Bengali digit string (e.g. 2 -> "২").
   static String _toBengaliDigits(int num) {
     const bengaliDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
-    return num.toString().split("").map((c) {
-      final d = int.tryParse(c);
-      return d != null ? bengaliDigits[d] : c;
-    }).join("");
+    return num.toString()
+        .split("")
+        .map((c) {
+          final d = int.tryParse(c);
+          return d != null ? bengaliDigits[d] : c;
+        })
+        .join("");
   }
 
   /// Converts an integer to Arabic digit string (e.g. 2 -> "٢").
   static String _toArabicDigits(int num) {
     const arabicDigits = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"];
-    return num.toString().split("").map((c) {
-      final d = int.tryParse(c);
-      return d != null ? arabicDigits[d] : c;
-    }).join("");
+    return num.toString()
+        .split("")
+        .map((c) {
+          final d = int.tryParse(c);
+          return d != null ? arabicDigits[d] : c;
+        })
+        .join("");
   }
 
   /// Generates common phonetic transliteration variants and keywords for a given Surah.
@@ -444,10 +754,28 @@ class SurahSearchEngine {
     // Specific famous variants for popular surahs
     switch (surahId) {
       case 1:
-        variants.addAll(["fatiha", "fateha", "alfatiha", "alfateha", "opening", "সূচনা", "ফাতিহা"]);
+        variants.addAll([
+          "fatiha",
+          "fateha",
+          "alfatiha",
+          "alfateha",
+          "opening",
+          "সূচনা",
+          "ফাতিহা",
+        ]);
         break;
       case 2:
-        variants.addAll(["baqara", "baqarah", "bakara", "cow", "thecow", "kursi", "ayatulkursi", "গাভী", "বাকারা"]);
+        variants.addAll([
+          "baqara",
+          "baqarah",
+          "bakara",
+          "cow",
+          "thecow",
+          "kursi",
+          "ayatulkursi",
+          "গাভী",
+          "বাকারা",
+        ]);
         break;
       case 3:
         variants.addAll(["imran", "aliimran", "alimran", "aalimran", "ইমরান"]);
@@ -456,7 +784,14 @@ class SurahSearchEngine {
         variants.addAll(["nisa", "women", "annisa", "নিসা", "নারী"]);
         break;
       case 5:
-        variants.addAll(["maidah", "maida", "mayidah", "tablespread", "মায়েদা", "মায়িদাহ"]);
+        variants.addAll([
+          "maidah",
+          "maida",
+          "mayidah",
+          "tablespread",
+          "মায়েদা",
+          "মায়িদাহ",
+        ]);
         break;
       case 6:
         variants.addAll(["anam", "cattle", "আনআম"]);
@@ -468,7 +803,14 @@ class SurahSearchEngine {
         variants.addAll(["anfal", "spoils", "আনফাল"]);
         break;
       case 9:
-        variants.addAll(["tawbah", "tauba", "taubah", "repentance", "তাওবা", "তাওবাহ্"]);
+        variants.addAll([
+          "tawbah",
+          "tauba",
+          "taubah",
+          "repentance",
+          "তাওবা",
+          "তাওবাহ্",
+        ]);
         break;
       case 10:
         variants.addAll(["yunus", "jonah", "ইউনুস"]);
@@ -495,7 +837,17 @@ class SurahSearchEngine {
         variants.addAll(["isra", "baniisrail", "nightjourney", "ইসরা"]);
         break;
       case 18:
-        variants.addAll(["kahf", "kahaf", "alkahf", "alkahaf", "cave", "thecave", "কাহফ", "কাহাফ", "গুহা"]);
+        variants.addAll([
+          "kahf",
+          "kahaf",
+          "alkahf",
+          "alkahaf",
+          "cave",
+          "thecave",
+          "কাহফ",
+          "কাহাফ",
+          "গুহা",
+        ]);
         break;
       case 19:
         variants.addAll(["maryam", "mary", "মারইয়াম", "মরিয়ম"]);
@@ -549,7 +901,14 @@ class SurahSearchEngine {
         variants.addAll(["fatir", "originator", "ফাতির"]);
         break;
       case 36:
-        variants.addAll(["yasin", "yaseen", "ya-sin", "yasiin", "ইয়াসীন", "ইয়াসিন"]);
+        variants.addAll([
+          "yasin",
+          "yaseen",
+          "ya-sin",
+          "yasiin",
+          "ইয়াসীন",
+          "ইয়াসিন",
+        ]);
         break;
       case 37:
         variants.addAll(["saffat", "ranks", "সাফফাত"]);
@@ -606,10 +965,26 @@ class SurahSearchEngine {
         variants.addAll(["qamar", "moon", "কামার", "চাঁদ"]);
         break;
       case 55:
-        variants.addAll(["rahman", "rehman", "arrahman", "arrehman", "beneficent", "রাহমান", "রহমান"]);
+        variants.addAll([
+          "rahman",
+          "rehman",
+          "arrahman",
+          "arrehman",
+          "beneficent",
+          "রাহমান",
+          "রহমান",
+        ]);
         break;
       case 56:
-        variants.addAll(["waqiah", "waqia", "alwaqiah", "alwaqia", "inevitable", "ওয়াকিয়াহ", "ওয়াক্বিয়াহ"]);
+        variants.addAll([
+          "waqiah",
+          "waqia",
+          "alwaqiah",
+          "alwaqia",
+          "inevitable",
+          "ওয়াকিয়াহ",
+          "ওয়াক্বিয়াহ",
+        ]);
         break;
       case 57:
         variants.addAll(["hadid", "iron", "হাদীদ", "লোহা"]);
@@ -627,7 +1002,15 @@ class SurahSearchEngine {
         variants.addAll(["saff", "ranks", "সফ"]);
         break;
       case 62:
-        variants.addAll(["jumuah", "jumma", "jummah", "friday", "congregation", "জুমুআহ", "জুমা"]);
+        variants.addAll([
+          "jumuah",
+          "jumma",
+          "jummah",
+          "friday",
+          "congregation",
+          "জুমুআহ",
+          "জুমা",
+        ]);
         break;
       case 63:
         variants.addAll(["munafiqun", "hypocrites", "মুনাফিকূন", "মুনাফিক"]);
@@ -642,7 +1025,15 @@ class SurahSearchEngine {
         variants.addAll(["tahrim", "prohibition", "তাহরীম"]);
         break;
       case 67:
-        variants.addAll(["mulk", "almulk", "muluk", "tabarak", "sovereignty", "kingdom", "মুলক"]);
+        variants.addAll([
+          "mulk",
+          "almulk",
+          "muluk",
+          "tabarak",
+          "sovereignty",
+          "kingdom",
+          "মুলক",
+        ]);
         break;
       case 68:
         variants.addAll(["qalam", "pen", "nun", "কালাম", "কলম"]);
@@ -732,13 +1123,26 @@ class SurahSearchEngine {
         variants.addAll(["alaq", "iqra", "clot", "আলাক", "ইক্বরা"]);
         break;
       case 97:
-        variants.addAll(["qadr", "kadr", "power", "nightofpower", "কদর", "শব-ই-কদর"]);
+        variants.addAll([
+          "qadr",
+          "kadr",
+          "power",
+          "nightofpower",
+          "কদর",
+          "শব-ই-কদর",
+        ]);
         break;
       case 98:
         variants.addAll(["bayyinah", "proof", "বাইয়্যিনাহ"]);
         break;
       case 99:
-        variants.addAll(["zalzalah", "zilzal", "earthquake", "যিলযাল", "ভূমিকম্প"]);
+        variants.addAll([
+          "zalzalah",
+          "zilzal",
+          "earthquake",
+          "যিলযাল",
+          "ভূমিকম্প",
+        ]);
         break;
       case 100:
         variants.addAll(["adiyat", "courser", "আদিয়াত"]);
@@ -768,7 +1172,13 @@ class SurahSearchEngine {
         variants.addAll(["kawthar", "kawsar", "abundance", "কাওসার"]);
         break;
       case 109:
-        variants.addAll(["kafirun", "kafiroon", "disbelievers", "কাফিরূন", "কাফেরুন"]);
+        variants.addAll([
+          "kafirun",
+          "kafiroon",
+          "disbelievers",
+          "কাফিরূন",
+          "কাফেরুন",
+        ]);
         break;
       case 110:
         variants.addAll(["nasr", "help", "নাসর"]);
@@ -777,7 +1187,16 @@ class SurahSearchEngine {
         variants.addAll(["masad", "lahab", "palmfibre", "লাহাব", "মাসাদ"]);
         break;
       case 112:
-        variants.addAll(["ikhlas", "ekhlas", "tauheed", "tawhid", "qulhuwallah", "sincerity", "ইখলাস", "একত্ববাদ"]);
+        variants.addAll([
+          "ikhlas",
+          "ekhlas",
+          "tauheed",
+          "tawhid",
+          "qulhuwallah",
+          "sincerity",
+          "ইখলাস",
+          "একত্ববাদ",
+        ]);
         break;
       case 113:
         variants.addAll(["falaq", "falak", "alfalaq", "daybreak", "ফালাক"]);

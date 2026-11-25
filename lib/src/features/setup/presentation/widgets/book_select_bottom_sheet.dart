@@ -9,7 +9,7 @@ import "package:al_quran_v3/src/features/setup/presentation/widgets/setup_previe
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:dartx/dartx.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:scrollable_positioned_list/scrollable_positioned_list.dart";
@@ -173,7 +173,10 @@ class _BookSelectBottomSheetState extends State<BookSelectBottomSheet> {
               color: isDark ? Colors.white : Colors.black87,
             ),
             decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 14,
+                vertical: 12,
+              ),
               prefixIcon: Icon(
                 Icons.search_rounded,
                 size: 22,
@@ -272,14 +275,14 @@ class _BookSelectBottomSheetState extends State<BookSelectBottomSheet> {
                                     alpha: isDark ? 0.15 : 0.08,
                                   )
                                 : (isDark
-                                    ? Colors.white.withValues(alpha: 0.02)
-                                    : Colors.white);
+                                      ? Colors.white.withValues(alpha: 0.02)
+                                      : Colors.white);
 
                             final tileBorder = isSelected
                                 ? themeState.primary.withValues(alpha: 0.6)
                                 : (isDark
-                                    ? Colors.white.withValues(alpha: 0.08)
-                                    : Colors.grey.shade200);
+                                      ? Colors.white.withValues(alpha: 0.08)
+                                      : Colors.grey.shade200);
 
                             return Container(
                               margin: const EdgeInsets.only(bottom: 6),
@@ -290,13 +293,13 @@ class _BookSelectBottomSheetState extends State<BookSelectBottomSheet> {
                                 child: InkWell(
                                   onTap: () {
                                     if (widget.isTafsir) {
-                                      context
-                                          .read<SetupBloc>()
-                                          .add(SetupTafsirSelected(book));
+                                      context.read<SetupBloc>().add(
+                                        SetupTafsirSelected(book),
+                                      );
                                     } else {
-                                      context
-                                          .read<SetupBloc>()
-                                          .add(SetupTranslationSelected(book));
+                                      context.read<SetupBloc>().add(
+                                        SetupTranslationSelected(book),
+                                      );
                                     }
                                     Navigator.pop(context);
                                   },
@@ -322,8 +325,8 @@ class _BookSelectBottomSheetState extends State<BookSelectBottomSheet> {
                                               fontSize: 14,
                                               color: isSelected
                                                   ? (isDark
-                                                      ? Colors.white
-                                                      : Colors.black87)
+                                                        ? Colors.white
+                                                        : Colors.black87)
                                                   : null,
                                               fontWeight: isSelected
                                                   ? FontWeight.bold
@@ -331,7 +334,8 @@ class _BookSelectBottomSheetState extends State<BookSelectBottomSheet> {
                                             ),
                                           ),
                                         ),
-                                        if (!widget.isTafsir && book.hasFootnote)
+                                        if (!widget.isTafsir &&
+                                            book.hasFootnote)
                                           getFeaturesMark(
                                             context,
                                             appLocalizations.footnote,
@@ -370,7 +374,10 @@ class _BookSelectBottomSheetState extends State<BookSelectBottomSheet> {
     );
   }
 
-  Widget _buildEmptyState(BuildContext context, AppLocalizations appLocalizations) {
+  Widget _buildEmptyState(
+    BuildContext context,
+    AppLocalizations appLocalizations,
+  ) {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(24.0),
@@ -390,7 +397,10 @@ class _BookSelectBottomSheetState extends State<BookSelectBottomSheet> {
             const Gap(4),
             Text(
               "Try searching with a different language or book name",
-              style: TextStyle(fontSize: 13, color: Theme.of(context).hintColor),
+              style: TextStyle(
+                fontSize: 13,
+                color: Theme.of(context).hintColor,
+              ),
               textAlign: TextAlign.center,
             ),
             const Gap(16),

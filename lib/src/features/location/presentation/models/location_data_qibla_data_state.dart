@@ -5,7 +5,8 @@ import "package:freezed_annotation/freezed_annotation.dart";
 part 'location_data_qibla_data_state.freezed.dart';
 
 @freezed
-abstract class LocationQiblaPrayerDataState with _$LocationQiblaPrayerDataState {
+abstract class LocationQiblaPrayerDataState
+    with _$LocationQiblaPrayerDataState {
   const factory LocationQiblaPrayerDataState({
     LatLon? latLon,
     double? kaabaAngle,

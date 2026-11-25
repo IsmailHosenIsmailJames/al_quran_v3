@@ -37,7 +37,7 @@ class KhatamPlanModel extends KhatamPlanEntity {
           : DateTime.now(),
       targetDate: map["targetDate"] != null
           ? DateTime.tryParse(map["targetDate"] as String) ??
-              DateTime.now().add(const Duration(days: 30))
+                DateTime.now().add(const Duration(days: 30))
           : DateTime.now().add(const Duration(days: 30)),
       isActive: map["isActive"] as bool? ?? true,
     );

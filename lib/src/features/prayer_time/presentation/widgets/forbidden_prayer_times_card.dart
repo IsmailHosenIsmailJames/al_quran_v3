@@ -3,7 +3,7 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/helpers/prayer_time_helper.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:intl/intl.dart";
@@ -14,7 +14,11 @@ class ForbiddenPrayerTimesCard extends StatelessWidget {
 
   const ForbiddenPrayerTimesCard({super.key, required this.prayerTimes});
 
-  void _showHadithExplanation(BuildContext context, dynamic themeState, bool isDark) {
+  void _showHadithExplanation(
+    BuildContext context,
+    dynamic themeState,
+    bool isDark,
+  ) {
     final l10n = AppLocalizations.of(context);
     showModalBottomSheet(
       context: context,
@@ -85,7 +89,11 @@ class ForbiddenPrayerTimesCard extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     final now = DateTime.now();
 
-    final windows = PrayerTimeHelper.getForbiddenWindows(prayerTimes, now, context);
+    final windows = PrayerTimeHelper.getForbiddenWindows(
+      prayerTimes,
+      now,
+      context,
+    );
     final timeFormatter = DateFormat.jm(l10n.localeName);
 
     return Column(
@@ -118,7 +126,8 @@ class ForbiddenPrayerTimesCard extends StatelessWidget {
                 size: 20,
                 color: themeState.primary,
               ),
-              onPressed: () => _showHadithExplanation(context, themeState, isDark),
+              onPressed: () =>
+                  _showHadithExplanation(context, themeState, isDark),
             ),
           ],
         ),
@@ -135,15 +144,15 @@ class ForbiddenPrayerTimesCard extends StatelessWidget {
               color: isForbidden
                   ? Colors.amber.withValues(alpha: isDark ? 0.18 : 0.10)
                   : (isDark
-                      ? Colors.white.withValues(alpha: 0.04)
-                      : Colors.white),
+                        ? Colors.white.withValues(alpha: 0.04)
+                        : Colors.white),
               borderRadius: BorderRadius.circular(14),
               border: Border.all(
                 color: isForbidden
                     ? Colors.amber.shade700.withValues(alpha: 0.5)
                     : (isDark
-                        ? Colors.white.withValues(alpha: 0.08)
-                        : Colors.grey.shade200),
+                          ? Colors.white.withValues(alpha: 0.08)
+                          : Colors.grey.shade200),
               ),
               boxShadow: [
                 if (!isDark && !isForbidden)
@@ -169,11 +178,13 @@ class ForbiddenPrayerTimesCard extends StatelessWidget {
                     window.prayer == Prayer.sunrise
                         ? FluentIcons.weather_sunny_low_24_regular
                         : window.prayer == Prayer.noon
-                            ? FluentIcons.weather_sunny_high_24_regular
-                            : FluentIcons.weather_sunny_low_24_filled,
+                        ? FluentIcons.weather_sunny_high_24_regular
+                        : FluentIcons.weather_sunny_low_24_filled,
                     size: 20,
                     color: isForbidden
-                        ? (isDark ? Colors.amber.shade300 : Colors.amber.shade900)
+                        ? (isDark
+                              ? Colors.amber.shade300
+                              : Colors.amber.shade900)
                         : themeState.primary,
                   ),
                 ),
@@ -189,7 +200,9 @@ class ForbiddenPrayerTimesCard extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
-                              color: isDark ? Colors.white : Colors.grey.shade900,
+                              color: isDark
+                                  ? Colors.white
+                                  : Colors.grey.shade900,
                             ),
                           ),
                           if (isForbidden) ...[
@@ -220,7 +233,9 @@ class ForbiddenPrayerTimesCard extends StatelessWidget {
                         window.description,
                         style: TextStyle(
                           fontSize: 11,
-                          color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                          color: isDark
+                              ? Colors.grey.shade400
+                              : Colors.grey.shade600,
                         ),
                       ),
                     ],
@@ -232,8 +247,12 @@ class ForbiddenPrayerTimesCard extends StatelessWidget {
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
                     color: isForbidden
-                        ? (isDark ? Colors.amber.shade300 : Colors.amber.shade900)
-                        : (isDark ? Colors.grey.shade300 : Colors.grey.shade800),
+                        ? (isDark
+                              ? Colors.amber.shade300
+                              : Colors.amber.shade900)
+                        : (isDark
+                              ? Colors.grey.shade300
+                              : Colors.grey.shade800),
                   ),
                 ),
               ],

@@ -1,5 +1,5 @@
 import "package:al_quran_v3/src/features/quran_script_view/domain/utils/tajweed_rules.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:html/dom.dart" as dom;
 import "package:html/parser.dart" show parseFragment;
 
@@ -59,9 +59,7 @@ class TajweedTaggedText extends StatelessWidget {
       MaddJaizMunfasilRule.key: isLight
           ? MaddJaizMunfasilRule.lightColor
           : MaddJaizMunfasilRule.darkColor,
-      HamWaslRule.key: isLight
-          ? HamWaslRule.lightColor
-          : HamWaslRule.darkColor,
+      HamWaslRule.key: isLight ? HamWaslRule.lightColor : HamWaslRule.darkColor,
       LaamShamsiyahRule.key: isLight
           ? LaamShamsiyahRule.lightColor
           : LaamShamsiyahRule.darkColor,

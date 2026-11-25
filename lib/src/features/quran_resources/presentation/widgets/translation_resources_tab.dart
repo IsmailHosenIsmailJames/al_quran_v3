@@ -3,7 +3,7 @@ import 'package:al_quran_v3/src/features/quran_resources/presentation/cubit/qura
 import 'package:al_quran_v3/src/features/quran_resources/presentation/widgets/resource_filter_chips.dart';
 import 'package:al_quran_v3/src/features/quran_resources/presentation/widgets/resource_language_group_card.dart';
 import 'package:al_quran_v3/src/features/quran_resources/presentation/widgets/resources_empty_state.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TranslationResourcesTab extends StatefulWidget {
@@ -42,18 +42,21 @@ class _TranslationResourcesTabState extends State<TranslationResourcesTab> {
           }
         }
 
-        final filteredGroups = state.translationGroups.map((g) {
-          if (_filter == ResourceFilterType.downloaded) {
-            return g.copyWith(
-              resources: g.resources.where((r) => r.isDownloaded).toList(),
-            );
-          } else if (_filter == ResourceFilterType.selected) {
-            return g.copyWith(
-              resources: g.resources.where((r) => r.isSelected).toList(),
-            );
-          }
-          return g;
-        }).where((g) => g.resources.isNotEmpty).toList();
+        final filteredGroups = state.translationGroups
+            .map((g) {
+              if (_filter == ResourceFilterType.downloaded) {
+                return g.copyWith(
+                  resources: g.resources.where((r) => r.isDownloaded).toList(),
+                );
+              } else if (_filter == ResourceFilterType.selected) {
+                return g.copyWith(
+                  resources: g.resources.where((r) => r.isSelected).toList(),
+                );
+              }
+              return g;
+            })
+            .where((g) => g.resources.isNotEmpty)
+            .toList();
 
         return Align(
           alignment: Alignment.topCenter,

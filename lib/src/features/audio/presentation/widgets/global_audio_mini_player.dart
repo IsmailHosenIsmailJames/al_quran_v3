@@ -15,7 +15,7 @@ import "package:al_quran_v3/src/features/audio/presentation/cubit/player_state_c
 import "package:al_quran_v3/src/features/audio/presentation/cubit/reciter_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_view.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:just_audio/just_audio.dart" as just_audio;
@@ -41,10 +41,12 @@ class GlobalAudioMiniPlayer extends StatelessWidget {
           builder: (context, ayahKeyState) {
             final surahNum =
                 int.tryParse(ayahKeyState.current.split(":").first) ?? 1;
-            final currentIndex =
-                ayahKeyState.ayahList.indexOf(ayahKeyState.current);
+            final currentIndex = ayahKeyState.ayahList.indexOf(
+              ayahKeyState.current,
+            );
             final hasPrevious = currentIndex > 0;
-            final hasNext = currentIndex != -1 &&
+            final hasNext =
+                currentIndex != -1 &&
                 currentIndex < ayahKeyState.ayahList.length - 1;
 
             return Container(
@@ -74,8 +76,7 @@ class GlobalAudioMiniPlayer extends StatelessWidget {
                     child: InkWell(
                       onTap: () {
                         final rawMeta = metaDataSurah["$surahNum"];
-                        final int totalVerses =
-                            (rawMeta?["vc"] as int?) ?? 7;
+                        final int totalVerses = (rawMeta?["vc"] as int?) ?? 7;
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -97,7 +98,9 @@ class GlobalAudioMiniPlayer extends StatelessWidget {
                             Container(
                               padding: const EdgeInsets.all(7),
                               decoration: BoxDecoration(
-                                color: themeState.primary.withValues(alpha: 0.14),
+                                color: themeState.primary.withValues(
+                                  alpha: 0.14,
+                                ),
                                 shape: BoxShape.circle,
                               ),
                               child: Icon(
@@ -126,10 +129,11 @@ class GlobalAudioMiniPlayer extends StatelessWidget {
                                         reciter.name,
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
-                                        style: theme.textTheme.bodySmall?.copyWith(
-                                          color: theme.hintColor,
-                                          fontSize: 11.5,
-                                        ),
+                                        style: theme.textTheme.bodySmall
+                                            ?.copyWith(
+                                              color: theme.hintColor,
+                                              fontSize: 11.5,
+                                            ),
                                       );
                                     },
                                   ),
@@ -141,13 +145,15 @@ class GlobalAudioMiniPlayer extends StatelessWidget {
                               iconSize: 20,
                               tooltip: "Previous",
                               onPressed: hasPrevious
-                                  ? () => AudioPlayerManager.seekToPreviousAyah()
+                                  ? () =>
+                                        AudioPlayerManager.seekToPreviousAyah()
                                   : null,
                               icon: const Icon(Icons.skip_previous_rounded),
                             ),
                             BlocBuilder<PlayerStateCubit, PlayerState>(
                               builder: (context, playerState) {
-                                final isLoading = playerState.state ==
+                                final isLoading =
+                                    playerState.state ==
                                         just_audio.ProcessingState.loading ||
                                     playerState.state ==
                                         just_audio.ProcessingState.buffering;
@@ -204,8 +210,9 @@ class GlobalAudioMiniPlayer extends StatelessWidget {
                     builder: (context, posState) {
                       final total = posState.totalDuration?.inMilliseconds ?? 0;
                       final cur = posState.currentDuration?.inMilliseconds ?? 0;
-                      final double progress =
-                          total > 0 ? (cur / total).clamp(0.0, 1.0) : 0.0;
+                      final double progress = total > 0
+                          ? (cur / total).clamp(0.0, 1.0)
+                          : 0.0;
                       return LinearProgressIndicator(
                         value: progress,
                         minHeight: 2.2,

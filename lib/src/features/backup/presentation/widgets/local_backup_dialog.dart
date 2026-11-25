@@ -2,7 +2,7 @@ import "package:al_quran_v3/src/core/services/backup_service.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/features/daily_plan/presentation/cubit/streak_cubit.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
@@ -130,7 +130,9 @@ class _LocalBackupDialogState extends State<LocalBackupDialog> {
                 Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: themeState.primary.withValues(alpha: isDark ? 0.2 : 0.1),
+                    color: themeState.primary.withValues(
+                      alpha: isDark ? 0.2 : 0.1,
+                    ),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Icon(
@@ -156,7 +158,9 @@ class _LocalBackupDialogState extends State<LocalBackupDialog> {
                         "100% Offline • Local JSON Export & Import",
                         style: TextStyle(
                           fontSize: 12,
-                          color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                          color: isDark
+                              ? Colors.grey.shade400
+                              : Colors.grey.shade600,
                         ),
                       ),
                     ],
@@ -246,7 +250,9 @@ class _LocalBackupDialogState extends State<LocalBackupDialog> {
                         Icon(
                           FluentIcons.chevron_right_24_regular,
                           size: 16,
-                          color: isDark ? Colors.grey.shade500 : Colors.grey.shade400,
+                          color: isDark
+                              ? Colors.grey.shade500
+                              : Colors.grey.shade400,
                         ),
                       ],
                     ),
@@ -314,7 +320,9 @@ class _LocalBackupDialogState extends State<LocalBackupDialog> {
                         Icon(
                           FluentIcons.chevron_right_24_regular,
                           size: 16,
-                          color: isDark ? Colors.grey.shade500 : Colors.grey.shade400,
+                          color: isDark
+                              ? Colors.grey.shade500
+                              : Colors.grey.shade400,
                         ),
                       ],
                     ),

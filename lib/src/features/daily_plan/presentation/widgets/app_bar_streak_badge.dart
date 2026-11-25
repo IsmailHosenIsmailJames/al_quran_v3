@@ -4,7 +4,7 @@ import "package:al_quran_v3/src/features/daily_plan/presentation/cubit/streak_st
 import "package:al_quran_v3/src/features/daily_plan/presentation/widgets/consistency_heatmap_calendar.dart";
 import "package:al_quran_v3/src/features/daily_plan/presentation/widgets/khatam_planner_modal.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -64,10 +64,7 @@ class AppBarStreakBadge extends StatelessWidget {
                 // Title
                 const Text(
                   "Istiqamah Streak",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const Gap(3),
                 Text(
@@ -150,12 +147,14 @@ class AppBarStreakBadge extends StatelessWidget {
                       vertical: 10,
                     ),
                     decoration: BoxDecoration(
-                      color: themeState.primary
-                          .withValues(alpha: isDark ? 0.15 : 0.08),
+                      color: themeState.primary.withValues(
+                        alpha: isDark ? 0.15 : 0.08,
+                      ),
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: themeState.primary
-                            .withValues(alpha: isDark ? 0.3 : 0.2),
+                        color: themeState.primary.withValues(
+                          alpha: isDark ? 0.3 : 0.2,
+                        ),
                       ),
                     ),
                     child: Row(
@@ -357,21 +356,21 @@ class AppBarStreakBadge extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
               decoration: BoxDecoration(
                 color: isActiveToday
-                    ? const Color(0xFFFF9800).withValues(
-                        alpha: isDark ? 0.18 : 0.12,
-                      )
+                    ? const Color(
+                        0xFFFF9800,
+                      ).withValues(alpha: isDark ? 0.18 : 0.12)
                     : (isDark
-                        ? Colors.white.withValues(alpha: 0.05)
-                        : Colors.grey.shade100),
+                          ? Colors.white.withValues(alpha: 0.05)
+                          : Colors.grey.shade100),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
                   color: isActiveToday
-                      ? const Color(0xFFFF9800).withValues(
-                          alpha: isDark ? 0.35 : 0.3,
-                        )
+                      ? const Color(
+                          0xFFFF9800,
+                        ).withValues(alpha: isDark ? 0.35 : 0.3)
                       : (isDark
-                          ? Colors.white.withValues(alpha: 0.08)
-                          : Colors.grey.shade300),
+                            ? Colors.white.withValues(alpha: 0.08)
+                            : Colors.grey.shade300),
                   width: 1,
                 ),
               ),
@@ -386,8 +385,8 @@ class AppBarStreakBadge extends StatelessWidget {
                     color: isActiveToday
                         ? const Color(0xFFFF9800)
                         : (isDark
-                            ? Colors.grey.shade400
-                            : Colors.grey.shade600),
+                              ? Colors.grey.shade400
+                              : Colors.grey.shade600),
                   ),
                   const Gap(4),
                   Text(

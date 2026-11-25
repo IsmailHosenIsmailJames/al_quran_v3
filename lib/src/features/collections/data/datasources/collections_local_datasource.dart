@@ -29,9 +29,7 @@ abstract class CollectionsLocalDataSource {
   );
   Future<void> deleteNoteCollectionByID(String id);
   Future<void> deletePinnedCollectionByID(String id);
-  Future<void> saveNoteCollectionModelAsMap(
-    NoteCollectionModel noteCollection,
-  );
+  Future<void> saveNoteCollectionModelAsMap(NoteCollectionModel noteCollection);
   Future<void> savePinnedCollectionModelAsMap(
     PinnedCollectionModel pinnedCollection,
   );
@@ -93,26 +91,21 @@ class CollectionsLocalDataSourceImpl implements CollectionsLocalDataSource {
   Future<List<PinnedCollectionModel>> fetchPinnedCollections() async {
     final box = Hive.box(CollectionType.pinned.name);
     await saveDemoPinnedCollection();
-    List<PinnedCollectionModel> availablePinnedCollections =
-        box.values
-            .map(
-              (e) => PinnedCollectionModel.fromJson(
-                deepConvertMap(e as Map),
-              ),
-            )
-            .where((collection) => !collection.isDeleted)
-            .map((collection) => collection.copyWith(
-                  pinned: collection.pinned.where((p) => !p.isDeleted).toList(),
-                ))
-            .toList();
+    List<PinnedCollectionModel> availablePinnedCollections = box.values
+        .map((e) => PinnedCollectionModel.fromJson(deepConvertMap(e as Map)))
+        .where((collection) => !collection.isDeleted)
+        .map(
+          (collection) => collection.copyWith(
+            pinned: collection.pinned.where((p) => !p.isDeleted).toList(),
+          ),
+        )
+        .toList();
     String sortMethod = Hive.box("user").get(
       "selected_sorting_method",
       defaultValue: SortingMethodsType.values.first.name,
     );
-    SortingMethodsType sortingMethodsType =
-        SortingMethodsType.values.firstWhere(
-          (element) => element.name == sortMethod,
-        );
+    SortingMethodsType sortingMethodsType = SortingMethodsType.values
+        .firstWhere((element) => element.name == sortMethod);
     switch (sortingMethodsType) {
       case SortingMethodsType.byNameAtoZ:
         availablePinnedCollections.sort(
@@ -154,25 +147,21 @@ class CollectionsLocalDataSourceImpl implements CollectionsLocalDataSource {
   Future<List<NoteCollectionModel>> fetchNoteCollections() async {
     final box = Hive.box(CollectionType.notes.name);
     await saveDemoNoteCollection();
-    List<NoteCollectionModel> availableNoteCollections =
-        box.values
-            .map(
-              (e) =>
-                  NoteCollectionModel.fromJson(deepConvertMap(e as Map)),
-            )
-            .where((collection) => !collection.isDeleted)
-            .map((collection) => collection.copyWith(
-                  notes: collection.notes.where((n) => !n.isDeleted).toList(),
-                ))
-            .toList();
+    List<NoteCollectionModel> availableNoteCollections = box.values
+        .map((e) => NoteCollectionModel.fromJson(deepConvertMap(e as Map)))
+        .where((collection) => !collection.isDeleted)
+        .map(
+          (collection) => collection.copyWith(
+            notes: collection.notes.where((n) => !n.isDeleted).toList(),
+          ),
+        )
+        .toList();
     String sortMethod = Hive.box("user").get(
       "selected_sorting_method",
       defaultValue: SortingMethodsType.values.first.name,
     );
-    SortingMethodsType sortingMethodsType =
-        SortingMethodsType.values.firstWhere(
-          (element) => element.name == sortMethod,
-        );
+    SortingMethodsType sortingMethodsType = SortingMethodsType.values
+        .firstWhere((element) => element.name == sortMethod);
     switch (sortingMethodsType) {
       case SortingMethodsType.byNameAtoZ:
         availableNoteCollections.sort(
@@ -306,7 +295,9 @@ class CollectionsLocalDataSourceImpl implements CollectionsLocalDataSource {
   Future<void> saveNoteCollectionModelAsMap(
     NoteCollectionModel noteCollection,
   ) async {
-    final updatedCollection = noteCollection.copyWith(updatedAt: DateTime.now());
+    final updatedCollection = noteCollection.copyWith(
+      updatedAt: DateTime.now(),
+    );
     await Hive.box(
       CollectionType.notes.name,
     ).put(updatedCollection.id, updatedCollection.toJson());
@@ -317,7 +308,9 @@ class CollectionsLocalDataSourceImpl implements CollectionsLocalDataSource {
   Future<void> savePinnedCollectionModelAsMap(
     PinnedCollectionModel pinnedCollection,
   ) async {
-    final updatedCollection = pinnedCollection.copyWith(updatedAt: DateTime.now());
+    final updatedCollection = pinnedCollection.copyWith(
+      updatedAt: DateTime.now(),
+    );
     await Hive.box(
       CollectionType.pinned.name,
     ).put(updatedCollection.id, updatedCollection.toJson());

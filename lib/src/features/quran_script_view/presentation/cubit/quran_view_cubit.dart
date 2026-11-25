@@ -159,8 +159,7 @@ class QuranViewCubit extends Cubit<QuranViewState> {
       alwaysOpenWordByWord: alwaysOpenWordByWord ?? state.alwaysOpenWordByWord,
       enableWordByWordHighlight:
           enableWordByWordHighlight ?? state.enableWordByWordHighlight,
-      scrollWithRecitation:
-          scrollWithRecitation ?? state.scrollWithRecitation,
+      scrollWithRecitation: scrollWithRecitation ?? state.scrollWithRecitation,
       useAudioStream: useAudioStream ?? state.useAudioStream,
       playbackSpeed: playbackSpeed ?? state.playbackSpeed,
     );

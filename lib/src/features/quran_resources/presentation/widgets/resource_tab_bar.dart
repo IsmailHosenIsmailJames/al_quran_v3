@@ -1,16 +1,13 @@
 import 'package:al_quran_v3/l10n/app_localizations.dart';
 import 'package:al_quran_v3/src/core/theme/controller/theme_cubit.dart';
 import 'package:al_quran_v3/src/features/quran_resources/presentation/cubit/quran_resources_cubit.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ResourceTabBar extends StatelessWidget {
   final TabController tabController;
 
-  const ResourceTabBar({
-    super.key,
-    required this.tabController,
-  });
+  const ResourceTabBar({super.key, required this.tabController});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +22,9 @@ class ResourceTabBar extends StatelessWidget {
     ];
 
     return Container(
-      color: isDark ? const Color(0xFF121212) : Theme.of(context).scaffoldBackgroundColor,
+      color: isDark
+          ? const Color(0xFF121212)
+          : Theme.of(context).scaffoldBackgroundColor,
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Center(
         child: ConstrainedBox(
@@ -59,8 +58,9 @@ class ResourceTabBar extends StatelessWidget {
               indicatorSize: TabBarIndicatorSize.tab,
               labelPadding: const EdgeInsets.symmetric(horizontal: 4),
               labelColor: Colors.white,
-              unselectedLabelColor:
-                  isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+              unselectedLabelColor: isDark
+                  ? Colors.grey.shade400
+                  : Colors.grey.shade600,
               labelStyle: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 13,

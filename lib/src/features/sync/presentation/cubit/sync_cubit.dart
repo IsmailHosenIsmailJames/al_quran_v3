@@ -10,8 +10,8 @@ class SyncCubit extends Cubit<SyncState> {
   final CloudSyncService _syncService;
 
   SyncCubit({required CloudSyncService syncService})
-      : _syncService = syncService,
-        super(SyncInitial(lastSynced: _getLastSyncedFromHive()));
+    : _syncService = syncService,
+      super(SyncInitial(lastSynced: _getLastSyncedFromHive()));
 
   static DateTime? _getLastSyncedFromHive() {
     try {
@@ -59,7 +59,9 @@ class SyncCubit extends Cubit<SyncState> {
       final lastSynced = _getLastSyncedFromHive() ?? DateTime.now();
       emit(SyncSuccess(lastSynced));
     } catch (e) {
-      final msg = e.toString().contains("offline") || e.toString().contains("unavailable")
+      final msg =
+          e.toString().contains("offline") ||
+              e.toString().contains("unavailable")
           ? "You are currently offline. Changes are saved locally."
           : e.toString();
       emit(SyncFailed(msg, lastSynced: _getLastSyncedFromHive()));

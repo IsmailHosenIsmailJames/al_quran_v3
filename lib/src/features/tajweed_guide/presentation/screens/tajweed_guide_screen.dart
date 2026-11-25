@@ -1,6 +1,6 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/di/injection.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "../cubit/tajweed_guide_cubit.dart";
 import "../cubit/tajweed_guide_state.dart";
@@ -85,21 +85,25 @@ class _TajweedGuideViewState extends State<TajweedGuideView> {
             child: BlocBuilder<TajweedGuideCubit, TajweedGuideState>(
               builder: (context, state) {
                 if (state is TajweedGuideLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
+                  return const Center(child: CircularProgressIndicator());
                 } else if (state is TajweedGuideError) {
                   return Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.error_outline, size: 48, color: Colors.red),
+                        const Icon(
+                          Icons.error_outline,
+                          size: 48,
+                          color: Colors.red,
+                        ),
                         const SizedBox(height: 12),
                         Text(state.message),
                         const SizedBox(height: 12),
                         ElevatedButton(
                           onPressed: () {
-                            context.read<TajweedGuideCubit>().loadTajweedRules();
+                            context
+                                .read<TajweedGuideCubit>()
+                                .loadTajweedRules();
                           },
                           child: const Text("Retry"),
                         ),

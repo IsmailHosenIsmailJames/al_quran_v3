@@ -16,20 +16,39 @@ class FakeFirebaseAuthDataSource implements FirebaseAuthDataSource {
 
   @override
   Future<UserEntity> signInWithGoogle() async {
-    _user = const UserEntity(uid: "google_123", email: "google@test.com", displayName: "Google User");
+    _user = const UserEntity(
+      uid: "google_123",
+      email: "google@test.com",
+      displayName: "Google User",
+    );
     return _user!;
   }
 
   @override
-  Future<UserEntity> signInWithEmailAndPassword({required String email, required String password}) async {
+  Future<UserEntity> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
     if (password == "wrong") throw Exception("wrong-password");
-    _user = UserEntity(uid: "email_123", email: email, displayName: "Email User");
+    _user = UserEntity(
+      uid: "email_123",
+      email: email,
+      displayName: "Email User",
+    );
     return _user!;
   }
 
   @override
-  Future<UserEntity> signUpWithEmailAndPassword({required String email, required String password, required String displayName}) async {
-    _user = UserEntity(uid: "signup_123", email: email, displayName: displayName);
+  Future<UserEntity> signUpWithEmailAndPassword({
+    required String email,
+    required String password,
+    required String displayName,
+  }) async {
+    _user = UserEntity(
+      uid: "signup_123",
+      email: email,
+      displayName: displayName,
+    );
     return _user!;
   }
 
@@ -78,24 +97,37 @@ void main() {
       expect(authState.user.email, "google@test.com");
     });
 
-    test("signInWithEmail with valid credentials emits Authenticated", () async {
-      await cubit.signInWithEmail(email: "test@example.com", password: "password123");
-      expect(cubit.state, isA<Authenticated>());
-      final authState = cubit.state as Authenticated;
-      expect(authState.user.email, "test@example.com");
-    });
+    test(
+      "signInWithEmail with valid credentials emits Authenticated",
+      () async {
+        await cubit.signInWithEmail(
+          email: "test@example.com",
+          password: "password123",
+        );
+        expect(cubit.state, isA<Authenticated>());
+        final authState = cubit.state as Authenticated;
+        expect(authState.user.email, "test@example.com");
+      },
+    );
 
     test("signInWithEmail with wrong password emits AuthError", () async {
       await cubit.signInWithEmail(email: "test@example.com", password: "wrong");
       expect(cubit.state, isA<AuthError>());
     });
 
-    test("signUpWithEmail emits Authenticated with correct displayName", () async {
-      await cubit.signUpWithEmail(email: "new@example.com", password: "password123", displayName: "Jane Doe");
-      expect(cubit.state, isA<Authenticated>());
-      final authState = cubit.state as Authenticated;
-      expect(authState.user.displayName, "Jane Doe");
-    });
+    test(
+      "signUpWithEmail emits Authenticated with correct displayName",
+      () async {
+        await cubit.signUpWithEmail(
+          email: "new@example.com",
+          password: "password123",
+          displayName: "Jane Doe",
+        );
+        expect(cubit.state, isA<Authenticated>());
+        final authState = cubit.state as Authenticated;
+        expect(authState.user.displayName, "Jane Doe");
+      },
+    );
 
     test("signOut emits Unauthenticated", () async {
       await cubit.signInWithGoogle();

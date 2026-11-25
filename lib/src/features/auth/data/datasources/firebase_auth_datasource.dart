@@ -103,8 +103,7 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
     try {
       final auth = _getRequiredAuth();
       await _ensureGoogleSignInInitialized();
-      final GoogleSignInAccount googleUser =
-          await _googleSignIn.authenticate();
+      final GoogleSignInAccount googleUser = await _googleSignIn.authenticate();
 
       final GoogleSignInAuthentication googleAuth = googleUser.authentication;
 
@@ -122,15 +121,13 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
         } on FirebaseAuthException catch (e) {
           if (e.code == "credential-already-in-use" ||
               e.code == "provider-already-linked") {
-            userCredential =
-                await auth.signInWithCredential(credential);
+            userCredential = await auth.signInWithCredential(credential);
           } else {
             rethrow;
           }
         }
       } else {
-        userCredential =
-            await auth.signInWithCredential(credential);
+        userCredential = await auth.signInWithCredential(credential);
       }
 
       final user = userCredential.user;
@@ -171,8 +168,10 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
   }) async {
     try {
       final auth = _getRequiredAuth();
-      final UserCredential credential = await auth
-          .signInWithEmailAndPassword(email: email.trim(), password: password);
+      final UserCredential credential = await auth.signInWithEmailAndPassword(
+        email: email.trim(),
+        password: password,
+      );
       final user = credential.user;
       if (user == null) {
         throw Exception("Sign in failed. No user found.");

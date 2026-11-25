@@ -20,10 +20,12 @@ class ReciterCubit extends Cubit<ReciterInfoModel> {
   static ReciterInfoModel _normalize(ReciterInfoModel model) {
     final normalizedLink = model.normalizedLink;
     // Match against bundled recitations metadata if segmentsUrl was added later
-    final catalogMatch = availableRecitations.cast<ReciterInfoModel?>().firstWhere(
-      (r) => r != null && r.normalizedLink == normalizedLink,
-      orElse: () => null,
-    );
+    final catalogMatch = availableRecitations
+        .cast<ReciterInfoModel?>()
+        .firstWhere(
+          (r) => r != null && r.normalizedLink == normalizedLink,
+          orElse: () => null,
+        );
     final merged = catalogMatch != null
         ? model.copyWith(
             link: catalogMatch.link,
@@ -109,7 +111,10 @@ class ReciterCubit extends Cubit<ReciterInfoModel> {
         await SegmentedResourcesManager.clearActiveBox();
       }
     } catch (e) {
-      log("Error loading segments for ${normalized.name}: $e", name: "ReciterCubit");
+      log(
+        "Error loading segments for ${normalized.name}: $e",
+        name: "ReciterCubit",
+      );
       await SegmentedResourcesManager.clearActiveBox();
       downloadSuccess = false;
     } finally {

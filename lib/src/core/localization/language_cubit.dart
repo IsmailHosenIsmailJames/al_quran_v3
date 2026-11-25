@@ -11,11 +11,11 @@ class LanguageCubit extends Cubit<MyAppLocalization> {
     : super(
         initialLocale != null
             ? (usedAppLanguageMap.firstOrNullWhere(
-                  (element) =>
-                      element.locale.languageCode ==
-                      initialLocale.locale.languageCode,
-                ) ??
-                usedAppLanguageMap.first)
+                    (element) =>
+                        element.locale.languageCode ==
+                        initialLocale.locale.languageCode,
+                  ) ??
+                  usedAppLanguageMap.first)
             : usedAppLanguageMap.first,
       );
 

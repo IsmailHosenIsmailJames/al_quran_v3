@@ -16,7 +16,7 @@ import "package:al_quran_v3/src/features/mushaf/presentation/widgets/mushaf_jump
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/gestures.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_inappwebview/flutter_inappwebview.dart";
 import "package:gap/gap.dart";
@@ -130,7 +130,9 @@ class _MushafReaderViewState extends State<MushafReaderView> {
         final isUiVisible = state.isUiVisible;
 
         return Scaffold(
-          backgroundColor: isDark ? const Color(0xFF121212) : const Color(0xFFFAF9F6),
+          backgroundColor: isDark
+              ? const Color(0xFF121212)
+              : const Color(0xFFFAF9F6),
           body: Stack(
             children: [
               // Main Reader Layout (AppBar + Responsive WebView + BottomBar)
@@ -167,20 +169,23 @@ class _MushafReaderViewState extends State<MushafReaderView> {
                         }
                       },
                       child: InAppWebView(
-                        gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
-                          Factory<VerticalDragGestureRecognizer>(
-                            () => VerticalDragGestureRecognizer(),
-                          ),
-                          Factory<HorizontalDragGestureRecognizer>(
-                            () => HorizontalDragGestureRecognizer(),
-                          ),
-                          Factory<ScaleGestureRecognizer>(
-                            () => ScaleGestureRecognizer(),
-                          ),
-                        },
+                        gestureRecognizers:
+                            <Factory<OneSequenceGestureRecognizer>>{
+                              Factory<VerticalDragGestureRecognizer>(
+                                () => VerticalDragGestureRecognizer(),
+                              ),
+                              Factory<HorizontalDragGestureRecognizer>(
+                                () => HorizontalDragGestureRecognizer(),
+                              ),
+                              Factory<ScaleGestureRecognizer>(
+                                () => ScaleGestureRecognizer(),
+                              ),
+                            },
                         initialUrlRequest: URLRequest(
                           url: WebUri(
-                            Uri.file("${widget.baseDirPath}/index.html").toString(),
+                            Uri.file(
+                              "${widget.baseDirPath}/index.html",
+                            ).toString(),
                           ),
                         ),
                         initialSettings: InAppWebViewSettings(
@@ -258,14 +263,15 @@ document.addEventListener('click', function(e) {
                         },
                         shouldOverrideUrlLoading:
                             (controller, navigationAction) async {
-                          final url =
-                              navigationAction.request.url?.toString() ?? "";
-                          if (url.startsWith("quran://")) {
-                            _handleQuranScheme(url);
-                            return NavigationActionPolicy.CANCEL;
-                          }
-                          return NavigationActionPolicy.ALLOW;
-                        },
+                              final url =
+                                  navigationAction.request.url?.toString() ??
+                                  "";
+                              if (url.startsWith("quran://")) {
+                                _handleQuranScheme(url);
+                                return NavigationActionPolicy.CANCEL;
+                              }
+                              return NavigationActionPolicy.ALLOW;
+                            },
                       ),
                     ),
                   ),
@@ -286,7 +292,9 @@ document.addEventListener('click', function(e) {
               if (!_isWebViewReady)
                 Positioned.fill(
                   child: Container(
-                    color: isDark ? const Color(0xFF121212) : const Color(0xFFFAF9F6),
+                    color: isDark
+                        ? const Color(0xFF121212)
+                        : const Color(0xFFFAF9F6),
                     child: Center(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -344,10 +352,11 @@ document.addEventListener('click', function(e) {
                             vertical: 7,
                           ),
                           decoration: BoxDecoration(
-                            color: (isDark
-                                    ? const Color(0xFF1E1E1E)
-                                    : Colors.white)
-                                .withValues(alpha: 0.92),
+                            color:
+                                (isDark
+                                        ? const Color(0xFF1E1E1E)
+                                        : Colors.white)
+                                    .withValues(alpha: 0.92),
                             borderRadius: BorderRadius.circular(30),
                             border: Border.all(
                               color: isDark

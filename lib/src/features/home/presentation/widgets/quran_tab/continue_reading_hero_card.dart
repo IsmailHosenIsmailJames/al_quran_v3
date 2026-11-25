@@ -9,7 +9,7 @@ import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/
 import "package:al_quran_v3/src/features/surah_info/presentation/widgets/surah_info_header_builder.dart";
 import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -33,8 +33,9 @@ class ContinueReadingHeroCard extends StatelessWidget {
         final int? pageNumber = latest?.pageNumber;
 
         final surahData = metaDataSurah[surahNumber.toString()];
-        final surahInfo =
-            surahData != null ? SurahInfoModel.fromMap(surahData) : null;
+        final surahInfo = surahData != null
+            ? SurahInfoModel.fromMap(surahData)
+            : null;
         final String revelationPlace =
             surahInfo?.revelationPlace.toLowerCase() ?? "makkah";
         final isMakkah = revelationPlace == "makkah";
@@ -61,8 +62,8 @@ class ContinueReadingHeroCard extends StatelessWidget {
 
         final double readingProgress =
             (hasHistory && ayahNumber != null && versesCount > 0)
-                ? (ayahNumber / versesCount).clamp(0.01, 1.0)
-                : 0.0;
+            ? (ayahNumber / versesCount).clamp(0.01, 1.0)
+            : 0.0;
 
         return Container(
           margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
@@ -196,8 +197,8 @@ class ContinueReadingHeroCard extends StatelessWidget {
                                       pageNumber != null
                                           ? "${l10n.page} ${localizedNumber(context, pageNumber)}"
                                           : (ayahNumber != null
-                                              ? "${l10n.ayah} ${localizedNumber(context, ayahNumber)} (${l10n.verses}: ${localizedNumber(context, versesCount)})"
-                                              : "${l10n.verses}: ${localizedNumber(context, versesCount)}"),
+                                                ? "${l10n.ayah} ${localizedNumber(context, ayahNumber)} (${l10n.verses}: ${localizedNumber(context, versesCount)})"
+                                                : "${l10n.verses}: ${localizedNumber(context, versesCount)}"),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
@@ -219,9 +220,7 @@ class ContinueReadingHeroCard extends StatelessWidget {
                                     value: readingProgress,
                                     minHeight: 3.5,
                                     backgroundColor: themeState.primary
-                                        .withValues(
-                                          alpha: isDark ? 0.2 : 0.12,
-                                        ),
+                                        .withValues(alpha: isDark ? 0.2 : 0.12),
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                       themeState.primary,
                                     ),
@@ -256,10 +255,7 @@ class ContinueReadingHeroCard extends StatelessWidget {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Icon(
-                                FluentIcons.play_24_filled,
-                                size: 12,
-                              ),
+                              const Icon(FluentIcons.play_24_filled, size: 12),
                               const Gap(4),
                               Text(
                                 hasHistory ? l10n.resume : l10n.startReading,

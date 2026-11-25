@@ -66,7 +66,8 @@ class TajweedGuideLocalDataSourceImpl implements TajweedGuideLocalDataSource {
         darkColor: IdghamShafawiRule.darkColor,
         examples: [
           TajweedExampleModel(
-            arabicText: "لَكُ<rule class=\"idgham_shafawi\">م مَّ</rule>ا كَسَبْتُمْ",
+            arabicText:
+                "لَكُ<rule class=\"idgham_shafawi\">م مَّ</rule>ا كَسَبْتُمْ",
             transliteration: "Lakum-ma kasabtum",
             surahAyahRef: "Surah Al-Baqarah 2:134",
             surahNumber: 2,
@@ -74,7 +75,8 @@ class TajweedGuideLocalDataSourceImpl implements TajweedGuideLocalDataSource {
             wordIndex: 7,
           ),
           TajweedExampleModel(
-            arabicText: "فِي قُلُوبِهِ<rule class=\"idgham_shafawi\">م مَّ</rule>رَضٌ",
+            arabicText:
+                "فِي قُلُوبِهِ<rule class=\"idgham_shafawi\">م مَّ</rule>رَضٌ",
             transliteration: "Fee quloobihim-maradun",
             surahAyahRef: "Surah Al-Baqarah 2:10",
             surahNumber: 2,
@@ -139,7 +141,8 @@ class TajweedGuideLocalDataSourceImpl implements TajweedGuideLocalDataSource {
             wordIndex: 0,
           ),
           TajweedExampleModel(
-            arabicText: "وَمَا هُ<rule class=\"ikhafa_shafawi\">م بِ</rule>مُؤْمِنِينَ",
+            arabicText:
+                "وَمَا هُ<rule class=\"ikhafa_shafawi\">م بِ</rule>مُؤْمِنِينَ",
             transliteration: "Wama hum-bi-mu'mineen",
             surahAyahRef: "Surah Al-Baqarah 2:8",
             surahNumber: 2,
@@ -179,7 +182,8 @@ class TajweedGuideLocalDataSourceImpl implements TajweedGuideLocalDataSource {
             wordIndex: 3,
           ),
           TajweedExampleModel(
-            arabicText: "قُلْ هُوَ ٱللَّهُ أَحَ<rule class=\"qalaqah\">دٌ</rule>",
+            arabicText:
+                "قُلْ هُوَ ٱللَّهُ أَحَ<rule class=\"qalaqah\">دٌ</rule>",
             transliteration: "Qul huwa Allahu ahad",
             surahAyahRef: "Surah Al-Ikhlas 112:1",
             surahNumber: 112,
@@ -236,7 +240,8 @@ class TajweedGuideLocalDataSourceImpl implements TajweedGuideLocalDataSource {
         darkColor: IdghamWoGhunnahRule.darkColor,
         examples: [
           TajweedExampleModel(
-            arabicText: "مِ<rule class=\"idgham_wo_ghunnah\">ن لَّ</rule>دُنْهُ",
+            arabicText:
+                "مِ<rule class=\"idgham_wo_ghunnah\">ن لَّ</rule>دُنْهُ",
             transliteration: "Mil-ladunhu",
             surahAyahRef: "Surah An-Nisa 4:40",
             surahNumber: 4,
@@ -244,7 +249,8 @@ class TajweedGuideLocalDataSourceImpl implements TajweedGuideLocalDataSource {
             wordIndex: 10,
           ),
           TajweedExampleModel(
-            arabicText: "مِ<rule class=\"idgham_wo_ghunnah\">ن رَّ</rule>بِّهِمْ",
+            arabicText:
+                "مِ<rule class=\"idgham_wo_ghunnah\">ن رَّ</rule>بِّهِمْ",
             transliteration: "Mir-rabbihim",
             surahAyahRef: "Surah Al-Baqarah 2:5",
             surahNumber: 2,
@@ -633,8 +639,7 @@ class TajweedGuideLocalDataSourceImpl implements TajweedGuideLocalDataSource {
         arabicName: "أَلِف مَقْصُورَة",
         description:
             "A dotless Ya (ى) appearing at the end of a word, pronounced as a short natural Alif (Madd Tabi'i).",
-        howToPronounce:
-            "Pronounce as a natural open 'aa' sound for 2 counts.",
+        howToPronounce: "Pronounce as a natural open 'aa' sound for 2 counts.",
         lightColor: CustomAlefMaksoraRule.lightColor,
         darkColor: CustomAlefMaksoraRule.darkColor,
         examples: [

@@ -1,6 +1,6 @@
 import "package:al_quran_v3/src/core/theme/values/values.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/jump_to_ayah/jump_to_ayah.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 Future<void> popupJumpToAyah({
   required BuildContext context,
@@ -19,7 +19,10 @@ Future<void> popupJumpToAyah({
       context: context,
       builder: (context) {
         return Dialog(
-          insetPadding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 40,
+            vertical: 30,
+          ),
           clipBehavior: Clip.antiAlias,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(roundedRadius + 6),

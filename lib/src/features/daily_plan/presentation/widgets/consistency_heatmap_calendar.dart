@@ -1,7 +1,7 @@
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/features/daily_plan/presentation/cubit/streak_cubit.dart";
 import "package:al_quran_v3/src/features/daily_plan/presentation/cubit/streak_state.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -68,8 +68,8 @@ class _ConsistencyHeatmapCalendarState
     final themeState = context.watch<ThemeCubit>().state;
     final primary = themeState.primary;
     final now = DateTime.now();
-    final isCurrentMonth = _selectedMonth.year == now.year &&
-        _selectedMonth.month == now.month;
+    final isCurrentMonth =
+        _selectedMonth.year == now.year && _selectedMonth.month == now.month;
 
     return BlocBuilder<StreakCubit, StreakState>(
       builder: (context, state) {
@@ -98,7 +98,8 @@ class _ConsistencyHeatmapCalendarState
         }
 
         final monthPercent = daysInMonth > 0
-            ? (activeCountInMonth / (isCurrentMonth ? now.day : daysInMonth)) * 100
+            ? (activeCountInMonth / (isCurrentMonth ? now.day : daysInMonth)) *
+                  100
             : 0.0;
 
         return Container(
@@ -182,7 +183,9 @@ class _ConsistencyHeatmapCalendarState
                       Icons.chevron_right_rounded,
                       size: 24,
                       color: isCurrentMonth
-                          ? (isDark ? Colors.grey.shade700 : Colors.grey.shade300)
+                          ? (isDark
+                                ? Colors.grey.shade700
+                                : Colors.grey.shade300)
                           : null,
                     ),
                     onPressed: isCurrentMonth ? null : _nextMonth,
@@ -215,7 +218,8 @@ class _ConsistencyHeatmapCalendarState
                   children: [
                     _buildKpiItem(
                       label: "Active Days",
-                      value: "$activeCountInMonth / ${isCurrentMonth ? now.day : daysInMonth}",
+                      value:
+                          "$activeCountInMonth / ${isCurrentMonth ? now.day : daysInMonth}",
                       isDark: isDark,
                       primary: primary,
                     ),
@@ -226,7 +230,8 @@ class _ConsistencyHeatmapCalendarState
                     ),
                     _buildKpiItem(
                       label: "Consistency",
-                      value: "${monthPercent.clamp(0, 100).toStringAsFixed(0)}%",
+                      value:
+                          "${monthPercent.clamp(0, 100).toStringAsFixed(0)}%",
                       isDark: isDark,
                       primary: primary,
                     ),
@@ -295,7 +300,8 @@ class _ConsistencyHeatmapCalendarState
                   final dateStr =
                       "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
                   final isActive = activeDatesSet.contains(dateStr);
-                  final isToday = now.year == date.year &&
+                  final isToday =
+                      now.year == date.year &&
                       now.month == date.month &&
                       now.day == date.day;
                   final isFuture = date.isAfter(now);
@@ -318,22 +324,24 @@ class _ConsistencyHeatmapCalendarState
                       decoration: BoxDecoration(
                         color: isActive
                             ? (isDark
-                                ? const Color(0xFF00C853).withValues(alpha: 0.85)
-                                : const Color(0xFF00C853))
+                                  ? const Color(
+                                      0xFF00C853,
+                                    ).withValues(alpha: 0.85)
+                                  : const Color(0xFF00C853))
                             : (isFuture
-                                ? Colors.transparent
-                                : (isDark
-                                    ? Colors.white.withValues(alpha: 0.05)
-                                    : Colors.grey.shade100)),
+                                  ? Colors.transparent
+                                  : (isDark
+                                        ? Colors.white.withValues(alpha: 0.05)
+                                        : Colors.grey.shade100)),
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(
                           color: isToday
                               ? primary
                               : (isActive
-                                  ? Colors.transparent
-                                  : (isDark
-                                      ? Colors.white.withValues(alpha: 0.08)
-                                      : Colors.grey.shade200)),
+                                    ? Colors.transparent
+                                    : (isDark
+                                          ? Colors.white.withValues(alpha: 0.08)
+                                          : Colors.grey.shade200)),
                           width: isToday ? 2.0 : 1.0,
                         ),
                       ),
@@ -348,12 +356,12 @@ class _ConsistencyHeatmapCalendarState
                             color: isActive
                                 ? Colors.white
                                 : (isFuture
-                                    ? (isDark
-                                        ? Colors.grey.shade700
-                                        : Colors.grey.shade300)
-                                    : (isDark
-                                        ? Colors.grey.shade300
-                                        : Colors.grey.shade800)),
+                                      ? (isDark
+                                            ? Colors.grey.shade700
+                                            : Colors.grey.shade300)
+                                      : (isDark
+                                            ? Colors.grey.shade300
+                                            : Colors.grey.shade800)),
                           ),
                         ),
                       ),
@@ -505,8 +513,8 @@ class _ConsistencyHeatmapCalendarState
     final statusText = isActive
         ? "✓ Quran read on this day. Streak maintained!"
         : (isToday
-            ? "Read Quran today to light up this day!"
-            : "No reading logged for this date.");
+              ? "Read Quran today to light up this day!"
+              : "No reading logged for this date.");
 
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(

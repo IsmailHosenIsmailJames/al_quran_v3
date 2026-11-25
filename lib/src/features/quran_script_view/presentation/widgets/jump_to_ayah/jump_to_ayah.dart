@@ -13,7 +13,7 @@ import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/
 import "package:al_quran_v3/src/features/surah_info/presentation/widgets/surah_info_header_builder.dart";
 import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
 import "package:al_quran_v3/src/features/tafsir/presentation/screens/tafsir_view.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 
@@ -110,9 +110,7 @@ class _JumpToAyahViewState extends State<JumpToAyahView> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => TafsirView(
-          ayahKey: "$surahNumber:$ayahNumber",
-        ),
+        builder: (context) => TafsirView(ayahKey: "$surahNumber:$ayahNumber"),
       ),
     );
   }

@@ -20,8 +20,9 @@ abstract class PrayerTimeEntity with _$PrayerTimeEntity {
   factory PrayerTimeEntity.fromPrayerTimes(PrayerTimes prayerTimes) {
     Prayer? nextPrayerEnum = prayerTimes.nextPrayer(date: DateTime.now());
     String nextPrayerName = nextPrayerEnum?.name ?? "";
-    DateTime? nextTime =
-        nextPrayerEnum != null ? prayerTimes.timeForPrayer(nextPrayerEnum) : null;
+    DateTime? nextTime = nextPrayerEnum != null
+        ? prayerTimes.timeForPrayer(nextPrayerEnum)
+        : null;
     Duration? remaining;
     if (nextTime != null) {
       remaining = nextTime.difference(DateTime.now());

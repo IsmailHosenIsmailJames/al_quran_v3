@@ -12,7 +12,7 @@ class QuranResourcesCubit extends Cubit<QuranResourcesState> {
   final GetQuranResourcesUseCase _getQuranResourcesUseCase;
   final DownloadQuranResourceUseCase _downloadQuranResourceUseCase;
   final ToggleQuranResourceSelectionUseCase
-      _toggleQuranResourceSelectionUseCase;
+  _toggleQuranResourceSelectionUseCase;
   final DeleteQuranResourceUseCase _deleteQuranResourceUseCase;
 
   QuranResourcesCubit(
@@ -92,12 +92,7 @@ class QuranResourcesCubit extends Cubit<QuranResourcesState> {
       },
     );
 
-    emit(
-      state.copyWith(
-        downloadingResourcePath: null,
-        downloadProgress: 0.0,
-      ),
-    );
+    emit(state.copyWith(downloadingResourcePath: null, downloadProgress: 0.0));
 
     if (success) {
       await loadResources();

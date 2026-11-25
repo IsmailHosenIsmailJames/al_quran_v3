@@ -8,7 +8,7 @@ import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_
 import "package:al_quran_v3/src/features/quran_script_view/domain/utils/tajweed_text_preser.dart";
 import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
 import "package:dartx/dartx.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:share_plus/share_plus.dart";
 
 /// Service responsible for generating shareable formatted text for Ayahs and triggering native share.
@@ -23,16 +23,17 @@ class AyahShareService {
     final StringBuffer buffer = StringBuffer();
 
     // Sort ayah keys chronologically if possible
-    final sortedKeys = List<String>.from(ayahKeys)..sort((a, b) {
-      final aParts = a.split(":").map((e) => int.tryParse(e) ?? 0).toList();
-      final bParts = b.split(":").map((e) => int.tryParse(e) ?? 0).toList();
-      if (aParts.first != bParts.first) {
-        return aParts.first.compareTo(bParts.first);
-      }
-      return (aParts.length > 1 && bParts.length > 1)
-          ? aParts[1].compareTo(bParts[1])
-          : 0;
-    });
+    final sortedKeys = List<String>.from(ayahKeys)
+      ..sort((a, b) {
+        final aParts = a.split(":").map((e) => int.tryParse(e) ?? 0).toList();
+        final bParts = b.split(":").map((e) => int.tryParse(e) ?? 0).toList();
+        if (aParts.first != bParts.first) {
+          return aParts.first.compareTo(bParts.first);
+        }
+        return (aParts.length > 1 && bParts.length > 1)
+            ? aParts[1].compareTo(bParts[1])
+            : 0;
+      });
 
     for (final ayahKey in sortedKeys) {
       final parts = ayahKey.split(":");

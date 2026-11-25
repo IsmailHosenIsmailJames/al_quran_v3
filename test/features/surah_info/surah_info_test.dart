@@ -24,7 +24,7 @@ import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/wo
 import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_view.dart";
 import "package:al_quran_v3/src/features/surah_info/presentation/screens/surah_info_view.dart";
 import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
@@ -35,7 +35,11 @@ class FakeHistoryRepo implements IHistoryRepository {
   @override
   List<HistoryElementEntity> getHistory() => List.unmodifiable(_storage);
   @override
-  Future<void> addHistory({required int surahNumber, int? ayahNumber, int? pageNumber}) async {}
+  Future<void> addHistory({
+    required int surahNumber,
+    int? ayahNumber,
+    int? pageNumber,
+  }) async {}
   @override
   Future<void> clearHistory() async {}
 }
@@ -108,35 +112,50 @@ void main() {
   }
 
   group("QuranTranslationFunction - Surah Info tests", () {
-    test("isInfoAvailable returns true when surah_info_en box is open with data", () async {
-      final box = await Hive.openLazyBox("surah_info_en");
-      await box.put("1", {"text": "Surah 1 info"});
+    test(
+      "isInfoAvailable returns true when surah_info_en box is open with data",
+      () async {
+        final box = await Hive.openLazyBox("surah_info_en");
+        await box.put("1", {"text": "Surah 1 info"});
 
-      expect(QuranTranslationFunction.isInfoAvailable(), isTrue);
-      expect(QuranTranslationFunction.isInfoAvailable(const Locale("en")), isTrue);
+        expect(QuranTranslationFunction.isInfoAvailable(), isTrue);
+        expect(
+          QuranTranslationFunction.isInfoAvailable(const Locale("en")),
+          isTrue,
+        );
 
-      final text = await QuranTranslationFunction.getInfoOfSurah("1", "en");
-      expect(text, equals("Surah 1 info"));
-    });
+        final text = await QuranTranslationFunction.getInfoOfSurah("1", "en");
+        expect(text, equals("Surah 1 info"));
+      },
+    );
 
-    test("getAvailableSurahInfoLanguage resolves preferred or default en", () async {
-      expect(
-        QuranTranslationFunction.getAvailableSurahInfoLanguage(const Locale("en")),
-        equals("en"),
-      );
-      expect(
-        QuranTranslationFunction.getAvailableSurahInfoLanguage(const Locale("bn")),
-        equals("en"),
-      );
+    test(
+      "getAvailableSurahInfoLanguage resolves preferred or default en",
+      () async {
+        expect(
+          QuranTranslationFunction.getAvailableSurahInfoLanguage(
+            const Locale("en"),
+          ),
+          equals("en"),
+        );
+        expect(
+          QuranTranslationFunction.getAvailableSurahInfoLanguage(
+            const Locale("bn"),
+          ),
+          equals("en"),
+        );
 
-      final itBox = await Hive.openLazyBox("surah_info_it");
-      await itBox.put("1", {"text": "Info in Italian"});
-      expect(
-        QuranTranslationFunction.getAvailableSurahInfoLanguage(const Locale("it")),
-        equals("it"),
-      );
-      await itBox.close();
-    });
+        final itBox = await Hive.openLazyBox("surah_info_it");
+        await itBox.put("1", {"text": "Info in Italian"});
+        expect(
+          QuranTranslationFunction.getAvailableSurahInfoLanguage(
+            const Locale("it"),
+          ),
+          equals("it"),
+        );
+        await itBox.close();
+      },
+    );
   });
 
   group("SurahInfoView Responsive Layout", () {
@@ -148,7 +167,9 @@ void main() {
       pagesRange: "1-1",
     );
 
-    testWidgets("Constrains max reading width on wide desktop screen", (tester) async {
+    testWidgets("Constrains max reading width on wide desktop screen", (
+      tester,
+    ) async {
       tester.view.physicalSize = const Size(1280, 800);
       tester.view.devicePixelRatio = 1.0;
       addTearDown(() {
@@ -161,7 +182,8 @@ void main() {
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           home: SurahInfoView(
-            html: "<h3>About Al-Fatihah</h3><p>The Opening Chapter of the Quran.</p>",
+            html:
+                "<h3>About Al-Fatihah</h3><p>The Opening Chapter of the Quran.</p>",
             surahInfoModel: testSurah,
           ),
         ),
@@ -172,8 +194,7 @@ void main() {
 
       final constrainedBoxFinder = find.byWidgetPredicate(
         (widget) =>
-            widget is ConstrainedBox &&
-            widget.constraints.maxWidth == 860,
+            widget is ConstrainedBox && widget.constraints.maxWidth == 860,
       );
       expect(constrainedBoxFinder, findsOneWidget);
 
@@ -194,7 +215,8 @@ void main() {
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           home: SurahInfoView(
-            html: "<h3>About Al-Fatihah</h3><p>The Opening Chapter of the Quran.</p>",
+            html:
+                "<h3>About Al-Fatihah</h3><p>The Opening Chapter of the Quran.</p>",
             surahInfoModel: testSurah,
           ),
         ),
@@ -206,7 +228,9 @@ void main() {
   });
 
   group("QuranScriptView AppBar Surah Info action", () {
-    testWidgets("Displays Surah Info button with tooltip in AppBar", (tester) async {
+    testWidgets("Displays Surah Info button with tooltip in AppBar", (
+      tester,
+    ) async {
       final ayahToHighlight = AyahToHighlight();
       final ayahScrollInfoCubit = AyahByAyahInScrollInfoCubit();
 
@@ -214,10 +238,7 @@ void main() {
         buildWrapper(
           ayahToHighlight: ayahToHighlight,
           ayahScrollInfoCubit: ayahScrollInfoCubit,
-          child: const QuranScriptView(
-            startKey: "1:1",
-            endKey: "1:7",
-          ),
+          child: const QuranScriptView(startKey: "1:1", endKey: "1:7"),
         ),
       );
       await tester.pumpAndSettle();

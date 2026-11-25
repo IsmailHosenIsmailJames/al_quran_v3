@@ -11,7 +11,11 @@ abstract class QiblaCompassData with _$QiblaCompassData {
   }) = _QiblaCompassData;
 
   /// Computes whether the current heading aligns with Kaaba angle within tolerance.
-  static bool checkIsAligned(double heading, double kaabaAngle, {double tolerance = 5.0}) {
+  static bool checkIsAligned(
+    double heading,
+    double kaabaAngle, {
+    double tolerance = 5.0,
+  }) {
     return (heading.abs() - kaabaAngle.abs()).abs() < tolerance;
   }
 }

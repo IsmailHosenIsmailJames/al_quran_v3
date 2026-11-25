@@ -12,7 +12,7 @@ import "package:al_quran_v3/src/features/quran_resources/presentation/widgets/re
 import "package:al_quran_v3/src/features/quran_resources/presentation/widgets/resource_tab_bar.dart";
 import "package:al_quran_v3/src/features/quran_resources/presentation/widgets/translation_resources_tab.dart";
 import "package:al_quran_v3/src/features/quran_resources/presentation/widgets/word_by_word_resources_tab.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
@@ -21,7 +21,7 @@ import "package:shared_preferences/shared_preferences.dart";
 class FakeQuranResourcesCubit extends Cubit<QuranResourcesState>
     implements QuranResourcesCubit {
   FakeQuranResourcesCubit([QuranResourcesState? initialState])
-      : super(initialState ?? const QuranResourcesState());
+    : super(initialState ?? const QuranResourcesState());
 
   @override
   Future<void> loadResources({int? initTab}) async {}
@@ -124,149 +124,151 @@ void main() {
   }
 
   group("QuranResources Responsive Tests", () {
-    testWidgets("ResourceTabBar is constrained to maxWidth 540 on wide screen",
-        (tester) async {
-      tester.view.physicalSize = const Size(1200, 800);
-      tester.view.devicePixelRatio = 1.0;
-      addTearDown(() {
-        tester.view.resetPhysicalSize();
-        tester.view.resetDevicePixelRatio();
-      });
+    testWidgets(
+      "ResourceTabBar is constrained to maxWidth 540 on wide screen",
+      (tester) async {
+        tester.view.physicalSize = const Size(1200, 800);
+        tester.view.devicePixelRatio = 1.0;
+        addTearDown(() {
+          tester.view.resetPhysicalSize();
+          tester.view.resetDevicePixelRatio();
+        });
 
-      final cubit = FakeQuranResourcesCubit();
-      final tabController = TabController(length: 3, vsync: const TestVSync());
+        final cubit = FakeQuranResourcesCubit();
+        final tabController = TabController(
+          length: 3,
+          vsync: const TestVSync(),
+        );
 
-      await tester.pumpWidget(
-        buildTestableWidget(
-          cubit: cubit,
-          child: Scaffold(
-            body: ResourceTabBar(tabController: tabController),
+        await tester.pumpWidget(
+          buildTestableWidget(
+            cubit: cubit,
+            child: Scaffold(body: ResourceTabBar(tabController: tabController)),
           ),
-        ),
-      );
+        );
 
-      final constrainedBoxFinder = find.byWidgetPredicate(
-        (widget) =>
-            widget is ConstrainedBox &&
-            widget.constraints.maxWidth == 540,
-      );
-      expect(constrainedBoxFinder, findsOneWidget);
+        final constrainedBoxFinder = find.byWidgetPredicate(
+          (widget) =>
+              widget is ConstrainedBox && widget.constraints.maxWidth == 540,
+        );
+        expect(constrainedBoxFinder, findsOneWidget);
 
-      final RenderBox box = tester.renderObject(constrainedBoxFinder);
-      expect(box.size.width, lessThanOrEqualTo(540));
-    });
+        final RenderBox box = tester.renderObject(constrainedBoxFinder);
+        expect(box.size.width, lessThanOrEqualTo(540));
+      },
+    );
 
     testWidgets(
-        "ResourceLanguageGroupCard uses 2-column grid when wide and expanded",
-        (tester) async {
-      tester.view.physicalSize = const Size(1000, 800);
-      tester.view.devicePixelRatio = 1.0;
-      addTearDown(() {
-        tester.view.resetPhysicalSize();
-        tester.view.resetDevicePixelRatio();
-      });
+      "ResourceLanguageGroupCard uses 2-column grid when wide and expanded",
+      (tester) async {
+        tester.view.physicalSize = const Size(1000, 800);
+        tester.view.devicePixelRatio = 1.0;
+        addTearDown(() {
+          tester.view.resetPhysicalSize();
+          tester.view.resetDevicePixelRatio();
+        });
 
-      final cubit = FakeQuranResourcesCubit();
-      const state = QuranResourcesState();
+        final cubit = FakeQuranResourcesCubit();
+        const state = QuranResourcesState();
 
-      await tester.pumpWidget(
-        buildTestableWidget(
-          cubit: cubit,
-          child: const Scaffold(
-            body: SingleChildScrollView(
-              child: ResourceLanguageGroupCard(
-                group: testGroup,
-                state: state,
-                forceExpanded: true,
+        await tester.pumpWidget(
+          buildTestableWidget(
+            cubit: cubit,
+            child: const Scaffold(
+              body: SingleChildScrollView(
+                child: ResourceLanguageGroupCard(
+                  group: testGroup,
+                  state: state,
+                  forceExpanded: true,
+                ),
               ),
             ),
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
+        );
+        await tester.pumpAndSettle();
 
-      // Should render 2 items side-by-side in a Row on wide screen
-      final rowFinder = find.byWidgetPredicate(
-        (widget) =>
-            widget is Row &&
-            widget.crossAxisAlignment == CrossAxisAlignment.start &&
-            widget.children.whereType<Expanded>().length == 2,
-      );
-      expect(rowFinder, findsOneWidget);
-    });
+        // Should render 2 items side-by-side in a Row on wide screen
+        final rowFinder = find.byWidgetPredicate(
+          (widget) =>
+              widget is Row &&
+              widget.crossAxisAlignment == CrossAxisAlignment.start &&
+              widget.children.whereType<Expanded>().length == 2,
+        );
+        expect(rowFinder, findsOneWidget);
+      },
+    );
 
     testWidgets(
-        "ResourceLanguageGroupCard uses single-column Column when narrow",
-        (tester) async {
-      tester.view.physicalSize = const Size(400, 800);
-      tester.view.devicePixelRatio = 1.0;
-      addTearDown(() {
-        tester.view.resetPhysicalSize();
-        tester.view.resetDevicePixelRatio();
-      });
+      "ResourceLanguageGroupCard uses single-column Column when narrow",
+      (tester) async {
+        tester.view.physicalSize = const Size(400, 800);
+        tester.view.devicePixelRatio = 1.0;
+        addTearDown(() {
+          tester.view.resetPhysicalSize();
+          tester.view.resetDevicePixelRatio();
+        });
 
-      final cubit = FakeQuranResourcesCubit();
-      const state = QuranResourcesState();
+        final cubit = FakeQuranResourcesCubit();
+        const state = QuranResourcesState();
 
-      await tester.pumpWidget(
-        buildTestableWidget(
-          cubit: cubit,
-          child: const Scaffold(
-            body: SingleChildScrollView(
-              child: ResourceLanguageGroupCard(
-                group: testGroup,
-                state: state,
-                forceExpanded: true,
+        await tester.pumpWidget(
+          buildTestableWidget(
+            cubit: cubit,
+            child: const Scaffold(
+              body: SingleChildScrollView(
+                child: ResourceLanguageGroupCard(
+                  group: testGroup,
+                  state: state,
+                  forceExpanded: true,
+                ),
               ),
             ),
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
+        );
+        await tester.pumpAndSettle();
 
-      expect(find.byType(GridView), findsNothing);
-      expect(find.text("Sahih International"), findsOneWidget);
-      expect(find.text("Clear Quran"), findsOneWidget);
-    });
+        expect(find.byType(GridView), findsNothing);
+        expect(find.text("Sahih International"), findsOneWidget);
+        expect(find.text("Clear Quran"), findsOneWidget);
+      },
+    );
 
     testWidgets(
-        "WordByWordResourcesTab renders GridView with 2 columns on wide screen",
-        (tester) async {
-      tester.view.physicalSize = const Size(1000, 800);
-      tester.view.devicePixelRatio = 1.0;
-      addTearDown(() {
-        tester.view.resetPhysicalSize();
-        tester.view.resetDevicePixelRatio();
-      });
+      "WordByWordResourcesTab renders GridView with 2 columns on wide screen",
+      (tester) async {
+        tester.view.physicalSize = const Size(1000, 800);
+        tester.view.devicePixelRatio = 1.0;
+        addTearDown(() {
+          tester.view.resetPhysicalSize();
+          tester.view.resetDevicePixelRatio();
+        });
 
-      final cubit = FakeQuranResourcesCubit(
-        const QuranResourcesState(
-          status: QuranResourcesStatus.success,
-          wordByWordResources: [testResource1, testResource2],
-        ),
-      );
-
-      await tester.pumpWidget(
-        buildTestableWidget(
-          cubit: cubit,
-          child: const Scaffold(
-            body: WordByWordResourcesTab(),
+        final cubit = FakeQuranResourcesCubit(
+          const QuranResourcesState(
+            status: QuranResourcesStatus.success,
+            wordByWordResources: [testResource1, testResource2],
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
+        );
 
-      final gridFinder = find.byType(GridView);
-      expect(gridFinder, findsOneWidget);
+        await tester.pumpWidget(
+          buildTestableWidget(
+            cubit: cubit,
+            child: const Scaffold(body: WordByWordResourcesTab()),
+          ),
+        );
+        await tester.pumpAndSettle();
 
-      final GridView grid = tester.widget(gridFinder);
-      final delegate =
-          grid.gridDelegate as SliverGridDelegateWithFixedCrossAxisCount;
-      expect(delegate.crossAxisCount, equals(2));
-    });
+        final gridFinder = find.byType(GridView);
+        expect(gridFinder, findsOneWidget);
 
-    testWidgets("ResourceFilterChips filters items properly",
-        (tester) async {
+        final GridView grid = tester.widget(gridFinder);
+        final delegate =
+            grid.gridDelegate as SliverGridDelegateWithFixedCrossAxisCount;
+        expect(delegate.crossAxisCount, equals(2));
+      },
+    );
+
+    testWidgets("ResourceFilterChips filters items properly", (tester) async {
       tester.view.physicalSize = const Size(1000, 800);
       tester.view.devicePixelRatio = 1.0;
       addTearDown(() {
@@ -284,9 +286,7 @@ void main() {
       await tester.pumpWidget(
         buildTestableWidget(
           cubit: cubit,
-          child: const Scaffold(
-            body: TranslationResourcesTab(),
-          ),
+          child: const Scaffold(body: TranslationResourcesTab()),
         ),
       );
       await tester.pumpAndSettle();
@@ -306,38 +306,39 @@ void main() {
     });
 
     testWidgets(
-        "QuranResourcesScreen shows embedded search field on wide screen (>=768px)",
-        (tester) async {
-      tester.view.physicalSize = const Size(1200, 800);
-      tester.view.devicePixelRatio = 1.0;
-      addTearDown(() {
-        tester.view.resetPhysicalSize();
-        tester.view.resetDevicePixelRatio();
-      });
+      "QuranResourcesScreen shows embedded search field on wide screen (>=768px)",
+      (tester) async {
+        tester.view.physicalSize = const Size(1200, 800);
+        tester.view.devicePixelRatio = 1.0;
+        addTearDown(() {
+          tester.view.resetPhysicalSize();
+          tester.view.resetDevicePixelRatio();
+        });
 
-      if (getIt.isRegistered<QuranResourcesCubit>()) {
-        getIt.unregister<QuranResourcesCubit>();
-      }
-      getIt.registerFactory<QuranResourcesCubit>(() => FakeQuranResourcesCubit());
+        if (getIt.isRegistered<QuranResourcesCubit>()) {
+          getIt.unregister<QuranResourcesCubit>();
+        }
+        getIt.registerFactory<QuranResourcesCubit>(
+          () => FakeQuranResourcesCubit(),
+        );
 
-      await tester.pumpWidget(
-        MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (_) => ThemeCubit()),
-          ],
-          child: const MaterialApp(
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
-            supportedLocales: AppLocalizations.supportedLocales,
-            locale: Locale("en"),
-            home: QuranResourcesScreen(),
+        await tester.pumpWidget(
+          MultiBlocProvider(
+            providers: [BlocProvider(create: (_) => ThemeCubit())],
+            child: const MaterialApp(
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              locale: Locale("en"),
+              home: QuranResourcesScreen(),
+            ),
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
+        );
+        await tester.pumpAndSettle();
 
-      // Embedded TextField in AppBar actions should be visible
-      expect(find.byType(TextField), findsOneWidget);
-      expect(find.text("Quran Resources"), findsOneWidget);
-    });
+        // Embedded TextField in AppBar actions should be visible
+        expect(find.byType(TextField), findsOneWidget);
+        expect(find.text("Quran Resources"), findsOneWidget);
+      },
+    );
   });
 }

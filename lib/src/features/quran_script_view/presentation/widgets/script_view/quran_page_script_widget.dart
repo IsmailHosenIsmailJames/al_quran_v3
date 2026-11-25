@@ -12,7 +12,7 @@ import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_script
 import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_info.dart";
 import "package:al_quran_v3/src/features/quran_script_view/domain/utils/tajweed_text_preser.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
 class QuranScriptScriptView extends StatelessWidget {
@@ -121,8 +121,10 @@ class QuranScriptScriptView extends StatelessWidget {
                     ayahKeyState.current == ayahKey &&
                     segments != null;
 
-                return BlocBuilder<PlayerPositionCubit,
-                    AudioPlayerPositionModel>(
+                return BlocBuilder<
+                  PlayerPositionCubit,
+                  AudioPlayerPositionModel
+                >(
                   buildWhen: (previous, current) {
                     if (!canWordHighlight) return false;
                     final prevWord = findActiveWordKeyForSegments(

@@ -17,7 +17,7 @@ import "package:al_quran_v3/src/features/prayer_time/presentation/helpers/prayer
 import "package:awesome_notifications/awesome_notifications.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/foundation.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
@@ -62,7 +62,8 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
         final reminderState = context.read<PrayerReminderCubit>().state;
-        final currentModes = reminderState.prayerReminderModes ??
+        final currentModes =
+            reminderState.prayerReminderModes ??
             ReminderScheduler.getPrayerReminderModes();
         setState(() {
           _selectedPreset = _detectCurrentPreset(currentModes);
@@ -80,21 +81,24 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
     final maghrib = modes[Prayer.maghrib] ?? PrayerReminderMode.notification;
     final isha = modes[Prayer.isha] ?? PrayerReminderMode.notification;
 
-    final isAllAlarm = fajr == PrayerReminderMode.alarm &&
+    final isAllAlarm =
+        fajr == PrayerReminderMode.alarm &&
         dhuhr == PrayerReminderMode.alarm &&
         asr == PrayerReminderMode.alarm &&
         maghrib == PrayerReminderMode.alarm &&
         isha == PrayerReminderMode.alarm;
     if (isAllAlarm) return "all_alarm";
 
-    final isAllNotification = fajr == PrayerReminderMode.notification &&
+    final isAllNotification =
+        fajr == PrayerReminderMode.notification &&
         dhuhr == PrayerReminderMode.notification &&
         asr == PrayerReminderMode.notification &&
         maghrib == PrayerReminderMode.notification &&
         isha == PrayerReminderMode.notification;
     if (isAllNotification) return "all_notification";
 
-    final isBalanced = fajr == PrayerReminderMode.alarm &&
+    final isBalanced =
+        fajr == PrayerReminderMode.alarm &&
         dhuhr == PrayerReminderMode.notification &&
         asr == PrayerReminderMode.notification &&
         maghrib == PrayerReminderMode.notification &&
@@ -190,7 +194,8 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
           _hasExactAlarmPermission = exactAlarmAllowed;
         });
         if (notifAllowed && !widget.isFromSettings) {
-          final isEnabled = context
+          final isEnabled =
+              context
                   .read<PrayerReminderCubit>()
                   .state
                   .isPrayerRemindNotificationEnabled ??
@@ -225,9 +230,7 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
           _hasNotificationPermission = _hasNotificationPermission || granted;
         });
         if (_hasNotificationPermission) {
-          context
-              .read<PrayerReminderCubit>()
-              .enablePrayerRemindNotification();
+          context.read<PrayerReminderCubit>().enablePrayerRemindNotification();
         }
       }
     } catch (_) {}
@@ -290,12 +293,12 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
     if (mounted) {
       if (_hasNotificationPermission) {
         await context.read<PrayerReminderCubit>().commitSetupConfiguration(
-              preset: _selectedPreset,
-            );
+          preset: _selectedPreset,
+        );
       } else {
         final modes =
             context.read<PrayerReminderCubit>().state.prayerReminderModes ??
-                ReminderScheduler.getPrayerReminderModes();
+            ReminderScheduler.getPrayerReminderModes();
         for (final entry in modes.entries) {
           await ReminderScheduler.setPrayerReminderMode(entry.key, entry.value);
         }
@@ -590,7 +593,9 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
                     decoration: BoxDecoration(
                       color: hasLocation
                           ? const Color(0xFF10B981).withValues(alpha: 0.12)
-                          : themeState.primary.withValues(alpha: isDark ? 0.16 : 0.08),
+                          : themeState.primary.withValues(
+                              alpha: isDark ? 0.16 : 0.08,
+                            ),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
@@ -920,9 +925,7 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
           ),
           child: Icon(
             isGranted ? FluentIcons.checkmark_16_regular : icon,
-            color: isGranted
-                ? const Color(0xFF10B981)
-                : themeState.primary,
+            color: isGranted ? const Color(0xFF10B981) : themeState.primary,
             size: 17,
           ),
         ),
@@ -1436,10 +1439,13 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
                 newMode,
               );
               final currentModes = Map<Prayer, PrayerReminderMode>.from(
-                context.read<PrayerReminderCubit>().state.prayerReminderModes ?? {},
+                context.read<PrayerReminderCubit>().state.prayerReminderModes ??
+                    {},
               );
               currentModes[prayer] = newMode;
-              setState(() => _selectedPreset = _detectCurrentPreset(currentModes));
+              setState(
+                () => _selectedPreset = _detectCurrentPreset(currentModes),
+              );
             },
             themeState: themeState,
             isDark: isDark,

@@ -1,7 +1,7 @@
 import 'package:al_quran_v3/l10n/app_localizations.dart';
 import 'package:al_quran_v3/src/features/quran_resources/presentation/cubit/quran_resources_cubit.dart';
 import 'package:al_quran_v3/src/features/quran_resources/presentation/cubit/quran_resources_state.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ResourceSearchBar extends StatelessWidget {
@@ -25,10 +25,7 @@ class ResourceSearchBar extends StatelessWidget {
         if (!state.isSearching) {
           return Text(
             appLocalizations.quranResources,
-            style: const TextStyle(
-              fontWeight: FontWeight.w700,
-              fontSize: 20,
-            ),
+            style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
           );
         }
 
@@ -44,10 +41,9 @@ class ResourceSearchBar extends StatelessWidget {
                 hintText: "${appLocalizations.search}...",
                 border: InputBorder.none,
                 hintStyle: TextStyle(
-                  color: Theme.of(context)
-                      .colorScheme
-                      .onSurface
-                      .withValues(alpha: 0.45),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withValues(alpha: 0.45),
                   fontSize: 16,
                 ),
                 suffixIcon: value.text.isNotEmpty
@@ -71,4 +67,3 @@ class ResourceSearchBar extends StatelessWidget {
     );
   }
 }
-
