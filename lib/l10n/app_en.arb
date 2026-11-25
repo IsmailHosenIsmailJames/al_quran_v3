@@ -63,6 +63,7 @@
     }
   },
   "saveAndDownload": "Save & Download",
+  "appSetup": "App Setup",
   "appLanguage": "App Language",
   "selectAppLanguage": "Select app language...",
   "pleaseSelectOne": "Please select one",

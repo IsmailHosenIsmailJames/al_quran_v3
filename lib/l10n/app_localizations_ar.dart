@@ -61,6 +61,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get saveAndDownload => 'حفظ وتنزيل';
 
   @override
+  String get appSetup => 'App Setup';
+
+  @override
   String get appLanguage => 'لغة التطبيق';
 
   @override

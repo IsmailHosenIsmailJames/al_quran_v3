@@ -95,6 +95,7 @@ class _SetupScreenContentState extends State<_SetupScreenContent> {
   @override
   Widget build(BuildContext context) {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     bool isLandscape = MediaQuery.of(context).size.width > 600;
     bool isSmallScreen = MediaQuery.of(context).size.height < 450;
 
@@ -124,28 +125,51 @@ class _SetupScreenContentState extends State<_SetupScreenContent> {
                   offset: _isAppBarVisible ? Offset.zero : const Offset(0, -1),
                   child: AppBar(
                     elevation: 0,
+                    scrolledUnderElevation: 0,
+                    backgroundColor: isLandscape
+                        ? (isDark ? const Color(0xFF161817) : Colors.white)
+                        : null,
+                    bottom: isLandscape
+                        ? PreferredSize(
+                            preferredSize: const Size.fromHeight(1),
+                            child: Divider(
+                              height: 1,
+                              color: isDark
+                                  ? Colors.white.withValues(alpha: 0.07)
+                                  : Colors.grey.shade200,
+                            ),
+                          )
+                        : null,
                     titleSpacing: 0,
-                    title: Text(appLocalizations.appLanguage),
+                    title: Text(
+                      appLocalizations.appSetup,
+                      style: const TextStyle(fontWeight: FontWeight.w600),
+                    ),
                     centerTitle: true,
                     actions: [
-                      IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const SettingsPage(),
-                            ),
-                          );
-                        },
-                        icon: const Icon(FluentIcons.settings_24_regular),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: IconButton(
+                          tooltip: appLocalizations.settings,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SettingsPage(),
+                              ),
+                            );
+                          },
+                          icon: const Icon(FluentIcons.settings_24_regular),
+                        ),
                       ),
                     ],
                   ),
                 ),
               ),
-        extendBodyBehindAppBar: true,
+        extendBodyBehindAppBar: !isLandscape,
         body: NotificationListener<UserScrollNotification>(
           onNotification: (notification) {
+            if (isLandscape) return false;
             if (notification.direction == ScrollDirection.reverse) {
               if (_isAppBarVisible) {
                 setState(() {
@@ -162,26 +186,45 @@ class _SetupScreenContentState extends State<_SetupScreenContent> {
             return true;
           },
           child: isLandscape
-              ? Row(
-                  children: [
-                    Expanded(
-                      flex: 5,
-                      child: LanguageSelectionList(
-                        scrollController: _scrollController,
-                        bottomPadding: 24,
+              ? Container(
+                  color: isDark
+                      ? const Color(0xFF101312)
+                      : const Color(0xFFF3F5F4),
+                  child: Center(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        maxWidth: 1120,
+                        maxHeight: 660,
                       ),
-                    ),
-                    const VerticalDivider(width: 1),
-                    Expanded(
-                      flex: 6,
-                      child: SingleChildScrollView(
-                        padding: const EdgeInsets.all(16),
-                        child: SetupPreviewCard(
-                          onDownloadPressed: () => _onDownloadPressed(context),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 28,
+                          vertical: 20,
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Expanded(
+                              flex: 5,
+                              child: LanguageSelectionList(
+                                scrollController: _scrollController,
+                                isDesktopCard: true,
+                                bottomPadding: 16,
+                              ),
+                            ),
+                            const SizedBox(width: 24),
+                            Expanded(
+                              flex: 6,
+                              child: SetupPreviewCard(
+                                onDownloadPressed: () =>
+                                    _onDownloadPressed(context),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                  ],
+                  ),
                 )
               : Stack(
                   children: [

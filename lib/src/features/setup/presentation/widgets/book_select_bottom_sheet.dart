@@ -16,8 +16,13 @@ import "package:scrollable_positioned_list/scrollable_positioned_list.dart";
 
 class BookSelectBottomSheet extends StatefulWidget {
   final bool isTafsir;
+  final bool isDialog;
 
-  const BookSelectBottomSheet({super.key, required this.isTafsir});
+  const BookSelectBottomSheet({
+    super.key,
+    required this.isTafsir,
+    this.isDialog = false,
+  });
 
   @override
   State<BookSelectBottomSheet> createState() => _BookSelectBottomSheetState();
@@ -60,7 +65,9 @@ class _BookSelectBottomSheetState extends State<BookSelectBottomSheet> {
     AppLocalizations appLocalizations = AppLocalizations.of(context);
 
     return ClipRRect(
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+      borderRadius: widget.isDialog
+          ? BorderRadius.circular(20)
+          : const BorderRadius.vertical(top: Radius.circular(20)),
       child: Container(
         color: Theme.of(context).scaffoldBackgroundColor,
         child: BlocBuilder<SetupBloc, SetupState>(
@@ -105,18 +112,21 @@ class _BookSelectBottomSheetState extends State<BookSelectBottomSheet> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Top Drag Handle Indicator
-        const Gap(10),
-        Center(
-          child: Container(
-            width: 38,
-            height: 4,
-            decoration: BoxDecoration(
-              color: isDark ? Colors.grey.shade700 : Colors.grey.shade300,
-              borderRadius: BorderRadius.circular(2),
+        if (!widget.isDialog) ...[
+          // Top Drag Handle Indicator
+          const Gap(10),
+          Center(
+            child: Container(
+              width: 38,
+              height: 4,
+              decoration: BoxDecoration(
+                color: isDark ? Colors.grey.shade700 : Colors.grey.shade300,
+                borderRadius: BorderRadius.circular(2),
+              ),
             ),
           ),
-        ),
+        ] else
+          const Gap(14),
 
         // Header Title Row
         Padding(

@@ -176,14 +176,19 @@ Future<void> main() async {
   LocationQiblaPrayerDataState locationQiblaPrayerDataState =
       await LocationQiblaPrayerDataCubit.getSavedState();
 
+  try {
+    await ReminderScheduler.init();
+  } catch (e) {
+    log("ReminderScheduler initialization skipped: $e");
+  }
+
   if (platformOwn != platform_services.PlatformOwn.isLinux &&
       platformOwn != platform_services.PlatformOwn.isWindows &&
       !kIsWeb) {
     try {
-      await ReminderScheduler.init();
       PrayerBackgroundWorker.registerWorker();
     } catch (e) {
-      log("Reminder/Background worker initialization skipped: $e");
+      log("Background worker initialization skipped: $e");
     }
   }
 

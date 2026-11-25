@@ -1,4 +1,5 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
+import "package:al_quran_v3/src/core/localization/language_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_info.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart";
@@ -288,9 +289,9 @@ class SetupPreviewCard extends StatelessWidget {
         return Container(
           decoration: BoxDecoration(
             color: isDark ? const Color(0xFF1B1B1B) : Colors.white,
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(isSheet ? 24 : 0),
-            ),
+            borderRadius: isSheet
+                ? const BorderRadius.vertical(top: Radius.circular(24))
+                : BorderRadius.circular(18),
             border: isSheet
                 ? Border(
                     top: BorderSide(
@@ -300,9 +301,30 @@ class SetupPreviewCard extends StatelessWidget {
                       width: 1,
                     ),
                   )
-                : null,
+                : Border.all(
+                    color: isDark
+                        ? Colors.white.withValues(alpha: 0.08)
+                        : Colors.grey.shade200,
+                    width: 1,
+                  ),
+            boxShadow: isSheet
+                ? null
+                : [
+                    BoxShadow(
+                      color: Colors.black.withValues(
+                        alpha: isDark ? 0.25 : 0.04,
+                      ),
+                      blurRadius: 16,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
           ),
-          padding: EdgeInsets.fromLTRB(16, isSheet ? 10 : 16, 16, 16),
+          padding: EdgeInsets.fromLTRB(
+            isSheet ? 16 : 20,
+            isSheet ? 10 : 20,
+            isSheet ? 16 : 20,
+            isSheet ? 16 : 20,
+          ),
           child: SafeArea(
             top: false,
             child: SingleChildScrollView(
@@ -310,6 +332,46 @@ class SetupPreviewCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  if (!isSheet) ...[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          appLocalizations.quranStyle,
+                          style: const TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: themeState.primary.withValues(
+                              alpha: isDark ? 0.16 : 0.08,
+                            ),
+                            borderRadius: BorderRadius.circular(100),
+                            border: Border.all(
+                              color: themeState.primary.withValues(
+                                alpha: isDark ? 0.3 : 0.18,
+                              ),
+                            ),
+                          ),
+                          child: Text(
+                            context.watch<LanguageCubit>().state.native,
+                            style: TextStyle(
+                              fontSize: 11.5,
+                              fontWeight: FontWeight.w600,
+                              color: themeState.primary,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Gap(14),
+                  ],
                   if (isSheet) ...[
                     // Drag handle pill
                     Center(
@@ -612,6 +674,44 @@ class SetupPreviewCard extends StatelessWidget {
     required bool isTafsir,
   }) {
     final setupBloc = context.read<SetupBloc>();
+    final isDesktopOrWide = MediaQuery.of(context).size.width > 600;
+
+    if (isDesktopOrWide) {
+      showDialog(
+        context: context,
+        builder: (_) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider.value(value: setupBloc),
+              BlocProvider(
+                create: (context) => BookSearchCubit(
+                  isTafsir: isTafsir,
+                  allResources: setupBloc.state.allResources,
+                ),
+              ),
+            ],
+            child: Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              backgroundColor: Colors.transparent,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(
+                  maxWidth: 560,
+                  maxHeight: 680,
+                ),
+                child: BookSelectBottomSheet(
+                  isTafsir: isTafsir,
+                  isDialog: true,
+                ),
+              ),
+            ),
+          );
+        },
+      );
+      return;
+    }
+
     showModalBottomSheet(
       useSafeArea: true,
       isScrollControlled: true,

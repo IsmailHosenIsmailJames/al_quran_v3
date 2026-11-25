@@ -61,6 +61,9 @@ class AppLocalizationsKk extends AppLocalizations {
   String get saveAndDownload => 'Сақтау және жүктеу';
 
   @override
+  String get appSetup => 'App Setup';
+
+  @override
   String get appLanguage => 'Қолданба тілі';
 
   @override

@@ -61,6 +61,9 @@ class AppLocalizationsFa extends AppLocalizations {
   String get saveAndDownload => 'ذخیره و دانلود';
 
   @override
+  String get appSetup => 'App Setup';
+
+  @override
   String get appLanguage => 'زبان برنامه';
 
   @override

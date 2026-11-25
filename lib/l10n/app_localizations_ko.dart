@@ -61,6 +61,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get saveAndDownload => '저장 및 다운로드';
 
   @override
+  String get appSetup => 'App Setup';
+
+  @override
   String get appLanguage => '앱 언어';
 
   @override

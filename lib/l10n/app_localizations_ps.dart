@@ -61,6 +61,9 @@ class AppLocalizationsPs extends AppLocalizations {
   String get saveAndDownload => 'خوندي او ډاونلوډ کړئ';
 
   @override
+  String get appSetup => 'App Setup';
+
+  @override
   String get appLanguage => 'د اپلیکیشن ژبه';
 
   @override

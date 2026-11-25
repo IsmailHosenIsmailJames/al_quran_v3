@@ -1,12 +1,9 @@
 import 'dart:async';
 
-import "package:cupertino_ui/cupertino_ui.dart";
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_localizations/flutter_localizations.dart'
-    hide GlobalMaterialLocalizations, GlobalCupertinoLocalizations;
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
-import "package:material_ui/material_ui.dart";
 
 import 'app_localizations_ar.dart';
 import 'app_localizations_az.dart';
@@ -222,6 +219,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save & Download'**
   String get saveAndDownload;
+
+  /// No description provided for @appSetup.
+  ///
+  /// In en, this message translates to:
+  /// **'App Setup'**
+  String get appSetup;
 
   /// No description provided for @appLanguage.
   ///

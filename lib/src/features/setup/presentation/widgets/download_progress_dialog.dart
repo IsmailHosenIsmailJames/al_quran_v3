@@ -42,11 +42,13 @@ class DownloadProgressDialog extends StatelessWidget {
     return PopScope(
       canPop: false,
       child: Dialog(
-        insetPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 24),
+        insetPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         backgroundColor: Colors.transparent,
-        child: Container(
-          padding: const EdgeInsets.all(22),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 460),
+          child: Container(
+            padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
             color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
             borderRadius: BorderRadius.circular(24),
@@ -91,9 +93,14 @@ class DownloadProgressDialog extends StatelessWidget {
                   isDark,
                 );
               }
-              return _buildInitialLoader(themeState);
+              return _buildInitialLoader(
+                themeState,
+                appLocalizations,
+                isDark,
+              );
             },
           ),
+        ),
         ),
       ),
     );
@@ -457,10 +464,27 @@ class DownloadProgressDialog extends StatelessWidget {
     );
   }
 
-  Widget _buildInitialLoader(ThemeState themeState) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [CircularProgressIndicator(color: themeState.primary)],
+  Widget _buildInitialLoader(
+    ThemeState themeState,
+    AppLocalizations appLocalizations,
+    bool isDark,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          CircularProgressIndicator(color: themeState.primary),
+          const Gap(16),
+          Text(
+            appLocalizations.preparingResources,
+            style: TextStyle(
+              fontSize: 13.5,
+              color: isDark ? Colors.grey.shade300 : Colors.grey.shade700,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

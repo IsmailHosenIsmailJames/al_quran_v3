@@ -61,6 +61,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get saveAndDownload => '保存并下载';
 
   @override
+  String get appSetup => 'App Setup';
+
+  @override
   String get appLanguage => '应用语言';
 
   @override

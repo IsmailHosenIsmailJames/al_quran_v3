@@ -61,6 +61,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get saveAndDownload => 'Guardar y Descargar';
 
   @override
+  String get appSetup => 'App Setup';
+
+  @override
   String get appLanguage => 'Idioma de la app';
 
   @override

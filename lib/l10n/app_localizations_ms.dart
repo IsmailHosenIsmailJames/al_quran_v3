@@ -61,6 +61,9 @@ class AppLocalizationsMs extends AppLocalizations {
   String get saveAndDownload => 'Simpan & Muat Turun';
 
   @override
+  String get appSetup => 'App Setup';
+
+  @override
   String get appLanguage => 'Bahasa Aplikasi';
 
   @override

@@ -61,6 +61,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get saveAndDownload => 'सहेजें और डाउनलोड करें';
 
   @override
+  String get appSetup => 'App Setup';
+
+  @override
   String get appLanguage => 'ऐप की भाषा';
 
   @override

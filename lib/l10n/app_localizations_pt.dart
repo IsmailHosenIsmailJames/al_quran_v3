@@ -61,6 +61,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get saveAndDownload => 'Salvar e Baixar';
 
   @override
+  String get appSetup => 'App Setup';
+
+  @override
   String get appLanguage => 'Idioma do Aplicativo';
 
   @override

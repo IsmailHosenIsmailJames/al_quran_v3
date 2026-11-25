@@ -517,39 +517,46 @@ class _PrayerGuidanceSetupScreenState extends State<PrayerGuidanceSetupScreen>
           ),
         ),
       ),
-      child: SizedBox(
-        height: 48,
-        child: ElevatedButton(
-          onPressed: _finishSetup,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: themeState.primary,
-            foregroundColor: Colors.white,
-            elevation: 1,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14),
-            ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Flexible(
-                child: Text(
-                  widget.isFromSettings
-                      ? l10n.saveAndReturn
-                      : l10n.saveAndGetStarted,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+      child: Center(
+        heightFactor: 1,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 648),
+          child: SizedBox(
+            width: double.infinity,
+            height: 48,
+            child: ElevatedButton(
+              onPressed: _finishSetup,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: themeState.primary,
+                foregroundColor: Colors.white,
+                elevation: 1,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
                 ),
               ),
-              const Gap(6),
-              const Icon(FluentIcons.arrow_right_24_filled, size: 16),
-            ],
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                    child: Text(
+                      widget.isFromSettings
+                          ? l10n.saveAndReturn
+                          : l10n.saveAndGetStarted,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  const Gap(6),
+                  const Icon(FluentIcons.arrow_right_24_filled, size: 16),
+                ],
+              ),
+            ),
           ),
         ),
       ),

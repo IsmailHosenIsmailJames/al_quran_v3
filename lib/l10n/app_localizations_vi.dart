@@ -61,6 +61,9 @@ class AppLocalizationsVi extends AppLocalizations {
   String get saveAndDownload => 'Lưu & Tải xuống';
 
   @override
+  String get appSetup => 'App Setup';
+
+  @override
   String get appLanguage => 'Ngôn ngữ ứng dụng';
 
   @override
