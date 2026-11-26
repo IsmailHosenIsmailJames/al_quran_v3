@@ -13,47 +13,61 @@ class DownloadCubit extends Cubit<DownloadState> {
   StreamSubscription<DownloadProgress>? _subscription;
 
   DownloadCubit({required this.downloadSetupResourcesUseCase})
-      : super(DownloadState.initial());
+    : super(DownloadState.initial());
 
   void startDownload({
     required SetupConfig config,
     required String segmentsUrl,
   }) {
-    emit(DownloadState(
-      status: DownloadStatus.downloading,
-      progress: DownloadProgress.inProgress(stepName: "Starting setup downloads..."),
-    ));
+    emit(
+      DownloadState(
+        status: DownloadStatus.downloading,
+        progress: DownloadProgress.inProgress(
+          stepName: "Starting setup downloads...",
+        ),
+      ),
+    );
 
     _subscription?.cancel();
     _subscription = downloadSetupResourcesUseCase
         .execute(config: config, segmentsUrl: segmentsUrl)
         .listen(
-      (progress) {
-        if (progress.status == DownloadStepStatus.completed) {
-          emit(state.copyWith(
-            status: DownloadStatus.success,
-            progress: progress,
-          ));
-        } else if (progress.status == DownloadStepStatus.failed) {
-          emit(state.copyWith(
-            status: DownloadStatus.failure,
-            progress: progress,
-            errorMessage: progress.errorMessage ?? "An error occurred during download.",
-          ));
-        } else {
-          emit(state.copyWith(
-            status: DownloadStatus.downloading,
-            progress: progress,
-          ));
-        }
-      },
-      onError: (error) {
-        emit(state.copyWith(
-          status: DownloadStatus.failure,
-          errorMessage: error.toString(),
-        ));
-      },
-    );
+          (progress) {
+            if (progress.status == DownloadStepStatus.completed) {
+              emit(
+                state.copyWith(
+                  status: DownloadStatus.success,
+                  progress: progress,
+                ),
+              );
+            } else if (progress.status == DownloadStepStatus.failed) {
+              emit(
+                state.copyWith(
+                  status: DownloadStatus.failure,
+                  progress: progress,
+                  errorMessage:
+                      progress.errorMessage ??
+                      "An error occurred during download.",
+                ),
+              );
+            } else {
+              emit(
+                state.copyWith(
+                  status: DownloadStatus.downloading,
+                  progress: progress,
+                ),
+              );
+            }
+          },
+          onError: (error) {
+            emit(
+              state.copyWith(
+                status: DownloadStatus.failure,
+                errorMessage: error.toString(),
+              ),
+            );
+          },
+        );
   }
 
   void reset() {

@@ -24,7 +24,6 @@
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon"
         android:label="Al Quran: Audio, Tafsir, Qibla"
-        android:usesCleartextTraffic="true"
         android:allowBackup="false"
         android:fullBackupContent="false"
         tools:replace="android:allowBackup,android:fullBackupContent">
@@ -39,7 +38,6 @@
             android:taskAffinity=""
             android:theme="@style/LaunchTheme"
             android:turnScreenOn="true"
-            android:usesCleartextTraffic="true"
             android:windowSoftInputMode="adjustResize">
             <!-- Specifies an Android theme to apply to this Activity as soon as
                  the Android process has started. This theme is visible to the user

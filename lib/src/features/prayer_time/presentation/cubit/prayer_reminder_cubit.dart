@@ -16,25 +16,25 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
   StreamSubscription<void>? _ringtoneStoppedSub;
 
   PrayerReminderCubit()
-      : super(
-          PrayerReminderState(
-            reminderTimeAdjustment:
-                ReminderScheduler.getReminderTimeAdjustment(),
-            enabledPrayers: ReminderScheduler.getEnabledPrayers(),
-            prayerReminderModes: ReminderScheduler.getPrayerReminderModes(),
-            enforceAlarmSound: ReminderScheduler.getEnforceAlarmSound(),
-            soundVolume: ReminderScheduler.getSoundVolume(),
-            isPrayerRemindNotificationEnabled:
-                ReminderScheduler.isPrayerRemindNotificationEnabled(),
-            selectedRingtoneUri: ReminderScheduler.getSelectedRingtoneUri(),
-            selectedRingtoneTitle: ReminderScheduler.getSelectedRingtoneTitle() ??
-                "App Default (notification_sound.wav)",
-            selectedRingtoneType: ReminderScheduler.getSelectedRingtoneType(),
-            isPlayingPreview: false,
-            hasFullScreenIntentPermission: true,
-            isIgnoringBatteryOptimizations: true,
-          ),
-        ) {
+    : super(
+        PrayerReminderState(
+          reminderTimeAdjustment: ReminderScheduler.getReminderTimeAdjustment(),
+          enabledPrayers: ReminderScheduler.getEnabledPrayers(),
+          prayerReminderModes: ReminderScheduler.getPrayerReminderModes(),
+          enforceAlarmSound: ReminderScheduler.getEnforceAlarmSound(),
+          soundVolume: ReminderScheduler.getSoundVolume(),
+          isPrayerRemindNotificationEnabled:
+              ReminderScheduler.isPrayerRemindNotificationEnabled(),
+          selectedRingtoneUri: ReminderScheduler.getSelectedRingtoneUri(),
+          selectedRingtoneTitle:
+              ReminderScheduler.getSelectedRingtoneTitle() ??
+              "App Default (notification_sound.wav)",
+          selectedRingtoneType: ReminderScheduler.getSelectedRingtoneType(),
+          isPlayingPreview: false,
+          hasFullScreenIntentPermission: true,
+          isIgnoringBatteryOptimizations: true,
+        ),
+      ) {
     _ringtoneStoppedSub = RingtoneService.onRingtoneStopped.listen((_) {
       if (!isClosed && state.isPlayingPreview) {
         emit(state.copyWith(isPlayingPreview: false));
@@ -45,14 +45,15 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
   }
 
   Future<void> togglePrayerReminder(Prayer prayer) async {
-    final currentMode = state.prayerReminderModes?[prayer] ??
+    final currentMode =
+        state.prayerReminderModes?[prayer] ??
         ReminderScheduler.getPrayerReminderMode(prayer);
     final isCurrentlyEnabled = currentMode.isEnabled;
     final newMode = isCurrentlyEnabled
         ? PrayerReminderMode.off
         : (prayer == Prayer.fajr
-            ? PrayerReminderMode.alarm
-            : PrayerReminderMode.notification);
+              ? PrayerReminderMode.alarm
+              : PrayerReminderMode.notification);
 
     await setPrayerReminderMode(prayer, newMode);
   }
@@ -62,7 +63,8 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
       await applyBulkPreset(preset);
     } else {
       await enablePrayerRemindNotification();
-      final modes = state.prayerReminderModes ??
+      final modes =
+          state.prayerReminderModes ??
           ReminderScheduler.getPrayerReminderModes();
       for (final entry in modes.entries) {
         await ReminderScheduler.setPrayerReminderMode(entry.key, entry.value);
@@ -202,8 +204,8 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
       final uri = soundType == "adhan"
           ? "resource://raw/adhan"
           : (soundType == "default_sound"
-              ? "resource://raw/notification_sound"
-              : (state.selectedRingtoneUri ?? soundType));
+                ? "resource://raw/notification_sound"
+                : (state.selectedRingtoneUri ?? soundType));
 
       final success = await RingtoneService.playRingtone(uri);
       if (!success && !isClosed) {
@@ -261,7 +263,8 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
     final Map<Prayer, bool> enabled = {};
 
     for (final p in Prayer.values) {
-      final isCorePrayer = p == Prayer.fajr ||
+      final isCorePrayer =
+          p == Prayer.fajr ||
           p == Prayer.dhuhr ||
           p == Prayer.asr ||
           p == Prayer.maghrib ||
@@ -285,17 +288,20 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
       } else {
         // "balanced" default: Fajr is Alarm, others are Notification
         final isFajr = p == Prayer.fajr;
-        modes[p] =
-            isFajr ? PrayerReminderMode.alarm : PrayerReminderMode.notification;
+        modes[p] = isFajr
+            ? PrayerReminderMode.alarm
+            : PrayerReminderMode.notification;
         enabled[p] = true;
       }
     }
 
-    emit(state.copyWith(
-      prayerReminderModes: modes,
-      enabledPrayers: enabled,
-      isPrayerRemindNotificationEnabled: true,
-    ));
+    emit(
+      state.copyWith(
+        prayerReminderModes: modes,
+        enabledPrayers: enabled,
+        isPrayerRemindNotificationEnabled: true,
+      ),
+    );
 
     await ReminderScheduler.enablePrayerRemindNotification();
     for (final entry in modes.entries) {
@@ -316,10 +322,9 @@ class PrayerReminderCubit extends Cubit<PrayerReminderState> {
     final enabledMap = Map<Prayer, bool>.from(state.enabledPrayers ?? {});
     enabledMap[prayer] = mode.isEnabled;
 
-    emit(state.copyWith(
-      prayerReminderModes: modes,
-      enabledPrayers: enabledMap,
-    ));
+    emit(
+      state.copyWith(prayerReminderModes: modes, enabledPrayers: enabledMap),
+    );
 
     await ReminderScheduler.setPrayerReminderMode(prayer, mode);
     await ReminderScheduler.scheduleNotification();

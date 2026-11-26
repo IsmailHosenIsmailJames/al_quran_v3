@@ -61,6 +61,9 @@ class AppLocalizationsAz extends AppLocalizations {
   String get saveAndDownload => 'Yadda saxla və endir';
 
   @override
+  String get appSetup => 'App Setup';
+
+  @override
   String get appLanguage => 'Tətbiq Dili';
 
   @override

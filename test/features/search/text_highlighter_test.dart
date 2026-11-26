@@ -1,5 +1,5 @@
 import "package:al_quran_v3/src/features/search/domain/utils/text_highlighter.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_test/flutter_test.dart";
 
 void main() {
@@ -39,7 +39,12 @@ void main() {
         highlightColor: Colors.blue,
       );
 
-      expect(spans.any((s) => (s as TextSpan).text?.contains("الرَّحْمَٰنِ") == true), isTrue);
+      expect(
+        spans.any(
+          (s) => (s as TextSpan).text?.contains("الرَّحْمَٰنِ") == true,
+        ),
+        isTrue,
+      );
     });
   });
 }

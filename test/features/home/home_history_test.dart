@@ -48,14 +48,17 @@ void main() {
       expect(getHistoryUseCase(), isEmpty);
     });
 
-    test("AddHistoryUseCase adds an item and GetHistoryUseCase retrieves it", () async {
-      await addHistoryUseCase(surahNumber: 1, ayahNumber: 1, pageNumber: 1);
+    test(
+      "AddHistoryUseCase adds an item and GetHistoryUseCase retrieves it",
+      () async {
+        await addHistoryUseCase(surahNumber: 1, ayahNumber: 1, pageNumber: 1);
 
-      final history = getHistoryUseCase();
-      expect(history.length, equals(1));
-      expect(history.first.surahNumber, equals(1));
-      expect(history.first.ayahNumber, equals(1));
-      expect(history.first.pageNumber, equals(1));
-    });
+        final history = getHistoryUseCase();
+        expect(history.length, equals(1));
+        expect(history.first.surahNumber, equals(1));
+        expect(history.first.ayahNumber, equals(1));
+        expect(history.first.pageNumber, equals(1));
+      },
+    );
   });
 }

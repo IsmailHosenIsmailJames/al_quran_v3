@@ -45,12 +45,14 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
         madhab: madhab,
       );
 
-      emit(state.copyWith(
-        todayPrayerTimes: prayerTimes,
-        monthlyPrayerTimes: monthly,
-        isLoading: false,
-        hasError: false,
-      ));
+      emit(
+        state.copyWith(
+          todayPrayerTimes: prayerTimes,
+          monthlyPrayerTimes: monthly,
+          isLoading: false,
+          hasError: false,
+        ),
+      );
       PrayerWidgetService.updateWidgets();
     } catch (_) {
       emit(state.copyWith(isLoading: false, hasError: true));

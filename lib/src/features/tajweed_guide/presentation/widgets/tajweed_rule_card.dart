@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "../../domain/entities/tajweed_rule_entity.dart";
 import "tajweed_tagged_text.dart";
 

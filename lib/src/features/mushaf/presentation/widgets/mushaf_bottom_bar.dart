@@ -2,7 +2,7 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/features/mushaf/domain/utils/mushaf_page_helper.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -35,8 +35,9 @@ class MushafBottomBar extends StatelessWidget {
       firstChild: Container(
         padding: const EdgeInsets.fromLTRB(16, 6, 16, 10),
         decoration: BoxDecoration(
-          color: (isDark ? const Color(0xFF1A1A1A) : Colors.white)
-              .withValues(alpha: 0.95),
+          color: (isDark ? const Color(0xFF1A1A1A) : Colors.white).withValues(
+            alpha: 0.95,
+          ),
           borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
           border: Border(
             top: BorderSide(
@@ -66,16 +67,18 @@ class MushafBottomBar extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
-                      color:
-                          isDark ? Colors.grey.shade500 : Colors.grey.shade600,
+                      color: isDark
+                          ? Colors.grey.shade500
+                          : Colors.grey.shade600,
                     ),
                   ),
                   Expanded(
                     child: SliderTheme(
                       data: SliderTheme.of(context).copyWith(
                         activeTrackColor: themeState.primary,
-                        inactiveTrackColor: themeState.primary
-                            .withValues(alpha: isDark ? 0.2 : 0.15),
+                        inactiveTrackColor: themeState.primary.withValues(
+                          alpha: isDark ? 0.2 : 0.15,
+                        ),
                         thumbColor: themeState.primary,
                         overlayColor: themeState.primary.withValues(alpha: 0.1),
                         trackHeight: 3.5,
@@ -85,9 +88,9 @@ class MushafBottomBar extends StatelessWidget {
                       ),
                       child: Slider(
                         value: currentPage.toDouble().clamp(
-                              1.0,
-                              MushafPageHelper.totalPages.toDouble(),
-                            ),
+                          1.0,
+                          MushafPageHelper.totalPages.toDouble(),
+                        ),
                         min: 1.0,
                         max: MushafPageHelper.totalPages.toDouble(),
                         onChanged: (val) {
@@ -101,8 +104,9 @@ class MushafBottomBar extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
-                      color:
-                          isDark ? Colors.grey.shade500 : Colors.grey.shade600,
+                      color: isDark
+                          ? Colors.grey.shade500
+                          : Colors.grey.shade600,
                     ),
                   ),
                 ],
@@ -131,8 +135,10 @@ class MushafBottomBar extends StatelessWidget {
                     onPressed: currentPage < MushafPageHelper.totalPages
                         ? onNextPage
                         : null,
-                    icon: const Icon(FluentIcons.chevron_left_20_filled,
-                        size: 16),
+                    icon: const Icon(
+                      FluentIcons.chevron_left_20_filled,
+                      size: 16,
+                    ),
                     label: Text(
                       l10n.next,
                       style: TextStyle(
@@ -154,8 +160,9 @@ class MushafBottomBar extends StatelessWidget {
                         vertical: 6,
                       ),
                       decoration: BoxDecoration(
-                        color: themeState.primary
-                            .withValues(alpha: isDark ? 0.2 : 0.1),
+                        color: themeState.primary.withValues(
+                          alpha: isDark ? 0.2 : 0.1,
+                        ),
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
                           color: themeState.primary.withValues(
@@ -211,8 +218,10 @@ class MushafBottomBar extends StatelessWidget {
                             : Colors.grey.shade800,
                       ),
                     ),
-                    icon: const Icon(FluentIcons.chevron_right_20_filled,
-                        size: 16),
+                    icon: const Icon(
+                      FluentIcons.chevron_right_20_filled,
+                      size: 16,
+                    ),
                   ),
                 ],
               ),
@@ -221,8 +230,9 @@ class MushafBottomBar extends StatelessWidget {
         ),
       ),
       secondChild: const SizedBox.shrink(),
-      crossFadeState:
-          isUiVisible ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+      crossFadeState: isUiVisible
+          ? CrossFadeState.showFirst
+          : CrossFadeState.showSecond,
       duration: const Duration(milliseconds: 200),
     );
   }

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.ismailhosenismailjames.al_quran_v3</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-proprietary=https://github.com/IsmailHosenIsmailJames/al_quran_v3/blob/main/LICENSE</project_license>
+  <name>Al Quran</name>
+  <summary>Read the Holy Quran with tafsir, audio, and prayer times</summary>
+
+  <description>
+    <p>
+      Al Quran is a comprehensive companion for reading the Holy Quran, listening to recitations,
+      and tracking daily prayer times.
+    </p>
+    <ul>
+      <li>Multiple Quran scripts including Uthmani, Indopak, and Tajweed color coding</li>
+      <li>Offline translations, tafsirs, and word-by-word analysis across dozens of languages</li>
+      <li>Synchronized ayah and word-by-word audio recitation with sleep timer</li>
+      <li>Global prayer time calculations, Qibla direction, and daily reading plans</li>
+      <li>Notes, collections, and pinned ayahs</li>
+    </ul>
+  </description>
+
+  <launchable type="desktop-id">io.github.ismailhosenismailjames.al_quran_v3.desktop</launchable>
+
+  <developer id="io.github.ismailhosenismailjames">
+    <name>Ismail Hosen</name>
+  </developer>
+
+  <url type="homepage">https://alquranwithaudio.web.app</url>
+  <url type="bugtracker">https://github.com/IsmailHosenIsmailJames/al_quran_v3/issues</url>
+  <url type="vcs-browser">https://github.com/IsmailHosenIsmailJames/al_quran_v3</url>
+
+  <screenshots>
+    <screenshot type="default">
+      <caption>Quran Reader with Arabic script, translation, and word-by-word analysis</caption>
+      <image>https://raw.githubusercontent.com/IsmailHosenIsmailJames/al_quran_v3/v4.4.2/docs/screenshots/quran-reader-desktop.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Main Quran dashboard with Surah, Juz, Page, Hizb, and Ruku navigation</caption>
+      <image>https://raw.githubusercontent.com/IsmailHosenIsmailJames/al_quran_v3/v4.4.2/docs/screenshots/home-desktop.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Prayer times schedule, live countdown, and Hijri calendar</caption>
+      <image>https://raw.githubusercontent.com/IsmailHosenIsmailJames/al_quran_v3/v4.4.2/docs/screenshots/prayer-times-desktop.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Synchronized Quran audio player with reciter selection</caption>
+      <image>https://raw.githubusercontent.com/IsmailHosenIsmailJames/al_quran_v3/v4.4.2/docs/screenshots/audio-desktop.png</image>
+    </screenshot>
+  </screenshots>
+
+  <content_rating type="oars-1.1" />
+
+  <releases>
+    <release version="4.4.2" date="2026-11-26">
+      <description>
+        <p>Desktop UI improvements, Flutter 3.50.1 update, and Linux prayer settings stability fixes.</p>
+      </description>
+    </release>
+  </releases>
+</component>

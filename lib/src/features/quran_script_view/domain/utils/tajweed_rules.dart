@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "tajweed_dark.dart";
 import "tajweed_light.dart";

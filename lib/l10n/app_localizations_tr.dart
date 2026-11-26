@@ -61,6 +61,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get saveAndDownload => 'Kaydet ve İndir';
 
   @override
+  String get appSetup => 'App Setup';
+
+  @override
   String get appLanguage => 'Uygulama Dili';
 
   @override

@@ -5,7 +5,7 @@ import "package:al_quran_v3/src/core/api/apis_urls.dart";
 import "package:al_quran_v3/src/core/resources/quran_resources/models/resources_model.dart";
 import "package:dio/dio.dart" as dio;
 import "package:flutter/foundation.dart";
-import "package:flutter/material.dart"; // Still needed for BuildContext
+import "package:material_ui/material_ui.dart"; // Still needed for BuildContext
 import "package:hive_ce_flutter/hive_flutter.dart";
 
 import "package:al_quran_v3/src/core/utils/encode_decode.dart";
@@ -275,10 +275,7 @@ class WordByWordFunction {
           "Failed to open Hive box '$boxName' even after delete: $e2",
           name: "WbWFunction.downloadResource",
         );
-        updateProgress(
-          null,
-          "Error preparing WbW storage for ${book.name}",
-        );
+        updateProgress(null, "Error preparing WbW storage for ${book.name}");
         return false;
       }
     }
@@ -292,10 +289,7 @@ class WordByWordFunction {
         onReceiveProgress: (received, total) {
           if (total != -1) {
             double progress = received / total;
-            updateProgress(
-              progress * 0.5,
-              "Downloading WbW: ${book.name}",
-            );
+            updateProgress(progress * 0.5, "Downloading WbW: ${book.name}");
           }
         },
       );

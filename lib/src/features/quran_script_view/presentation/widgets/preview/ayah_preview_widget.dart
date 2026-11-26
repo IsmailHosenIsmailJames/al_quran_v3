@@ -7,7 +7,7 @@ import "package:al_quran_v3/src/features/quran_resources/data/utils/get_translat
 import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/jump_to_ayah/popup_jump_to_ayah.dart";
 import "package:dartx/dartx.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -60,33 +60,33 @@ BlocBuilder<QuranViewCubit, QuranViewState> getAyahPreviewWidget({
 
           translationWithWordByWord != null
               ? getAyahByAyahCard(
-                ayahKey: quranViewState.ayahKey,
-                context: context,
-                showTopOptions: showHeaderOptions,
-                keepMargin: false,
-                showOnlyAyah: showOnlyAyah,
-                translationListWithInfo:
-                    translationWithWordByWord.translationList,
-                wordByWord: translationWithWordByWord.wordByWord ?? [],
-              )
+                  ayahKey: quranViewState.ayahKey,
+                  context: context,
+                  showTopOptions: showHeaderOptions,
+                  keepMargin: false,
+                  showOnlyAyah: showOnlyAyah,
+                  translationListWithInfo:
+                      translationWithWordByWord.translationList,
+                  wordByWord: translationWithWordByWord.wordByWord ?? [],
+                )
               : FutureBuilder(
-                future: getTranslationWithWordByWord(quranViewState.ayahKey),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState != ConnectionState.done) {
-                    return const SizedBox(height: 250);
-                  }
-                  return getAyahByAyahCard(
-                    ayahKey: quranViewState.ayahKey,
-                    context: context,
-                    showTopOptions: showHeaderOptions,
-                    keepMargin: false,
-                    showOnlyAyah: showOnlyAyah,
-                    translationListWithInfo:
-                        snapshot.data?.translationList ?? [],
-                    wordByWord: snapshot.data?.wordByWord ?? [],
-                  );
-                },
-              ),
+                  future: getTranslationWithWordByWord(quranViewState.ayahKey),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState != ConnectionState.done) {
+                      return const SizedBox(height: 250);
+                    }
+                    return getAyahByAyahCard(
+                      ayahKey: quranViewState.ayahKey,
+                      context: context,
+                      showTopOptions: showHeaderOptions,
+                      keepMargin: false,
+                      showOnlyAyah: showOnlyAyah,
+                      translationListWithInfo:
+                          snapshot.data?.translationList ?? [],
+                      wordByWord: snapshot.data?.wordByWord ?? [],
+                    );
+                  },
+                ),
         ],
       );
     },

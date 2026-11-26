@@ -32,10 +32,6 @@ class SurahSearchCubit extends Cubit<SurahSearchState> {
       languageCode: languageCode,
     );
 
-    emit(SurahSearchState(
-      query: query,
-      filteredSurahs: results,
-    ));
+    emit(SurahSearchState(query: query, filteredSurahs: results));
   }
 }
-

@@ -19,7 +19,7 @@ import "package:al_quran_v3/src/features/settings/presentation/screens/settings_
 import "package:al_quran_v3/src/features/settings/presentation/screens/widget_settings_screen.dart";
 import "package:al_quran_v3/src/features/tajweed_guide/presentation/screens/tajweed_guide_screen.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
@@ -441,11 +441,7 @@ Widget drawerSection({
 
           _buildDrawerTile(
             context: context,
-            leading: _buildLeadingIcon(
-              Icons.book_rounded,
-              themeState,
-              isDark,
-            ),
+            leading: _buildLeadingIcon(Icons.book_rounded, themeState, isDark),
             title: l10n.tajweedGuide,
             isJustIcon: isJustIcon,
             isDesktop: isDesktop,
@@ -551,8 +547,7 @@ Widget drawerSection({
 
           // ─── 3. Others Section ────────────────────────────────────────────
           if (!isJustIcon) const Gap(8),
-          if (!isJustIcon)
-            _buildSectionHeader(l10n.others, themeState, isDark),
+          if (!isJustIcon) _buildSectionHeader(l10n.others, themeState, isDark),
 
           _buildDrawerTile(
             context: context,
@@ -784,11 +779,7 @@ Widget _buildLeadingIcon(IconData icon, ThemeState themeState, bool isDark) {
       color: themeState.primary.withValues(alpha: isDark ? 0.14 : 0.08),
       borderRadius: BorderRadius.circular(10),
     ),
-    child: Icon(
-      icon,
-      color: themeState.primary,
-      size: 19,
-    ),
+    child: Icon(icon, color: themeState.primary, size: 19),
   );
 }
 
@@ -806,9 +797,7 @@ Widget _buildDrawerTile({
     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 1.5),
     child: ListTile(
       minTileHeight: 44,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       contentPadding: const EdgeInsets.symmetric(horizontal: 10),
       onTap: () {
         if (!isDesktop) Navigator.pop(context);
@@ -828,10 +817,7 @@ Widget _buildDrawerTile({
           ? null
           : Text(
               subtitle,
-              style: TextStyle(
-                fontSize: 11,
-                color: Colors.grey.shade600,
-              ),
+              style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),

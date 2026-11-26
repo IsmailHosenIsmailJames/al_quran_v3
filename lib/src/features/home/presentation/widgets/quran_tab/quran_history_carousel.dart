@@ -7,7 +7,7 @@ import "package:al_quran_v3/src/features/home/presentation/cubit/quran_history_s
 import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_view.dart";
 import "package:al_quran_v3/src/features/surah_info/presentation/widgets/surah_info_header_builder.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -77,7 +77,9 @@ class QuranHistoryCarousel extends StatelessWidget {
                         MaterialPageRoute(
                           builder: (context) => QuranScriptView(
                             startKey: "${item.surahNumber}:1",
-                            endKey: getEndAyahKeyFromSurahNumber(item.surahNumber),
+                            endKey: getEndAyahKeyFromSurahNumber(
+                              item.surahNumber,
+                            ),
                             toScrollKey: toScroll,
                           ),
                         ),

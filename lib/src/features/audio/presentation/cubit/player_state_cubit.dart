@@ -18,6 +18,11 @@ class PlayerStateCubit extends Cubit<PlayerState> {
   PlayerStateCubit() : super(const PlayerState());
 
   void changeState({ProcessingState? processingState, bool? isPlaying}) {
-    emit(state.copyWith(state: processingState, isPlaying: isPlaying ?? state.isPlaying));
+    emit(
+      state.copyWith(
+        state: processingState,
+        isPlaying: isPlaying ?? state.isPlaying,
+      ),
+    );
   }
 }

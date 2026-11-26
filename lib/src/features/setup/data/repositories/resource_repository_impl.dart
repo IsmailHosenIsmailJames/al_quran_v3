@@ -27,16 +27,18 @@ class ResourceRepositoryImpl implements IResourceRepository {
       return _cachedResources;
     }
 
-    final rawList = (tafsirResources.values.toList() +
-            translationResources.values.toList())
-        .expand((e) => e)
-        .map((e) => ResourcesModel.fromMap(e))
-        .toList();
+    final rawList =
+        (tafsirResources.values.toList() + translationResources.values.toList())
+            .expand((e) => e)
+            .map((e) => ResourcesModel.fromMap(e))
+            .toList();
 
     final mappedEntities = <ResourceEntity>[];
     for (final model in rawList) {
       final isDownloaded = await _checkIfDownloaded(model);
-      mappedEntities.add(ResourceMapper.toEntity(model, isDownloaded: isDownloaded));
+      mappedEntities.add(
+        ResourceMapper.toEntity(model, isDownloaded: isDownloaded),
+      );
     }
 
     final grouped = mappedEntities.groupBy((element) => element.languageCode);
@@ -74,7 +76,9 @@ class ResourceRepositoryImpl implements IResourceRepository {
       return;
     }
 
-    final translationModel = ResourceMapper.toModel(config.selectedTranslation!);
+    final translationModel = ResourceMapper.toModel(
+      config.selectedTranslation!,
+    );
     final tafsirModel = ResourceMapper.toModel(config.selectedTafsir!);
 
     final controller = StreamController<DownloadProgress>();
@@ -98,7 +102,11 @@ class ResourceRepositoryImpl implements IResourceRepository {
     Future<void> runBatch() async {
       try {
         // Step 0: Translation
-        emitProgress(0.0, "Downloading Translation: ${translationModel.name}", 0);
+        emitProgress(
+          0.0,
+          "Downloading Translation: ${translationModel.name}",
+          0,
+        );
         bool success1 = await QuranTranslationFunction.downloadResources(
           translationBook: translationModel,
           isSetupProcess: true,
@@ -138,9 +146,7 @@ class ResourceRepositoryImpl implements IResourceRepository {
         // Step 2: Word by Word (if available for language)
         final allResourcesMap = await getAllAvailableResources();
         final langResources = allResourcesMap[config.appLanguageCode] ?? [];
-        final wbwEntity = langResources.firstOrNullWhere(
-          (e) => e.isWordByWord,
-        );
+        final wbwEntity = langResources.firstOrNullWhere((e) => e.isWordByWord);
 
         bool success3 = true;
         if (wbwEntity != null) {
@@ -170,9 +176,10 @@ class ResourceRepositoryImpl implements IResourceRepository {
 
         // Step 4: Location Data
         emitProgress(0.0, "Downloading Location Data", 4);
-        bool success5 = await LocationResourcesFunction.downloadLocationResources(
-          isSetupProcess: true,
-        );
+        bool success5 =
+            await LocationResourcesFunction.downloadLocationResources(
+              isSetupProcess: true,
+            );
         emitProgress(1.0, "Location Data Downloaded", 4);
 
         if (success1 && success2 && success3 && success4 && success5) {

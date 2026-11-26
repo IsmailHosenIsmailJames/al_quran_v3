@@ -1,6 +1,6 @@
 import "package:al_quran_v3/src/core/localization/language_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:intl/intl.dart";
 
@@ -26,8 +26,8 @@ class QuranIndexBadge extends StatelessWidget {
     final langCode = context.watch<LanguageCubit>().state.locale.languageCode;
 
     final badgeColor = color ?? themeState.primary;
-    final textStyleColor = textColor ??
-        (isDark ? Colors.white : Colors.grey.shade900);
+    final textStyleColor =
+        textColor ?? (isDark ? Colors.white : Colors.grey.shade900);
 
     final localizedStr = NumberFormat.decimalPattern(langCode).format(index);
 

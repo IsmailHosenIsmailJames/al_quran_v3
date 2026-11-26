@@ -6,7 +6,7 @@ import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/
 import "package:al_quran_v3/src/features/search/data/models/search_result_model.dart";
 import "package:al_quran_v3/src/features/surah_info/presentation/widgets/surah_info_header_builder.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -43,17 +43,14 @@ class DirectAyahJumpCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              QuranIndexBadge(
-                index: directJump.ayahNumber,
-                size: 36,
-              ),
+              QuranIndexBadge(index: directJump.ayahNumber, size: 36),
               const Gap(10),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                       children: [
+                      children: [
                         Icon(
                           FluentIcons.arrow_turn_down_right_20_filled,
                           size: 14,
@@ -86,7 +83,10 @@ class DirectAyahJumpCard extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: themeState.primary,
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 8,
+                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -98,7 +98,9 @@ class DirectAyahJumpCard extends StatelessWidget {
                     MaterialPageRoute(
                       builder: (context) => QuranScriptView(
                         startKey: "${directJump.surahNumber}:1",
-                        endKey: getEndAyahKeyFromSurahNumber(directJump.surahNumber),
+                        endKey: getEndAyahKeyFromSurahNumber(
+                          directJump.surahNumber,
+                        ),
                         toScrollKey: directJump.ayahKey,
                       ),
                     ),

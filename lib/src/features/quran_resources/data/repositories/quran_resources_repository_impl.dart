@@ -14,10 +14,7 @@ class QuranResourcesRepositoryImpl implements IQuranResourcesRepository {
   final QuranResourcesLocalDataSource _localDataSource;
   final QuranResourcesRemoteDataSource _remoteDataSource;
 
-  QuranResourcesRepositoryImpl(
-    this._localDataSource,
-    this._remoteDataSource,
-  );
+  QuranResourcesRepositoryImpl(this._localDataSource, this._remoteDataSource);
 
   bool _matchesQuery(String query, String target) {
     if (query.isEmpty) return true;
@@ -48,7 +45,8 @@ class QuranResourcesRepositoryImpl implements IQuranResourcesRepository {
       if (books.isEmpty) continue;
 
       final first = books.first;
-      bool matchesSearch = query.isEmpty ||
+      bool matchesSearch =
+          query.isEmpty ||
           _matchesQuery(query, first.language) ||
           _matchesQuery(query, first.languageNative) ||
           books.any(
@@ -60,9 +58,7 @@ class QuranResourcesRepositoryImpl implements IQuranResourcesRepository {
       if (!matchesSearch) continue;
 
       final resourceEntities = books.map((book) {
-        final isDownloaded = downloaded.any(
-          (d) => d.fullPath == book.fullPath,
-        );
+        final isDownloaded = downloaded.any((d) => d.fullPath == book.fullPath);
         final isSelected =
             isDownloaded &&
             (selected?.any((s) => s.fullPath == book.fullPath) ?? false);
@@ -105,7 +101,8 @@ class QuranResourcesRepositoryImpl implements IQuranResourcesRepository {
       if (books.isEmpty) continue;
 
       final first = books.first;
-      bool matchesSearch = query.isEmpty ||
+      bool matchesSearch =
+          query.isEmpty ||
           _matchesQuery(query, first.language) ||
           _matchesQuery(query, first.languageNative) ||
           books.any(
@@ -117,9 +114,7 @@ class QuranResourcesRepositoryImpl implements IQuranResourcesRepository {
       if (!matchesSearch) continue;
 
       final resourceEntities = books.map((book) {
-        final isDownloaded = downloaded.any(
-          (d) => d.fullPath == book.fullPath,
-        );
+        final isDownloaded = downloaded.any((d) => d.fullPath == book.fullPath);
         final isSelected =
             isDownloaded &&
             (selected?.any((s) => s.fullPath == book.fullPath) ?? false);
@@ -169,10 +164,7 @@ class QuranResourcesRepositoryImpl implements IQuranResourcesRepository {
     return filtered.map((book) {
       final isDownloaded = downloaded.any((d) => d.fullPath == book.fullPath);
       final isSelected = isDownloaded && selected?.fullPath == book.fullPath;
-      return book.toEntity(
-        isDownloaded: isDownloaded,
-        isSelected: isSelected,
-      );
+      return book.toEntity(isDownloaded: isDownloaded, isSelected: isSelected);
     }).toList();
   }
 

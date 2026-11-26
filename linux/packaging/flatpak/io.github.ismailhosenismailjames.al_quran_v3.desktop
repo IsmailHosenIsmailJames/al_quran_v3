@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Al Quran
+GenericName=Holy Quran & Prayer Companion
+Comment=Read the Holy Quran with tafsir, word-by-word translations, audio recitation, and prayer times
+Exec=al_quran_v3 %U
+Icon=io.github.ismailhosenismailjames.al_quran_v3
+Terminal=false
+Categories=Education;Literature;
+Keywords=Quran;Tafsir;Prayer;Islam;Audio;
+StartupNotify=true
+StartupWMClass=al_quran_v3

@@ -105,7 +105,8 @@ class MushafCubit extends Cubit<MushafState> {
           isExtracting: false,
           hasError: true,
           errorMessage: e.toString(),
-          downloadStatus: "Download failed. Please check your connection and try again.",
+          downloadStatus:
+              "Download failed. Please check your connection and try again.",
         ),
       );
     }

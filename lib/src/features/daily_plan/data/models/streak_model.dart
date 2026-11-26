@@ -16,7 +16,8 @@ class StreakModel extends StreakEntity {
       currentStreak: (map["currentStreak"] as num?)?.toInt() ?? 0,
       bestStreak: (map["bestStreak"] as num?)?.toInt() ?? 0,
       lastActiveDate: map["lastActiveDate"] as String?,
-      activeDates: (map["activeDates"] as List<dynamic>?)
+      activeDates:
+          (map["activeDates"] as List<dynamic>?)
               ?.map((e) => e.toString())
               .toList() ??
           [],

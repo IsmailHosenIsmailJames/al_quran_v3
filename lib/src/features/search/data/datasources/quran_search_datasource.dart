@@ -31,8 +31,9 @@ class QuranSearchDataSource {
         QuranScriptType.uthmani,
         setCurrent: false,
       );
-      final scriptMap =
-          QuranScriptFunction.getScriptMap(QuranScriptType.uthmani);
+      final scriptMap = QuranScriptFunction.getScriptMap(
+        QuranScriptType.uthmani,
+      );
 
       for (final surahKey in scriptMap.keys) {
         final surahMap = scriptMap[surahKey] as Map<String, dynamic>;
@@ -48,7 +49,9 @@ class QuranSearchDataSource {
           final fullAyah = buffer.toString();
           final key = "$surahKey:$ayahKey";
           _plainArabicAyahs[key] = fullAyah;
-          _normalizedArabicAyahs[key] = ArabicTextNormalizer.normalize(fullAyah);
+          _normalizedArabicAyahs[key] = ArabicTextNormalizer.normalize(
+            fullAyah,
+          );
         }
       }
       _arabicLoaded = true;
@@ -71,7 +74,9 @@ class QuranSearchDataSource {
           final fullAyah = buffer.toString();
           final key = "$surahKey:$ayahKey";
           _plainArabicAyahs[key] = fullAyah;
-          _normalizedArabicAyahs[key] = ArabicTextNormalizer.normalize(fullAyah);
+          _normalizedArabicAyahs[key] = ArabicTextNormalizer.normalize(
+            fullAyah,
+          );
         }
       }
       _arabicLoaded = true;

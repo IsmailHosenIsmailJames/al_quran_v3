@@ -10,7 +10,7 @@ import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/features/quran_resources/data/utils/quran_tafsir_function.dart";
 import "package:flutter/services.dart";
 import "package:dartx/dartx.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_html/flutter_html.dart";
 import "package:fluttertoast/fluttertoast.dart";

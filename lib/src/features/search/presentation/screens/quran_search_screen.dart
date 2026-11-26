@@ -17,7 +17,7 @@ import "package:al_quran_v3/src/features/search/presentation/widgets/search_resu
 import "package:al_quran_v3/src/features/search/presentation/widgets/search_scope_tabs.dart";
 import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -143,7 +143,9 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
       child: Focus(
         autofocus: false,
         child: Scaffold(
-          backgroundColor: isDark ? const Color(0xFF121212) : const Color(0xFFF8F9FA),
+          backgroundColor: isDark
+              ? const Color(0xFF121212)
+              : const Color(0xFFF8F9FA),
           appBar: AppBar(
             leading: const BackButton(),
             titleSpacing: 0,
@@ -153,7 +155,12 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
                 ? Center(
                     child: ConstrainedBox(
                       constraints: const BoxConstraints(maxWidth: 640),
-                      child: _buildSearchTextField(themeState, isDark, l10n, isDesktop),
+                      child: _buildSearchTextField(
+                        themeState,
+                        isDark,
+                        l10n,
+                        isDesktop,
+                      ),
                     ),
                   )
                 : _buildSearchTextField(themeState, isDark, l10n, false),
@@ -205,7 +212,9 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
                           availableTranslations: state.availableTranslations,
                           availableTafsirs: state.availableTafsirs,
                           onApply: (newFilter) {
-                            context.read<QuranSearchCubit>().updateFilter(newFilter);
+                            context.read<QuranSearchCubit>().updateFilter(
+                              newFilter,
+                            );
                           },
                           onClose: () {
                             setState(() => _isSidebarOpen = false);
@@ -236,7 +245,9 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
         const Gap(6),
         // Scope Tabs (All, Translations, Arabic, Tafsir, Surahs)
         Align(
-          alignment: isTablet || isDesktop ? Alignment.center : Alignment.centerLeft,
+          alignment: isTablet || isDesktop
+              ? Alignment.center
+              : Alignment.centerLeft,
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 820),
             child: BlocBuilder<QuranSearchCubit, QuranSearchState>(
@@ -255,7 +266,9 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
 
         // Active Filters Bar
         Align(
-          alignment: isTablet || isDesktop ? Alignment.center : Alignment.centerLeft,
+          alignment: isTablet || isDesktop
+              ? Alignment.center
+              : Alignment.centerLeft,
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 820),
             child: BlocBuilder<QuranSearchCubit, QuranSearchState>(
@@ -264,7 +277,13 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
                 if (!state.filter.hasCustomFilters) {
                   return const SizedBox.shrink();
                 }
-                return _buildActiveFilterChips(context, state, themeState, isDark, l10n);
+                return _buildActiveFilterChips(
+                  context,
+                  state,
+                  themeState,
+                  isDark,
+                  l10n,
+                );
               },
             ),
           ),
@@ -312,7 +331,14 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
                           state.results!.directJump != null)) {
                     return Stack(
                       children: [
-                        _buildResultsList(state, themeState, isDark, l10n, isTablet, isDesktop),
+                        _buildResultsList(
+                          state,
+                          themeState,
+                          isDark,
+                          l10n,
+                          isTablet,
+                          isDesktop,
+                        ),
                         Positioned(
                           top: 0,
                           left: 0,
@@ -334,7 +360,14 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
                 case SearchStatus.error:
                   return _buildErrorState(state, themeState, isDark);
                 case SearchStatus.success:
-                  return _buildResultsList(state, themeState, isDark, l10n, isTablet, isDesktop);
+                  return _buildResultsList(
+                    state,
+                    themeState,
+                    isDark,
+                    l10n,
+                    isTablet,
+                    isDesktop,
+                  );
               }
             },
           ),
@@ -410,7 +443,10 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
               if (isDesktop) ...[
                 Container(
                   margin: const EdgeInsets.only(right: 8),
-                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 5,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
                     color: isDark
                         ? Colors.white.withValues(alpha: 0.08)
@@ -427,7 +463,9 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
                     style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w600,
-                      color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                      color: isDark
+                          ? Colors.grey.shade400
+                          : Colors.grey.shade600,
                     ),
                   ),
                 ),
@@ -468,16 +506,16 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
                 backgroundColor: (isDesktop && isSidebarOpen)
                     ? themeState.primary.withValues(alpha: isDark ? 0.2 : 0.12)
                     : (isDark
-                        ? Colors.white.withValues(alpha: 0.05)
-                        : Colors.grey.shade100),
+                          ? Colors.white.withValues(alpha: 0.05)
+                          : Colors.grey.shade100),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                   side: BorderSide(
                     color: (isDesktop && isSidebarOpen)
                         ? themeState.primary.withValues(alpha: 0.5)
                         : (isDark
-                            ? Colors.white.withValues(alpha: 0.08)
-                            : Colors.grey.shade300),
+                              ? Colors.white.withValues(alpha: 0.08)
+                              : Colors.grey.shade300),
                   ),
                 ),
               ),
@@ -490,8 +528,8 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
               icon: Icon(
                 isDesktop
                     ? (isSidebarOpen
-                        ? FluentIcons.panel_right_contract_20_filled
-                        : FluentIcons.panel_right_expand_20_regular)
+                          ? FluentIcons.panel_right_contract_20_filled
+                          : FluentIcons.panel_right_expand_20_regular)
                     : FluentIcons.options_20_regular,
                 size: 18,
                 color: (hasFilters || (isDesktop && isSidebarOpen))
@@ -534,7 +572,8 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
           children: [
             if (filter.surahNumber != null) ...[
               _buildFilterChip(
-                label: "${l10n.surah}: ${getSurahName(context, filter.surahNumber!)}",
+                label:
+                    "${l10n.surah}: ${getSurahName(context, filter.surahNumber!)}",
                 onDeleted: () {
                   context.read<QuranSearchCubit>().updateFilter(
                     filter.copyWith(clearSurahNumber: true),
@@ -547,7 +586,9 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
             ],
             if (filter.revelationType != "all") ...[
               _buildFilterChip(
-                label: filter.revelationType == "meccan" ? l10n.makki : l10n.madani,
+                label: filter.revelationType == "meccan"
+                    ? l10n.makki
+                    : l10n.madani,
                 onDeleted: () {
                   context.read<QuranSearchCubit>().updateFilter(
                     filter.copyWith(revelationType: "all"),
@@ -588,9 +629,7 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
       decoration: BoxDecoration(
         color: themeState.primary.withValues(alpha: isDark ? 0.15 : 0.1),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(
-          color: themeState.primary.withValues(alpha: 0.3),
-        ),
+        border: Border.all(color: themeState.primary.withValues(alpha: 0.3)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -639,7 +678,8 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 820),
         child: ListView.builder(
-          itemCount: 1 + // Header stats banner
+          itemCount:
+              1 + // Header stats banner
               (directJump != null ? 1 : 0) +
               (surahs.isNotEmpty ? 1 : 0) +
               ayahs.length,
@@ -647,7 +687,10 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
             // 1. Result Statistics Banner
             if (index == 0) {
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 8.0,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -656,14 +699,18 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.bold,
-                        color: isDark ? Colors.grey.shade300 : Colors.grey.shade800,
+                        color: isDark
+                            ? Colors.grey.shade300
+                            : Colors.grey.shade800,
                       ),
                     ),
                     Text(
                       "${results.executionTime.inMilliseconds} ms",
                       style: TextStyle(
                         fontSize: 11.5,
-                        color: isDark ? Colors.grey.shade500 : Colors.grey.shade500,
+                        color: isDark
+                            ? Colors.grey.shade500
+                            : Colors.grey.shade500,
                       ),
                     ),
                   ],
@@ -679,7 +726,9 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
                 return DirectAyahJumpCard(
                   directJump: directJump,
                   onResultSelected: () {
-                    context.read<QuranSearchCubit>().saveQueryToHistory(state.query);
+                    context.read<QuranSearchCubit>().saveQueryToHistory(
+                      state.query,
+                    );
                   },
                 );
               }
@@ -709,7 +758,9 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
                 ayahResult: ayahs[ayahIndex],
                 query: state.query,
                 onResultSelected: () {
-                  context.read<QuranSearchCubit>().saveQueryToHistory(state.query);
+                  context.read<QuranSearchCubit>().saveQueryToHistory(
+                    state.query,
+                  );
                 },
               );
             }
@@ -747,7 +798,10 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
         if (isTablet || isDesktop) ...[
           // Responsive Multi-column Grid on Tablet & Desktop
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+              vertical: 4.0,
+            ),
             child: GridView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -844,10 +898,7 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
         ),
         child: Row(
           children: [
-            QuranIndexBadge(
-              index: surah.id,
-              size: 34,
-            ),
+            QuranIndexBadge(index: surah.id, size: 34),
             const Gap(10),
             Expanded(
               child: Column(
@@ -870,7 +921,9 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w500,
-                      color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                      color: isDark
+                          ? Colors.grey.shade400
+                          : Colors.grey.shade600,
                     ),
                   ),
                 ],
@@ -956,7 +1009,8 @@ class _QuranSearchScreenBodyState extends State<_QuranSearchScreenBody> {
               ),
               const Gap(6),
               Text(
-                state.errorMessage ?? "An unexpected error occurred while searching.",
+                state.errorMessage ??
+                    "An unexpected error occurred while searching.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 13,

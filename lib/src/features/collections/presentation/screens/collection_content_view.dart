@@ -16,7 +16,7 @@ import "package:al_quran_v3/src/core/theme/values/values.dart";
 import "package:al_quran_v3/src/features/quran_resources/data/utils/get_translation_with_word_by_word.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/ayah_by_ayah/ayah_by_ayah_card.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_animate/flutter_animate.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
@@ -61,32 +61,40 @@ class _CollectionContentViewState extends State<CollectionContentView> {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                FluentIcons.info_24_regular,
-                size: 48,
-                color: colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
-              ),
-            ),
-            const Gap(16),
-            Text(
-              message,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: colorScheme.onSurfaceVariant,
-                    fontWeight: FontWeight.w600,
-                  ),
-            ),
-          ],
-        ).animate().fadeIn(duration: 300.ms).scale(begin: const Offset(0.9, 0.9)),
+        child:
+            Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: colorScheme.surfaceContainerHighest.withValues(
+                          alpha: 0.5,
+                        ),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        FluentIcons.info_24_regular,
+                        size: 48,
+                        color: colorScheme.onSurfaceVariant.withValues(
+                          alpha: 0.6,
+                        ),
+                      ),
+                    ),
+                    const Gap(16),
+                    Text(
+                      message,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                )
+                .animate()
+                .fadeIn(duration: 300.ms)
+                .scale(begin: const Offset(0.9, 0.9)),
       ),
     );
   }
@@ -150,10 +158,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                   IconButton(
                     onPressed: onMoveUp,
                     visualDensity: VisualDensity.compact,
-                    icon: const Icon(
-                      FluentIcons.arrow_up_24_regular,
-                      size: 18,
-                    ),
+                    icon: const Icon(FluentIcons.arrow_up_24_regular, size: 18),
                   ),
                 if (onMoveDown != null)
                   IconButton(
@@ -337,9 +342,7 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                   itemBuilder: (context, index) {
                     NoteModel noteModel = _noteCollectionModel!.notes[index];
                     return Dismissible(
-                      key: ValueKey(
-                        noteModel.id + index.toString(),
-                      ),
+                      key: ValueKey(noteModel.id + index.toString()),
                       direction: DismissDirection.endToStart,
                       background: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -355,62 +358,87 @@ class _CollectionContentViewState extends State<CollectionContentView> {
                         ),
                       ),
                       onDismissed: (direction) async {
-                        final updatedNotes = List<NoteModel>.from(_noteCollectionModel!.notes)
-                          ..removeAt(index);
+                        final updatedNotes = List<NoteModel>.from(
+                          _noteCollectionModel!.notes,
+                        )..removeAt(index);
                         _noteCollectionModel = _noteCollectionModel!.copyWith(
                           notes: updatedNotes,
                         );
-                        await getIt<CollectionsRepository>().saveNoteCollectionModelAsMap(
-                          _noteCollectionModel!,
-                        );
+                        await getIt<CollectionsRepository>()
+                            .saveNoteCollectionModelAsMap(
+                              _noteCollectionModel!,
+                            );
                         setState(() {});
                       },
-                      child: _buildNoteItem(
-                        noteModel,
-                        context,
-                        index > 0
-                            ? () async {
-                                final updatedNotes = List<NoteModel>.from(_noteCollectionModel!.notes);
-                                final item = updatedNotes.removeAt(index);
-                                updatedNotes.insert(index - 1, item);
-                                _noteCollectionModel = _noteCollectionModel!.copyWith(
-                                  notes: updatedNotes,
-                                );
-                                await getIt<CollectionsRepository>().saveNoteCollectionModelAsMap(
-                                  _noteCollectionModel!,
-                                );
-                                setState(() {});
-                                Fluttertoast.showToast(msg: l10n.success);
-                              }
-                            : null,
-                        index < _noteCollectionModel!.notes.length - 1
-                            ? () async {
-                                final updatedNotes = List<NoteModel>.from(_noteCollectionModel!.notes);
-                                final item = updatedNotes.removeAt(index);
-                                updatedNotes.insert(index + 1, item);
-                                _noteCollectionModel = _noteCollectionModel!.copyWith(
-                                  notes: updatedNotes,
-                                );
-                                await getIt<CollectionsRepository>().saveNoteCollectionModelAsMap(
-                                  _noteCollectionModel!,
-                                );
-                                setState(() {});
-                                Fluttertoast.showToast(msg: l10n.success);
-                              }
-                            : null,
-                        () async {
-                          final updatedNotes = List<NoteModel>.from(_noteCollectionModel!.notes)
-                            ..removeAt(index);
-                          _noteCollectionModel = _noteCollectionModel!.copyWith(
-                            notes: updatedNotes,
-                          );
-                          await getIt<CollectionsRepository>().saveNoteCollectionModelAsMap(
-                            _noteCollectionModel!,
-                          );
-                          setState(() {});
-                          Fluttertoast.showToast(msg: l10n.success);
-                        },
-                      ).animate(delay: (index * 30).ms).fadeIn().slideY(begin: 0.05, end: 0),
+                      child:
+                          _buildNoteItem(
+                                noteModel,
+                                context,
+                                index > 0
+                                    ? () async {
+                                        final updatedNotes =
+                                            List<NoteModel>.from(
+                                              _noteCollectionModel!.notes,
+                                            );
+                                        final item = updatedNotes.removeAt(
+                                          index,
+                                        );
+                                        updatedNotes.insert(index - 1, item);
+                                        _noteCollectionModel =
+                                            _noteCollectionModel!.copyWith(
+                                              notes: updatedNotes,
+                                            );
+                                        await getIt<CollectionsRepository>()
+                                            .saveNoteCollectionModelAsMap(
+                                              _noteCollectionModel!,
+                                            );
+                                        setState(() {});
+                                        Fluttertoast.showToast(
+                                          msg: l10n.success,
+                                        );
+                                      }
+                                    : null,
+                                index < _noteCollectionModel!.notes.length - 1
+                                    ? () async {
+                                        final updatedNotes =
+                                            List<NoteModel>.from(
+                                              _noteCollectionModel!.notes,
+                                            );
+                                        final item = updatedNotes.removeAt(
+                                          index,
+                                        );
+                                        updatedNotes.insert(index + 1, item);
+                                        _noteCollectionModel =
+                                            _noteCollectionModel!.copyWith(
+                                              notes: updatedNotes,
+                                            );
+                                        await getIt<CollectionsRepository>()
+                                            .saveNoteCollectionModelAsMap(
+                                              _noteCollectionModel!,
+                                            );
+                                        setState(() {});
+                                        Fluttertoast.showToast(
+                                          msg: l10n.success,
+                                        );
+                                      }
+                                    : null,
+                                () async {
+                                  final updatedNotes = List<NoteModel>.from(
+                                    _noteCollectionModel!.notes,
+                                  )..removeAt(index);
+                                  _noteCollectionModel = _noteCollectionModel!
+                                      .copyWith(notes: updatedNotes);
+                                  await getIt<CollectionsRepository>()
+                                      .saveNoteCollectionModelAsMap(
+                                        _noteCollectionModel!,
+                                      );
+                                  setState(() {});
+                                  Fluttertoast.showToast(msg: l10n.success);
+                                },
+                              )
+                              .animate(delay: (index * 30).ms)
+                              .fadeIn()
+                              .slideY(begin: 0.05, end: 0),
                     );
                   },
                 ),
@@ -425,156 +453,205 @@ class _CollectionContentViewState extends State<CollectionContentView> {
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 960),
                 child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-              itemCount: _pinnedCollectionModel!.pinned.length,
-              itemBuilder: (context, index) {
-                final pinnedItem = _pinnedCollectionModel!.pinned[index];
-                final TranslationWithWordByWord? translationData =
-                    getTranslationFromCache(pinnedItem.ayahKey);
-                Widget cardWidget = translationData != null
-                    ? getAyahByAyahCard(
-                        ayahKey: pinnedItem.ayahKey,
-                        context: context,
-                        showFullKey: true,
-                        translationListWithInfo:
-                            translationData.translationList,
-                        wordByWord: translationData.wordByWord ?? [],
-                      )
-                    : FutureBuilder(
-                        future: getTranslationWithWordByWord(
-                          pinnedItem.ayahKey,
-                        ),
-                        builder: (context, asyncSnapshot) {
-                          if (asyncSnapshot.connectionState !=
-                              ConnectionState.done) {
-                            return const SizedBox(height: 250);
-                          }
-                          return getAyahByAyahCard(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 8,
+                  ),
+                  itemCount: _pinnedCollectionModel!.pinned.length,
+                  itemBuilder: (context, index) {
+                    final pinnedItem = _pinnedCollectionModel!.pinned[index];
+                    final TranslationWithWordByWord? translationData =
+                        getTranslationFromCache(pinnedItem.ayahKey);
+                    Widget cardWidget = translationData != null
+                        ? getAyahByAyahCard(
                             ayahKey: pinnedItem.ayahKey,
                             context: context,
                             showFullKey: true,
                             translationListWithInfo:
-                                asyncSnapshot.data?.translationList ?? [],
-                            wordByWord: asyncSnapshot.data?.wordByWord ?? [],
+                                translationData.translationList,
+                            wordByWord: translationData.wordByWord ?? [],
+                          )
+                        : FutureBuilder(
+                            future: getTranslationWithWordByWord(
+                              pinnedItem.ayahKey,
+                            ),
+                            builder: (context, asyncSnapshot) {
+                              if (asyncSnapshot.connectionState !=
+                                  ConnectionState.done) {
+                                return const SizedBox(height: 250);
+                              }
+                              return getAyahByAyahCard(
+                                ayahKey: pinnedItem.ayahKey,
+                                context: context,
+                                showFullKey: true,
+                                translationListWithInfo:
+                                    asyncSnapshot.data?.translationList ?? [],
+                                wordByWord:
+                                    asyncSnapshot.data?.wordByWord ?? [],
+                              );
+                            },
                           );
-                        },
-                      );
 
-                return Dismissible(
-                  key: ValueKey(
-                    pinnedItem.id + index.toString(),
-                  ),
-                  direction: DismissDirection.endToStart,
-                  background: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    margin: const EdgeInsets.symmetric(vertical: 6),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFDC2626),
-                      borderRadius: BorderRadius.circular(roundedRadius),
-                    ),
-                    alignment: Alignment.centerRight,
-                    child: const Icon(
-                      FluentIcons.delete_24_regular,
-                      color: Colors.white,
-                    ),
-                  ),
-                  onDismissed: (direction) async {
-                    final updatedPinned = List<PinnedModel>.from(_pinnedCollectionModel!.pinned)
-                      ..removeAt(index);
-                    _pinnedCollectionModel = _pinnedCollectionModel!.copyWith(
-                      pinned: updatedPinned,
-                    );
-                    await getIt<CollectionsRepository>().savePinnedCollectionModelAsMap(
-                      _pinnedCollectionModel!,
-                    );
-                    setState(() {});
-                  },
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8.0, top: 4.0),
-                        child: Row(
-                          children: [
-                            const Gap(8),
-                            Text(
-                              formatRelativeDate(pinnedItem.updatedAt),
-                              style: textTheme.labelSmall?.copyWith(
-                                color: colorScheme.onSurfaceVariant,
-                              ),
-                            ),
-                            const Spacer(),
-                            if (index > 0)
-                              IconButton(
-                                visualDensity: VisualDensity.compact,
-                                onPressed: () async {
-                                  final updatedPinned = List<PinnedModel>.from(_pinnedCollectionModel!.pinned);
-                                  final item = updatedPinned.removeAt(index);
-                                  updatedPinned.insert(index - 1, item);
-                                  _pinnedCollectionModel = _pinnedCollectionModel!.copyWith(
-                                    pinned: updatedPinned,
-                                  );
-                                  await getIt<CollectionsRepository>().savePinnedCollectionModelAsMap(
-                                    _pinnedCollectionModel!,
-                                  );
-                                  setState(() {});
-                                },
-                                icon: const Icon(
-                                  FluentIcons.arrow_up_24_regular,
-                                  size: 18,
-                                ),
-                              ),
-                            if (index <
-                                _pinnedCollectionModel!.pinned.length - 1)
-                              IconButton(
-                                visualDensity: VisualDensity.compact,
-                                onPressed: () async {
-                                  final updatedPinned = List<PinnedModel>.from(_pinnedCollectionModel!.pinned);
-                                  final item = updatedPinned.removeAt(index);
-                                  updatedPinned.insert(index + 1, item);
-                                  _pinnedCollectionModel = _pinnedCollectionModel!.copyWith(
-                                    pinned: updatedPinned,
-                                  );
-                                  await getIt<CollectionsRepository>().savePinnedCollectionModelAsMap(
-                                    _pinnedCollectionModel!,
-                                  );
-                                  setState(() {});
-                                },
-                                icon: const Icon(
-                                  FluentIcons.arrow_down_24_regular,
-                                  size: 18,
-                                ),
-                              ),
-                            IconButton(
-                              visualDensity: VisualDensity.compact,
-                              onPressed: () async {
-                                final updatedPinned = List<PinnedModel>.from(_pinnedCollectionModel!.pinned)
-                                  ..removeAt(index);
-                                _pinnedCollectionModel = _pinnedCollectionModel!.copyWith(
-                                  pinned: updatedPinned,
-                                );
-                                await getIt<CollectionsRepository>().savePinnedCollectionModelAsMap(
-                                  _pinnedCollectionModel!,
-                                );
-                                setState(() {});
-                              },
-                              icon: const Icon(
-                                FluentIcons.delete_24_regular,
-                                color: Color(0xFFDC2626),
-                                size: 18,
-                              ),
-                            ),
-                          ],
+                    return Dismissible(
+                      key: ValueKey(pinnedItem.id + index.toString()),
+                      direction: DismissDirection.endToStart,
+                      background: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        margin: const EdgeInsets.symmetric(vertical: 6),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFDC2626),
+                          borderRadius: BorderRadius.circular(roundedRadius),
+                        ),
+                        alignment: Alignment.centerRight,
+                        child: const Icon(
+                          FluentIcons.delete_24_regular,
+                          color: Colors.white,
                         ),
                       ),
-                      cardWidget,
-                    ],
-                  ).animate(delay: (index * 30).ms).fadeIn().slideY(begin: 0.05, end: 0),
-                );
-              },
-            ),
-          ),
-        );
-      }
+                      onDismissed: (direction) async {
+                        final updatedPinned = List<PinnedModel>.from(
+                          _pinnedCollectionModel!.pinned,
+                        )..removeAt(index);
+                        _pinnedCollectionModel = _pinnedCollectionModel!
+                            .copyWith(pinned: updatedPinned);
+                        await getIt<CollectionsRepository>()
+                            .savePinnedCollectionModelAsMap(
+                              _pinnedCollectionModel!,
+                            );
+                        setState(() {});
+                      },
+                      child:
+                          Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      right: 8.0,
+                                      top: 4.0,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        const Gap(8),
+                                        Text(
+                                          formatRelativeDate(
+                                            pinnedItem.updatedAt,
+                                          ),
+                                          style: textTheme.labelSmall?.copyWith(
+                                            color: colorScheme.onSurfaceVariant,
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        if (index > 0)
+                                          IconButton(
+                                            visualDensity:
+                                                VisualDensity.compact,
+                                            onPressed: () async {
+                                              final updatedPinned =
+                                                  List<PinnedModel>.from(
+                                                    _pinnedCollectionModel!
+                                                        .pinned,
+                                                  );
+                                              final item = updatedPinned
+                                                  .removeAt(index);
+                                              updatedPinned.insert(
+                                                index - 1,
+                                                item,
+                                              );
+                                              _pinnedCollectionModel =
+                                                  _pinnedCollectionModel!
+                                                      .copyWith(
+                                                        pinned: updatedPinned,
+                                                      );
+                                              await getIt<
+                                                    CollectionsRepository
+                                                  >()
+                                                  .savePinnedCollectionModelAsMap(
+                                                    _pinnedCollectionModel!,
+                                                  );
+                                              setState(() {});
+                                            },
+                                            icon: const Icon(
+                                              FluentIcons.arrow_up_24_regular,
+                                              size: 18,
+                                            ),
+                                          ),
+                                        if (index <
+                                            _pinnedCollectionModel!
+                                                    .pinned
+                                                    .length -
+                                                1)
+                                          IconButton(
+                                            visualDensity:
+                                                VisualDensity.compact,
+                                            onPressed: () async {
+                                              final updatedPinned =
+                                                  List<PinnedModel>.from(
+                                                    _pinnedCollectionModel!
+                                                        .pinned,
+                                                  );
+                                              final item = updatedPinned
+                                                  .removeAt(index);
+                                              updatedPinned.insert(
+                                                index + 1,
+                                                item,
+                                              );
+                                              _pinnedCollectionModel =
+                                                  _pinnedCollectionModel!
+                                                      .copyWith(
+                                                        pinned: updatedPinned,
+                                                      );
+                                              await getIt<
+                                                    CollectionsRepository
+                                                  >()
+                                                  .savePinnedCollectionModelAsMap(
+                                                    _pinnedCollectionModel!,
+                                                  );
+                                              setState(() {});
+                                            },
+                                            icon: const Icon(
+                                              FluentIcons.arrow_down_24_regular,
+                                              size: 18,
+                                            ),
+                                          ),
+                                        IconButton(
+                                          visualDensity: VisualDensity.compact,
+                                          onPressed: () async {
+                                            final updatedPinned =
+                                                List<PinnedModel>.from(
+                                                  _pinnedCollectionModel!
+                                                      .pinned,
+                                                )..removeAt(index);
+                                            _pinnedCollectionModel =
+                                                _pinnedCollectionModel!
+                                                    .copyWith(
+                                                      pinned: updatedPinned,
+                                                    );
+                                            await getIt<CollectionsRepository>()
+                                                .savePinnedCollectionModelAsMap(
+                                                  _pinnedCollectionModel!,
+                                                );
+                                            setState(() {});
+                                          },
+                                          icon: const Icon(
+                                            FluentIcons.delete_24_regular,
+                                            color: Color(0xFFDC2626),
+                                            size: 18,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  cardWidget,
+                                ],
+                              )
+                              .animate(delay: (index * 30).ms)
+                              .fadeIn()
+                              .slideY(begin: 0.05, end: 0),
+                    );
+                  },
+                ),
+              ),
+            );
+          }
           return _buildEmptyState(l10n.noContentAvailable);
         },
       ),

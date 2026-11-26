@@ -33,7 +33,7 @@ import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/
 import "package:al_quran_v3/src/features/surah_info/presentation/widgets/surah_info_header_builder.dart";
 import "package:dartx/dartx_io.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter/rendering.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -207,8 +207,10 @@ class _QuranScriptViewState extends State<QuranScriptView> {
   }
 
   void _startAutoScroll() {
-    final isAyahByAyah =
-        context.read<AyahByAyahInScrollInfoCubit>().state.isAyahByAyah;
+    final isAyahByAyah = context
+        .read<AyahByAyahInScrollInfoCubit>()
+        .state
+        .isAyahByAyah;
     String startAyah = _lastTopAyahKey ?? widget.toScrollKey ?? widget.startKey;
     int startIndex = ayahsList.indexOf(startAyah);
     if (startIndex == -1) startIndex = 0;
@@ -251,15 +253,18 @@ class _QuranScriptViewState extends State<QuranScriptView> {
     final state = autoScrollCubit.state;
     if (!state.isActive || !state.isPlaying) return;
 
-    final isAyahByAyah =
-        context.read<AyahByAyahInScrollInfoCubit>().state.isAyahByAyah;
+    final isAyahByAyah = context
+        .read<AyahByAyahInScrollInfoCubit>()
+        .state
+        .isAyahByAyah;
 
     // Boundary check: pause if we reached the bottom of the list
     if (isAyahByAyah) {
       final positions = itemPositionsListenerAyahByAyah.itemPositions.value;
       if (positions.isNotEmpty) {
-        final lastVisible =
-            positions.reduce((a, b) => a.index > b.index ? a : b);
+        final lastVisible = positions.reduce(
+          (a, b) => a.index > b.index ? a : b,
+        );
         if (lastVisible.index >= ayahsList.length &&
             lastVisible.itemTrailingEdge <= 1.0) {
           autoScrollCubit.pause();
@@ -269,8 +274,9 @@ class _QuranScriptViewState extends State<QuranScriptView> {
     } else {
       final positions = itemPositionsListenerReadingMode.itemPositions.value;
       if (positions.isNotEmpty) {
-        final lastVisible =
-            positions.reduce((a, b) => a.index > b.index ? a : b);
+        final lastVisible = positions.reduce(
+          (a, b) => a.index > b.index ? a : b,
+        );
         if (lastVisible.index >= pagesList.length &&
             lastVisible.itemTrailingEdge <= 1.0) {
           autoScrollCubit.pause();
@@ -444,10 +450,9 @@ class _QuranScriptViewState extends State<QuranScriptView> {
 
       final int surahNumber =
           int.tryParse(widget.toScrollKey!.split(":").first) ?? 1;
-      final surahInfo =
-          metaDataSurah["$surahNumber"] != null
-              ? SurahInfoModel.fromMap(metaDataSurah["$surahNumber"]!)
-              : null;
+      final surahInfo = metaDataSurah["$surahNumber"] != null
+          ? SurahInfoModel.fromMap(metaDataSurah["$surahNumber"]!)
+          : null;
       if (surahInfo != null) {
         context.read<AyahByAyahInScrollInfoCubit>().setData(
           surahInfoModel: surahInfo,
@@ -570,8 +575,10 @@ class _QuranScriptViewState extends State<QuranScriptView> {
       event,
     ) {
       if (!mounted) return;
-      final isInsidePlayer =
-          context.read<AudioUiCubit>().state.isInsideQuranPlayer;
+      final isInsidePlayer = context
+          .read<AudioUiCubit>()
+          .state
+          .isInsideQuranPlayer;
       if (isInsidePlayer) {
         context.read<AyahToHighlight>().changeAyah(event.current);
       }
@@ -603,10 +610,9 @@ class _QuranScriptViewState extends State<QuranScriptView> {
     final String initialAyah = widget.toScrollKey ?? widget.startKey;
     final int initialSurahNumber =
         int.tryParse(initialAyah.split(":").first) ?? 1;
-    final initialSurahInfo =
-        metaDataSurah["$initialSurahNumber"] != null
-            ? SurahInfoModel.fromMap(metaDataSurah["$initialSurahNumber"]!)
-            : null;
+    final initialSurahInfo = metaDataSurah["$initialSurahNumber"] != null
+        ? SurahInfoModel.fromMap(metaDataSurah["$initialSurahNumber"]!)
+        : null;
     if (initialSurahInfo != null) {
       context.read<AyahByAyahInScrollInfoCubit>().setData(
         surahInfoModel: initialSurahInfo,
@@ -737,8 +743,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
 
             // Scroll-aware FAB visibility: hides on scroll down (reading down)
             // and reveals on scroll up (heading back), only while auto-scroll is not active.
-            final isAutoScrollActive =
-                autoScrollCubit?.state.isActive ?? false;
+            final isAutoScrollActive = autoScrollCubit?.state.isActive ?? false;
             if (!isAutoScrollActive) {
               if (notification is UserScrollNotification) {
                 if (notification.direction == ScrollDirection.reverse) {
@@ -915,9 +920,7 @@ class _QuranScriptViewState extends State<QuranScriptView> {
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide(
-                      color: themeState.primaryShade200,
-                    ),
+                    borderSide: BorderSide(color: themeState.primaryShade200),
                   ),
                 ),
                 onChanged: (val) => setState(() => _surahSearchQuery = val),
@@ -934,184 +937,193 @@ class _QuranScriptViewState extends State<QuranScriptView> {
                     border: Border.all(color: themeState.primaryShade200),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: BlocBuilder<
-                    AyahByAyahInScrollInfoCubit,
-                    AyahByAyahInScrollInfoState
-                  >(
-                    builder: (context, ayahState) {
-                      String surahQuery = _surahSearchQuery.trim();
-                      String? targetAyahQuery;
-                      if (surahQuery.contains(":")) {
-                        final parts = surahQuery.split(":");
-                        surahQuery = parts[0].trim();
-                        if (parts.length > 1 && parts[1].trim().isNotEmpty) {
-                          targetAyahQuery = parts[1].trim();
-                        }
-                      }
+                  child:
+                      BlocBuilder<
+                        AyahByAyahInScrollInfoCubit,
+                        AyahByAyahInScrollInfoState
+                      >(
+                        builder: (context, ayahState) {
+                          String surahQuery = _surahSearchQuery.trim();
+                          String? targetAyahQuery;
+                          if (surahQuery.contains(":")) {
+                            final parts = surahQuery.split(":");
+                            surahQuery = parts[0].trim();
+                            if (parts.length > 1 &&
+                                parts[1].trim().isNotEmpty) {
+                              targetAyahQuery = parts[1].trim();
+                            }
+                          }
 
-                      final List<SurahInfoModel> filteredSurahs =
-                          getFilteredSurah(
-                        context,
-                        surahQuery,
-                      );
+                          final List<SurahInfoModel> filteredSurahs =
+                              getFilteredSurah(context, surahQuery);
 
-                      if (filteredSurahs.isEmpty) {
-                        return Center(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 16,
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  FluentIcons.search_info_20_regular,
-                                  size: 24,
-                                  color: Colors.grey.shade400,
+                          if (filteredSurahs.isEmpty) {
+                            return Center(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 16,
                                 ),
-                                const Gap(6),
-                                Text(
-                                  l10n.noResultsFound,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 11.5,
-                                    color: Colors.grey.shade500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      }
-
-                      return ListView.builder(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 4,
-                          vertical: 4,
-                        ),
-                        itemCount: filteredSurahs.length,
-                        itemBuilder: (context, i) {
-                          final surah = filteredSurahs[i];
-                          final int surahId = surah.id;
-                          bool isCurrent =
-                              surahId == ayahState.surahInfoModel?.id;
-                          final int? ayahNum = targetAyahQuery != null
-                              ? int.tryParse(targetAyahQuery)
-                              : null;
-                          final String targetAyahKey = (ayahNum != null &&
-                                  ayahNum > 0 &&
-                                  ayahNum <= surah.versesCount)
-                              ? "$surahId:$ayahNum"
-                              : "$surahId:1";
-
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 2),
-                            child: OutlinedButton(
-                              style: outlineButtonDesignSidebar(
-                                isCurrent,
-                                themeState,
-                              ),
-                              onPressed: () {
-                                if (isCurrent && ayahNum != null) {
-                                  scrollToAyah(targetAyahKey);
-                                  return;
-                                }
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => QuranScriptView(
-                                      startKey: "$surahId:1",
-                                      endKey: getEndAyahKeyFromSurahNumber(
-                                        surahId,
-                                      ),
-                                      toScrollKey: targetAyahQuery != null
-                                          ? targetAyahKey
-                                          : null,
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "$surahId. ",
-                                    style: TextStyle(
-                                      fontSize: 12.5,
-                                      fontWeight: isCurrent
-                                          ? FontWeight.bold
-                                          : FontWeight.w500,
-                                      color: isCurrent
-                                          ? themeState.primary
-                                          : Colors.grey.shade600,
-                                    ),
-                                  ),
-                                  Flexible(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          getSurahName(context, surahId),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            fontSize: 13.5,
-                                            fontWeight: isCurrent
-                                                ? FontWeight.bold
-                                                : FontWeight.w500,
-                                            color: isCurrent
-                                                ? themeState.primary
-                                                : null,
-                                          ),
-                                        ),
-                                        if (_surahSearchQuery.isNotEmpty) ...[
-                                          Builder(
-                                            builder: (context) {
-                                              final transliteratedName =
-                                                  (surahId >= 1 &&
-                                                          surahId <= 114)
-                                                      ? canonicalSurahTransliterations[
-                                                          surahId - 1]
-                                                      : "";
-                                              return Text(
-                                                targetAyahQuery != null
-                                                    ? "$transliteratedName ($targetAyahKey)"
-                                                    : transliteratedName,
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  fontSize: 10.5,
-                                                  color: isCurrent
-                                                      ? themeState.primary
-                                                          .withValues(alpha: 0.8)
-                                                      : Colors.grey.shade500,
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ],
-                                      ],
-                                    ),
-                                  ),
-                                  if (isCurrent) const Gap(3),
-                                  if (isCurrent)
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
                                     Icon(
-                                      Icons.radio_button_checked,
-                                      size: 11,
-                                      color: themeState.primary,
+                                      FluentIcons.search_info_20_regular,
+                                      size: 24,
+                                      color: Colors.grey.shade400,
                                     ),
-                                ],
+                                    const Gap(6),
+                                    Text(
+                                      l10n.noResultsFound,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 11.5,
+                                        color: Colors.grey.shade500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
+                            );
+                          }
+
+                          return ListView.builder(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 4,
+                              vertical: 4,
                             ),
+                            itemCount: filteredSurahs.length,
+                            itemBuilder: (context, i) {
+                              final surah = filteredSurahs[i];
+                              final int surahId = surah.id;
+                              bool isCurrent =
+                                  surahId == ayahState.surahInfoModel?.id;
+                              final int? ayahNum = targetAyahQuery != null
+                                  ? int.tryParse(targetAyahQuery)
+                                  : null;
+                              final String targetAyahKey =
+                                  (ayahNum != null &&
+                                      ayahNum > 0 &&
+                                      ayahNum <= surah.versesCount)
+                                  ? "$surahId:$ayahNum"
+                                  : "$surahId:1";
+
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 2,
+                                ),
+                                child: OutlinedButton(
+                                  style: outlineButtonDesignSidebar(
+                                    isCurrent,
+                                    themeState,
+                                  ),
+                                  onPressed: () {
+                                    if (isCurrent && ayahNum != null) {
+                                      scrollToAyah(targetAyahKey);
+                                      return;
+                                    }
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => QuranScriptView(
+                                          startKey: "$surahId:1",
+                                          endKey: getEndAyahKeyFromSurahNumber(
+                                            surahId,
+                                          ),
+                                          toScrollKey: targetAyahQuery != null
+                                              ? targetAyahKey
+                                              : null,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "$surahId. ",
+                                        style: TextStyle(
+                                          fontSize: 12.5,
+                                          fontWeight: isCurrent
+                                              ? FontWeight.bold
+                                              : FontWeight.w500,
+                                          color: isCurrent
+                                              ? themeState.primary
+                                              : Colors.grey.shade600,
+                                        ),
+                                      ),
+                                      Flexible(
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              getSurahName(context, surahId),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                fontSize: 13.5,
+                                                fontWeight: isCurrent
+                                                    ? FontWeight.bold
+                                                    : FontWeight.w500,
+                                                color: isCurrent
+                                                    ? themeState.primary
+                                                    : null,
+                                              ),
+                                            ),
+                                            if (_surahSearchQuery
+                                                .isNotEmpty) ...[
+                                              Builder(
+                                                builder: (context) {
+                                                  final transliteratedName =
+                                                      (surahId >= 1 &&
+                                                          surahId <= 114)
+                                                      ? canonicalSurahTransliterations[surahId -
+                                                            1]
+                                                      : "";
+                                                  return Text(
+                                                    targetAyahQuery != null
+                                                        ? "$transliteratedName ($targetAyahKey)"
+                                                        : transliteratedName,
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: TextStyle(
+                                                      fontSize: 10.5,
+                                                      color: isCurrent
+                                                          ? themeState.primary
+                                                                .withValues(
+                                                                  alpha: 0.8,
+                                                                )
+                                                          : Colors
+                                                                .grey
+                                                                .shade500,
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            ],
+                                          ],
+                                        ),
+                                      ),
+                                      if (isCurrent) const Gap(3),
+                                      if (isCurrent)
+                                        Icon(
+                                          Icons.radio_button_checked,
+                                          size: 11,
+                                          color: themeState.primary,
+                                        ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
                           );
                         },
-                      );
-                    },
-                  ),
+                      ),
                 ),
                 Container(
                   width: 95,
@@ -1120,141 +1132,160 @@ class _QuranScriptViewState extends State<QuranScriptView> {
                     border: Border.all(color: themeState.primaryShade200),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: BlocBuilder<
-                    AyahByAyahInScrollInfoCubit,
-                    AyahByAyahInScrollInfoState
-                  >(
-                    builder: (context, ayahState) {
-                      if (ayahState.isAyahByAyah) {
-                        return ScrollablePositionedList.builder(
-                          itemScrollController: itemScrollControllerAyahList,
-                          itemPositionsListener:
-                              itemPositionsListenerAyahList,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 4,
-                            vertical: 4,
-                          ),
-                          itemCount: ayahsList.length,
-                          itemBuilder: (context, index) {
-                            bool isCurrent =
-                                ayahState.dropdownAyahKey == ayahsList[index];
+                  child:
+                      BlocBuilder<
+                        AyahByAyahInScrollInfoCubit,
+                        AyahByAyahInScrollInfoState
+                      >(
+                        builder: (context, ayahState) {
+                          if (ayahState.isAyahByAyah) {
+                            return ScrollablePositionedList.builder(
+                              itemScrollController:
+                                  itemScrollControllerAyahList,
+                              itemPositionsListener:
+                                  itemPositionsListenerAyahList,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 4,
+                                vertical: 4,
+                              ),
+                              itemCount: ayahsList.length,
+                              itemBuilder: (context, index) {
+                                bool isCurrent =
+                                    ayahState.dropdownAyahKey ==
+                                    ayahsList[index];
 
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 2),
-                              child: OutlinedButton(
-                                style: outlineButtonDesignSidebar(
-                                  isCurrent,
-                                  themeState,
-                                ),
-                                onPressed: () {
-                                  scrollToAyah(ayahsList[index]);
-                                  WidgetsBinding.instance.addPostFrameCallback((
-                                    _,
-                                  ) async {
-                                    context
-                                        .read<AyahByAyahInScrollInfoCubit>()
-                                        .setData(
-                                          dropdownAyahKey: ayahsList[index],
-                                        );
-                                  });
-                                },
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "${localizedNumber(context, ayahsList[index].split(":").first.toInt())}:${localizedNumber(context, ayahsList[index].split(":").last.toInt())}",
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: isCurrent
-                                            ? FontWeight.bold
-                                            : FontWeight.normal,
-                                        color: isCurrent
-                                            ? themeState.primary
-                                            : null,
-                                      ),
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 2,
+                                  ),
+                                  child: OutlinedButton(
+                                    style: outlineButtonDesignSidebar(
+                                      isCurrent,
+                                      themeState,
                                     ),
-                                    if (isCurrent) const Gap(4),
-                                    if (isCurrent)
-                                      Icon(
-                                        Icons.radio_button_checked,
-                                        size: 11,
-                                        color: themeState.primary,
-                                      ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        );
-                      } else {
-                        return ScrollablePositionedList.builder(
-                          itemScrollController: itemScrollControllerPagesList,
-                          itemPositionsListener:
-                              itemPositionsListenerPagesList,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 4,
-                            vertical: 4,
-                          ),
-                          itemCount: pagesList.length,
-                          itemBuilder: (context, index) {
-                            bool isCurrent =
-                                ayahState.dropdownAyahKey == pagesList[index];
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 2),
-                              child: OutlinedButton(
-                                style: outlineButtonDesignSidebar(
-                                  isCurrent,
-                                  themeState,
-                                ),
-                                onPressed: () {
-                                  scrollToAyah(pagesList[index]);
-                                  WidgetsBinding.instance.addPostFrameCallback((
-                                    _,
-                                  ) async {
-                                    context
-                                        .read<AyahByAyahInScrollInfoCubit>()
-                                        .setData(
-                                          dropdownAyahKey: pagesList[index],
-                                        );
-                                  });
-                                },
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      localizedNumber(
-                                        context,
-                                        getPageNumber(pagesList[index].first) ??
-                                            0,
-                                      ),
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: isCurrent
-                                            ? FontWeight.bold
-                                            : FontWeight.normal,
-                                        color: isCurrent
-                                            ? themeState.primary
-                                            : null,
-                                      ),
+                                    onPressed: () {
+                                      scrollToAyah(ayahsList[index]);
+                                      WidgetsBinding.instance
+                                          .addPostFrameCallback((_) async {
+                                            context
+                                                .read<
+                                                  AyahByAyahInScrollInfoCubit
+                                                >()
+                                                .setData(
+                                                  dropdownAyahKey:
+                                                      ayahsList[index],
+                                                );
+                                          });
+                                    },
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "${localizedNumber(context, ayahsList[index].split(":").first.toInt())}:${localizedNumber(context, ayahsList[index].split(":").last.toInt())}",
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: isCurrent
+                                                ? FontWeight.bold
+                                                : FontWeight.normal,
+                                            color: isCurrent
+                                                ? themeState.primary
+                                                : null,
+                                          ),
+                                        ),
+                                        if (isCurrent) const Gap(4),
+                                        if (isCurrent)
+                                          Icon(
+                                            Icons.radio_button_checked,
+                                            size: 11,
+                                            color: themeState.primary,
+                                          ),
+                                      ],
                                     ),
-                                    if (isCurrent) const Gap(4),
-                                    if (isCurrent)
-                                      Icon(
-                                        Icons.radio_button_checked,
-                                        size: 11,
-                                        color: themeState.primary,
-                                      ),
-                                  ],
-                                ),
-                              ),
+                                  ),
+                                );
+                              },
                             );
-                          },
-                        );
-                      }
-                    },
-                  ),
+                          } else {
+                            return ScrollablePositionedList.builder(
+                              itemScrollController:
+                                  itemScrollControllerPagesList,
+                              itemPositionsListener:
+                                  itemPositionsListenerPagesList,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 4,
+                                vertical: 4,
+                              ),
+                              itemCount: pagesList.length,
+                              itemBuilder: (context, index) {
+                                bool isCurrent =
+                                    ayahState.dropdownAyahKey ==
+                                    pagesList[index];
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 2,
+                                  ),
+                                  child: OutlinedButton(
+                                    style: outlineButtonDesignSidebar(
+                                      isCurrent,
+                                      themeState,
+                                    ),
+                                    onPressed: () {
+                                      scrollToAyah(pagesList[index]);
+                                      WidgetsBinding.instance
+                                          .addPostFrameCallback((_) async {
+                                            context
+                                                .read<
+                                                  AyahByAyahInScrollInfoCubit
+                                                >()
+                                                .setData(
+                                                  dropdownAyahKey:
+                                                      pagesList[index],
+                                                );
+                                          });
+                                    },
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          localizedNumber(
+                                            context,
+                                            getPageNumber(
+                                                  pagesList[index].first,
+                                                ) ??
+                                                0,
+                                          ),
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: isCurrent
+                                                ? FontWeight.bold
+                                                : FontWeight.normal,
+                                            color: isCurrent
+                                                ? themeState.primary
+                                                : null,
+                                          ),
+                                        ),
+                                        if (isCurrent) const Gap(4),
+                                        if (isCurrent)
+                                          Icon(
+                                            Icons.radio_button_checked,
+                                            size: 11,
+                                            color: themeState.primary,
+                                          ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          }
+                        },
+                      ),
                 ),
               ],
             ),
@@ -1349,7 +1380,8 @@ class _QuranScriptViewState extends State<QuranScriptView> {
                             endAyahKey: surahEndAyahKey,
                           ),
                         ),
-                      if (isPageStart) pageLabelOfQuran(context, l10n, pageNumber),
+                      if (isPageStart)
+                        pageLabelOfQuran(context, l10n, pageNumber),
                       translationData != null
                           ? AyahByAyahCard(
                               ayahKey: ayahKey,
@@ -1368,7 +1400,8 @@ class _QuranScriptViewState extends State<QuranScriptView> {
                                   ayahKey: ayahKey,
                                   translationListWithInfo:
                                       asyncSnapshot.data?.translationList ?? [],
-                                  wordByWord: asyncSnapshot.data?.wordByWord ?? [],
+                                  wordByWord:
+                                      asyncSnapshot.data?.wordByWord ?? [],
                                 );
                               },
                             ),
@@ -1554,8 +1587,8 @@ class _QuranScriptViewState extends State<QuranScriptView> {
             size: 20,
             color: themeState.primary,
           ),
-          onPressed:
-              () => SurahInfoHeaderBuilder.openSurahInfo(context, surahInfo),
+          onPressed: () =>
+              SurahInfoHeaderBuilder.openSurahInfo(context, surahInfo),
         );
       },
     );

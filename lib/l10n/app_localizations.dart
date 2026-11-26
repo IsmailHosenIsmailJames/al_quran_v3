@@ -220,6 +220,12 @@ abstract class AppLocalizations {
   /// **'Save & Download'**
   String get saveAndDownload;
 
+  /// No description provided for @appSetup.
+  ///
+  /// In en, this message translates to:
+  /// **'App Setup'**
+  String get appSetup;
+
   /// No description provided for @appLanguage.
   ///
   /// In en, this message translates to:

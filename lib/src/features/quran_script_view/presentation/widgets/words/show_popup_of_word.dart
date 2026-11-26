@@ -9,7 +9,7 @@ import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/word_playing_state_cubit.dart";
 import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_html/flutter_html.dart";
 import "package:gap/gap.dart";
@@ -57,8 +57,10 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
     }
 
     final ThemeState themeState = context.read<ThemeCubit>().state;
-    final QuranScriptType scriptType =
-        context.read<QuranViewCubit>().state.quranScriptType;
+    final QuranScriptType scriptType = context
+        .read<QuranViewCubit>()
+        .state
+        .quranScriptType;
     final bool supportsWordByWord =
         WordByWordFunction.getSelectedWordByWordBook() != null;
 
@@ -131,10 +133,12 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
               itemBuilder: (context, index) {
                 final parts = widget.wordKeys[index].split(":");
                 final int surahNum = int.tryParse(parts[0]) ?? 1;
-                final int ayahNum =
-                    parts.length > 1 ? (int.tryParse(parts[1]) ?? 1) : 1;
-                final int wordNum =
-                    parts.length > 2 ? (int.tryParse(parts[2]) ?? 1) : 1;
+                final int ayahNum = parts.length > 1
+                    ? (int.tryParse(parts[1]) ?? 1)
+                    : 1;
+                final int wordNum = parts.length > 2
+                    ? (int.tryParse(parts[2]) ?? 1)
+                    : 1;
                 final bool hasTranslation =
                     supportsWordByWord && index < widget.wordByWord.length;
 
@@ -151,15 +155,16 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
                           skipWordTap: true,
                         ),
                         themeState: context.read<ThemeCubit>().state,
-                        tajweedColorEnable: scriptType == QuranScriptType.uthmani
+                        tajweedColorEnable:
+                            scriptType == QuranScriptType.uthmani
                             ? context
-                                .read<QuranViewCubit>()
-                                .state
-                                .useTajweedOnUthmani
+                                  .read<QuranViewCubit>()
+                                  .state
+                                  .useTajweedOnUthmani
                             : context
-                                .read<QuranViewCubit>()
-                                .state
-                                .useTajweedOnIndopak,
+                                  .read<QuranViewCubit>()
+                                  .state
+                                  .useTajweedOnIndopak,
                       ),
                       const Gap(10),
                       if (hasTranslation)
@@ -186,7 +191,9 @@ class _ShowPopupOfWordState extends State<ShowPopupOfWord> {
                               foregroundColor: themeState.primary,
                             ),
                             onPressed: () {
-                              AudioPlayerManager.playWord(widget.wordKeys[index]);
+                              AudioPlayerManager.playWord(
+                                widget.wordKeys[index],
+                              );
                             },
                             label: Text(AppLocalizations.of(context).playAudio),
                             icon: Icon(

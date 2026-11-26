@@ -2,7 +2,7 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/features/mushaf/domain/utils/mushaf_page_helper.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -36,8 +36,9 @@ class MushafAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AnimatedCrossFade(
       firstChild: Container(
         decoration: BoxDecoration(
-          color: (isDark ? const Color(0xFF1A1A1A) : Colors.white)
-              .withValues(alpha: 0.95),
+          color: (isDark ? const Color(0xFF1A1A1A) : Colors.white).withValues(
+            alpha: 0.95,
+          ),
           border: Border(
             bottom: BorderSide(
               color: isDark
@@ -129,13 +130,18 @@ class MushafAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(FluentIcons.book_open_24_regular, size: 20),
+                    icon: const Icon(
+                      FluentIcons.book_open_24_regular,
+                      size: 20,
+                    ),
                     tooltip: l10n.goToPage,
                     onPressed: onJumpPressed,
                   ),
                   IconButton(
-                    icon: const Icon(FluentIcons.full_screen_maximize_24_regular,
-                        size: 19),
+                    icon: const Icon(
+                      FluentIcons.full_screen_maximize_24_regular,
+                      size: 19,
+                    ),
                     tooltip: l10n.fullscreen,
                     onPressed: onToggleFullscreen,
                   ),
@@ -156,8 +162,11 @@ class MushafAppBar extends StatelessWidget implements PreferredSizeWidget {
                         value: "jump",
                         child: Row(
                           children: [
-                            Icon(FluentIcons.navigation_24_regular,
-                                size: 18, color: themeState.primary),
+                            Icon(
+                              FluentIcons.navigation_24_regular,
+                              size: 18,
+                              color: themeState.primary,
+                            ),
                             const Gap(10),
                             Text(l10n.goToPage),
                           ],
@@ -167,8 +176,11 @@ class MushafAppBar extends StatelessWidget implements PreferredSizeWidget {
                         value: "delete",
                         child: Row(
                           children: [
-                            const Icon(FluentIcons.delete_24_regular,
-                                size: 18, color: Colors.red),
+                            const Icon(
+                              FluentIcons.delete_24_regular,
+                              size: 18,
+                              color: Colors.red,
+                            ),
                             const Gap(10),
                             Text(
                               l10n.deleteMushafData,
@@ -186,8 +198,9 @@ class MushafAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       secondChild: const SizedBox.shrink(),
-      crossFadeState:
-          isUiVisible ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+      crossFadeState: isUiVisible
+          ? CrossFadeState.showFirst
+          : CrossFadeState.showSecond,
       duration: const Duration(milliseconds: 200),
     );
   }

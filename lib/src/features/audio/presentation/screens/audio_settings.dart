@@ -10,7 +10,7 @@ import "package:al_quran_v3/src/features/audio/presentation/helpers/audio_functi
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_state.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
@@ -73,9 +73,7 @@ class _AudioSettingsState extends State<AudioSettings> {
                 child: Align(
                   alignment: Alignment.topCenter,
                   child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: isWide ? 960 : 650,
-                    ),
+                    constraints: BoxConstraints(maxWidth: isWide ? 960 : 650),
                     child: content,
                   ),
                 ),
@@ -98,9 +96,7 @@ class _AudioSettingsState extends State<AudioSettings> {
                 child: Align(
                   alignment: Alignment.topCenter,
                   child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: isWide ? 960 : 650,
-                    ),
+                    constraints: BoxConstraints(maxWidth: isWide ? 960 : 650),
                     child: content,
                   ),
                 ),
@@ -150,8 +146,8 @@ class _AudioSettingsState extends State<AudioSettings> {
             activeTrackColor: themeState.primary,
             onChanged: (value) {
               context.read<QuranViewCubit>().setViewOptions(
-                    useAudioStream: value,
-                  );
+                useAudioStream: value,
+              );
               if (value) {
                 Fluttertoast.showToast(msg: l10n.useAudioStreamDesc);
               } else {
@@ -182,19 +178,10 @@ class _AudioSettingsState extends State<AudioSettings> {
             children: [
               Expanded(
                 flex: 5,
-                child: Column(
-                  children: [
-                    speedCard,
-                    const Gap(16),
-                    streamCard,
-                  ],
-                ),
+                child: Column(children: [speedCard, const Gap(16), streamCard]),
               ),
               const Gap(16),
-              Expanded(
-                flex: 6,
-                child: cacheCard,
-              ),
+              Expanded(flex: 6, child: cacheCard),
             ],
           );
         }
@@ -263,10 +250,7 @@ class _AudioSettingsState extends State<AudioSettings> {
           const Gap(12),
           const Divider(height: 1),
           const Gap(12),
-          Material(
-            color: Colors.transparent,
-            child: child,
-          ),
+          Material(color: Colors.transparent, child: child),
         ],
       ),
     );
@@ -545,7 +529,9 @@ class PlayBackSpeedWidget extends StatelessWidget {
               children: _speedPresets.map((speed) {
                 final isSelected = (currentSpeed - speed).abs() < 0.04;
                 return ChoiceChip(
-                  label: Text("${speed.toStringAsFixed(speed == speed.roundToDouble() ? 0 : 2)}x"),
+                  label: Text(
+                    "${speed.toStringAsFixed(speed == speed.roundToDouble() ? 0 : 2)}x",
+                  ),
                   selected: isSelected,
                   selectedColor: themeState.primary,
                   checkmarkColor: Colors.white,
@@ -557,8 +543,8 @@ class PlayBackSpeedWidget extends StatelessWidget {
                     color: isSelected
                         ? Colors.transparent
                         : (isDark
-                            ? Colors.white.withValues(alpha: 0.08)
-                            : Colors.grey.shade300),
+                              ? Colors.white.withValues(alpha: 0.08)
+                              : Colors.grey.shade300),
                   ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -569,14 +555,14 @@ class PlayBackSpeedWidget extends StatelessWidget {
                     color: isSelected
                         ? Colors.white
                         : isDark
-                            ? Colors.grey.shade300
-                            : Colors.grey.shade800,
+                        ? Colors.grey.shade300
+                        : Colors.grey.shade800,
                   ),
                   onSelected: (selected) async {
                     if (selected) {
                       context.read<QuranViewCubit>().setViewOptions(
-                            playbackSpeed: speed,
-                          );
+                        playbackSpeed: speed,
+                      );
                       await AudioPlayerManager.setSpeed(speed);
                     }
                   },
@@ -595,11 +581,13 @@ class PlayBackSpeedWidget extends StatelessWidget {
                   onPressed: currentSpeed > 0.5
                       ? () async {
                           final value = double.parse(
-                            (currentSpeed - 0.05).clamp(0.5, 2.0).toStringAsFixed(2),
+                            (currentSpeed - 0.05)
+                                .clamp(0.5, 2.0)
+                                .toStringAsFixed(2),
                           );
                           context.read<QuranViewCubit>().setViewOptions(
-                                playbackSpeed: value,
-                              );
+                            playbackSpeed: value,
+                          );
                           await AudioPlayerManager.setSpeed(value);
                         }
                       : null,
@@ -617,11 +605,13 @@ class PlayBackSpeedWidget extends StatelessWidget {
                   onPressed: currentSpeed < 2.0
                       ? () async {
                           final value = double.parse(
-                            (currentSpeed + 0.05).clamp(0.5, 2.0).toStringAsFixed(2),
+                            (currentSpeed + 0.05)
+                                .clamp(0.5, 2.0)
+                                .toStringAsFixed(2),
                           );
                           context.read<QuranViewCubit>().setViewOptions(
-                                playbackSpeed: value,
-                              );
+                            playbackSpeed: value,
+                          );
                           await AudioPlayerManager.setSpeed(value);
                         }
                       : null,
@@ -636,8 +626,8 @@ class PlayBackSpeedWidget extends StatelessWidget {
                     onChanged: (value) {
                       final parsed = double.parse(value.toStringAsFixed(2));
                       context.read<QuranViewCubit>().setViewOptions(
-                            playbackSpeed: parsed,
-                          );
+                        playbackSpeed: parsed,
+                      );
                     },
                     onChangeEnd: (value) async {
                       final parsed = double.parse(value.toStringAsFixed(2));
@@ -655,7 +645,7 @@ class PlayBackSpeedWidget extends StatelessWidget {
 }
 
 Future<Map<String, List<Map<String, dynamic>>>>
-    getCategorizedCacheFilesWithSize(
+getCategorizedCacheFilesWithSize(
   BuildContext context,
   AppLocalizations l10n,
 ) async {
@@ -699,6 +689,8 @@ String getTheTimeKey(
   if (distanceInDay > 21) return l10n.weeksAgo(localizedNumber(context, 3));
   if (distanceInDay > 14) return l10n.weeksAgo(localizedNumber(context, 2));
   if (distanceInDay > 7) return l10n.weeksAgo(localizedNumber(context, 1));
-  if (distanceInDay > 1) return l10n.daysAgo(localizedNumber(context, distanceInDay));
+  if (distanceInDay > 1) {
+    return l10n.daysAgo(localizedNumber(context, distanceInDay));
+  }
   return l10n.today;
 }

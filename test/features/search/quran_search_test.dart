@@ -96,29 +96,32 @@ void main() {
       cubit.close();
     });
 
-    test("onQueryChanged debounces and does not save intermediate keystrokes to history", () async {
-      final cubit = QuranSearchCubit(dataSource, useCase);
-      await cubit.clearAllHistory();
+    test(
+      "onQueryChanged debounces and does not save intermediate keystrokes to history",
+      () async {
+        final cubit = QuranSearchCubit(dataSource, useCase);
+        await cubit.clearAllHistory();
 
-      cubit.onQueryChanged("F");
-      cubit.onQueryChanged("Fa");
-      cubit.onQueryChanged("Fatiha");
+        cubit.onQueryChanged("F");
+        cubit.onQueryChanged("Fa");
+        cubit.onQueryChanged("Fatiha");
 
-      // Wait for debounce duration
-      await Future.delayed(const Duration(milliseconds: 400));
+        // Wait for debounce duration
+        await Future.delayed(const Duration(milliseconds: 400));
 
-      expect(cubit.state.status, SearchStatus.success);
-      // History should not contain intermediate keystrokes
-      expect(cubit.state.searchHistory.contains("F"), isFalse);
-      expect(cubit.state.searchHistory.contains("Fa"), isFalse);
-      expect(cubit.state.searchHistory.contains("Fatiha"), isFalse);
+        expect(cubit.state.status, SearchStatus.success);
+        // History should not contain intermediate keystrokes
+        expect(cubit.state.searchHistory.contains("F"), isFalse);
+        expect(cubit.state.searchHistory.contains("Fa"), isFalse);
+        expect(cubit.state.searchHistory.contains("Fatiha"), isFalse);
 
-      // Now explicitly saving query when tapped
-      await cubit.saveQueryToHistory("Fatiha");
-      expect(cubit.state.searchHistory.contains("Fatiha"), isTrue);
+        // Now explicitly saving query when tapped
+        await cubit.saveQueryToHistory("Fatiha");
+        expect(cubit.state.searchHistory.contains("Fatiha"), isTrue);
 
-      cubit.close();
-    });
+        cubit.close();
+      },
+    );
 
     test("onQueryChanged does not immediately emit loading state", () {
       final cubit = QuranSearchCubit(dataSource, useCase);
@@ -131,17 +134,20 @@ void main() {
       cubit.close();
     });
 
-    test("short query (<2 chars) returns surah matches and direct jump without full text scanning", () async {
-      final results = await useCase.execute(
-        query: "B",
-        filter: const SearchFilterModel(),
-      );
+    test(
+      "short query (<2 chars) returns surah matches and direct jump without full text scanning",
+      () async {
+        final results = await useCase.execute(
+          query: "B",
+          filter: const SearchFilterModel(),
+        );
 
-      // Should find Surahs starting with or containing B (e.g. Baqarah, Balad, Buruj)
-      expect(results.surahMatches.isNotEmpty, isTrue);
-      // But full-text ayahResults should be empty to prevent heavy scans
-      expect(results.ayahResults.isEmpty, isTrue);
-    });
+        // Should find Surahs starting with or containing B (e.g. Baqarah, Balad, Buruj)
+        expect(results.surahMatches.isNotEmpty, isTrue);
+        // But full-text ayahResults should be empty to prevent heavy scans
+        expect(results.ayahResults.isEmpty, isTrue);
+      },
+    );
 
     test("dataSource caching methods function properly", () {
       dataSource.clearMemoryCaches();

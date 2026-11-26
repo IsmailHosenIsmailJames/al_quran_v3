@@ -1,5 +1,5 @@
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -8,11 +8,7 @@ class MushafInfoBadge extends StatelessWidget {
   final IconData icon;
   final String label;
 
-  const MushafInfoBadge({
-    super.key,
-    required this.icon,
-    required this.label,
-  });
+  const MushafInfoBadge({super.key, required this.icon, required this.label});
 
   @override
   Widget build(BuildContext context) {

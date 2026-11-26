@@ -18,7 +18,7 @@ import "package:al_quran_v3/src/features/audio/presentation/widgets/reciter_view
 import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
 import "package:al_quran_v3/src/features/surah_list/domain/utils/filter_surah.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
@@ -157,8 +157,9 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
             // Reciter Selector Card
             BlocBuilder<AyahKeyCubit, AyahKeyManagement>(
               builder: (context, ayahKeyState) {
-                final playlistIdx =
-                    ayahKeyState.ayahList.indexOf(ayahKeyState.current);
+                final playlistIdx = ayahKeyState.ayahList.indexOf(
+                  ayahKeyState.current,
+                );
                 final currentIndex = playlistIdx >= 0 ? playlistIdx : 0;
                 return getReciterViewWidget(
                   context,
@@ -306,7 +307,9 @@ class _AudioDownloadScreenState extends State<AudioDownloadScreen> {
                     "${getSurahMeaning(context, surah.id)} • ${localizedNumber(context, downloadedCount)}/${l10n.ayahsCount(localizedNumber(context, surah.versesCount))}",
                     style: TextStyle(
                       fontSize: 12,
-                      color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                      color: isDark
+                          ? Colors.grey.shade400
+                          : Colors.grey.shade600,
                     ),
                   ),
                 ],

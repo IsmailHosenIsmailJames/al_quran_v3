@@ -14,7 +14,7 @@ import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_
 import "package:al_quran_v3/src/features/quran_script_view/domain/utils/tajweed_text_preser.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart";
 import "package:dartx/dartx.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
 class QuranPagesRenderer extends StatelessWidget {
@@ -70,8 +70,10 @@ class QuranPagesRenderer extends StatelessWidget {
                       ayahsKey.contains(highlightingAyahKey) &&
                       audioSegmentsMap.containsKey(highlightingAyahKey);
 
-                  return BlocBuilder<PlayerPositionCubit,
-                      AudioPlayerPositionModel>(
+                  return BlocBuilder<
+                    PlayerPositionCubit,
+                    AudioPlayerPositionModel
+                  >(
                     buildWhen: (previous, current) {
                       if (!canWordHighlightPage) return false;
                       final segments = audioSegmentsMap[highlightingAyahKey];
@@ -96,21 +98,22 @@ class QuranPagesRenderer extends StatelessWidget {
                             )
                           : null;
 
-                      final quranViewState =
-                          context.read<QuranViewCubit>().state;
+                      final quranViewState = context
+                          .read<QuranViewCubit>()
+                          .state;
 
                       return Text.rich(
                         TextSpan(
                           children: ayahsKey.map((ayahKey) {
                             final List words =
                                 QuranScriptFunction.getWordListOfAyah(
-                              isUthmani
-                                  ? QuranScriptType.uthmani
-                                  : QuranScriptType.indopak,
-                              ayahKey.split(":").first,
-                              ayahKey.split(":").last,
-                              circleJojom: quranViewState.circleJojom,
-                            );
+                                  isUthmani
+                                      ? QuranScriptType.uthmani
+                                      : QuranScriptType.indopak,
+                                  ayahKey.split(":").first,
+                                  ayahKey.split(":").last,
+                                  circleJojom: quranViewState.circleJojom,
+                                );
 
                             final bool isAyahHighlighted =
                                 audioUiState.isInsideQuranPlayer &&
@@ -129,8 +132,7 @@ class QuranPagesRenderer extends StatelessWidget {
                               children: List.generate(words.length, (index) {
                                 final bool isWordHighlighted =
                                     enableWordByWordHighlight &&
-                                    highlightingWord ==
-                                        "$ayahKey:${index + 1}";
+                                    highlightingWord == "$ayahKey:${index + 1}";
 
                                 return parseTajweedWord(
                                   wordIndex: index,

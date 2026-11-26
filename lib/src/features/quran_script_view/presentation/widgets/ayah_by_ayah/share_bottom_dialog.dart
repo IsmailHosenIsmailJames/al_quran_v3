@@ -11,7 +11,7 @@ import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_
 import "package:al_quran_v3/src/features/quran_script_view/domain/utils/tajweed_text_preser.dart";
 import "package:flutter/services.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
@@ -68,7 +68,12 @@ void showShareBottomDialog(
     builder: (context) {
       ButtonStyle textButtonStyle = TextButton.styleFrom(
         shape: const RoundedRectangleBorder(),
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+        padding: const EdgeInsets.only(
+          left: 20,
+          right: 20,
+          top: 10,
+          bottom: 10,
+        ),
         alignment: Alignment.centerLeft,
       );
       Color color = Theme.brightnessOf(context) == Brightness.dark
@@ -132,7 +137,10 @@ void showShareBottomDialog(
                 await userBox.put("widget_ayah_mode", "pinned");
                 await userBox.put("widget_pinned_surah", surah);
                 await userBox.put("widget_pinned_ayah", ayah);
-                await AyahWidgetService.updateWidgets(customSurah: surah, customAyah: ayah);
+                await AyahWidgetService.updateWidgets(
+                  customSurah: surah,
+                  customAyah: ayah,
+                );
                 Fluttertoast.showToast(msg: l10n.ayahPinnedToWidgets);
                 if (context.mounted) {
                   Navigator.pop(context);
@@ -174,9 +182,9 @@ void showShareBottomDialog(
                   await Clipboard.setData(
                     ClipboardData(
                       text:
-                    "${getSurahName(context, surahInfoModel.id)}"
-                    " - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\n"
-                    "${l10n.translation}:\n$translationSingleString",
+                          "${getSurahName(context, surahInfoModel.id)}"
+                          " - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\n"
+                          "${l10n.translation}:\n$translationSingleString",
                     ),
                   );
                   await Fluttertoast.showToast(msg: l10n.copiedWithTafsir);
@@ -403,10 +411,10 @@ void showShareBottomDialog(
                   await Clipboard.setData(
                     ClipboardData(
                       text:
-                    "${getSurahName(context, surahInfoModel.id)}"
-                    " - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\n"
-                    " ${l10n.translation}:\n$translationSingleString"
-                    " \n${l10n.tafsir}:\n${tafsir ?? l10n.notFound}",
+                          "${getSurahName(context, surahInfoModel.id)}"
+                          " - $ayahKey\n\n${getPlainTextAyahFromTajweedWords(List<String>.from(quranScriptWord))}\n\n"
+                          " ${l10n.translation}:\n$translationSingleString"
+                          " \n${l10n.tafsir}:\n${tafsir ?? l10n.notFound}",
                     ),
                   );
                   await Fluttertoast.showToast(msg: l10n.copiedWithTafsir);

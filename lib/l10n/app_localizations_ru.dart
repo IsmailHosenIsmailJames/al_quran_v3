@@ -61,6 +61,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get saveAndDownload => 'Сохранить и скачать';
 
   @override
+  String get appSetup => 'App Setup';
+
+  @override
   String get appLanguage => 'Язык приложения';
 
   @override

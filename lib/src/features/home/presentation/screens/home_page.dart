@@ -24,7 +24,7 @@ import "package:al_quran_v3/src/features/settings/presentation/screens/settings_
 import "package:al_quran_v3/src/features/daily_plan/presentation/widgets/app_bar_streak_badge.dart";
 import "package:al_quran_v3/src/features/sync/presentation/cubit/sync_cubit.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
@@ -95,21 +95,12 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
   List<Widget> getBody() {
     if (platformOwn == platform_services.PlatformOwn.isWeb) {
-      return const [
-        QuranPage(),
-        AudioPage(),
-        SettingsPage(showAppBar: false),
-      ];
+      return const [QuranPage(), AudioPage(), SettingsPage(showAppBar: false)];
     }
 
     if (platformOwn == platform_services.PlatformOwn.isAndroid ||
         platformOwn == platform_services.PlatformOwn.isIos) {
-      return const [
-        QuranPage(),
-        PrayerTimePage(),
-        QiblaScreen(),
-        AudioPage(),
-      ];
+      return const [QuranPage(), PrayerTimePage(), QiblaScreen(), AudioPage()];
     }
 
     // Devices without compass sensor: show Profile & Settings tab instead of Qibla
@@ -212,9 +203,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
       ),
       BottomNavigationBarItem(
         icon: Icon(
-          tabIndex == 2
-              ? Icons.audiotrack_rounded
-              : Icons.audiotrack_outlined,
+          tabIndex == 2 ? Icons.audiotrack_rounded : Icons.audiotrack_outlined,
         ),
         label: l10n.audio,
       ),
@@ -233,7 +222,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
 
-      final isAyah = uri.host == "ayah" ||
+      final isAyah =
+          uri.host == "ayah" ||
           uri.path.contains("ayah") ||
           (uri.scheme == "al-quran" && uri.host == "ayah");
 
@@ -343,7 +333,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             ),
       body: Row(
         children: [
-          if (isSideNav) _buildNavigationRail(context, themeState, isDark, l10n),
+          if (isSideNav)
+            _buildNavigationRail(context, themeState, isDark, l10n),
           Expanded(
             child: Column(
               children: [
@@ -360,7 +351,10 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                   buildWhen: (prev, curr) => prev.tabIndex != curr.tabIndex,
                   builder: (context, settingsState) {
                     final body = getBody();
-                    final idx = settingsState.tabIndex.clamp(0, body.length - 1);
+                    final idx = settingsState.tabIndex.clamp(
+                      0,
+                      body.length - 1,
+                    );
                     if (body[idx] is AudioPage) {
                       return const SizedBox.shrink();
                     }
@@ -431,7 +425,9 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                         child: SvgPicture.string(
                           """<?xml version="1.0" encoding="utf-8"?> <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <g id="Menu / Menu_Alt_03"> <path id="Vector" d="M5 17H13M5 12H19M5 7H13" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </g> </svg>""",
                           colorFilter: ColorFilter.mode(
-                            isDark ? Colors.grey.shade200 : Colors.grey.shade800,
+                            isDark
+                                ? Colors.grey.shade200
+                                : Colors.grey.shade800,
                             BlendMode.srcIn,
                           ),
                           height: 20,
@@ -506,14 +502,14 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  const QuranSearchScreen(),
+                              builder: (context) => const QuranSearchScreen(),
                             ),
                           );
                         },
                       ),
                       // Settings shortcut (only when Settings is not in main rail destinations)
-                      if (platformOwn == platform_services.PlatformOwn.isAndroid ||
+                      if (platformOwn ==
+                              platform_services.PlatformOwn.isAndroid ||
                           platformOwn == platform_services.PlatformOwn.isIos)
                         IconButton(
                           tooltip: l10n.settings,
@@ -528,8 +524,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    const SettingsPage(),
+                                builder: (context) => const SettingsPage(),
                               ),
                             );
                           },
@@ -652,9 +647,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
               width: 44,
               height: 44,
               decoration: BoxDecoration(
-                color: isSelected
-                    ? themeState.primary
-                    : Colors.transparent,
+                color: isSelected ? themeState.primary : Colors.transparent,
                 borderRadius: BorderRadius.circular(14),
                 boxShadow: isSelected
                     ? [
@@ -672,9 +665,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                   size: 22,
                   color: isSelected
                       ? Colors.white
-                      : (isDark
-                          ? Colors.grey.shade400
-                          : Colors.grey.shade700),
+                      : (isDark ? Colors.grey.shade400 : Colors.grey.shade700),
                 ),
               ),
             ),
@@ -738,8 +729,9 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             },
             type: BottomNavigationBarType.fixed,
             selectedItemColor: themeState.primary,
-            unselectedItemColor:
-                isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+            unselectedItemColor: isDark
+                ? Colors.grey.shade400
+                : Colors.grey.shade600,
             selectedLabelStyle: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 12,

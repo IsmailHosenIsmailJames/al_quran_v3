@@ -37,16 +37,20 @@ import "package:al_quran_v3/src/core/localization/language_cubit.dart";
 import "package:awesome_notifications/awesome_notifications.dart";
 import "package:dartx/dartx_io.dart";
 import "package:flutter/foundation.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:intl/intl.dart";
 import "package:permission_handler/permission_handler.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
 class ReminderScheduler {
-  static late SharedPreferences _sharedPreferences;
+  static SharedPreferences? _sharedPreferences;
 
   static Future<void> init() async {
     _sharedPreferences = await SharedPreferences.getInstance();
+  }
+
+  static Future<SharedPreferences> _ensurePrefs() async {
+    return _sharedPreferences ??= await SharedPreferences.getInstance();
   }
 
   // ─── Permission Check ──────────────────────────────────────────────────
@@ -83,7 +87,8 @@ class ReminderScheduler {
 
     if (soundType == "adhan") {
       soundSource = "resource://raw/adhan";
-    } else if (soundType == "default_sound" || soundType == "notification_sound") {
+    } else if (soundType == "default_sound" ||
+        soundType == "notification_sound") {
       soundSource = "resource://raw/notification_sound";
     } else if (soundType == "system_alarm") {
       notifRingtoneType = DefaultRingtoneType.Alarm;
@@ -137,8 +142,8 @@ class ReminderScheduler {
       final nativeSoundUri = soundType == "adhan"
           ? "resource://raw/adhan"
           : ((soundType == "default_sound" || soundType == "notification_sound")
-              ? "resource://raw/notification_sound"
-              : soundUri ?? soundType);
+                ? "resource://raw/notification_sound"
+                : soundUri ?? soundType);
 
       await RingtoneService.createOrUpdateNotificationChannel(
         channelKey: notifChannelKey,
@@ -199,12 +204,14 @@ class ReminderScheduler {
 
     final notifChannelKey = getNotificationChannelKey();
     final alarmChannelKey = getAlarmChannelKey();
-    final localTimeZone = await AwesomeNotifications().getLocalTimeZoneIdentifier();
+    final localTimeZone = await AwesomeNotifications()
+        .getLocalTimeZoneIdentifier();
 
     for (int i = 0; i < next7DaysPrayerTimes.length; i++) {
       final prayerTimesToday = next7DaysPrayerTimes[i];
       for (Prayer prayerName in prayerTimesToday.keys) {
-        final mode = reminderState.prayerReminderModes?[prayerName] ??
+        final mode =
+            reminderState.prayerReminderModes?[prayerName] ??
             getPrayerReminderMode(prayerName);
 
         if (mode.isOff) continue;
@@ -225,9 +232,7 @@ class ReminderScheduler {
               id: _notificationId(prayerName, time),
               title:
                   "${getPrayerGroupName(prayerName, appLocalizations)} - ${getPrayerNameWithSomeDetails(prayerName, appLocalizations)}",
-              body: DateFormat.jm(
-                locale.languageCode,
-              ).format(time),
+              body: DateFormat.jm(locale.languageCode).format(time),
               category: category,
               notificationLayout: NotificationLayout.Default,
               wakeUpScreen: true,
@@ -273,10 +278,14 @@ class ReminderScheduler {
   }
 
   /// Snoozes a prayer alarm for [minutes] minutes.
-  static Future<void> snoozePrayerAlarm(Prayer prayer, {int minutes = 10}) async {
+  static Future<void> snoozePrayerAlarm(
+    Prayer prayer, {
+    int minutes = 10,
+  }) async {
     final now = DateTime.now();
     final snoozeTime = now.add(Duration(minutes: minutes));
-    final localTimeZone = await AwesomeNotifications().getLocalTimeZoneIdentifier();
+    final localTimeZone = await AwesomeNotifications()
+        .getLocalTimeZoneIdentifier();
     final alarmChannelKey = getAlarmChannelKey();
 
     await AwesomeNotifications().createNotification(
@@ -556,17 +565,19 @@ class ReminderScheduler {
   }
 
   static Future<void> enablePrayerRemindNotification() async {
-    await _sharedPreferences.setBool("prayer_remind_notification", true);
+    final prefs = await _ensurePrefs();
+    await prefs.setBool("prayer_remind_notification", true);
     await scheduleNotification();
   }
 
   static Future<void> disablePrayerRemindNotification() async {
-    await _sharedPreferences.setBool("prayer_remind_notification", false);
+    final prefs = await _ensurePrefs();
+    await prefs.setBool("prayer_remind_notification", false);
     await cancelAllNotifications();
   }
 
   static bool isPrayerRemindNotificationEnabled() {
-    return _sharedPreferences.getBool("prayer_remind_notification") ?? false;
+    return _sharedPreferences?.getBool("prayer_remind_notification") ?? false;
   }
 
   static bool isPrayerEnabled(Prayer prayer) {
@@ -574,9 +585,10 @@ class ReminderScheduler {
   }
 
   static Future<void> setPrayerEnabled(Prayer prayer, bool enabled) async {
-    await _sharedPreferences.setBool("prayer_${prayer.name}_enabled", enabled);
+    final prefs = await _ensurePrefs();
+    await prefs.setBool("prayer_${prayer.name}_enabled", enabled);
     if (!enabled) {
-      await _sharedPreferences.setString(
+      await prefs.setString(
         "prayer_${prayer.name}_reminder_mode",
         PrayerReminderMode.off.name,
       );
@@ -584,10 +596,10 @@ class ReminderScheduler {
       final currentMode = getPrayerReminderMode(prayer);
       final newMode = currentMode.isOff
           ? (prayer == Prayer.fajr
-              ? PrayerReminderMode.alarm
-              : PrayerReminderMode.notification)
+                ? PrayerReminderMode.alarm
+                : PrayerReminderMode.notification)
           : currentMode;
-      await _sharedPreferences.setString(
+      await prefs.setString(
         "prayer_${prayer.name}_reminder_mode",
         newMode.name,
       );
@@ -603,19 +615,21 @@ class ReminderScheduler {
   }
 
   static PrayerReminderMode getPrayerReminderMode(Prayer prayer) {
-    final savedModeStr =
-        _sharedPreferences.getString("prayer_${prayer.name}_reminder_mode");
+    final savedModeStr = _sharedPreferences?.getString(
+      "prayer_${prayer.name}_reminder_mode",
+    );
     if (savedModeStr != null) {
       return PrayerReminderMode.fromString(savedModeStr);
     }
 
-    final legacyEnabled =
-        _sharedPreferences.getBool("prayer_${prayer.name}_enabled");
+    final legacyEnabled = _sharedPreferences?.getBool(
+      "prayer_${prayer.name}_enabled",
+    );
     if (legacyEnabled != null) {
       return legacyEnabled
           ? (prayer == Prayer.fajr
-              ? PrayerReminderMode.alarm
-              : PrayerReminderMode.notification)
+                ? PrayerReminderMode.alarm
+                : PrayerReminderMode.notification)
           : PrayerReminderMode.off;
     }
 
@@ -645,14 +659,9 @@ class ReminderScheduler {
     Prayer prayer,
     PrayerReminderMode mode,
   ) async {
-    await _sharedPreferences.setString(
-      "prayer_${prayer.name}_reminder_mode",
-      mode.name,
-    );
-    await _sharedPreferences.setBool(
-      "prayer_${prayer.name}_enabled",
-      mode.isEnabled,
-    );
+    final prefs = await _ensurePrefs();
+    await prefs.setString("prayer_${prayer.name}_reminder_mode", mode.name);
+    await prefs.setBool("prayer_${prayer.name}_enabled", mode.isEnabled);
   }
 
   static Future<void> setAllPrayerReminderModes(PrayerReminderMode mode) async {
@@ -680,7 +689,7 @@ class ReminderScheduler {
   static Map<Prayer, int> getReminderTimeAdjustment() {
     Map<Prayer, int> map = {};
     for (var element in Prayer.values) {
-      int? time = _sharedPreferences.getInt(
+      int? time = _sharedPreferences?.getInt(
         "prayer_${element.name}_reminder_time",
       );
       time ??= 0;
@@ -690,30 +699,33 @@ class ReminderScheduler {
   }
 
   static Future<void> setReminderTimeAdjustment(Prayer prayer, int time) async {
-    await _sharedPreferences.setInt("prayer_${prayer.name}_reminder_time", time);
+    final prefs = await _ensurePrefs();
+    await prefs.setInt("prayer_${prayer.name}_reminder_time", time);
   }
 
   static bool getEnforceAlarmSound() {
-    return _sharedPreferences.getBool("prayer_reminder_enforce_alarm_sound") ??
+    return _sharedPreferences?.getBool("prayer_reminder_enforce_alarm_sound") ??
         false;
   }
 
   static Future<void> setEnforceAlarmSound(bool value) async {
-    await _sharedPreferences.setBool("prayer_reminder_enforce_alarm_sound", value);
+    final prefs = await _ensurePrefs();
+    await prefs.setBool("prayer_reminder_enforce_alarm_sound", value);
   }
 
   static double getSoundVolume() {
-    return _sharedPreferences.getDouble("prayer_reminder_sound_volume") ?? 0.8;
+    return _sharedPreferences?.getDouble("prayer_reminder_sound_volume") ?? 0.8;
   }
 
   static Future<void> setSoundVolume(double volume) async {
-    await _sharedPreferences.setDouble("prayer_reminder_sound_volume", volume);
+    final prefs = await _ensurePrefs();
+    await prefs.setDouble("prayer_reminder_sound_volume", volume);
   }
 
   // ─── Ringtone Settings ────────────────────────────────────────────────
 
   static String getNotificationChannelKey() {
-    final key = _sharedPreferences.getString("prayer_reminder_channel_key");
+    final key = _sharedPreferences?.getString("prayer_reminder_channel_key");
     if (key == null ||
         key == "prayer_reminder" ||
         key == "prayer_reminder_default") {
@@ -723,11 +735,12 @@ class ReminderScheduler {
   }
 
   static Future<void> setNotificationChannelKey(String key) async {
-    await _sharedPreferences.setString("prayer_reminder_channel_key", key);
+    final prefs = await _ensurePrefs();
+    await prefs.setString("prayer_reminder_channel_key", key);
   }
 
   static String getAlarmChannelKey() {
-    final key = _sharedPreferences.getString("prayer_alarm_channel_key");
+    final key = _sharedPreferences?.getString("prayer_alarm_channel_key");
     if (key == null || key.isEmpty) {
       return "prayer_alarm_channel_v1";
     }
@@ -735,39 +748,43 @@ class ReminderScheduler {
   }
 
   static Future<void> setAlarmChannelKey(String key) async {
-    await _sharedPreferences.setString("prayer_alarm_channel_key", key);
+    final prefs = await _ensurePrefs();
+    await prefs.setString("prayer_alarm_channel_key", key);
   }
 
   static String? getSelectedRingtoneUri() {
-    return _sharedPreferences.getString("prayer_reminder_sound_uri");
+    return _sharedPreferences?.getString("prayer_reminder_sound_uri");
   }
 
   static Future<void> setSelectedRingtoneUri(String? uri) async {
+    final prefs = await _ensurePrefs();
     if (uri == null) {
-      await _sharedPreferences.remove("prayer_reminder_sound_uri");
+      await prefs.remove("prayer_reminder_sound_uri");
     } else {
-      await _sharedPreferences.setString("prayer_reminder_sound_uri", uri);
+      await prefs.setString("prayer_reminder_sound_uri", uri);
     }
   }
 
   static String? getSelectedRingtoneTitle() {
-    return _sharedPreferences.getString("prayer_reminder_sound_title");
+    return _sharedPreferences?.getString("prayer_reminder_sound_title");
   }
 
   static Future<void> setSelectedRingtoneTitle(String? title) async {
+    final prefs = await _ensurePrefs();
     if (title == null) {
-      await _sharedPreferences.remove("prayer_reminder_sound_title");
+      await prefs.remove("prayer_reminder_sound_title");
     } else {
-      await _sharedPreferences.setString("prayer_reminder_sound_title", title);
+      await prefs.setString("prayer_reminder_sound_title", title);
     }
   }
 
   static String getSelectedRingtoneType() {
-    return _sharedPreferences.getString("prayer_reminder_sound_type") ??
+    return _sharedPreferences?.getString("prayer_reminder_sound_type") ??
         "default_sound";
   }
 
   static Future<void> setSelectedRingtoneType(String type) async {
-    await _sharedPreferences.setString("prayer_reminder_sound_type", type);
+    final prefs = await _ensurePrefs();
+    await prefs.setString("prayer_reminder_sound_type", type);
   }
 }

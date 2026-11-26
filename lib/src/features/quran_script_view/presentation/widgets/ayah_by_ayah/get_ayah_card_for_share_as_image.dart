@@ -6,7 +6,7 @@ import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/core/theme/values/values.dart";
 import "package:dartx/dartx.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_html/flutter_html.dart";
 import "package:gap/gap.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
@@ -127,36 +127,35 @@ Widget getAyahCardForShareAsImage(
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: List.generate(
-                    footNote[translationIndex].length,
-                    (fnIndex) {
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Gap(5),
-                          Text(
-                            "${fnIndex + 1}.",
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              decoration: TextDecoration.underline,
+                  children: List.generate(footNote[translationIndex].length, (
+                    fnIndex,
+                  ) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Gap(5),
+                        Text(
+                          "${fnIndex + 1}.",
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                        MediaQuery(
+                          data: MediaQuery.of(context),
+                          child: Directionality(
+                            textDirection: Directionality.of(context),
+                            child: Html(
+                              data: footNote[translationIndex].values
+                                  .elementAt(fnIndex)
+                                  .toString(),
                             ),
                           ),
-                          MediaQuery(
-                            data: MediaQuery.of(context),
-                            child: Directionality(
-                              textDirection: Directionality.of(context),
-                              child: Html(
-                                data: footNote[translationIndex].values
-                                    .elementAt(fnIndex)
-                                    .toString(),
-                              ),
-                            ),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
+                        ),
+                      ],
+                    );
+                  }),
                 ),
 
               Row(

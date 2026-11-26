@@ -24,22 +24,22 @@ class AutoScrollCubit extends Cubit<AutoScrollState> {
   }
 
   void activate({String? initialAyahKey, int initialIndex = 0}) {
-    emit(state.copyWith(
-      isActive: true,
-      isPlaying: true,
-      isPausedByTouch: false,
-      currentAyahKey: initialAyahKey,
-      currentScrollIndex: initialIndex,
-    ));
+    emit(
+      state.copyWith(
+        isActive: true,
+        isPlaying: true,
+        isPausedByTouch: false,
+        currentAyahKey: initialAyahKey,
+        currentScrollIndex: initialIndex,
+      ),
+    );
     _enableWakelock();
   }
 
   void deactivate() {
-    emit(state.copyWith(
-      isActive: false,
-      isPlaying: false,
-      isPausedByTouch: false,
-    ));
+    emit(
+      state.copyWith(isActive: false, isPlaying: false, isPausedByTouch: false),
+    );
     _disableWakelock();
   }
 
@@ -110,10 +110,12 @@ class AutoScrollCubit extends Cubit<AutoScrollState> {
   }
 
   void updateCurrentIndex(int index, {String? ayahKey}) {
-    emit(state.copyWith(
-      currentScrollIndex: index,
-      currentAyahKey: ayahKey ?? state.currentAyahKey,
-    ));
+    emit(
+      state.copyWith(
+        currentScrollIndex: index,
+        currentAyahKey: ayahKey ?? state.currentAyahKey,
+      ),
+    );
   }
 
   void _persistSpeed(double speed) {

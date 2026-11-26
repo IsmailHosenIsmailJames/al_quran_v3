@@ -13,7 +13,10 @@ import "package:injectable/injectable.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
 double _calcQibla(double lat, double lon) {
-  final repo = QiblaRepositoryImpl(CompassDatasourceImpl(), VibrationDatasourceImpl());
+  final repo = QiblaRepositoryImpl(
+    CompassDatasourceImpl(),
+    VibrationDatasourceImpl(),
+  );
   return repo.calculateQiblaAngle(lat, lon);
 }
 
@@ -53,10 +56,7 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
     if (save) {
       sharedPreferences.setString("user_location", latLon.toJsonString());
     }
-    final double kaabaAngle = _calcQibla(
-      latLon.latitude,
-      latLon.longitude,
-    );
+    final double kaabaAngle = _calcQibla(latLon.latitude, latLon.longitude);
 
     emit(state.copyWith(latLon: latLon, kaabaAngle: kaabaAngle));
     await ReminderScheduler.scheduleNotification();
@@ -104,7 +104,9 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
     String? jsonLocation = sharedPreferences.getString("user_location");
     if (jsonLocation == null) {
       if (Hive.isBoxOpen("user")) {
-        jsonLocation = Hive.box("user").get("user_location", defaultValue: null);
+        jsonLocation = Hive.box(
+          "user",
+        ).get("user_location", defaultValue: null);
         if (jsonLocation != null) {
           await sharedPreferences.setString("user_location", jsonLocation);
         }
@@ -115,10 +117,7 @@ class LocationQiblaPrayerDataCubit extends Cubit<LocationQiblaPrayerDataState> {
       return const LocationQiblaPrayerDataState();
     } else {
       var latLong = LatLon.fromJsonString(jsonLocation);
-      double kaabaAngle = _calcQibla(
-        latLong.latitude,
-        latLong.longitude,
-      );
+      double kaabaAngle = _calcQibla(latLong.latitude, latLong.longitude);
       String? calculationMethodJason = sharedPreferences.getString(
         "selected_calculation_method",
       );

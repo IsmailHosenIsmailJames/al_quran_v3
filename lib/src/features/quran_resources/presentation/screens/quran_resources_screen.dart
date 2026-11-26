@@ -7,7 +7,7 @@ import "package:al_quran_v3/src/features/quran_resources/presentation/widgets/re
 import "package:al_quran_v3/src/features/quran_resources/presentation/widgets/tafsir_resources_tab.dart";
 import "package:al_quran_v3/src/features/quran_resources/presentation/widgets/translation_resources_tab.dart";
 import "package:al_quran_v3/src/features/quran_resources/presentation/widgets/word_by_word_resources_tab.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
@@ -54,9 +54,9 @@ class _QuranResourcesViewState extends State<_QuranResourcesView>
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context
-          .read<QuranResourcesCubit>()
-          .loadResources(initTab: widget.initTab);
+      context.read<QuranResourcesCubit>().loadResources(
+        initTab: widget.initTab,
+      );
     });
   }
 
@@ -134,8 +134,9 @@ class _QuranResourcesViewState extends State<_QuranResourcesView>
                   height: 40,
                   margin: const EdgeInsets.only(right: 16),
                   decoration: BoxDecoration(
-                    color:
-                        isDark ? const Color(0xFF1E1E1E) : Colors.grey.shade100,
+                    color: isDark
+                        ? const Color(0xFF1E1E1E)
+                        : Colors.grey.shade100,
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
                       color: isDark
@@ -162,7 +163,9 @@ class _QuranResourcesViewState extends State<_QuranResourcesView>
                       suffixIcon: ValueListenableBuilder<TextEditingValue>(
                         valueListenable: _searchController,
                         builder: (context, value, _) {
-                          if (value.text.isEmpty) return const SizedBox.shrink();
+                          if (value.text.isEmpty) {
+                            return const SizedBox.shrink();
+                          }
                           return IconButton(
                             icon: const Icon(Icons.clear_rounded, size: 18),
                             onPressed: () {

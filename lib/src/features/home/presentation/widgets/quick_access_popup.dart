@@ -9,7 +9,7 @@ import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model
 import "package:al_quran_v3/src/features/surah_list/domain/utils/filter_surah.dart";
 import "package:dartx/dartx.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -77,7 +77,10 @@ class _QuickAccessWidgetState extends State<QuickAccessWidget> {
             BlocBuilder<QuickAccessCubit, List<QuickAccessModel>>(
               builder: (context, quickAccessList) {
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 6.0,
+                  ),
                   child: Row(
                     children: [
                       Container(
@@ -129,7 +132,10 @@ class _QuickAccessWidgetState extends State<QuickAccessWidget> {
                               : Colors.grey.shade800,
                           visualDensity: VisualDensity.compact,
                         ),
-                        icon: const Icon(FluentIcons.dismiss_20_regular, size: 18),
+                        icon: const Icon(
+                          FluentIcons.dismiss_20_regular,
+                          size: 18,
+                        ),
                       ),
                     ],
                   ),
@@ -215,7 +221,9 @@ class _QuickAccessWidgetState extends State<QuickAccessWidget> {
                           const Gap(8),
                           _buildTabChip(
                             index: 1,
-                            label: l10n.activeShortcutsCount(quickAccessList.length),
+                            label: l10n.activeShortcutsCount(
+                              quickAccessList.length,
+                            ),
                             isSelected: _selectedFilterTab == 1,
                             themeState: themeState,
                             isDark: isDark,
@@ -240,8 +248,9 @@ class _QuickAccessWidgetState extends State<QuickAccessWidget> {
                   );
 
                   if (_selectedFilterTab == 1) {
-                    final selectedIds =
-                        quickAccessList.map((e) => e.surahNumber).toSet();
+                    final selectedIds = quickAccessList
+                        .map((e) => e.surahNumber)
+                        .toSet();
                     surahs = surahs
                         .where((s) => selectedIds.contains(s.id))
                         .toList();
@@ -303,29 +312,29 @@ class _QuickAccessWidgetState extends State<QuickAccessWidget> {
                         l10n: l10n,
                         onToggle: () {
                           if (isSelected) {
-                            context
-                                .read<QuickAccessCubit>()
-                                .removeQuickAccess(matchedAccess);
+                            context.read<QuickAccessCubit>().removeQuickAccess(
+                              matchedAccess,
+                            );
                           } else {
                             context.read<QuickAccessCubit>().addQuickAccess(
-                                  QuickAccessModel(
-                                    surahNumber: surah.id,
-                                    scrollIndex: 1,
-                                    createdAt: DateTime.now(),
-                                  ),
-                                );
+                              QuickAccessModel(
+                                surahNumber: surah.id,
+                                scrollIndex: 1,
+                                createdAt: DateTime.now(),
+                              ),
+                            );
                           }
                           setState(() {});
                         },
                         onUpdateAyah: (newAyah) {
                           context.read<QuickAccessCubit>().updateQuickAccess(
-                                QuickAccessModel(
-                                  surahNumber: surah.id,
-                                  scrollIndex: newAyah,
-                                  createdAt: matchedAccess?.createdAt ??
-                                      DateTime.now(),
-                                ),
-                              );
+                            QuickAccessModel(
+                              surahNumber: surah.id,
+                              scrollIndex: newAyah,
+                              createdAt:
+                                  matchedAccess?.createdAt ?? DateTime.now(),
+                            ),
+                          );
                           setState(() {});
                         },
                       );
@@ -358,15 +367,15 @@ class _QuickAccessWidgetState extends State<QuickAccessWidget> {
             color: isSelected
                 ? themeState.primary
                 : (isDark
-                    ? Colors.white.withValues(alpha: 0.05)
-                    : Colors.white),
+                      ? Colors.white.withValues(alpha: 0.05)
+                      : Colors.white),
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
               color: isSelected
                   ? themeState.primary
                   : (isDark
-                      ? Colors.white.withValues(alpha: 0.08)
-                      : Colors.grey.shade300),
+                        ? Colors.white.withValues(alpha: 0.08)
+                        : Colors.grey.shade300),
             ),
           ),
           child: Text(
@@ -422,8 +431,8 @@ class _QuickAccessSurahCard extends StatelessWidget {
           color: isSelected
               ? themeState.primary.withValues(alpha: isDark ? 0.6 : 0.4)
               : (isDark
-                  ? Colors.white.withValues(alpha: 0.06)
-                  : Colors.grey.shade200),
+                    ? Colors.white.withValues(alpha: 0.06)
+                    : Colors.grey.shade200),
           width: isSelected ? 1.5 : 1.0,
         ),
         boxShadow: isDark
@@ -442,7 +451,10 @@ class _QuickAccessSurahCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(14),
           onTap: onToggle,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 12.0,
+              vertical: 10.0,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -462,8 +474,8 @@ class _QuickAccessSurahCard extends StatelessWidget {
                           color: isSelected
                               ? themeState.primary
                               : (isDark
-                                  ? Colors.grey.shade600
-                                  : Colors.grey.shade400),
+                                    ? Colors.grey.shade600
+                                    : Colors.grey.shade400),
                           width: 1.5,
                         ),
                       ),
@@ -479,10 +491,7 @@ class _QuickAccessSurahCard extends StatelessWidget {
                     const Gap(10),
 
                     // Number Badge
-                    QuranIndexBadge(
-                      index: surah.id,
-                      size: 32,
-                    ),
+                    QuranIndexBadge(index: surah.id, size: 32),
 
                     const Gap(10),
 
@@ -528,8 +537,8 @@ class _QuickAccessSurahCard extends StatelessWidget {
                         color: isSelected
                             ? themeState.primary
                             : (isDark
-                                ? Colors.grey.shade300
-                                : Colors.grey.shade800),
+                                  ? Colors.grey.shade300
+                                  : Colors.grey.shade800),
                       ),
                     ),
                   ],
@@ -587,7 +596,9 @@ class _QuickAccessSurahCard extends StatelessWidget {
                               ),
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
-                                color: themeState.primary.withValues(alpha: 0.3),
+                                color: themeState.primary.withValues(
+                                  alpha: 0.3,
+                                ),
                               ),
                             ),
                             child: Row(
@@ -851,10 +862,7 @@ class _AyahPickerSheetState extends State<_AyahPickerSheet> {
               },
               child: const Text(
                 "Set Shortcut Ayah",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -878,12 +886,10 @@ class _AyahPickerSheetState extends State<_AyahPickerSheet> {
         color: isSelected
             ? Colors.transparent
             : (widget.isDark
-                ? Colors.white.withValues(alpha: 0.08)
-                : Colors.grey.shade300),
+                  ? Colors.white.withValues(alpha: 0.08)
+                  : Colors.grey.shade300),
       ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       labelStyle: TextStyle(
         fontSize: 11.5,
         fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,

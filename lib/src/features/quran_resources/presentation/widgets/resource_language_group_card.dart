@@ -2,7 +2,7 @@ import 'package:al_quran_v3/src/core/theme/controller/theme_cubit.dart';
 import 'package:al_quran_v3/src/features/quran_resources/domain/entities/resource_group_entity.dart';
 import 'package:al_quran_v3/src/features/quran_resources/presentation/cubit/quran_resources_state.dart';
 import 'package:al_quran_v3/src/features/quran_resources/presentation/widgets/resource_item_tile.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ResourceLanguageGroupCard extends StatelessWidget {
@@ -21,10 +21,10 @@ class ResourceLanguageGroupCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeState = context.watch<ThemeCubit>().state;
     final isDark = Theme.brightnessOf(context) == Brightness.dark;
-    final int downloadedCount =
-        group.resources.where((r) => r.isDownloaded).length;
-    final int selectedCount =
-        group.resources.where((r) => r.isSelected).length;
+    final int downloadedCount = group.resources
+        .where((r) => r.isDownloaded)
+        .length;
+    final int selectedCount = group.resources.where((r) => r.isSelected).length;
     final isSearchActive = state.searchQuery.trim().isNotEmpty;
     final shouldExpand = isSearchActive || forceExpanded;
 
@@ -48,16 +48,15 @@ class ResourceLanguageGroupCard extends StatelessWidget {
         ],
       ),
       child: Theme(
-        data: Theme.of(context).copyWith(
-          dividerColor: Colors.transparent,
-        ),
+        data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
           key: PageStorageKey("${group.languageKey}_$shouldExpand"),
           initiallyExpanded: shouldExpand,
           tilePadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
           iconColor: themeState.primary,
-          collapsedIconColor:
-              isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+          collapsedIconColor: isDark
+              ? Colors.grey.shade400
+              : Colors.grey.shade600,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(16)),
           ),
@@ -103,8 +102,10 @@ class ResourceLanguageGroupCard extends StatelessWidget {
                 ),
                 if (selectedCount > 0)
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 7,
+                      vertical: 2,
+                    ),
                     decoration: BoxDecoration(
                       color: themeState.primary.withValues(alpha: 0.12),
                       borderRadius: BorderRadius.circular(12),
@@ -135,8 +136,10 @@ class ResourceLanguageGroupCard extends StatelessWidget {
                   )
                 else if (downloadedCount > 0)
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 7,
+                      vertical: 2,
+                    ),
                     decoration: BoxDecoration(
                       color: isDark
                           ? Colors.white.withValues(alpha: 0.08)
@@ -174,8 +177,10 @@ class ResourceLanguageGroupCard extends StatelessWidget {
                     ),
                   ),
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
                     color: isDark
                         ? Colors.white.withValues(alpha: 0.04)
@@ -187,8 +192,9 @@ class ResourceLanguageGroupCard extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 10.5,
                       fontWeight: FontWeight.w500,
-                      color:
-                          isDark ? Colors.grey.shade500 : Colors.grey.shade600,
+                      color: isDark
+                          ? Colors.grey.shade500
+                          : Colors.grey.shade600,
                     ),
                   ),
                 ),
@@ -215,7 +221,8 @@ class ResourceLanguageGroupCard extends StatelessWidget {
 
                     final bool isDownloading1 =
                         state.downloadingResourcePath == r1.fullPath;
-                    final bool isDownloading2 = r2 != null &&
+                    final bool isDownloading2 =
+                        r2 != null &&
                         state.downloadingResourcePath == r2.fullPath;
 
                     rows.add(
@@ -260,8 +267,9 @@ class ResourceLanguageGroupCard extends StatelessWidget {
                     return ResourceItemTile(
                       resource: resource,
                       isDownloading: isDownloading,
-                      downloadProgress:
-                          isDownloading ? state.downloadProgress : 0.0,
+                      downloadProgress: isDownloading
+                          ? state.downloadProgress
+                          : 0.0,
                     );
                   }).toList(),
                 );
@@ -273,4 +281,3 @@ class ResourceLanguageGroupCard extends StatelessWidget {
     );
   }
 }
-

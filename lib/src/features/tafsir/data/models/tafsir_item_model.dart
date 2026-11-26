@@ -18,10 +18,6 @@ abstract class TafsirItemModel with _$TafsirItemModel {
   const TafsirItemModel._();
 
   TafsirItemEntity toEntity() {
-    return TafsirItemEntity(
-      bookName: bookName,
-      ayahKey: ayahKey,
-      text: text,
-    );
+    return TafsirItemEntity(bookName: bookName, ayahKey: ayahKey, text: text);
   }
 }

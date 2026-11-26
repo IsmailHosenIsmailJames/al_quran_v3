@@ -4,7 +4,7 @@ import "package:al_quran_v3/src/core/localization/languages.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -40,7 +40,9 @@ class _AppLanguageSettingsState extends State<AppLanguageSettings> {
     }).toList();
 
     return Scaffold(
-      backgroundColor: isDark ? const Color(0xFF121212) : const Color(0xFFF8F9FA),
+      backgroundColor: isDark
+          ? const Color(0xFF121212)
+          : const Color(0xFFF8F9FA),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -63,7 +65,10 @@ class _AppLanguageSettingsState extends State<AppLanguageSettings> {
                   children: [
                     // Search Bar
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 8.0,
+                      ),
                       child: Container(
                         height: 44,
                         decoration: BoxDecoration(
@@ -134,42 +139,53 @@ class _AppLanguageSettingsState extends State<AppLanguageSettings> {
                               ),
                             )
                           : (isWide
-                              ? GridView.builder(
-                                  controller: _scrollController,
-                                  padding: const EdgeInsets.fromLTRB(16, 6, 16, 24),
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    mainAxisExtent: 68,
-                                    crossAxisSpacing: 10,
-                                    mainAxisSpacing: 8,
-                                  ),
-                                  itemCount: filteredLanguages.length,
-                                  itemBuilder: (context, index) {
-                                    final lang = filteredLanguages[index];
-                                    return _buildLanguageCard(
-                                      lang,
-                                      currentLanguage,
-                                      themeState,
-                                      isDark,
-                                    );
-                                  },
-                                )
-                              : ListView.separated(
-                                  controller: _scrollController,
-                                  padding: const EdgeInsets.fromLTRB(16, 6, 16, 24),
-                                  itemCount: filteredLanguages.length,
-                                  separatorBuilder: (context, index) => const Gap(8),
-                                  itemBuilder: (context, index) {
-                                    final lang = filteredLanguages[index];
-                                    return _buildLanguageCard(
-                                      lang,
-                                      currentLanguage,
-                                      themeState,
-                                      isDark,
-                                    );
-                                  },
-                                )),
+                                ? GridView.builder(
+                                    controller: _scrollController,
+                                    padding: const EdgeInsets.fromLTRB(
+                                      16,
+                                      6,
+                                      16,
+                                      24,
+                                    ),
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2,
+                                          mainAxisExtent: 68,
+                                          crossAxisSpacing: 10,
+                                          mainAxisSpacing: 8,
+                                        ),
+                                    itemCount: filteredLanguages.length,
+                                    itemBuilder: (context, index) {
+                                      final lang = filteredLanguages[index];
+                                      return _buildLanguageCard(
+                                        lang,
+                                        currentLanguage,
+                                        themeState,
+                                        isDark,
+                                      );
+                                    },
+                                  )
+                                : ListView.separated(
+                                    controller: _scrollController,
+                                    padding: const EdgeInsets.fromLTRB(
+                                      16,
+                                      6,
+                                      16,
+                                      24,
+                                    ),
+                                    itemCount: filteredLanguages.length,
+                                    separatorBuilder: (context, index) =>
+                                        const Gap(8),
+                                    itemBuilder: (context, index) {
+                                      final lang = filteredLanguages[index];
+                                      return _buildLanguageCard(
+                                        lang,
+                                        currentLanguage,
+                                        themeState,
+                                        isDark,
+                                      );
+                                    },
+                                  )),
                     ),
                   ],
                 );
@@ -187,13 +203,12 @@ class _AppLanguageSettingsState extends State<AppLanguageSettings> {
     ThemeState themeState,
     bool isDark,
   ) {
-    final isSelected = currentLanguage.locale.languageCode == lang.locale.languageCode;
+    final isSelected =
+        currentLanguage.locale.languageCode == lang.locale.languageCode;
 
     return Material(
       color: isSelected
-          ? themeState.primary.withValues(
-              alpha: isDark ? 0.15 : 0.06,
-            )
+          ? themeState.primary.withValues(alpha: isDark ? 0.15 : 0.06)
           : (isDark ? const Color(0xFF1E1E1E) : Colors.white),
       borderRadius: BorderRadius.circular(14),
       child: InkWell(
@@ -203,18 +218,15 @@ class _AppLanguageSettingsState extends State<AppLanguageSettings> {
           context.read<LanguageCubit>().changeLanguage(lang);
         },
         child: Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 12,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14),
             border: Border.all(
               color: isSelected
                   ? themeState.primary
                   : (isDark
-                      ? Colors.white.withValues(alpha: 0.06)
-                      : Colors.grey.shade200),
+                        ? Colors.white.withValues(alpha: 0.06)
+                        : Colors.grey.shade200),
               width: isSelected ? 1.5 : 1.0,
             ),
           ),
@@ -227,10 +239,8 @@ class _AppLanguageSettingsState extends State<AppLanguageSettings> {
                   color: isSelected
                       ? themeState.primary
                       : (isDark
-                          ? Colors.white.withValues(
-                              alpha: 0.08,
-                            )
-                          : Colors.grey.shade100),
+                            ? Colors.white.withValues(alpha: 0.08)
+                            : Colors.grey.shade100),
                   shape: BoxShape.circle,
                 ),
                 alignment: Alignment.center,
@@ -242,8 +252,8 @@ class _AppLanguageSettingsState extends State<AppLanguageSettings> {
                     color: isSelected
                         ? Colors.white
                         : (isDark
-                            ? Colors.grey.shade300
-                            : Colors.grey.shade700),
+                              ? Colors.grey.shade300
+                              : Colors.grey.shade700),
                   ),
                 ),
               ),
@@ -259,7 +269,9 @@ class _AppLanguageSettingsState extends State<AppLanguageSettings> {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontSize: 14.5,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
+                        fontWeight: isSelected
+                            ? FontWeight.bold
+                            : FontWeight.w600,
                         color: isDark ? Colors.white : Colors.grey.shade900,
                       ),
                     ),
@@ -270,7 +282,9 @@ class _AppLanguageSettingsState extends State<AppLanguageSettings> {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontSize: 11.5,
-                        color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                        color: isDark
+                            ? Colors.grey.shade400
+                            : Colors.grey.shade600,
                       ),
                     ),
                   ],

@@ -1,6 +1,6 @@
 import "package:al_quran_v3/src/features/audio/data/models/recitation_info_model.dart";
 import "package:al_quran_v3/src/features/audio/presentation/screens/change_reciter.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 Future<void> popupChangeReciter(
   BuildContext context,
@@ -17,7 +17,10 @@ Future<void> popupChangeReciter(
       context: context,
       builder: (context) {
         return Dialog(
-          insetPadding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 40,
+            vertical: 30,
+          ),
           clipBehavior: Clip.antiAlias,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),

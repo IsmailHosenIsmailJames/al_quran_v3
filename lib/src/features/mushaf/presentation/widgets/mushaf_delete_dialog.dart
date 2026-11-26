@@ -1,6 +1,6 @@
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:gap/gap.dart";
 
 /// Shows a stylized confirmation dialog for clearing Mushaf data.
@@ -12,9 +12,7 @@ Future<bool?> showMushafDeleteDialog(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: Row(
           children: [
             Container(
@@ -49,7 +47,10 @@ Future<bool?> showMushafDeleteDialog(BuildContext context) {
             color: isDark ? Colors.grey.shade300 : Colors.grey.shade700,
           ),
         ),
-        actionsPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        actionsPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 12,
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),

@@ -59,9 +59,7 @@ class SegmentedResourcesManager {
         audioTimeStamp is Map &&
         audioTimeStamp["segments"] is List) {
       segments = List<List>.from(
-        (audioTimeStamp["segments"] as List).map(
-          (e) => e is List ? e : [],
-        ),
+        (audioTimeStamp["segments"] as List).map((e) => e is List ? e : []),
       );
     }
     return segments;
@@ -197,8 +195,9 @@ class SegmentedResourcesManager {
       return true;
     }
 
-    final String fullUrl =
-        rawUrl.startsWith("http") ? rawUrl : "${ApisUrls.base}$rawUrl";
+    final String fullUrl = rawUrl.startsWith("http")
+        ? rawUrl
+        : "${ApisUrls.base}$rawUrl";
 
     try {
       final response = await _dio.get(fullUrl);
@@ -219,17 +218,15 @@ class SegmentedResourcesManager {
         // Save reciter metadata
         ReciterInfoModel? resolvedMeta =
             reciterMeta ??
-            getSegmentsSupportedReciters()
-                .cast<ReciterInfoModel?>()
-                .firstWhere(
-                  (r) =>
-                      r != null &&
-                      r.segmentsUrl != null &&
-                      (r.segmentsUrl == rawUrl ||
-                          rawUrl.endsWith(r.segmentsUrl!) ||
-                          praseStringToBoxName(r.segmentsUrl!) == boxName),
-                  orElse: () => null,
-                );
+            getSegmentsSupportedReciters().cast<ReciterInfoModel?>().firstWhere(
+              (r) =>
+                  r != null &&
+                  r.segmentsUrl != null &&
+                  (r.segmentsUrl == rawUrl ||
+                      rawUrl.endsWith(r.segmentsUrl!) ||
+                      praseStringToBoxName(r.segmentsUrl!) == boxName),
+              orElse: () => null,
+            );
         if (resolvedMeta != null) {
           await _segmentsBox?.put(_metaKey, resolvedMeta.toJson());
         }

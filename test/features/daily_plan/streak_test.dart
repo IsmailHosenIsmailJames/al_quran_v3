@@ -51,9 +51,7 @@ void main() {
 
   group("DailyPlanEntity Tests", () {
     test("initial plan has 0 completed prayers and is not all completed", () {
-      const plan = DailyPlanEntity(
-        prayersCompleted: {},
-      );
+      const plan = DailyPlanEntity(prayersCompleted: {});
 
       expect(plan.completedPrayersCount, 0);
       expect(plan.allPrayersCompleted, isFalse);

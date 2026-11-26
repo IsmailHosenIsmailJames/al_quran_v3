@@ -36,7 +36,7 @@ import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/
 import "package:al_quran_v3/src/features/quran_script_view/domain/models/script_info.dart";
 import "package:al_quran_v3/src/features/quran_script_view/data/processor/script_processor.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:just_audio/just_audio.dart" as just_audio;
@@ -560,8 +560,8 @@ class _AyahPlayButton extends StatelessWidget {
                       } else if (isCurrent) {
                         await AudioPlayerManager.togglePlayPause();
                       } else {
-                        final int playlistIdx =
-                            ayahKeyManagement.ayahList.indexOf(ayahKey);
+                        final int playlistIdx = ayahKeyManagement.ayahList
+                            .indexOf(ayahKey);
                         if (audioUiState.isPlayList && playlistIdx != -1) {
                           await AudioPlayerManager.seekToAyahKey(ayahKey);
                           if (!AudioPlayerManager.audioPlayer.playing) {
@@ -971,8 +971,9 @@ class _WordByWordContent extends StatelessWidget {
 
         return BlocBuilder<ReciterCubit, ReciterInfoModel>(
           builder: (context, reciterState) {
-            final List<List>? segments =
-                context.read<ReciterCubit>().getAyahSegments(ayahKey);
+            final List<List>? segments = context
+                .read<ReciterCubit>()
+                .getAyahSegments(ayahKey);
 
             return BlocBuilder<AudioUiCubit, AudioControllerUiState>(
               buildWhen: (prev, curr) =>
@@ -989,8 +990,10 @@ class _WordByWordContent extends StatelessWidget {
                         ayahKeyState.current == ayahKey &&
                         segments != null;
 
-                    return BlocBuilder<PlayerPositionCubit,
-                        AudioPlayerPositionModel>(
+                    return BlocBuilder<
+                      PlayerPositionCubit,
+                      AudioPlayerPositionModel
+                    >(
                       buildWhen: (previous, current) {
                         if (!isThisAyahActive) return false;
                         final prevWord = findActiveWordKeyForSegments(
@@ -1026,88 +1029,97 @@ class _WordByWordContent extends StatelessWidget {
                               final bool isHighlighted =
                                   activeWordKey == currentWordKey;
 
-                      return InkWell(
-                        borderRadius: BorderRadius.circular(10),
-                        onTap: () async {
-                          final List<String> wordsKey = List.generate(
-                            wordByWord.length,
-                            (i) => "$surahNumber:$ayahNumber:${i + 1}",
-                          );
-                          showPopupWordFunction(
-                            context: context,
-                            wordKeys: wordsKey,
-                            initWordIndex: index,
-                            wordByWordList:
-                                await WordByWordFunction.getAyahWordByWordData(
-                                  "${wordsKey.first.split(":")[0]}:${wordsKey.first.split(":")[1]}",
-                                ) ??
-                                [],
-                          );
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 6,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: isHighlighted
-                                ? themeState.primary.withValues(alpha: 0.15)
-                                : (isDark
-                                      ? Colors.white.withValues(alpha: 0.04)
-                                      : themeState.primary.withValues(
-                                          alpha: 0.06,
-                                        )),
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                              color: isHighlighted
-                                  ? themeState.primary
-                                  : (isDark
-                                        ? Colors.white.withValues(alpha: 0.06)
-                                        : themeState.primary.withValues(
+                              return InkWell(
+                                borderRadius: BorderRadius.circular(10),
+                                onTap: () async {
+                                  final List<String> wordsKey = List.generate(
+                                    wordByWord.length,
+                                    (i) => "$surahNumber:$ayahNumber:${i + 1}",
+                                  );
+                                  showPopupWordFunction(
+                                    context: context,
+                                    wordKeys: wordsKey,
+                                    initWordIndex: index,
+                                    wordByWordList:
+                                        await WordByWordFunction.getAyahWordByWordData(
+                                          "${wordsKey.first.split(":")[0]}:${wordsKey.first.split(":")[1]}",
+                                        ) ??
+                                        [],
+                                  );
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 6,
+                                    vertical: 4,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: isHighlighted
+                                        ? themeState.primary.withValues(
                                             alpha: 0.15,
-                                          )),
-                              width: isHighlighted ? 1.5 : 1,
-                            ),
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              ScriptProcessor(
-                                scriptInfo: ScriptInfo(
-                                  surahNumber: surahNumber,
-                                  ayahNumber: ayahNumber,
-                                  quranScriptType:
-                                      quranViewState.quranScriptType,
-                                  wordIndex: index,
-                                  textStyle: TextStyle(
-                                    fontSize: quranViewState.fontSize,
-                                    height: quranViewState.lineHeight,
+                                          )
+                                        : (isDark
+                                              ? Colors.white.withValues(
+                                                  alpha: 0.04,
+                                                )
+                                              : themeState.primary.withValues(
+                                                  alpha: 0.06,
+                                                )),
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      color: isHighlighted
+                                          ? themeState.primary
+                                          : (isDark
+                                                ? Colors.white.withValues(
+                                                    alpha: 0.06,
+                                                  )
+                                                : themeState.primary.withValues(
+                                                    alpha: 0.15,
+                                                  )),
+                                      width: isHighlighted ? 1.5 : 1,
+                                    ),
+                                  ),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      ScriptProcessor(
+                                        scriptInfo: ScriptInfo(
+                                          surahNumber: surahNumber,
+                                          ayahNumber: ayahNumber,
+                                          quranScriptType:
+                                              quranViewState.quranScriptType,
+                                          wordIndex: index,
+                                          textStyle: TextStyle(
+                                            fontSize: quranViewState.fontSize,
+                                            height: quranViewState.lineHeight,
+                                          ),
+                                        ),
+                                        tajweedColorEnable:
+                                            quranViewState.quranScriptType ==
+                                                QuranScriptType.uthmani
+                                            ? quranViewState.useTajweedOnUthmani
+                                            : quranViewState
+                                                  .useTajweedOnIndopak,
+                                        themeState: themeState,
+                                      ),
+                                      const Gap(2),
+                                      Text(
+                                        removeHtmlTags(
+                                          wordByWord[index].toString(),
+                                        ),
+                                        style: TextStyle(
+                                          fontSize: 11,
+                                          color: isDark
+                                              ? Colors.grey.shade400
+                                              : Colors.grey.shade700,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                tajweedColorEnable:
-                                    quranViewState.quranScriptType ==
-                                        QuranScriptType.uthmani
-                                    ? quranViewState.useTajweedOnUthmani
-                                    : quranViewState.useTajweedOnIndopak,
-                                themeState: themeState,
-                              ),
-                              const Gap(2),
-                              Text(
-                                removeHtmlTags(wordByWord[index].toString()),
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  color: isDark
-                                      ? Colors.grey.shade400
-                                      : Colors.grey.shade700,
-                                ),
-                              ),
-                            ],
+                              );
+                            }),
                           ),
-                        ),
-                      );
-                    }),
-                  ),
-                );
+                        );
                       },
                     );
                   },

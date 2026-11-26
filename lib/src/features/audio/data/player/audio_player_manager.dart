@@ -28,7 +28,7 @@ import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model
 import "package:dio/dio.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
 import "package:flutter/foundation.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:just_audio/just_audio.dart";
@@ -132,7 +132,11 @@ class AudioPlayerManager {
         messenger.showSnackBar(
           SnackBar(
             behavior: SnackBarBehavior.floating,
-            content: Text(message, maxLines: 2, overflow: TextOverflow.ellipsis),
+            content: Text(
+              message,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
             action: _lastRetryAction != null
                 ? SnackBarAction(
                     label: "Retry",
@@ -245,10 +249,7 @@ class AudioPlayerManager {
         await player.seek(Duration.zero, index: 0);
         audioUICubit.expand(false);
         playerPositionCubit.changeCurrentPosition(Duration.zero);
-        playerStateCubit.changeState(
-          isPlaying: false,
-          processingState: event,
-        );
+        playerStateCubit.changeState(isPlaying: false, processingState: event);
         return;
       }
       playerStateCubit.changeState(processingState: event);
@@ -494,7 +495,10 @@ class AudioPlayerManager {
                 await tempFile.delete();
               } catch (_) {}
             }
-            log("Unexpected error downloading ayah $i: $e", name: "AudioDownload");
+            log(
+              "Unexpected error downloading ayah $i: $e",
+              name: "AudioDownload",
+            );
             Fluttertoast.showToast(msg: "Download failed: $e");
             return false;
           }
@@ -732,7 +736,10 @@ class AudioPlayerManager {
     final audioUICubit = context.read<AudioUiCubit>();
     final ayahKeyCubit = context.read<AyahKeyCubit>();
     final playerStateCubit = context.read<PlayerStateCubit>();
-    final double playbackSpeed = context.read<QuranViewCubit>().state.playbackSpeed;
+    final double playbackSpeed = context
+        .read<QuranViewCubit>()
+        .state
+        .playbackSpeed;
 
     final int surahNum = int.tryParse(ayahKey.split(":").first) ?? 1;
     final SurahInfoModel surahInfoModel = SurahInfoModel.fromMap(
@@ -779,7 +786,11 @@ class AudioPlayerManager {
         await player.play();
       }
     } catch (e, s) {
-      log("playSingleAyah failed: $e", stackTrace: s, name: "AudioPlayerManager");
+      log(
+        "playSingleAyah failed: $e",
+        stackTrace: s,
+        name: "AudioPlayerManager",
+      );
       playerStateCubit.changeState(
         isPlaying: false,
         processingState: ProcessingState.idle,
@@ -796,7 +807,10 @@ class AudioPlayerManager {
     String startAyahKey,
   ) async {
     if (kIsWeb) return true;
-    final bool useAudioStream = context.read<QuranViewCubit>().state.useAudioStream;
+    final bool useAudioStream = context
+        .read<QuranViewCubit>()
+        .state
+        .useAudioStream;
     if (useAudioStream) return true;
 
     final String surahStr = startAyahKey.split(":").first;
@@ -919,14 +933,16 @@ class AudioPlayerManager {
     final List<String> uniqueAyahList = List<String>.from(rawList);
     if (uniqueAyahList.isEmpty) return;
 
-    final int safeUniqueIndex =
-        initialIndex.clamp(0, uniqueAyahList.length - 1);
+    final int safeUniqueIndex = initialIndex.clamp(
+      0,
+      uniqueAyahList.length - 1,
+    );
 
     final loopState = audioLoopCubit.state;
     final int perAyahRepeat =
         (loopState.isRangeActive && loopState.repeatEachAyah > 1)
-            ? loopState.repeatEachAyah
-            : 1;
+        ? loopState.repeatEachAyah
+        : 1;
 
     final List<String> expandedKeys = perAyahRepeat <= 1
         ? uniqueAyahList
@@ -940,7 +956,10 @@ class AudioPlayerManager {
     final audioUICubit = context.read<AudioUiCubit>();
     final ayahKeyCubit = context.read<AyahKeyCubit>();
     final playerStateCubit = context.read<PlayerStateCubit>();
-    final double playbackSpeed = context.read<QuranViewCubit>().state.playbackSpeed;
+    final double playbackSpeed = context
+        .read<QuranViewCubit>()
+        .state
+        .playbackSpeed;
 
     try {
       playerStateCubit.changeState(processingState: ProcessingState.loading);
@@ -998,8 +1017,8 @@ class AudioPlayerManager {
       final bool isSinglePlaylistItem = expandedKeys.length == 1;
       final LoopMode effectiveLoopMode =
           (loopState.isRangeActive && isSinglePlaylistItem)
-              ? LoopMode.off
-              : loopState.loopMode;
+          ? LoopMode.off
+          : loopState.loopMode;
       await player.setLoopMode(effectiveLoopMode);
       await player.setSpeed(playbackSpeed);
 
@@ -1039,10 +1058,9 @@ class AudioPlayerManager {
 
   static Future<void> playWord(String wordKey) async {
     final BuildContext? context = navigatorKey.currentContext;
-    final wordPlayingCubit =
-        (context != null && context.mounted)
-            ? context.read<WordPlayingStateCubit>()
-            : null;
+    final wordPlayingCubit = (context != null && context.mounted)
+        ? context.read<WordPlayingStateCubit>()
+        : null;
 
     // Tapping the active word toggles playback off cleanly
     if (isWordPlaying && wordPlayingCubit?.state == wordKey) {
@@ -1105,7 +1123,10 @@ class AudioPlayerManager {
         onTimeout: () {},
       );
     } catch (e) {
-      log("Word audio playback error ($wordKey): $e", name: "AudioPlayerManager");
+      log(
+        "Word audio playback error ($wordKey): $e",
+        name: "AudioPlayerManager",
+      );
       if (!_isBenignPlayerError(e)) {
         Fluttertoast.showToast(msg: "Unable to play word pronunciation.");
       }
@@ -1172,12 +1193,11 @@ class AudioPlayerManager {
     final String mediaTitle = "$surahTitle • Ayah $ayahNumber";
     final String album =
         (reciter.style != null && reciter.style!.trim().isNotEmpty)
-            ? "${reciter.name} (${reciter.style})"
-            : reciter.name;
-    final Uri? artUri =
-        (reciter.img != null && reciter.img!.isNotEmpty)
-            ? Uri.tryParse(reciter.img!)
-            : null;
+        ? "${reciter.name} (${reciter.style})"
+        : reciter.name;
+    final Uri? artUri = (reciter.img != null && reciter.img!.isNotEmpty)
+        ? Uri.tryParse(reciter.img!)
+        : null;
     final Map<String, dynamic> extras = {
       "ayahKey": ayahKey,
       "surahId": surahInfoModel.id,

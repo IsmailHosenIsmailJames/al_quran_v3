@@ -3,7 +3,7 @@ import "package:al_quran_v3/src/core/localization/languages.dart";
 import "package:al_quran_v3/src/core/services/companion_apps_service.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:gap/gap.dart";
@@ -328,9 +328,9 @@ class AboutAppPage extends StatelessWidget {
             const Gap(30),
             Text(
               l10n.ourIslamicCompanionApps,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
             ),
             const Gap(10),
             Text(
@@ -345,10 +345,9 @@ class AboutAppPage extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
-                tileColor: Theme.of(context)
-                    .colorScheme
-                    .secondaryContainer
-                    .withValues(alpha: 0.3),
+                tileColor: Theme.of(
+                  context,
+                ).colorScheme.secondaryContainer.withValues(alpha: 0.3),
                 leading: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.asset(
@@ -372,11 +371,12 @@ class AboutAppPage extends StatelessWidget {
                 ),
                 title: Text(
                   l10n.alHadith,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
-                subtitle: Text(
-                  l10n.hadithCompanionDesc,
-                ),
+                subtitle: Text(l10n.hadithCompanionDesc),
                 trailing: FilledButton.tonal(
                   onPressed: () =>
                       CompanionAppsService.openOrInstallHadithApp(),
@@ -458,9 +458,9 @@ class FeatureTile extends StatelessWidget {
         leading: Icon(icon, color: themeState.primary, size: 32),
         title: Text(
           title,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
         ),
         subtitle: Text(subtitle, style: Theme.of(context).textTheme.bodyMedium),
       ),
@@ -497,9 +497,9 @@ class PlatformTile extends StatelessWidget {
         leading: alterNative ?? Icon(icon, color: themeState.primary, size: 32),
         title: Text(
           title,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
         ),
       ),
     );

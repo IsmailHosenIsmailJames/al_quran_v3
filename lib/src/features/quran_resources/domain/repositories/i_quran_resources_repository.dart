@@ -5,12 +5,8 @@ abstract class IQuranResourcesRepository {
   Future<List<ResourceGroupEntity>> getTranslationResources({
     String query = '',
   });
-  Future<List<ResourceGroupEntity>> getTafsirResources({
-    String query = '',
-  });
-  Future<List<QuranResourceEntity>> getWordByWordResources({
-    String query = '',
-  });
+  Future<List<ResourceGroupEntity>> getTafsirResources({String query = ''});
+  Future<List<QuranResourceEntity>> getWordByWordResources({String query = ''});
 
   Future<bool> downloadResource(
     QuranResourceEntity resource, {

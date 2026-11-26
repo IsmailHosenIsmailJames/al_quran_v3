@@ -61,6 +61,9 @@ class AppLocalizationsSw extends AppLocalizations {
   String get saveAndDownload => 'Hifadhi na Upakue';
 
   @override
+  String get appSetup => 'App Setup';
+
+  @override
   String get appLanguage => 'Lugha ya App';
 
   @override

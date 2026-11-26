@@ -7,7 +7,7 @@ import "package:al_quran_v3/src/features/audio/data/player/audio_player_manager.
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_loop_cubit.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/reciter_cubit.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -27,13 +27,19 @@ Future<void> popupAyahRangeSelector(
       context: context,
       builder: (context) {
         return Dialog(
-          insetPadding: const EdgeInsets.symmetric(horizontal: 40, vertical: 24),
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 40,
+            vertical: 24,
+          ),
           clipBehavior: Clip.antiAlias,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
           child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: 520, maxHeight: height * 0.85),
+            constraints: BoxConstraints(
+              maxWidth: 520,
+              maxHeight: height * 0.85,
+            ),
             child: AyahRangeSelectorSheet(
               initialSurah: initialSurah,
               initialStartAyah: initialStartAyah,
@@ -96,20 +102,24 @@ class _AyahRangeSelectorSheetState extends State<AyahRangeSelectorSheet> {
     super.initState();
     final loopState = context.read<AudioLoopCubit>().state;
     _selectedSurah =
-        widget.initialSurah ?? (loopState.isRangeActive ? loopState.startSurah : 1);
+        widget.initialSurah ??
+        (loopState.isRangeActive ? loopState.startSurah : 1);
     final totalVerses = quranAyahCount[_selectedSurah - 1];
 
-    _startAyah = widget.initialStartAyah ??
+    _startAyah =
+        widget.initialStartAyah ??
         (loopState.isRangeActive ? loopState.startAyah : 1);
-    _endAyah = widget.initialEndAyah ??
+    _endAyah =
+        widget.initialEndAyah ??
         (loopState.isRangeActive
             ? loopState.endAyah
             : (_startAyah + 9).clamp(1, totalVerses));
 
     _repeatCount = loopState.isRangeActive ? loopState.repeatTargetCount : -1;
     _repeatEachAyah = loopState.isRangeActive ? loopState.repeatEachAyah : 1;
-    _pauseBetweenSeconds =
-        loopState.isRangeActive ? loopState.pauseBetweenAyahsSeconds : 0;
+    _pauseBetweenSeconds = loopState.isRangeActive
+        ? loopState.pauseBetweenAyahsSeconds
+        : 0;
 
     // Safety checks
     if (_startAyah < 1) _startAyah = 1;
@@ -215,7 +225,10 @@ class _AyahRangeSelectorSheetState extends State<AyahRangeSelectorSheet> {
               ),
               const Gap(6),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 2,
+                ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(roundedRadius),
                   color: isDark
@@ -253,10 +266,15 @@ class _AyahRangeSelectorSheetState extends State<AyahRangeSelectorSheet> {
 
               // Range Summary Banner
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 10,
+                ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(roundedRadius),
-                  color: themeState.primary.withValues(alpha: isDark ? 0.15 : 0.08),
+                  color: themeState.primary.withValues(
+                    alpha: isDark ? 0.15 : 0.08,
+                  ),
                   border: Border.all(
                     color: themeState.primary.withValues(alpha: 0.25),
                   ),
@@ -332,7 +350,10 @@ class _AyahRangeSelectorSheetState extends State<AyahRangeSelectorSheet> {
               // Range Slider
               if (totalVerses > 1)
                 RangeSlider(
-                  values: RangeValues(_startAyah.toDouble(), _endAyah.toDouble()),
+                  values: RangeValues(
+                    _startAyah.toDouble(),
+                    _endAyah.toDouble(),
+                  ),
                   min: 1.0,
                   max: totalVerses.toDouble(),
                   divisions: totalVerses > 1 ? totalVerses - 1 : 1,
@@ -457,7 +478,8 @@ class _AyahRangeSelectorSheetState extends State<AyahRangeSelectorSheet> {
                     isSelected: _pauseBetweenSeconds == sec,
                     themeState: themeState,
                     isDark: isDark,
-                    onSelected: () => setState(() => _pauseBetweenSeconds = sec),
+                    onSelected: () =>
+                        setState(() => _pauseBetweenSeconds = sec),
                   );
                 }).toList(),
               ),
@@ -566,20 +588,18 @@ class _AyahRangeSelectorSheetState extends State<AyahRangeSelectorSheet> {
         color: isSelected
             ? Colors.transparent
             : (isDark
-                ? Colors.white.withValues(alpha: 0.08)
-                : Colors.grey.shade300),
+                  ? Colors.white.withValues(alpha: 0.08)
+                  : Colors.grey.shade300),
       ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       labelStyle: TextStyle(
         fontSize: 12,
         fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
         color: isSelected
             ? Colors.white
             : isDark
-                ? Colors.grey.shade300
-                : Colors.grey.shade800,
+            ? Colors.grey.shade300
+            : Colors.grey.shade800,
       ),
       onSelected: (selected) {
         if (selected) onSelected();
@@ -656,9 +676,7 @@ class _AyahRangeSelectorSheetState extends State<AyahRangeSelectorSheet> {
     return ActionChip(
       label: Text(label),
       onPressed: onTap,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       labelStyle: TextStyle(
         fontSize: 11,
         color: isDark ? Colors.grey.shade300 : Colors.grey.shade700,

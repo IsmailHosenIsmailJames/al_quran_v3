@@ -16,5 +16,7 @@ abstract class CollectionsRepository {
   Future<void> deleteNoteCollectionByID(String id);
   Future<void> deletePinnedCollectionByID(String id);
   Future<void> saveNoteCollectionModelAsMap(NoteCollectionModel noteCollection);
-  Future<void> savePinnedCollectionModelAsMap(PinnedCollectionModel pinnedCollection);
+  Future<void> savePinnedCollectionModelAsMap(
+    PinnedCollectionModel pinnedCollection,
+  );
 }

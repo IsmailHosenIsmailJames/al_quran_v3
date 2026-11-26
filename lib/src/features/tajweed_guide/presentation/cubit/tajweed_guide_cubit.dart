@@ -8,7 +8,7 @@ class TajweedGuideCubit extends Cubit<TajweedGuideState> {
   final GetTajweedRulesUseCase getTajweedRulesUseCase;
 
   TajweedGuideCubit({required this.getTajweedRulesUseCase})
-      : super(const TajweedGuideState.initial());
+    : super(const TajweedGuideState.initial());
 
   void loadTajweedRules() {
     emit(const TajweedGuideState.loading());
@@ -24,11 +24,13 @@ class TajweedGuideCubit extends Cubit<TajweedGuideState> {
     if (state is TajweedGuideLoaded) {
       final currentState = state as TajweedGuideLoaded;
       if (query.trim().isEmpty) {
-        emit(TajweedGuideState.loaded(
-          rules: currentState.rules,
-          filteredRules: currentState.rules,
-          searchQuery: "",
-        ));
+        emit(
+          TajweedGuideState.loaded(
+            rules: currentState.rules,
+            filteredRules: currentState.rules,
+            searchQuery: "",
+          ),
+        );
       } else {
         final lower = query.toLowerCase().trim();
         final filtered = currentState.rules.where((rule) {
@@ -38,11 +40,13 @@ class TajweedGuideCubit extends Cubit<TajweedGuideState> {
               rule.howToPronounce.toLowerCase().contains(lower);
         }).toList();
 
-        emit(TajweedGuideState.loaded(
-          rules: currentState.rules,
-          filteredRules: filtered,
-          searchQuery: query,
-        ));
+        emit(
+          TajweedGuideState.loaded(
+            rules: currentState.rules,
+            filteredRules: filtered,
+            searchQuery: query,
+          ),
+        );
       }
     }
   }

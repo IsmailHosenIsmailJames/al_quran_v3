@@ -6,7 +6,7 @@ import "package:al_quran_v3/src/core/utils/number_localization.dart";
 import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
 import "package:al_quran_v3/src/features/surah_list/domain/utils/filter_surah.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:gap/gap.dart";
 
 class SurahPickerColumn extends StatefulWidget {
@@ -156,15 +156,15 @@ class _SurahPickerColumnState extends State<SurahPickerColumn> {
                                 alpha: isDark ? 0.2 : 0.08,
                               )
                             : isDark
-                                ? Colors.white.withValues(alpha: 0.02)
-                                : Colors.white,
+                            ? Colors.white.withValues(alpha: 0.02)
+                            : Colors.white,
                         borderRadius: BorderRadius.circular(roundedRadius),
                         border: Border.all(
                           color: isSelected
                               ? widget.themeState.primary
                               : isDark
-                                  ? Colors.white.withValues(alpha: 0.05)
-                                  : Colors.grey.shade200,
+                              ? Colors.white.withValues(alpha: 0.05)
+                              : Colors.grey.shade200,
                           width: isSelected ? 1.5 : 1,
                         ),
                       ),
@@ -188,8 +188,10 @@ class _SurahPickerColumnState extends State<SurahPickerColumn> {
                                     color: isSelected
                                         ? widget.themeState.primary
                                         : isDark
-                                            ? Colors.white.withValues(alpha: 0.06)
-                                            : widget.themeState.primary.withValues(alpha: 0.08),
+                                        ? Colors.white.withValues(alpha: 0.06)
+                                        : widget.themeState.primary.withValues(
+                                            alpha: 0.08,
+                                          ),
                                     borderRadius: BorderRadius.circular(6),
                                   ),
                                   alignment: Alignment.center,
@@ -209,34 +211,42 @@ class _SurahPickerColumnState extends State<SurahPickerColumn> {
                                 // Surah Title and Info
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Text(
                                         getSurahName(context, surah.id),
-                                        style: theme.textTheme.bodyMedium?.copyWith(
-                                          fontWeight: isSelected
-                                              ? FontWeight.bold
-                                              : FontWeight.w600,
-                                          color: isSelected
-                                              ? widget.themeState.primary
-                                              : null,
-                                          fontSize: 13,
-                                        ),
+                                        style: theme.textTheme.bodyMedium
+                                            ?.copyWith(
+                                              fontWeight: isSelected
+                                                  ? FontWeight.bold
+                                                  : FontWeight.w600,
+                                              color: isSelected
+                                                  ? widget.themeState.primary
+                                                  : null,
+                                              fontSize: 13,
+                                            ),
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                       const Gap(2),
                                       Text(
                                         l10n.ayahsCount(
-                                          localizedNumber(context, surah.versesCount),
-                                        ),
-                                        style: theme.textTheme.bodySmall?.copyWith(
-                                          fontSize: 11,
-                                          color: theme.textTheme.bodySmall?.color?.withValues(
-                                            alpha: 0.65,
+                                          localizedNumber(
+                                            context,
+                                            surah.versesCount,
                                           ),
                                         ),
+                                        style: theme.textTheme.bodySmall
+                                            ?.copyWith(
+                                              fontSize: 11,
+                                              color: theme
+                                                  .textTheme
+                                                  .bodySmall
+                                                  ?.color
+                                                  ?.withValues(alpha: 0.65),
+                                            ),
                                       ),
                                     ],
                                   ),

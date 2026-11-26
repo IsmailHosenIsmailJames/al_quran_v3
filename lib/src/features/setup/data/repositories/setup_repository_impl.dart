@@ -13,10 +13,7 @@ class SetupRepositoryImpl implements ISetupRepository {
   Future<SetupConfig> getSetupConfig() async {
     final lang = localDataSource.getAppLanguage() ?? "en";
     final isComplete = localDataSource.isSetupComplete();
-    return SetupConfig(
-      appLanguageCode: lang,
-      isSetupComplete: isComplete,
-    );
+    return SetupConfig(appLanguageCode: lang, isSetupComplete: isComplete);
   }
 
   @override

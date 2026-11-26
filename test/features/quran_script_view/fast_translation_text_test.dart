@@ -1,5 +1,5 @@
 import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/ayah_by_ayah/fast_translation_text.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_test/flutter_test.dart";
 
 void main() {
@@ -9,7 +9,8 @@ void main() {
         const MaterialApp(
           home: Scaffold(
             body: FastTranslationText(
-              text: "In the name of Allah, the Entirely Merciful, the Especially Merciful.",
+              text:
+                  "In the name of Allah, the Entirely Merciful, the Especially Merciful.",
               style: TextStyle(fontSize: 16),
             ),
           ),
@@ -47,7 +48,8 @@ void main() {
         const MaterialApp(
           home: Scaffold(
             body: FastTranslationText(
-              text: "This is a verse with a footnote<sup foot_note=1>1</sup> attached.",
+              text:
+                  "This is a verse with a footnote<sup foot_note=1>1</sup> attached.",
               style: TextStyle(fontSize: 16),
             ),
           ),

@@ -13,7 +13,7 @@ import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/qu
 import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_view.dart";
 import "package:al_quran_v3/src/features/surah_list/data/models/page_info_model.dart";
 import "package:dartx/dartx.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -34,7 +34,10 @@ class PageListView extends StatelessWidget {
 
     if (isTabletGrid) {
       return GridView.builder(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0).copyWith(bottom: 100),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16.0,
+          vertical: 8.0,
+        ).copyWith(bottom: 100),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           mainAxisExtent: 94,
@@ -92,11 +95,10 @@ class PageListView extends StatelessWidget {
     final surahName = getSurahName(context, surahNumber);
 
     return Container(
-      margin: margin ?? const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+      margin:
+          margin ?? const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
       decoration: BoxDecoration(
-        color: isDark
-            ? Colors.white.withValues(alpha: 0.035)
-            : Colors.white,
+        color: isDark ? Colors.white.withValues(alpha: 0.035) : Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: isDark
@@ -120,9 +122,7 @@ class PageListView extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => QuranScriptView(
-                  startKey: convertAyahNumberToKey(
-                    pageInfoList[index].start,
-                  )!,
+                  startKey: convertAyahNumberToKey(pageInfoList[index].start)!,
                   endKey: convertAyahNumberToKey(pageInfoList[index].end)!,
                   currentIndex: index,
                   getNavigationInfo: (i) {
@@ -164,9 +164,7 @@ class PageListView extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
-                          color: isDark
-                              ? Colors.white
-                              : Colors.grey.shade900,
+                          color: isDark ? Colors.white : Colors.grey.shade900,
                         ),
                       ),
                       const Gap(2),
@@ -202,8 +200,8 @@ class PageListView extends StatelessWidget {
                       themeState: themeState,
                       tajweedColorEnable:
                           quranScriptType == QuranScriptType.uthmani
-                              ? quranViewState.useTajweedOnUthmani
-                              : quranViewState.useTajweedOnIndopak,
+                          ? quranViewState.useTajweedOnUthmani
+                          : quranViewState.useTajweedOnIndopak,
                     ),
                   ),
                 ),

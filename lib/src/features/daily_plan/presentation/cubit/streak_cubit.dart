@@ -16,19 +16,14 @@ class StreakCubit extends Cubit<StreakState> {
   StreamSubscription<void>? _syncSubscription;
 
   StreakCubit(this._repository)
-      : super(
-          StreakInitial(
-            const StreakEntity(
-              currentStreak: 0,
-              bestStreak: 0,
-              activeDates: [],
-            ),
-            DailyPlanEntity.initial(),
-          ),
-        ) {
+    : super(
+        StreakInitial(
+          const StreakEntity(currentStreak: 0, bestStreak: 0, activeDates: []),
+          DailyPlanEntity.initial(),
+        ),
+      ) {
     try {
-      _syncSubscription =
-          getIt<CloudSyncService>().onSyncCompleted.listen((_) {
+      _syncSubscription = getIt<CloudSyncService>().onSyncCompleted.listen((_) {
         loadStreak();
       });
     } catch (_) {}
@@ -90,8 +85,9 @@ class StreakCubit extends Cubit<StreakState> {
   }
 
   Future<void> togglePlanCollapsed() async {
-    final updatedPlan =
-        await _repository.setPlanCollapsed(!state.plan.isCollapsed);
+    final updatedPlan = await _repository.setPlanCollapsed(
+      !state.plan.isCollapsed,
+    );
     emit(StreakLoaded(state.streak, updatedPlan, khatamPlan: state.khatamPlan));
   }
 

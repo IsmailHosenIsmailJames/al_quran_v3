@@ -20,8 +20,9 @@ class AyahByAyahInScrollInfoCubit extends Cubit<AyahByAyahInScrollInfoState> {
   }
 
   void toggleWordByWord(String ayahKey) {
-    final List<String> list =
-        List<String>.from(state.expandedForWordByWord ?? []);
+    final List<String> list = List<String>.from(
+      state.expandedForWordByWord ?? [],
+    );
     if (list.contains(ayahKey)) {
       list.remove(ayahKey);
     } else {

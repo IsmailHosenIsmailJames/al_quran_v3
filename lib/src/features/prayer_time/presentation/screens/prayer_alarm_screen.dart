@@ -9,7 +9,7 @@ import "package:al_quran_v3/src/features/prayer_time/data/services/ringtone_serv
 import "package:al_quran_v3/src/features/prayer_time/presentation/helpers/prayer_time_helper.dart";
 import "package:awesome_notifications/awesome_notifications.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter/services.dart";
 import "package:flutter_animate/flutter_animate.dart";
 import "package:gap/gap.dart";
@@ -99,8 +99,8 @@ class _PrayerAlarmScreenState extends State<PrayerAlarmScreen>
       final uriToPlay = soundType == "adhan"
           ? "resource://raw/adhan"
           : (soundType == "default_sound"
-              ? "resource://raw/notification_sound"
-              : (soundUri ?? soundType));
+                ? "resource://raw/notification_sound"
+                : (soundUri ?? soundType));
 
       await RingtoneService.playRingtone(
         uriToPlay,
@@ -207,11 +207,7 @@ class _PrayerAlarmScreenState extends State<PrayerAlarmScreen>
           Color(0xFF1A264D),
         ];
       default:
-        return const [
-          Color(0xFF0B1424),
-          Color(0xFF13223D),
-          Color(0xFF1E355B),
-        ];
+        return const [Color(0xFF0B1424), Color(0xFF13223D), Color(0xFF1E355B)];
     }
   }
 
@@ -245,7 +241,8 @@ class _PrayerAlarmScreenState extends State<PrayerAlarmScreen>
   Widget build(BuildContext context) {
     final gradient = _getThemeGradient();
     final accentColor = _getAccentColor();
-    final prayerName = PrayerTimeHelper.localizedPrayerName(context, widget.prayer) ??
+    final prayerName =
+        PrayerTimeHelper.localizedPrayerName(context, widget.prayer) ??
         widget.prayer.name;
     final arabicName = PrayerTimeHelper.arabicPrayerName(widget.prayer);
     final formattedTime = DateFormat("hh:mm").format(_currentTime);
@@ -276,7 +273,10 @@ class _PrayerAlarmScreenState extends State<PrayerAlarmScreen>
                 children: [
                   // Top Status Pill
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.white.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(30),
@@ -287,11 +287,7 @@ class _PrayerAlarmScreenState extends State<PrayerAlarmScreen>
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(
-                          Icons.alarm,
-                          color: accentColor,
-                          size: 16,
-                        ),
+                        Icon(Icons.alarm, color: accentColor, size: 16),
                         const Gap(8),
                         Text(
                           "PRAYER TIME ALARM",
@@ -326,21 +322,24 @@ class _PrayerAlarmScreenState extends State<PrayerAlarmScreen>
 
                   // Arabic Prayer Name
                   Text(
-                    arabicName,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 38,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.5,
-                      shadows: [
-                        Shadow(
-                          color: Colors.black45,
-                          blurRadius: 10,
-                          offset: Offset(0, 3),
+                        arabicName,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 38,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1.5,
+                          shadows: [
+                            Shadow(
+                              color: Colors.black45,
+                              blurRadius: 10,
+                              offset: Offset(0, 3),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ).animate().fadeIn(duration: 400.ms).slideY(begin: 0.15, end: 0),
+                      )
+                      .animate()
+                      .fadeIn(duration: 400.ms)
+                      .slideY(begin: 0.15, end: 0),
 
                   const Gap(4),
 
@@ -412,7 +411,10 @@ class _PrayerAlarmScreenState extends State<PrayerAlarmScreen>
 
                   // Islamic Quote / Hadith
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 12,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.black.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(16),
@@ -434,96 +436,104 @@ class _PrayerAlarmScreenState extends State<PrayerAlarmScreen>
                   const Spacer(flex: 2),
 
                   // Interactive Control Buttons: Dismiss & Snooze
-                  Builder(builder: (context) {
-                    final l10n = AppLocalizations.of(context);
-                    return Column(
-                      children: [
-                        // Large Stop / Dismiss Alarm Button (Vibrant & Distinctive)
-                        SizedBox(
-                          width: double.infinity,
-                          height: 58,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFFE11D48),
-                              foregroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
+                  Builder(
+                    builder: (context) {
+                      final l10n = AppLocalizations.of(context);
+                      return Column(
+                        children: [
+                          // Large Stop / Dismiss Alarm Button (Vibrant & Distinctive)
+                          SizedBox(
+                            width: double.infinity,
+                            height: 58,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFFE11D48),
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                elevation: 8,
+                                shadowColor: const Color(
+                                  0xFFE11D48,
+                                ).withValues(alpha: 0.5),
                               ),
-                              elevation: 8,
-                              shadowColor: const Color(0xFFE11D48).withValues(alpha: 0.5),
-                            ),
-                            onPressed: _dismissAlarm,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.all(4),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white.withValues(alpha: 0.2),
-                                    shape: BoxShape.circle,
+                              onPressed: _dismissAlarm,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withValues(
+                                        alpha: 0.2,
+                                      ),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: const Icon(
+                                      FluentIcons.dismiss_24_filled,
+                                      color: Colors.white,
+                                      size: 18,
+                                    ),
                                   ),
-                                  child: const Icon(
-                                    FluentIcons.dismiss_24_filled,
-                                    color: Colors.white,
+                                  const Gap(10),
+                                  Text(
+                                    l10n.stopAlarm,
+                                    style: const TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 0.5,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+
+                          const Gap(14),
+
+                          // Snooze Button
+                          SizedBox(
+                            width: double.infinity,
+                            height: 50,
+                            child: OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                foregroundColor: Colors.white,
+                                backgroundColor: Colors.white.withValues(
+                                  alpha: 0.08,
+                                ),
+                                side: BorderSide(
+                                  color: Colors.white.withValues(alpha: 0.25),
+                                  width: 1.2,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                              ),
+                              onPressed: _snoozeAlarm,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(
+                                    FluentIcons.snooze_24_regular,
                                     size: 18,
+                                    color: Colors.white,
                                   ),
-                                ),
-                                const Gap(10),
-                                Text(
-                                  l10n.stopAlarm,
-                                  style: const TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 0.5,
+                                  const Gap(8),
+                                  Text(
+                                    l10n.snooze,
+                                    style: const TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-
-                        const Gap(14),
-
-                        // Snooze Button
-                        SizedBox(
-                          width: double.infinity,
-                          height: 50,
-                          child: OutlinedButton(
-                            style: OutlinedButton.styleFrom(
-                              foregroundColor: Colors.white,
-                              backgroundColor: Colors.white.withValues(alpha: 0.08),
-                              side: BorderSide(
-                                color: Colors.white.withValues(alpha: 0.25),
-                                width: 1.2,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
+                                ],
                               ),
                             ),
-                            onPressed: _snoozeAlarm,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  FluentIcons.snooze_24_regular,
-                                  size: 18,
-                                  color: Colors.white,
-                                ),
-                                const Gap(8),
-                                Text(
-                                  l10n.snooze,
-                                  style: const TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
                           ),
-                        ),
-                      ],
-                    );
-                  }),
+                        ],
+                      );
+                    },
+                  ),
                   const Gap(10),
                 ],
               ),
@@ -566,10 +576,7 @@ class MosqueArchPainter extends CustomPainter {
       ..shader = const LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: [
-          Color(0xFF16203D),
-          Color(0xFF090D1A),
-        ],
+        colors: [Color(0xFF16203D), Color(0xFF090D1A)],
       ).createShader(Rect.fromCircle(center: center, radius: w * 0.42));
     canvas.drawCircle(center, w * 0.42, discPaint);
 
@@ -586,10 +593,15 @@ class MosqueArchPainter extends CustomPainter {
     final moonPath = Path()
       ..addOval(Rect.fromCircle(center: moonCenter, radius: moonRadius));
     final moonCut = Path()
-      ..addOval(Rect.fromCircle(
-        center: Offset(moonCenter.dx + moonRadius * 0.35, moonCenter.dy - moonRadius * 0.2),
-        radius: moonRadius * 0.85,
-      ));
+      ..addOval(
+        Rect.fromCircle(
+          center: Offset(
+            moonCenter.dx + moonRadius * 0.35,
+            moonCenter.dy - moonRadius * 0.2,
+          ),
+          radius: moonRadius * 0.85,
+        ),
+      );
     final crescent = Path.combine(PathOperation.difference, moonPath, moonCut);
     final crescentPaint = Paint()
       ..color = Colors.white.withValues(alpha: 0.85)
@@ -624,14 +636,20 @@ class MosqueArchPainter extends CustomPainter {
 
     // Central Dome (onion / oriental dome)
     mosquePath.cubicTo(
-      w * 0.34, h * 0.46,
-      w * 0.42, h * 0.38,
-      w * 0.50, h * 0.34, // Dome apex
+      w * 0.34,
+      h * 0.46,
+      w * 0.42,
+      h * 0.38,
+      w * 0.50,
+      h * 0.34, // Dome apex
     );
     mosquePath.cubicTo(
-      w * 0.58, h * 0.38,
-      w * 0.66, h * 0.46,
-      w * 0.66, h * 0.58,
+      w * 0.58,
+      h * 0.38,
+      w * 0.66,
+      h * 0.46,
+      w * 0.66,
+      h * 0.58,
     );
 
     // Right Wall
@@ -670,6 +688,7 @@ class MosqueArchPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant MosqueArchPainter oldDelegate) {
-    return oldDelegate.pulseValue != pulseValue || oldDelegate.accentColor != accentColor;
+    return oldDelegate.pulseValue != pulseValue ||
+        oldDelegate.accentColor != accentColor;
   }
 }

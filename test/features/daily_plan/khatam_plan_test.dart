@@ -66,24 +66,27 @@ void main() {
       expect(plan.roundedDailyPagesQuota, 46); // 500 / 11 = 45.45 -> ceil = 46
     });
 
-    test("isCompleted is true when completedPages equals or exceeds totalPages", () {
-      final now = DateTime.now();
-      final plan = KhatamPlanEntity(
-        id: "test_done",
-        title: "Completed Khatam",
-        totalPages: 604,
-        completedPages: 604,
-        startDate: now.subtract(const Duration(days: 29)),
-        targetDate: now,
-      );
+    test(
+      "isCompleted is true when completedPages equals or exceeds totalPages",
+      () {
+        final now = DateTime.now();
+        final plan = KhatamPlanEntity(
+          id: "test_done",
+          title: "Completed Khatam",
+          totalPages: 604,
+          completedPages: 604,
+          startDate: now.subtract(const Duration(days: 29)),
+          targetDate: now,
+        );
 
-      expect(plan.isCompleted, isTrue);
-      expect(plan.pagesRemaining, 0);
-      expect(plan.progressFraction, 1.0);
-      expect(plan.progressPercent, 100.0);
-      expect(plan.dynamicDailyPagesQuota, 0.0);
-      expect(plan.roundedDailyPagesQuota, 0);
-    });
+        expect(plan.isCompleted, isTrue);
+        expect(plan.pagesRemaining, 0);
+        expect(plan.progressFraction, 1.0);
+        expect(plan.progressPercent, 100.0);
+        expect(plan.dynamicDailyPagesQuota, 0.0);
+        expect(plan.roundedDailyPagesQuota, 0);
+      },
+    );
 
     test("KhatamPlanModel serialization and deserialization roundtrip", () {
       final now = DateTime.now();

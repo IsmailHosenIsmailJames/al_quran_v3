@@ -10,7 +10,7 @@ import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/core/theme/values/values.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
@@ -111,12 +111,12 @@ class _LocationAcquireState extends State<LocationAcquire> {
             FossPosition position =
                 await FossLocationService.getCurrentPosition();
             context.read<LocationQiblaPrayerDataCubit>().saveLocationData(
-                  LatLon(
-                    latitude: position.latitude,
-                    longitude: position.longitude,
-                  ),
-                  save: !widget.backToPage,
-                );
+              LatLon(
+                latitude: position.latitude,
+                longitude: position.longitude,
+              ),
+              save: !widget.backToPage,
+            );
             setState(() {
               isGPSLocationLoading = false;
             });
@@ -169,7 +169,10 @@ class _LocationAcquireState extends State<LocationAcquire> {
                 children: [
                   Text(
                     l10n.allowLocation,
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
                   ),
                   const Gap(5),
                   Text(
@@ -190,7 +193,10 @@ class _LocationAcquireState extends State<LocationAcquire> {
     ThemeState themeState,
     AppLocalizations l10n,
   ) {
-    return BlocBuilder<ManualLocationSelectionCubit, ManualLocationSelectionState>(
+    return BlocBuilder<
+      ManualLocationSelectionCubit,
+      ManualLocationSelectionState
+    >(
       builder: (context, state) {
         return InkWell(
           onTap: () {
@@ -218,7 +224,10 @@ class _LocationAcquireState extends State<LocationAcquire> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(FluentIcons.location_24_regular, color: themeState.primary),
+                    Icon(
+                      FluentIcons.location_24_regular,
+                      color: themeState.primary,
+                    ),
                     const Gap(15),
                     Expanded(
                       child: Column(
@@ -234,7 +243,9 @@ class _LocationAcquireState extends State<LocationAcquire> {
                           const Gap(5),
                           Text(
                             l10n.manualLocationDescription,
-                            style: TextStyle(color: Theme.of(context).hintColor),
+                            style: TextStyle(
+                              color: Theme.of(context).hintColor,
+                            ),
                           ),
                         ],
                       ),
@@ -248,7 +259,9 @@ class _LocationAcquireState extends State<LocationAcquire> {
                   Container(
                     padding: const EdgeInsets.all(15),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).scaffoldBackgroundColor.withValues(alpha: 0.5),
+                      color: Theme.of(
+                        context,
+                      ).scaffoldBackgroundColor.withValues(alpha: 0.5),
                       borderRadius: BorderRadius.circular(roundedRadius),
                     ),
                     child: Column(
@@ -268,7 +281,9 @@ class _LocationAcquireState extends State<LocationAcquire> {
                           Center(
                             child: TextButton(
                               onPressed: () {
-                                context.read<ManualLocationSelectionCubit>().loadData(context);
+                                context
+                                    .read<ManualLocationSelectionCubit>()
+                                    .loadData(context);
                               },
                               child: Text(l10n.retry),
                             ),
@@ -293,7 +308,7 @@ class _LocationAcquireState extends State<LocationAcquire> {
                         ],
                       ],
                     ),
-                  )
+                  ),
                 ],
               ],
             ),
@@ -341,7 +356,7 @@ class _LocationAcquireState extends State<LocationAcquire> {
     final cubit = parentContext.read<ManualLocationSelectionCubit>();
     final l10n = AppLocalizations.of(parentContext);
     final themeState = parentContext.read<ThemeCubit>().state;
-    
+
     showModalBottomSheet(
       context: parentContext,
       isScrollControlled: true,
@@ -366,7 +381,7 @@ class _LocationAcquireState extends State<LocationAcquire> {
     final cubit = parentContext.read<ManualLocationSelectionCubit>();
     final l10n = AppLocalizations.of(parentContext);
     final themeState = parentContext.read<ThemeCubit>().state;
-    
+
     showModalBottomSheet(
       context: parentContext,
       isScrollControlled: true,
@@ -382,14 +397,15 @@ class _LocationAcquireState extends State<LocationAcquire> {
           onSelected: (selected) {
             final cityMap = selected as Map;
             cubit.selectCity(cityMap['city'] as String);
-            
+
             LatLon latLon = LatLon(
               latitude: double.parse(cityMap["lat"]),
               longitude: double.parse(cityMap["lng"]),
             );
-            parentContext
-                .read<LocationQiblaPrayerDataCubit>()
-                .saveLocationData(latLon, save: true);
+            parentContext.read<LocationQiblaPrayerDataCubit>().saveLocationData(
+              latLon,
+              save: true,
+            );
 
             Navigator.pop(context);
             if (widget.backToPage) {
@@ -446,7 +462,10 @@ class _SelectionListState extends State<_SelectionList> {
               const Gap(15),
               Text(
                 widget.title,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
@@ -477,8 +496,10 @@ class _SelectionListState extends State<_SelectionList> {
             itemCount: filteredItems.length,
             itemBuilder: (context, index) {
               final item = filteredItems[index];
-              final name = widget.isCity ? item['city'] as String : item as String;
-              
+              final name = widget.isCity
+                  ? item['city'] as String
+                  : item as String;
+
               return ListTile(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 30),
                 title: Text(name),

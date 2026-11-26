@@ -15,7 +15,7 @@ import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/prayer
 import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/prayer_times_calendar_view.dart";
 import "package:al_quran_v3/src/features/prayer_time/presentation/widgets/prayer_times_horizontal_card.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:intl/intl.dart";
@@ -53,7 +53,8 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
     final l10n = AppLocalizations.of(context);
     final width = mediaQueryData.size.width;
     final height = mediaQueryData.size.height;
-    final isLandscapeDashboard = (width > height && width >= 600) || width >= 800;
+    final isLandscapeDashboard =
+        (width > height && width >= 600) || width >= 800;
 
     return BlocBuilder<
       LocationQiblaPrayerDataCubit,
@@ -87,10 +88,7 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                   child: ListView(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 14,
-                    ).copyWith(
-                      top: mediaQueryData.padding.top + 8,
-                      bottom: 40,
-                    ),
+                    ).copyWith(top: mediaQueryData.padding.top + 8, bottom: 40),
                     children: [
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,9 +127,13 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                             flex: 5,
                             child: Column(
                               children: [
-                                PrayerTimesHorizontalCard(prayerTimes: prayerTimes),
+                                PrayerTimesHorizontalCard(
+                                  prayerTimes: prayerTimes,
+                                ),
                                 const Gap(12),
-                                ForbiddenPrayerTimesCard(prayerTimes: prayerTimes),
+                                ForbiddenPrayerTimesCard(
+                                  prayerTimes: prayerTimes,
+                                ),
                                 const Gap(12),
                                 FastingSunnahCard(prayerTimes: prayerTimes),
                               ],
@@ -246,7 +248,8 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
                 await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const LocationAcquire(backToPage: true),
+                    builder: (context) =>
+                        const LocationAcquire(backToPage: true),
                   ),
                 );
               },
@@ -383,8 +386,10 @@ class _TimeListOfPrayersState extends State<TimeListOfPrayers> {
     bool isDark,
     AppLocalizations l10n,
   ) {
-    final gregorianFormatted =
-        DateFormat("d MMMM yyyy", l10n.localeName).format(DateTime.now());
+    final gregorianFormatted = DateFormat(
+      "d MMMM yyyy",
+      l10n.localeName,
+    ).format(DateTime.now());
 
     final methodEnum =
         locationState.calculationMethod?.method ??

@@ -61,6 +61,9 @@ class AppLocalizationsTa extends AppLocalizations {
   String get saveAndDownload => 'சேமித்து பதிவிறக்கவும்';
 
   @override
+  String get appSetup => 'App Setup';
+
+  @override
   String get appLanguage => 'பயன்பாட்டின் மொழி';
 
   @override

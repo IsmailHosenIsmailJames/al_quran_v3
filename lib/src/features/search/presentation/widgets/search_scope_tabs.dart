@@ -2,7 +2,7 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/features/search/data/models/search_filter_model.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -72,15 +72,15 @@ class SearchScopeTabs extends StatelessWidget {
                 color: isSelected
                     ? themeState.primary
                     : (isDark
-                        ? Colors.white.withValues(alpha: 0.04)
-                        : Colors.white),
+                          ? Colors.white.withValues(alpha: 0.04)
+                          : Colors.white),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
                   color: isSelected
                       ? themeState.primary
                       : (isDark
-                          ? Colors.white.withValues(alpha: 0.07)
-                          : Colors.grey.shade300),
+                            ? Colors.white.withValues(alpha: 0.07)
+                            : Colors.grey.shade300),
                 ),
               ),
               child: Row(
@@ -91,17 +91,23 @@ class SearchScopeTabs extends StatelessWidget {
                     size: 16,
                     color: isSelected
                         ? Colors.white
-                        : (isDark ? Colors.grey.shade400 : Colors.grey.shade700),
+                        : (isDark
+                              ? Colors.grey.shade400
+                              : Colors.grey.shade700),
                   ),
                   const Gap(6),
                   Text(
                     tab.label,
                     style: TextStyle(
                       fontSize: 12.5,
-                      fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                      fontWeight: isSelected
+                          ? FontWeight.bold
+                          : FontWeight.w500,
                       color: isSelected
                           ? Colors.white
-                          : (isDark ? Colors.grey.shade300 : Colors.grey.shade800),
+                          : (isDark
+                                ? Colors.grey.shade300
+                                : Colors.grey.shade800),
                     ),
                   ),
                 ],

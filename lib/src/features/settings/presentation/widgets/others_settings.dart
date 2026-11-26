@@ -6,7 +6,7 @@ import "package:al_quran_v3/src/features/settings/presentation/cubit/others_sett
 import "package:al_quran_v3/src/features/settings/presentation/cubit/others_settings_state.dart";
 import "package:al_quran_v3/src/features/settings/presentation/screens/app_language_settings.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -176,11 +176,7 @@ class _OthersSettingsState extends State<OthersSettings> {
               color: themePrimary.withValues(alpha: isDark ? 0.2 : 0.1),
               shape: BoxShape.circle,
             ),
-            child: Icon(
-              icon,
-              size: 18,
-              color: themePrimary,
-            ),
+            child: Icon(icon, size: 18, color: themePrimary),
           ),
           const Gap(12),
           Expanded(
@@ -200,8 +196,9 @@ class _OthersSettingsState extends State<OthersSettings> {
                     subtitle,
                     style: TextStyle(
                       fontSize: 12,
-                      color:
-                          isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                      color: isDark
+                          ? Colors.grey.shade400
+                          : Colors.grey.shade600,
                     ),
                   ),
                 ],

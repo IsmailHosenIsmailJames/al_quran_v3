@@ -15,7 +15,8 @@ import "package:shared_preferences/shared_preferences.dart";
 /// Service responsible for synchronizing prayer time data with native
 /// Home Screen and Lock Screen widgets on Android and iOS.
 class PrayerWidgetService {
-  static const String appGroupId = "group.com.ismail_hosen_james.al_bayan_quran";
+  static const String appGroupId =
+      "group.com.ismail_hosen_james.al_bayan_quran";
   static const String smallWidgetAndroid = "PrayerWidgetSmallProvider";
   static const String mediumWidgetAndroid = "PrayerWidgetMediumProvider";
   static const String iosWidget = "PrayerWidget";
@@ -44,7 +45,8 @@ class PrayerWidgetService {
     try {
       await init();
 
-      final locState = locationState ?? await LocationQiblaPrayerDataCubit.getSavedState();
+      final locState =
+          locationState ?? await LocationQiblaPrayerDataCubit.getSavedState();
       if (locState.latLon == null) return;
 
       final now = currentTime ?? DateTime.now();
@@ -53,9 +55,10 @@ class PrayerWidgetService {
         locState.latLon!.longitude,
       );
 
-      final calcParams = (locState.calculationMethod ??
-              CalculationMethodParameters.muslimWorldLeague())
-          ..madhab = locState.madhab ?? Madhab.shafi;
+      final calcParams =
+          (locState.calculationMethod ??
+                CalculationMethodParameters.muslimWorldLeague())
+            ..madhab = locState.madhab ?? Madhab.shafi;
 
       final timeline = PrayerTimeline.calculate(
         coordinates: coordinates,
@@ -78,7 +81,8 @@ class PrayerWidgetService {
 
       // Location Name
       final prefs = await SharedPreferences.getInstance();
-      String locationName = locationNameOverride ??
+      String locationName =
+          locationNameOverride ??
           prefs.getString("user_location_name") ??
           "Prayer Times";
       if (locationName.contains(",")) {
@@ -114,19 +118,36 @@ class PrayerWidgetService {
         activeIndex = 2;
       } else if (timeline.currentPrayer == Prayer.maghrib) {
         activeIndex = 3;
-      } else if (timeline.currentPrayer == Prayer.isha || timeline.currentPrayer == Prayer.tahajjud) {
+      } else if (timeline.currentPrayer == Prayer.isha ||
+          timeline.currentPrayer == Prayer.tahajjud) {
         activeIndex = 4;
       }
 
       // 1. Save individual fields for Android RemoteViews
-      final isDark = PlatformDispatcher.instance.platformBrightness == Brightness.dark;
+      final isDark =
+          PlatformDispatcher.instance.platformBrightness == Brightness.dark;
       await HomeWidget.saveWidgetData<bool>("is_dark_mode", isDark);
       await HomeWidget.saveWidgetData<String>("location_name", locationName);
-      await HomeWidget.saveWidgetData<String>("date_text", dateFormatter.format(now));
-      await HomeWidget.saveWidgetData<String>("next_prayer_name", nextPrayerName);
-      await HomeWidget.saveWidgetData<String>("next_prayer_time", nextPrayerTime);
-      await HomeWidget.saveWidgetData<String>("next_prayer_countdown", countdownText);
-      await HomeWidget.saveWidgetData<String>("next_prayer_target_iso", timeline.nextPrayerTime.toIso8601String());
+      await HomeWidget.saveWidgetData<String>(
+        "date_text",
+        dateFormatter.format(now),
+      );
+      await HomeWidget.saveWidgetData<String>(
+        "next_prayer_name",
+        nextPrayerName,
+      );
+      await HomeWidget.saveWidgetData<String>(
+        "next_prayer_time",
+        nextPrayerTime,
+      );
+      await HomeWidget.saveWidgetData<String>(
+        "next_prayer_countdown",
+        countdownText,
+      );
+      await HomeWidget.saveWidgetData<String>(
+        "next_prayer_target_iso",
+        timeline.nextPrayerTime.toIso8601String(),
+      );
 
       // Prayer names
       await HomeWidget.saveWidgetData<String>("fajr_name", l10n.fajr);
@@ -146,9 +167,15 @@ class PrayerWidgetService {
 
       // Active flags
       await HomeWidget.saveWidgetData<bool>("fajr_is_active", activeIndex == 0);
-      await HomeWidget.saveWidgetData<bool>("dhuhr_is_active", activeIndex == 1);
+      await HomeWidget.saveWidgetData<bool>(
+        "dhuhr_is_active",
+        activeIndex == 1,
+      );
       await HomeWidget.saveWidgetData<bool>("asr_is_active", activeIndex == 2);
-      await HomeWidget.saveWidgetData<bool>("maghrib_is_active", activeIndex == 3);
+      await HomeWidget.saveWidgetData<bool>(
+        "maghrib_is_active",
+        activeIndex == 3,
+      );
       await HomeWidget.saveWidgetData<bool>("isha_is_active", activeIndex == 4);
       await HomeWidget.saveWidgetData<int>("active_prayer_index", activeIndex);
 

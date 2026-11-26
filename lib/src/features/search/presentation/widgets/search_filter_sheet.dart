@@ -6,7 +6,7 @@ import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:al_quran_v3/src/core/utils/number_localization.dart";
 import "package:al_quran_v3/src/features/search/data/models/search_filter_model.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -106,7 +106,9 @@ class _SearchFilterSheetState extends State<SearchFilterSheet> {
   void initState() {
     super.initState();
     _filter = widget.initialFilter;
-    _selectedTranslations = List.from(widget.initialFilter.selectedTranslations);
+    _selectedTranslations = List.from(
+      widget.initialFilter.selectedTranslations,
+    );
     _selectedTafsirs = List.from(widget.initialFilter.selectedTafsirs);
   }
 
@@ -117,7 +119,9 @@ class _SearchFilterSheetState extends State<SearchFilterSheet> {
         oldWidget.initialFilter != widget.initialFilter) {
       setState(() {
         _filter = widget.initialFilter;
-        _selectedTranslations = List.from(widget.initialFilter.selectedTranslations);
+        _selectedTranslations = List.from(
+          widget.initialFilter.selectedTranslations,
+        );
         _selectedTafsirs = List.from(widget.initialFilter.selectedTafsirs);
       });
     }
@@ -217,7 +221,9 @@ class _SearchFilterSheetState extends State<SearchFilterSheet> {
                       onPressed: () {
                         setState(() {
                           _filter = const SearchFilterModel();
-                          _selectedTranslations = List.from(widget.availableTranslations);
+                          _selectedTranslations = List.from(
+                            widget.availableTranslations,
+                          );
                           _selectedTafsirs = List.from(widget.availableTafsirs);
                         });
                         _notifySidebarChange();
@@ -245,9 +251,12 @@ class _SearchFilterSheetState extends State<SearchFilterSheet> {
                               ? FluentIcons.panel_right_contract_20_regular
                               : FluentIcons.dismiss_20_regular,
                           size: 18,
-                          color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                          color: isDark
+                              ? Colors.grey.shade400
+                              : Colors.grey.shade600,
                         ),
-                        onPressed: widget.onClose ?? () => Navigator.pop(context),
+                        onPressed:
+                            widget.onClose ?? () => Navigator.pop(context),
                         visualDensity: VisualDensity.compact,
                       ),
                     ],
@@ -273,13 +282,18 @@ class _SearchFilterSheetState extends State<SearchFilterSheet> {
                     contentPadding: EdgeInsets.zero,
                     title: Text(
                       l10n.exactPhraseMatch,
-                      style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600),
+                      style: const TextStyle(
+                        fontSize: 13.5,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     subtitle: Text(
                       l10n.matchExactWordsDesc,
                       style: TextStyle(
                         fontSize: 11.5,
-                        color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                        color: isDark
+                            ? Colors.grey.shade400
+                            : Colors.grey.shade600,
                       ),
                     ),
                     value: _filter.matchExactPhrase,
@@ -296,7 +310,10 @@ class _SearchFilterSheetState extends State<SearchFilterSheet> {
                   // 2. Specific Surah Filter
                   Text(
                     l10n.filterBySurah,
-                    style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontSize: 12.5,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const Gap(6),
                   Container(
@@ -357,16 +374,34 @@ class _SearchFilterSheetState extends State<SearchFilterSheet> {
                   // 3. Revelation Type (All, Meccan, Medinan)
                   Text(
                     l10n.revelationType,
-                    style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontSize: 12.5,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const Gap(8),
                   Row(
                     children: [
-                      _buildRevTypeChip("all", l10n.searchAll, themeState, isDark),
+                      _buildRevTypeChip(
+                        "all",
+                        l10n.searchAll,
+                        themeState,
+                        isDark,
+                      ),
                       const Gap(6),
-                      _buildRevTypeChip("meccan", l10n.makki, themeState, isDark),
+                      _buildRevTypeChip(
+                        "meccan",
+                        l10n.makki,
+                        themeState,
+                        isDark,
+                      ),
                       const Gap(6),
-                      _buildRevTypeChip("medinan", l10n.madani, themeState, isDark),
+                      _buildRevTypeChip(
+                        "medinan",
+                        l10n.madani,
+                        themeState,
+                        isDark,
+                      ),
                     ],
                   ),
                   const Gap(16),
@@ -378,7 +413,10 @@ class _SearchFilterSheetState extends State<SearchFilterSheet> {
                       children: [
                         Text(
                           l10n.searchInTranslations,
-                          style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                            fontSize: 12.5,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         Text(
                           l10n.activeCount(
@@ -410,7 +448,9 @@ class _SearchFilterSheetState extends State<SearchFilterSheet> {
                           book.language,
                           style: TextStyle(
                             fontSize: 11,
-                            color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                            color: isDark
+                                ? Colors.grey.shade400
+                                : Colors.grey.shade600,
                           ),
                         ),
                         value: isChecked,
@@ -440,7 +480,10 @@ class _SearchFilterSheetState extends State<SearchFilterSheet> {
                       children: [
                         Text(
                           l10n.searchInTafsirs,
-                          style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                            fontSize: 12.5,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         Text(
                           l10n.activeCount(
@@ -472,7 +515,9 @@ class _SearchFilterSheetState extends State<SearchFilterSheet> {
                           book.language,
                           style: TextStyle(
                             fontSize: 11,
-                            color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                            color: isDark
+                                ? Colors.grey.shade400
+                                : Colors.grey.shade600,
                           ),
                         ),
                         value: isChecked,
@@ -519,7 +564,10 @@ class _SearchFilterSheetState extends State<SearchFilterSheet> {
                 },
                 child: Text(
                   l10n.apply,
-                  style: const TextStyle(fontSize: 14.5, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 14.5,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
@@ -552,15 +600,15 @@ class _SearchFilterSheetState extends State<SearchFilterSheet> {
             color: isSelected
                 ? themeState.primary
                 : (isDark
-                    ? Colors.white.withValues(alpha: 0.04)
-                    : Colors.grey.shade100),
+                      ? Colors.white.withValues(alpha: 0.04)
+                      : Colors.grey.shade100),
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
               color: isSelected
                   ? themeState.primary
                   : (isDark
-                      ? Colors.white.withValues(alpha: 0.08)
-                      : Colors.grey.shade300),
+                        ? Colors.white.withValues(alpha: 0.08)
+                        : Colors.grey.shade300),
             ),
           ),
           child: Text(

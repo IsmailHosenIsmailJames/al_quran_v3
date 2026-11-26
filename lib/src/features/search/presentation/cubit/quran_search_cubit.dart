@@ -16,7 +16,7 @@ class QuranSearchCubit extends Cubit<QuranSearchState> {
   static const _debounceDuration = Duration(milliseconds: 300);
 
   QuranSearchCubit(this._dataSource, this._useCase)
-      : super(const QuranSearchState()) {
+    : super(const QuranSearchState()) {
     _init();
   }
 
@@ -32,19 +32,21 @@ class QuranSearchCubit extends Cubit<QuranSearchState> {
 
     if (isClosed) return;
 
-    emit(state.copyWith(
-      searchHistory: history,
-      availableTranslations: downloadedTranslations,
-      availableTafsirs: downloadedTafsirs,
-      filter: state.filter.copyWith(
-        selectedTranslations: selectedTranslations.isNotEmpty
-            ? selectedTranslations
-            : downloadedTranslations,
-        selectedTafsirs: selectedTafsirs.isNotEmpty
-            ? selectedTafsirs
-            : downloadedTafsirs,
+    emit(
+      state.copyWith(
+        searchHistory: history,
+        availableTranslations: downloadedTranslations,
+        availableTafsirs: downloadedTafsirs,
+        filter: state.filter.copyWith(
+          selectedTranslations: selectedTranslations.isNotEmpty
+              ? selectedTranslations
+              : downloadedTranslations,
+          selectedTafsirs: selectedTafsirs.isNotEmpty
+              ? selectedTafsirs
+              : downloadedTafsirs,
+        ),
       ),
-    ));
+    );
   }
 
   int _searchSessionId = 0;
@@ -57,11 +59,13 @@ class QuranSearchCubit extends Cubit<QuranSearchState> {
 
     if (trimmed.isEmpty) {
       _searchSessionId++;
-      emit(state.copyWith(
-        query: "",
-        status: SearchStatus.initial,
-        clearResults: true,
-      ));
+      emit(
+        state.copyWith(
+          query: "",
+          status: SearchStatus.initial,
+          clearResults: true,
+        ),
+      );
       return;
     }
 
@@ -87,18 +91,17 @@ class QuranSearchCubit extends Cubit<QuranSearchState> {
 
     if (trimmed.isEmpty) {
       _searchSessionId++;
-      emit(state.copyWith(
-        query: "",
-        status: SearchStatus.initial,
-        clearResults: true,
-      ));
+      emit(
+        state.copyWith(
+          query: "",
+          status: SearchStatus.initial,
+          clearResults: true,
+        ),
+      );
       return;
     }
 
-    emit(state.copyWith(
-      query: query,
-      status: SearchStatus.loading,
-    ));
+    emit(state.copyWith(query: query, status: SearchStatus.loading));
 
     await _executeSearch(trimmed, saveHistory: saveHistory);
   }
@@ -109,9 +112,7 @@ class QuranSearchCubit extends Cubit<QuranSearchState> {
     if (trimmed.isNotEmpty) {
       await _dataSource.addSearchHistory(trimmed);
       if (isClosed) return;
-      emit(state.copyWith(
-        searchHistory: _dataSource.getSearchHistory(),
-      ));
+      emit(state.copyWith(searchHistory: _dataSource.getSearchHistory()));
     }
   }
 
@@ -186,24 +187,27 @@ class QuranSearchCubit extends Cubit<QuranSearchState> {
       if (session != _searchSessionId || isClosed) return;
 
       if (results.isEmpty) {
-        emit(state.copyWith(
-          status: SearchStatus.empty,
-          results: results,
-          searchHistory: updatedHistory,
-        ));
+        emit(
+          state.copyWith(
+            status: SearchStatus.empty,
+            results: results,
+            searchHistory: updatedHistory,
+          ),
+        );
       } else {
-        emit(state.copyWith(
-          status: SearchStatus.success,
-          results: results,
-          searchHistory: updatedHistory,
-        ));
+        emit(
+          state.copyWith(
+            status: SearchStatus.success,
+            results: results,
+            searchHistory: updatedHistory,
+          ),
+        );
       }
     } catch (e) {
       if (session != _searchSessionId || isClosed) return;
-      emit(state.copyWith(
-        status: SearchStatus.error,
-        errorMessage: e.toString(),
-      ));
+      emit(
+        state.copyWith(status: SearchStatus.error, errorMessage: e.toString()),
+      );
     }
   }
 
@@ -214,17 +218,13 @@ class QuranSearchCubit extends Cubit<QuranSearchState> {
   Future<void> deleteHistoryItem(String query) async {
     await _dataSource.removeSearchHistoryItem(query);
     if (isClosed) return;
-    emit(state.copyWith(
-      searchHistory: _dataSource.getSearchHistory(),
-    ));
+    emit(state.copyWith(searchHistory: _dataSource.getSearchHistory()));
   }
 
   Future<void> clearAllHistory() async {
     await _dataSource.clearSearchHistory();
     if (isClosed) return;
-    emit(state.copyWith(
-      searchHistory: [],
-    ));
+    emit(state.copyWith(searchHistory: []));
   }
 
   @override

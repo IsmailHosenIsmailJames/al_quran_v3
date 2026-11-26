@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 const List<String> collectionPresetColors = [
   "4CAF50", // Emerald

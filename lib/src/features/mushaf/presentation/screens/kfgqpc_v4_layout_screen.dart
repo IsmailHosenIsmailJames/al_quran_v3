@@ -4,7 +4,7 @@ import "package:al_quran_v3/src/features/mushaf/presentation/cubit/mushaf_cubit.
 import "package:al_quran_v3/src/features/mushaf/presentation/cubit/mushaf_state.dart";
 import "package:al_quran_v3/src/features/mushaf/presentation/screens/mushaf_download_view.dart";
 import "package:al_quran_v3/src/features/mushaf/presentation/screens/mushaf_reader_view.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
 /// Main entry point for the KFGQPC V4 Mushaf feature.
@@ -36,16 +36,16 @@ class _MushafViewOrchestrator extends StatelessWidget {
       builder: (context, state) {
         if (state.isChecking) {
           return Scaffold(
-            backgroundColor:
-                isDark ? const Color(0xFF121212) : const Color(0xFFFAF9F6),
+            backgroundColor: isDark
+                ? const Color(0xFF121212)
+                : const Color(0xFFFAF9F6),
             body: Center(
               child: SizedBox(
                 width: 36,
                 height: 36,
                 child: CircularProgressIndicator(
                   strokeWidth: 3,
-                  valueColor:
-                      AlwaysStoppedAnimation<Color>(themeState.primary),
+                  valueColor: AlwaysStoppedAnimation<Color>(themeState.primary),
                 ),
               ),
             ),

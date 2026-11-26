@@ -1,1 +1,97 @@
-{}
+{
+  "ar": [
+    "appSetup"
+  ],
+
+  "az": [
+    "appSetup"
+  ],
+
+  "bn": [
+    "appSetup"
+  ],
+
+  "de": [
+    "appSetup"
+  ],
+
+  "es": [
+    "appSetup"
+  ],
+
+  "fa": [
+    "appSetup"
+  ],
+
+  "fr": [
+    "appSetup"
+  ],
+
+  "hi": [
+    "appSetup"
+  ],
+
+  "id": [
+    "appSetup"
+  ],
+
+  "it": [
+    "appSetup"
+  ],
+
+  "ja": [
+    "appSetup"
+  ],
+
+  "kk": [
+    "appSetup"
+  ],
+
+  "ko": [
+    "appSetup"
+  ],
+
+  "ms": [
+    "appSetup"
+  ],
+
+  "pa": [
+    "appSetup"
+  ],
+
+  "ps": [
+    "appSetup"
+  ],
+
+  "pt": [
+    "appSetup"
+  ],
+
+  "ru": [
+    "appSetup"
+  ],
+
+  "sw": [
+    "appSetup"
+  ],
+
+  "ta": [
+    "appSetup"
+  ],
+
+  "tr": [
+    "appSetup"
+  ],
+
+  "ur": [
+    "appSetup"
+  ],
+
+  "vi": [
+    "appSetup"
+  ],
+
+  "zh": [
+    "appSetup"
+  ]
+}

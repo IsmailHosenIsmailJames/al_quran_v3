@@ -2,7 +2,7 @@ name: al_quran_v3
 description: "A Flutter application for reading the Holy Quran, tracking prayer times, and managing Islamic practices."
 publish_to: none
 
-version: 4.4.1+105
+version: 4.4.2+106
 
 environment:
   sdk: ^3.10.0
@@ -77,6 +77,8 @@ dependencies:
   home_widget: ^0.10.0
   file_picker: ^13.4.0
 
+  cupertino_ui: any
+  material_ui: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -97,7 +99,7 @@ msix_config:
   publisher_display_name: "MD. Ismail Hosen"
   identity_name: MD.IsmailHosen.com.ismail.al-quran
   publisher: "CN=B9F6AC9B-F4A4-426C-9C75-82E3872E24AB"
-  msix_version: 4.4.1.0
+  msix_version: 4.4.2.0
   logo_path: "assets\\img\\Quran_Logo_v3.png"
   capabilities: "internetClient, location"
   store: true

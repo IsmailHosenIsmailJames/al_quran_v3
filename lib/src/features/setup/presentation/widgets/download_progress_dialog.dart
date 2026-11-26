@@ -4,7 +4,7 @@ import "package:al_quran_v3/src/features/setup/presentation/bloc/download_state.
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -42,11 +42,13 @@ class DownloadProgressDialog extends StatelessWidget {
     return PopScope(
       canPop: false,
       child: Dialog(
-        insetPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 24),
+        insetPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         backgroundColor: Colors.transparent,
-        child: Container(
-          padding: const EdgeInsets.all(22),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 460),
+          child: Container(
+            padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
             color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
             borderRadius: BorderRadius.circular(24),
@@ -91,9 +93,14 @@ class DownloadProgressDialog extends StatelessWidget {
                   isDark,
                 );
               }
-              return _buildInitialLoader(themeState);
+              return _buildInitialLoader(
+                themeState,
+                appLocalizations,
+                isDark,
+              );
             },
           ),
+        ),
         ),
       ),
     );
@@ -308,12 +315,12 @@ class DownloadProgressDialog extends StatelessWidget {
                                 color: isActive
                                     ? themeState.primary
                                     : (isDone
-                                        ? (isDark
-                                            ? Colors.white
-                                            : Colors.grey.shade900)
-                                        : (isDark
-                                            ? Colors.grey.shade400
-                                            : Colors.grey.shade600)),
+                                          ? (isDark
+                                                ? Colors.white
+                                                : Colors.grey.shade900)
+                                          : (isDark
+                                                ? Colors.grey.shade400
+                                                : Colors.grey.shade600)),
                               ),
                             ),
                             const Gap(1),
@@ -357,9 +364,9 @@ class DownloadProgressDialog extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: const Color(0xFF16A34A).withValues(
-              alpha: isDark ? 0.2 : 0.1,
-            ),
+            color: const Color(
+              0xFF16A34A,
+            ).withValues(alpha: isDark ? 0.2 : 0.1),
           ),
           child: const Icon(
             Icons.check_circle_rounded,
@@ -403,9 +410,9 @@ class DownloadProgressDialog extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: const Color(0xFFDC2626).withValues(
-              alpha: isDark ? 0.2 : 0.1,
-            ),
+            color: const Color(
+              0xFFDC2626,
+            ).withValues(alpha: isDark ? 0.2 : 0.1),
           ),
           child: const Icon(
             Icons.error_outline_rounded,
@@ -457,10 +464,27 @@ class DownloadProgressDialog extends StatelessWidget {
     );
   }
 
-  Widget _buildInitialLoader(ThemeState themeState) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [CircularProgressIndicator(color: themeState.primary)],
+  Widget _buildInitialLoader(
+    ThemeState themeState,
+    AppLocalizations appLocalizations,
+    bool isDark,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          CircularProgressIndicator(color: themeState.primary),
+          const Gap(16),
+          Text(
+            appLocalizations.preparingResources,
+            style: TextStyle(
+              fontSize: 13.5,
+              color: isDark ? Colors.grey.shade300 : Colors.grey.shade700,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

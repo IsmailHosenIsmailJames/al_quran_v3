@@ -5,11 +5,7 @@ class CuratedAyahItem {
   final int ayah;
   final String? theme;
 
-  const CuratedAyahItem({
-    required this.surah,
-    required this.ayah,
-    this.theme,
-  });
+  const CuratedAyahItem({required this.surah, required this.ayah, this.theme});
 
   String get key => "${surah}_$ayah";
 }

@@ -12,9 +12,6 @@ class GetSurahInfoUseCase {
     required int surahId,
     required String rawHtml,
   }) {
-    return _repository.getSurahInfoDetail(
-      surahId: surahId,
-      rawHtml: rawHtml,
-    );
+    return _repository.getSurahInfoDetail(surahId: surahId, rawHtml: rawHtml);
   }
 }

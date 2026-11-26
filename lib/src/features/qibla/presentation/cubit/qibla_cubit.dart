@@ -23,7 +23,11 @@ class QiblaCubit extends Cubit<QiblaState> {
     this._triggerAlignmentVibrationUseCase,
   ) : super(const QiblaState());
 
-  void init({double? latitude, double? longitude, double? preCalculatedKaabaAngle}) {
+  void init({
+    double? latitude,
+    double? longitude,
+    double? preCalculatedKaabaAngle,
+  }) {
     double? kaabaAngle = preCalculatedKaabaAngle;
     if (kaabaAngle == null && latitude != null && longitude != null) {
       kaabaAngle = _calculateQiblaAngleUseCase(latitude, longitude);
@@ -47,7 +51,10 @@ class QiblaCubit extends Cubit<QiblaState> {
 
         bool isAligned = false;
         if (state.kaabaAngle != null) {
-          isAligned = QiblaCompassData.checkIsAligned(heading, state.kaabaAngle!);
+          isAligned = QiblaCompassData.checkIsAligned(
+            heading,
+            state.kaabaAngle!,
+          );
         }
 
         if (isAligned) {
@@ -59,12 +66,14 @@ class QiblaCubit extends Cubit<QiblaState> {
           _vibratedOnce = false;
         }
 
-        emit(state.copyWith(
-          compassHeading: heading,
-          isAligned: isAligned,
-          isSensorSupported: true,
-          hasError: false,
-        ));
+        emit(
+          state.copyWith(
+            compassHeading: heading,
+            isAligned: isAligned,
+            isSensorSupported: true,
+            hasError: false,
+          ),
+        );
       },
       onError: (_) {
         emit(state.copyWith(hasError: true));

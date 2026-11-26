@@ -2,7 +2,7 @@ import "package:adhan_dart/adhan_dart.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:hijri/hijri_calendar.dart";
@@ -85,8 +85,10 @@ class _PrayerTimesCalenderViewState extends State<PrayerTimesCalenderView> {
       _selectedMonth.year,
       _selectedMonth.month,
     );
-    final monthTitle =
-        DateFormat("MMMM yyyy", l10n.localeName).format(_selectedMonth);
+    final monthTitle = DateFormat(
+      "MMMM yyyy",
+      l10n.localeName,
+    ).format(_selectedMonth);
     final today = DateTime.now();
 
     final prayers = [
@@ -99,7 +101,9 @@ class _PrayerTimesCalenderViewState extends State<PrayerTimesCalenderView> {
     ];
 
     return Scaffold(
-      backgroundColor: isDark ? const Color(0xFF121212) : const Color(0xFFF8F9FA),
+      backgroundColor: isDark
+          ? const Color(0xFF121212)
+          : const Color(0xFFF8F9FA),
       appBar: AppBar(
         title: Text(
           l10n.prayerTimesCalender,
@@ -137,7 +141,9 @@ class _PrayerTimesCalenderViewState extends State<PrayerTimesCalenderView> {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.03),
+                      color: Colors.black.withValues(
+                        alpha: isDark ? 0.2 : 0.03,
+                      ),
                       blurRadius: 8,
                       offset: const Offset(0, 2),
                     ),
@@ -187,7 +193,9 @@ class _PrayerTimesCalenderViewState extends State<PrayerTimesCalenderView> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.04),
+                        color: Colors.black.withValues(
+                          alpha: isDark ? 0.2 : 0.04,
+                        ),
                         blurRadius: 10,
                         offset: const Offset(0, 3),
                       ),
@@ -223,7 +231,12 @@ class _PrayerTimesCalenderViewState extends State<PrayerTimesCalenderView> {
                               ),
                               child: Row(
                                 children: [
-                                  _buildHeaderCell(l10n.dateAndHijri, 130, isDark, themeState),
+                                  _buildHeaderCell(
+                                    l10n.dateAndHijri,
+                                    130,
+                                    isDark,
+                                    themeState,
+                                  ),
                                   ...prayers.map(
                                     (prayer) => _buildHeaderCell(
                                       _getPrayerName(prayer, l10n),
@@ -249,21 +262,25 @@ class _PrayerTimesCalenderViewState extends State<PrayerTimesCalenderView> {
                                       _selectedMonth.month,
                                       index + 1,
                                     );
-                                    final isToday = date.year == today.year &&
+                                    final isToday =
+                                        date.year == today.year &&
                                         date.month == today.month &&
                                         date.day == today.day;
 
                                     final dailyPrayerTimes = PrayerTimes(
                                       date: date,
-                                      coordinates: widget.prayerTimes.coordinates,
-                                      calculationParameters:
-                                          widget.prayerTimes.calculationParameters,
+                                      coordinates:
+                                          widget.prayerTimes.coordinates,
+                                      calculationParameters: widget
+                                          .prayerTimes
+                                          .calculationParameters,
                                     );
 
                                     final hijri = HijriCalendar.fromDate(date);
-                                    final gregorianStr =
-                                        DateFormat("d EEE", l10n.localeName)
-                                            .format(date);
+                                    final gregorianStr = DateFormat(
+                                      "d EEE",
+                                      l10n.localeName,
+                                    ).format(date);
                                     final hijriStr =
                                         "${hijri.hDay} ${hijri.shortMonthName}";
 
@@ -275,12 +292,17 @@ class _PrayerTimesCalenderViewState extends State<PrayerTimesCalenderView> {
                                                 alpha: isDark ? 0.18 : 0.08,
                                               )
                                             : (index.isEven
-                                                ? (isDark
-                                                    ? Colors.transparent
-                                                    : Colors.white)
-                                                : (isDark
-                                                    ? Colors.white.withValues(alpha: 0.02)
-                                                    : const Color(0xFFFAFBFC))),
+                                                  ? (isDark
+                                                        ? Colors.transparent
+                                                        : Colors.white)
+                                                  : (isDark
+                                                        ? Colors.white
+                                                              .withValues(
+                                                                alpha: 0.02,
+                                                              )
+                                                        : const Color(
+                                                            0xFFFAFBFC,
+                                                          ))),
                                         border: Border(
                                           left: isToday
                                               ? BorderSide(
@@ -290,7 +312,9 @@ class _PrayerTimesCalenderViewState extends State<PrayerTimesCalenderView> {
                                               : BorderSide.none,
                                           bottom: BorderSide(
                                             color: isDark
-                                                ? Colors.white.withValues(alpha: 0.04)
+                                                ? Colors.white.withValues(
+                                                    alpha: 0.04,
+                                                  )
                                                 : Colors.grey.shade100,
                                           ),
                                         ),
@@ -321,8 +345,10 @@ class _PrayerTimesCalenderViewState extends State<PrayerTimesCalenderView> {
                                                         color: isToday
                                                             ? themeState.primary
                                                             : (isDark
-                                                                ? Colors.white
-                                                                : Colors.grey.shade900),
+                                                                  ? Colors.white
+                                                                  : Colors
+                                                                        .grey
+                                                                        .shade900),
                                                       ),
                                                     ),
                                                     if (isToday) ...[
@@ -330,22 +356,29 @@ class _PrayerTimesCalenderViewState extends State<PrayerTimesCalenderView> {
                                                       Container(
                                                         padding:
                                                             const EdgeInsets.symmetric(
-                                                          horizontal: 5,
-                                                          vertical: 1.5,
-                                                        ),
+                                                              horizontal: 5,
+                                                              vertical: 1.5,
+                                                            ),
                                                         decoration: BoxDecoration(
-                                                          color: themeState.primary,
+                                                          color: themeState
+                                                              .primary,
                                                           borderRadius:
-                                                              BorderRadius.circular(4),
+                                                              BorderRadius.circular(
+                                                                4,
+                                                              ),
                                                         ),
                                                         child: Text(
-                                                          l10n.today.toUpperCase(),
-                                                          style: const TextStyle(
-                                                            fontSize: 8,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: Colors.white,
-                                                          ),
+                                                          l10n.today
+                                                              .toUpperCase(),
+                                                          style:
+                                                              const TextStyle(
+                                                                fontSize: 8,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
                                                         ),
                                                       ),
                                                     ],
@@ -370,8 +403,9 @@ class _PrayerTimesCalenderViewState extends State<PrayerTimesCalenderView> {
                                             final time = dailyPrayerTimes
                                                 .timeForPrayer(prayer);
                                             final timeStr = time != null
-                                                ? DateFormat.jm(l10n.localeName)
-                                                    .format(time.toLocal())
+                                                ? DateFormat.jm(
+                                                    l10n.localeName,
+                                                  ).format(time.toLocal())
                                                 : "--";
 
                                             return SizedBox(
@@ -387,8 +421,12 @@ class _PrayerTimesCalenderViewState extends State<PrayerTimesCalenderView> {
                                                     color: isToday
                                                         ? themeState.primary
                                                         : (isDark
-                                                            ? Colors.grey.shade200
-                                                            : Colors.grey.shade800),
+                                                              ? Colors
+                                                                    .grey
+                                                                    .shade200
+                                                              : Colors
+                                                                    .grey
+                                                                    .shade800),
                                                   ),
                                                 ),
                                               ),
@@ -416,7 +454,12 @@ class _PrayerTimesCalenderViewState extends State<PrayerTimesCalenderView> {
     );
   }
 
-  Widget _buildHeaderCell(String title, double width, bool isDark, dynamic themeState) {
+  Widget _buildHeaderCell(
+    String title,
+    double width,
+    bool isDark,
+    dynamic themeState,
+  ) {
     return SizedBox(
       width: width,
       child: Center(

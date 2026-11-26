@@ -3,7 +3,7 @@ import 'package:al_quran_v3/src/features/quran_resources/presentation/cubit/qura
 import 'package:al_quran_v3/src/features/quran_resources/presentation/widgets/resource_filter_chips.dart';
 import 'package:al_quran_v3/src/features/quran_resources/presentation/widgets/resource_item_tile.dart';
 import 'package:al_quran_v3/src/features/quran_resources/presentation/widgets/resources_empty_state.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WordByWordResourcesTab extends StatefulWidget {
@@ -30,10 +30,12 @@ class _WordByWordResourcesTabState extends State<WordByWordResourcesTab> {
         }
 
         int totalCount = state.wordByWordResources.length;
-        int downloadedCount =
-            state.wordByWordResources.where((r) => r.isDownloaded).length;
-        int selectedCount =
-            state.wordByWordResources.where((r) => r.isSelected).length;
+        int downloadedCount = state.wordByWordResources
+            .where((r) => r.isDownloaded)
+            .length;
+        int selectedCount = state.wordByWordResources
+            .where((r) => r.isSelected)
+            .length;
 
         final filteredResources = state.wordByWordResources.where((r) {
           if (_filter == ResourceFilterType.downloaded) {
@@ -75,21 +77,25 @@ class _WordByWordResourcesTabState extends State<WordByWordResourcesTab> {
                                 physics: const AlwaysScrollableScrollPhysics(
                                   parent: BouncingScrollPhysics(),
                                 ),
-                                padding:
-                                    const EdgeInsets.fromLTRB(16, 6, 16, 24),
+                                padding: const EdgeInsets.fromLTRB(
+                                  16,
+                                  6,
+                                  16,
+                                  24,
+                                ),
                                 gridDelegate:
                                     const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  mainAxisExtent: 80,
-                                  crossAxisSpacing: 10,
-                                  mainAxisSpacing: 6,
-                                ),
+                                      crossAxisCount: 2,
+                                      mainAxisExtent: 80,
+                                      crossAxisSpacing: 10,
+                                      mainAxisSpacing: 6,
+                                    ),
                                 itemCount: filteredResources.length,
                                 itemBuilder: (context, index) {
                                   final resource = filteredResources[index];
                                   final bool isDownloading =
                                       state.downloadingResourcePath ==
-                                          resource.fullPath;
+                                      resource.fullPath;
                                   return ResourceItemTile(
                                     resource: resource,
                                     isDownloading: isDownloading,
@@ -111,7 +117,7 @@ class _WordByWordResourcesTabState extends State<WordByWordResourcesTab> {
                                 final resource = filteredResources[index];
                                 final bool isDownloading =
                                     state.downloadingResourcePath ==
-                                        resource.fullPath;
+                                    resource.fullPath;
                                 return ResourceItemTile(
                                   resource: resource,
                                   isDownloading: isDownloading,

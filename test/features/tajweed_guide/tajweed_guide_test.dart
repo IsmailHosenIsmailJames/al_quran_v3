@@ -3,14 +3,16 @@ import "package:al_quran_v3/src/features/tajweed_guide/data/repositories/tajweed
 import "package:al_quran_v3/src/features/tajweed_guide/domain/usecases/get_tajweed_rules_usecase.dart";
 import "package:al_quran_v3/src/features/tajweed_guide/presentation/widgets/tajweed_tagged_text.dart";
 import "package:al_quran_v3/src/features/quran_script_view/domain/utils/tajweed_rules.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_test/flutter_test.dart";
 
 void main() {
   group("TajweedGuide Feature Tests", () {
     test("GetTajweedRulesUseCase returns all 19 rules", () {
       final dataSource = TajweedGuideLocalDataSourceImpl();
-      final repository = TajweedGuideRepositoryImpl(localDataSource: dataSource);
+      final repository = TajweedGuideRepositoryImpl(
+        localDataSource: dataSource,
+      );
       final useCase = GetTajweedRulesUseCase(repository);
 
       final rules = useCase();
@@ -19,7 +21,9 @@ void main() {
       expect(rules.first.examples.isNotEmpty, isTrue);
     });
 
-    testWidgets("TajweedTaggedText renders tagged letters with custom colors", (WidgetTester tester) async {
+    testWidgets("TajweedTaggedText renders tagged letters with custom colors", (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(

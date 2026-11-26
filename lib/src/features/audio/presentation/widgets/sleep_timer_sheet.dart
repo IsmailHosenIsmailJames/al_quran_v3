@@ -2,7 +2,7 @@ import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/values/values.dart";
 import "package:al_quran_v3/src/features/audio/presentation/cubit/audio_sleep_timer_cubit.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -71,7 +71,9 @@ class SleepTimerSheet extends StatelessWidget {
                     width: 36,
                     height: 4,
                     decoration: BoxDecoration(
-                      color: isDark ? Colors.grey.shade700 : Colors.grey.shade300,
+                      color: isDark
+                          ? Colors.grey.shade700
+                          : Colors.grey.shade300,
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -106,10 +108,10 @@ class SleepTimerSheet extends StatelessWidget {
                             sleepState.mode == SleepTimerMode.timed
                                 ? "Pausing in ${formatSleepCountdown(sleepState.remainingSeconds)}"
                                 : sleepState.mode == SleepTimerMode.endOfAyah
-                                    ? "Stops after the current Ayah"
-                                    : sleepState.mode == SleepTimerMode.endOfSurah
-                                        ? "Stops after the current Surah"
-                                        : "Automatically pause playback",
+                                ? "Stops after the current Ayah"
+                                : sleepState.mode == SleepTimerMode.endOfSurah
+                                ? "Stops after the current Surah"
+                                : "Automatically pause playback",
                             style: theme.textTheme.bodySmall?.copyWith(
                               color: sleepState.isActive
                                   ? themeState.primary

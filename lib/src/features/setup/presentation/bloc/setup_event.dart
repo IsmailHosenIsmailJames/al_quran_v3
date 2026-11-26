@@ -6,8 +6,9 @@ part 'setup_event.freezed.dart';
 
 @freezed
 abstract class SetupEvent with _$SetupEvent {
-  const factory SetupEvent.initRequested(MyAppLocalization currentLocalization) =
-      SetupInitRequested;
+  const factory SetupEvent.initRequested(
+    MyAppLocalization currentLocalization,
+  ) = SetupInitRequested;
   const factory SetupEvent.languageChanged(MyAppLocalization localization) =
       SetupLanguageChanged;
   const factory SetupEvent.translationSelected(ResourceEntity translation) =

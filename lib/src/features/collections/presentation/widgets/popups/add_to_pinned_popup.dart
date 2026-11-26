@@ -8,7 +8,7 @@ import "package:al_quran_v3/src/features/collections/presentation/helpers/collec
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_animate/flutter_animate.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
@@ -25,9 +25,7 @@ Future<void> showAddToPinnedPopup(BuildContext context, String ayahKey) async {
     isScrollControlled: true,
     backgroundColor: Colors.transparent,
     useSafeArea: true,
-    constraints: BoxConstraints(
-      maxWidth: isWide ? 560 : double.infinity,
-    ),
+    constraints: BoxConstraints(maxWidth: isWide ? 560 : double.infinity),
     builder: (context) {
       return Padding(
         padding: EdgeInsets.only(
@@ -101,11 +99,9 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
       PinnedCollectionModel collection = PinnedCollectionModel.fromJson(
         deepConvertMap(pinnedBox.get(collectionID) as Map),
       );
-      final updatedPinned = List<PinnedModel>.from(collection.pinned)..add(newPinned);
-      collection = collection.copyWith(
-        updatedAt: now,
-        pinned: updatedPinned,
-      );
+      final updatedPinned = List<PinnedModel>.from(collection.pinned)
+        ..add(newPinned);
+      collection = collection.copyWith(updatedAt: now, pinned: updatedPinned);
       pinnedBox.put(collectionID, collection.toJson());
     }
 
@@ -222,8 +218,9 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
                       Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: colorScheme.surfaceContainerHighest
-                              .withValues(alpha: 0.6),
+                          color: colorScheme.surfaceContainerHighest.withValues(
+                            alpha: 0.6,
+                          ),
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(
                             color: themeState.primary.withValues(alpha: 0.4),
@@ -262,8 +259,7 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
                                     PinnedCollectionModel? newCollection =
                                         await getIt<CollectionsRepository>()
                                             .handleAddNewCollection(
-                                              _newCollectionNameController
-                                                  .text
+                                              _newCollectionNameController.text
                                                   .trim(),
                                               AppLocalizations.of(context),
                                             );
@@ -301,8 +297,8 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
                               child: ListView.separated(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: collectionPresetColors.length,
-                                separatorBuilder:
-                                    (context, index) => const Gap(8),
+                                separatorBuilder: (context, index) =>
+                                    const Gap(8),
                                 itemBuilder: (context, index) {
                                   final hex = collectionPresetColors[index];
                                   final isSelected = _selectedColorHex == hex;
@@ -320,27 +316,27 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
                                         shape: BoxShape.circle,
                                         border: isSelected
                                             ? Border.all(
-                                              color: Colors.white,
-                                              width: 2.5,
-                                            )
+                                                color: Colors.white,
+                                                width: 2.5,
+                                              )
                                             : null,
                                         boxShadow: isSelected
                                             ? [
-                                              BoxShadow(
-                                                color: safeParseColor(
-                                                  hex,
-                                                ).withValues(alpha: 0.6),
-                                                blurRadius: 6,
-                                              ),
-                                            ]
+                                                BoxShadow(
+                                                  color: safeParseColor(
+                                                    hex,
+                                                  ).withValues(alpha: 0.6),
+                                                  blurRadius: 6,
+                                                ),
+                                              ]
                                             : null,
                                       ),
                                       child: isSelected
                                           ? const Icon(
-                                            Icons.check,
-                                            size: 16,
-                                            color: Colors.white,
-                                          )
+                                              Icons.check,
+                                              size: 16,
+                                              color: Colors.white,
+                                            )
                                           : null,
                                     ),
                                   );
@@ -354,127 +350,131 @@ class _AddToPinnedWidgetState extends State<AddToPinnedWidget> {
                     Expanded(
                       child: _availablePinnedCollections.isEmpty
                           ? Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  FluentIcons.folder_open_24_regular,
-                                  size: 40,
-                                  color: colorScheme.onSurfaceVariant
-                                      .withValues(alpha: 0.5),
-                                ),
-                                const Gap(8),
-                                Text(
-                                  l10n.noCollectionsYetAddANewOne,
-                                  style: TextStyle(
-                                    color: colorScheme.onSurfaceVariant,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    FluentIcons.folder_open_24_regular,
+                                    size: 40,
+                                    color: colorScheme.onSurfaceVariant
+                                        .withValues(alpha: 0.5),
                                   ),
-                                ),
-                              ],
-                            ),
-                          )
-                          : ListView.separated(
-                            itemCount: _availablePinnedCollections.length,
-                            separatorBuilder: (context, index) => const Gap(6),
-                            itemBuilder: (context, index) {
-                              final collection =
-                                  _availablePinnedCollections[index];
-                              final isSelected = _selectedPinnedCollectionIds
-                                  .contains(collection.id);
-                              final folderColor = safeParseColor(
-                                collection.colorHex,
-                              );
-                              return AnimatedContainer(
-                                duration: const Duration(milliseconds: 200),
-                                decoration: BoxDecoration(
-                                  color: isSelected
-                                      ? folderColor.withValues(alpha: 0.12)
-                                      : colorScheme.surfaceContainerHighest
-                                          .withValues(alpha: 0.3),
-                                  borderRadius: BorderRadius.circular(14),
-                                  border: Border.all(
-                                    color: isSelected
-                                        ? folderColor
-                                        : Colors.transparent,
-                                    width: 1.5,
-                                  ),
-                                ),
-                                child: ListTile(
-                                  dense: true,
-                                  contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 14,
-                                    vertical: 2,
-                                  ),
-                                  leading: Container(
-                                    padding: const EdgeInsets.all(8),
-                                    decoration: BoxDecoration(
-                                      color: folderColor.withValues(
-                                        alpha: 0.18,
-                                      ),
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Icon(
-                                      FluentIcons.pin_24_filled,
-                                      color: folderColor,
-                                      size: 20,
-                                    ),
-                                  ),
-                                  title: Text(
-                                    collection.name,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                  subtitle: Text(
-                                    "${collection.pinned.length} pinned",
+                                  const Gap(8),
+                                  Text(
+                                    l10n.noCollectionsYetAddANewOne,
                                     style: TextStyle(
-                                      fontSize: 12,
                                       color: colorScheme.onSurfaceVariant,
                                     ),
                                   ),
-                                  trailing: AnimatedContainer(
-                                    duration: const Duration(milliseconds: 200),
-                                    width: 24,
-                                    height: 24,
-                                    decoration: BoxDecoration(
+                                ],
+                              ),
+                            )
+                          : ListView.separated(
+                              itemCount: _availablePinnedCollections.length,
+                              separatorBuilder: (context, index) =>
+                                  const Gap(6),
+                              itemBuilder: (context, index) {
+                                final collection =
+                                    _availablePinnedCollections[index];
+                                final isSelected = _selectedPinnedCollectionIds
+                                    .contains(collection.id);
+                                final folderColor = safeParseColor(
+                                  collection.colorHex,
+                                );
+                                return AnimatedContainer(
+                                  duration: const Duration(milliseconds: 200),
+                                  decoration: BoxDecoration(
+                                    color: isSelected
+                                        ? folderColor.withValues(alpha: 0.12)
+                                        : colorScheme.surfaceContainerHighest
+                                              .withValues(alpha: 0.3),
+                                    borderRadius: BorderRadius.circular(14),
+                                    border: Border.all(
                                       color: isSelected
                                           ? folderColor
                                           : Colors.transparent,
-                                      shape: BoxShape.circle,
-                                      border: isSelected
-                                          ? null
-                                          : Border.all(
-                                            color: colorScheme.onSurfaceVariant
-                                                .withValues(alpha: 0.4),
-                                            width: 2,
-                                          ),
+                                      width: 1.5,
                                     ),
-                                    child: isSelected
-                                        ? const Icon(
-                                          Icons.check,
-                                          size: 16,
-                                          color: Colors.white,
-                                        )
-                                        : null,
                                   ),
-                                  onTap: () {
-                                    setState(() {
-                                      if (isSelected) {
-                                        _selectedPinnedCollectionIds.remove(
-                                          collection.id,
-                                        );
-                                      } else {
-                                        _selectedPinnedCollectionIds.add(
-                                          collection.id,
-                                        );
-                                      }
-                                    });
-                                  },
-                                ),
-                              );
-                            },
-                          ),
+                                  child: ListTile(
+                                    dense: true,
+                                    contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 14,
+                                      vertical: 2,
+                                    ),
+                                    leading: Container(
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                        color: folderColor.withValues(
+                                          alpha: 0.18,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Icon(
+                                        FluentIcons.pin_24_filled,
+                                        color: folderColor,
+                                        size: 20,
+                                      ),
+                                    ),
+                                    title: Text(
+                                      collection.name,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                    subtitle: Text(
+                                      "${collection.pinned.length} pinned",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: colorScheme.onSurfaceVariant,
+                                      ),
+                                    ),
+                                    trailing: AnimatedContainer(
+                                      duration: const Duration(
+                                        milliseconds: 200,
+                                      ),
+                                      width: 24,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                        color: isSelected
+                                            ? folderColor
+                                            : Colors.transparent,
+                                        shape: BoxShape.circle,
+                                        border: isSelected
+                                            ? null
+                                            : Border.all(
+                                                color: colorScheme
+                                                    .onSurfaceVariant
+                                                    .withValues(alpha: 0.4),
+                                                width: 2,
+                                              ),
+                                      ),
+                                      child: isSelected
+                                          ? const Icon(
+                                              Icons.check,
+                                              size: 16,
+                                              color: Colors.white,
+                                            )
+                                          : null,
+                                    ),
+                                    onTap: () {
+                                      setState(() {
+                                        if (isSelected) {
+                                          _selectedPinnedCollectionIds.remove(
+                                            collection.id,
+                                          );
+                                        } else {
+                                          _selectedPinnedCollectionIds.add(
+                                            collection.id,
+                                          );
+                                        }
+                                      });
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
                     ),
                   ],
                 ),

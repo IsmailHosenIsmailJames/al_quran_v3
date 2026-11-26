@@ -61,6 +61,9 @@ class AppLocalizationsBn extends AppLocalizations {
   String get saveAndDownload => 'সেভ করুন এবং ডাউনলোড করুন';
 
   @override
+  String get appSetup => 'App Setup';
+
+  @override
   String get appLanguage => 'অ্যাপের ভাষা';
 
   @override

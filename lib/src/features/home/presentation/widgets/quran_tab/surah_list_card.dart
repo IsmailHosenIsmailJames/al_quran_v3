@@ -5,7 +5,7 @@ import "package:al_quran_v3/src/core/utils/number_localization.dart";
 import "package:al_quran_v3/src/features/home/presentation/widgets/quran_tab/quran_index_badge.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_view.dart";
 import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -28,7 +28,8 @@ class SurahListCard extends StatelessWidget {
     final bool isMakkah = surah.revelationPlace.toLowerCase() == "makkah";
 
     return Container(
-      margin: margin ?? const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+      margin:
+          margin ?? const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
       decoration: BoxDecoration(
         color: isDark ? Colors.white.withValues(alpha: 0.035) : Colors.white,
         borderRadius: BorderRadius.circular(16),

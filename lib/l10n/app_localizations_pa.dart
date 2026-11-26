@@ -61,6 +61,9 @@ class AppLocalizationsPa extends AppLocalizations {
   String get saveAndDownload => 'ਸੁਰੱਖਿਅਤ ਕਰੋ ਅਤੇ ਡਾਊਨਲੋਡ ਕਰੋ';
 
   @override
+  String get appSetup => 'App Setup';
+
+  @override
   String get appLanguage => 'ਐਪ ਭਾਸ਼ਾ';
 
   @override

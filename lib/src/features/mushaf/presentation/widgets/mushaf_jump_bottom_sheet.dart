@@ -2,7 +2,7 @@ import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:al_quran_v3/src/core/theme/controller/theme_cubit.dart";
 import "package:al_quran_v3/src/features/mushaf/domain/utils/mushaf_page_helper.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -21,7 +21,10 @@ Future<void> showMushafJumpModal({
       context: context,
       builder: (context) {
         return Dialog(
-          insetPadding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 40,
+            vertical: 30,
+          ),
           clipBehavior: Clip.antiAlias,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
@@ -72,7 +75,8 @@ class _MushafJumpModalContent extends StatefulWidget {
   });
 
   @override
-  State<_MushafJumpModalContent> createState() => _MushafJumpModalContentState();
+  State<_MushafJumpModalContent> createState() =>
+      _MushafJumpModalContentState();
 }
 
 class _MushafJumpModalContentState extends State<_MushafJumpModalContent>
@@ -153,18 +157,23 @@ class _MushafJumpModalContentState extends State<_MushafJumpModalContent>
           indicatorColor: themeState.primary,
           indicatorWeight: 3,
           labelColor: themeState.primary,
-          unselectedLabelColor:
-              isDark ? Colors.grey.shade400 : Colors.grey.shade600,
-          labelStyle:
-              const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+          unselectedLabelColor: isDark
+              ? Colors.grey.shade400
+              : Colors.grey.shade600,
+          labelStyle: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+          ),
           tabs: [
             Tab(
               icon: const Icon(FluentIcons.book_open_24_regular, size: 20),
               text: l10n.page,
             ),
             Tab(
-              icon: const Icon(FluentIcons.document_bullet_list_24_regular,
-                  size: 20),
+              icon: const Icon(
+                FluentIcons.document_bullet_list_24_regular,
+                size: 20,
+              ),
               text: l10n.surah,
             ),
             Tab(
@@ -300,12 +309,42 @@ class _MushafJumpModalContentState extends State<_MushafJumpModalContent>
             spacing: 8,
             runSpacing: 8,
             children: [
-              _quickPageChip(1, "${l10n.page} 1 (Al-Fatihah)", themeState, isDark),
-              _quickPageChip(2, "${l10n.page} 2 (Al-Baqarah)", themeState, isDark),
-              _quickPageChip(293, "${l10n.page} 293 (Al-Kahf)", themeState, isDark),
-              _quickPageChip(440, "${l10n.page} 440 (Ya-Sin)", themeState, isDark),
-              _quickPageChip(582, "${l10n.page} 582 (${l10n.juz} 30)", themeState, isDark),
-              _quickPageChip(604, "${l10n.page} 604 (An-Nas)", themeState, isDark),
+              _quickPageChip(
+                1,
+                "${l10n.page} 1 (Al-Fatihah)",
+                themeState,
+                isDark,
+              ),
+              _quickPageChip(
+                2,
+                "${l10n.page} 2 (Al-Baqarah)",
+                themeState,
+                isDark,
+              ),
+              _quickPageChip(
+                293,
+                "${l10n.page} 293 (Al-Kahf)",
+                themeState,
+                isDark,
+              ),
+              _quickPageChip(
+                440,
+                "${l10n.page} 440 (Ya-Sin)",
+                themeState,
+                isDark,
+              ),
+              _quickPageChip(
+                582,
+                "${l10n.page} 582 (${l10n.juz} 30)",
+                themeState,
+                isDark,
+              ),
+              _quickPageChip(
+                604,
+                "${l10n.page} 604 (An-Nas)",
+                themeState,
+                isDark,
+              ),
             ],
           ),
         ],
@@ -314,7 +353,11 @@ class _MushafJumpModalContentState extends State<_MushafJumpModalContent>
   }
 
   Widget _quickPageChip(
-      int page, String label, dynamic themeState, bool isDark) {
+    int page,
+    String label,
+    dynamic themeState,
+    bool isDark,
+  ) {
     return ActionChip(
       label: Text(label),
       labelStyle: TextStyle(
@@ -336,7 +379,10 @@ class _MushafJumpModalContentState extends State<_MushafJumpModalContent>
   }
 
   Widget _buildSurahTab(
-      dynamic themeState, bool isDark, AppLocalizations l10n) {
+    dynamic themeState,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     return Column(
       children: [
         Padding(
@@ -348,8 +394,10 @@ class _MushafJumpModalContentState extends State<_MushafJumpModalContent>
               prefixIcon: const Icon(FluentIcons.search_24_regular, size: 20),
               suffixIcon: _surahSearchController.text.isNotEmpty
                   ? IconButton(
-                      icon: const Icon(FluentIcons.dismiss_circle_24_regular,
-                          size: 18),
+                      icon: const Icon(
+                        FluentIcons.dismiss_circle_24_regular,
+                        size: 18,
+                      ),
                       onPressed: () => _surahSearchController.clear(),
                     )
                   : null,

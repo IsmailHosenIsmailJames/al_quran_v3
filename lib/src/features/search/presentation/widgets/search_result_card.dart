@@ -11,7 +11,7 @@ import "package:al_quran_v3/src/features/search/domain/utils/text_highlighter.da
 import "package:al_quran_v3/src/features/surah_info/presentation/widgets/surah_info_header_builder.dart";
 import "package:al_quran_v3/src/features/tafsir/presentation/screens/tafsir_view.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -61,7 +61,9 @@ class SearchResultCard extends StatelessWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
           mouseCursor: SystemMouseCursors.click,
-          hoverColor: themeState.primary.withValues(alpha: isDark ? 0.05 : 0.03),
+          hoverColor: themeState.primary.withValues(
+            alpha: isDark ? 0.05 : 0.03,
+          ),
           onTap: () {
             onResultSelected?.call();
             Navigator.push(
@@ -83,10 +85,7 @@ class SearchResultCard extends StatelessWidget {
                 // Top Header: Index Badge + Surah/Ayah Title + Quick Actions
                 Row(
                   children: [
-                    QuranIndexBadge(
-                      index: ayahResult.ayahNumber,
-                      size: 34,
-                    ),
+                    QuranIndexBadge(index: ayahResult.ayahNumber, size: 34),
                     const Gap(10),
                     Expanded(
                       child: Column(
@@ -97,7 +96,9 @@ class SearchResultCard extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 14.5,
                               fontWeight: FontWeight.bold,
-                              color: isDark ? Colors.white : Colors.grey.shade900,
+                              color: isDark
+                                  ? Colors.white
+                                  : Colors.grey.shade900,
                             ),
                           ),
                           const Gap(2),
@@ -105,7 +106,9 @@ class SearchResultCard extends StatelessWidget {
                             "${l10n.juz} ${localizedNumber(context, ayahResult.juzNumber)} • ${l10n.page} ${localizedNumber(context, ayahResult.pageNumber)}",
                             style: TextStyle(
                               fontSize: 11.5,
-                              color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                              color: isDark
+                                  ? Colors.grey.shade400
+                                  : Colors.grey.shade600,
                             ),
                           ),
                         ],
@@ -121,9 +124,8 @@ class SearchResultCard extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => TafsirView(
-                              ayahKey: ayahResult.ayahKey,
-                            ),
+                            builder: (context) =>
+                                TafsirView(ayahKey: ayahResult.ayahKey),
                           ),
                         );
                       },
@@ -134,7 +136,8 @@ class SearchResultCard extends StatelessWidget {
                       tooltip: l10n.pinned,
                       themeState: themeState,
                       isDark: isDark,
-                      onTap: () => showAddToPinnedPopup(context, ayahResult.ayahKey),
+                      onTap: () =>
+                          showAddToPinnedPopup(context, ayahResult.ayahKey),
                     ),
                     const Gap(6),
                     _QuickActionIconButton(
@@ -149,7 +152,9 @@ class SearchResultCard extends StatelessWidget {
                           buffer.writeln(t.text);
                         }
                         buffer.write("($surahName ${ayahResult.ayahKey})");
-                        Clipboard.setData(ClipboardData(text: buffer.toString()));
+                        Clipboard.setData(
+                          ClipboardData(text: buffer.toString()),
+                        );
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text("Ayah copied to clipboard"),
@@ -176,7 +181,9 @@ class SearchResultCard extends StatelessWidget {
                             fontSize: 19,
                             fontFamily: "QPC_Hafs",
                             height: 1.6,
-                            color: isDark ? Colors.grey.shade200 : Colors.grey.shade900,
+                            color: isDark
+                                ? Colors.grey.shade200
+                                : Colors.grey.shade900,
                           ),
                           highlightColor: themeState.primary,
                           highlightBgColor: themeState.primary.withValues(
@@ -207,7 +214,9 @@ class SearchResultCard extends StatelessWidget {
                                 baseStyle: TextStyle(
                                   fontSize: 13.5,
                                   height: 1.45,
-                                  color: isDark ? Colors.grey.shade300 : Colors.grey.shade800,
+                                  color: isDark
+                                      ? Colors.grey.shade300
+                                      : Colors.grey.shade800,
                                 ),
                                 highlightColor: themeState.primary,
                                 highlightBgColor: themeState.primary.withValues(
@@ -233,7 +242,9 @@ class SearchResultCard extends StatelessWidget {
                                     query: query,
                                     baseStyle: TextStyle(
                                       fontSize: 12,
-                                      color: isDark ? Colors.grey.shade400 : Colors.grey.shade700,
+                                      color: isDark
+                                          ? Colors.grey.shade400
+                                          : Colors.grey.shade700,
                                     ),
                                     highlightColor: themeState.primary,
                                   ),
@@ -247,7 +258,9 @@ class SearchResultCard extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.w500,
-                              color: isDark ? Colors.grey.shade500 : Colors.grey.shade500,
+                              color: isDark
+                                  ? Colors.grey.shade500
+                                  : Colors.grey.shade500,
                             ),
                           ),
                         ],
@@ -304,7 +317,9 @@ class SearchResultCard extends StatelessWidget {
                                 baseStyle: TextStyle(
                                   fontSize: 12.5,
                                   height: 1.4,
-                                  color: isDark ? Colors.grey.shade300 : Colors.grey.shade700,
+                                  color: isDark
+                                      ? Colors.grey.shade300
+                                      : Colors.grey.shade700,
                                 ),
                                 highlightColor: themeState.primary,
                                 highlightBgColor: themeState.primary.withValues(

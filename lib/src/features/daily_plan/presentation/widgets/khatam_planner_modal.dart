@@ -3,7 +3,7 @@ import "package:al_quran_v3/src/features/daily_plan/domain/entities/khatam_plan_
 import "package:al_quran_v3/src/features/daily_plan/presentation/cubit/streak_cubit.dart";
 import "package:al_quran_v3/src/features/daily_plan/presentation/cubit/streak_state.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter/services.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
@@ -311,8 +311,8 @@ class _KhatamPlannerModalState extends State<KhatamPlannerModal> {
                     ? () {
                         HapticFeedback.lightImpact();
                         context.read<StreakCubit>().updateKhatamPages(
-                              plan.completedPages - 1,
-                            );
+                          plan.completedPages - 1,
+                        );
                       }
                     : null,
               ),
@@ -335,8 +335,8 @@ class _KhatamPlannerModalState extends State<KhatamPlannerModal> {
                     ? () {
                         HapticFeedback.lightImpact();
                         context.read<StreakCubit>().updateKhatamPages(
-                              plan.completedPages + 1,
-                            );
+                          plan.completedPages + 1,
+                        );
                       }
                     : null,
               ),
@@ -424,15 +424,15 @@ class _KhatamPlannerModalState extends State<KhatamPlannerModal> {
                     color: isSelected
                         ? primary.withValues(alpha: isDark ? 0.18 : 0.08)
                         : (isDark
-                            ? Colors.white.withValues(alpha: 0.03)
-                            : Colors.grey.shade50),
+                              ? Colors.white.withValues(alpha: 0.03)
+                              : Colors.grey.shade50),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: isSelected
                           ? primary
                           : (isDark
-                              ? Colors.white.withValues(alpha: 0.08)
-                              : Colors.grey.shade200),
+                                ? Colors.white.withValues(alpha: 0.08)
+                                : Colors.grey.shade200),
                       width: isSelected ? 1.5 : 1,
                     ),
                   ),
@@ -446,8 +446,8 @@ class _KhatamPlannerModalState extends State<KhatamPlannerModal> {
                         color: isSelected
                             ? primary
                             : (isDark
-                                ? Colors.grey.shade500
-                                : Colors.grey.shade400),
+                                  ? Colors.grey.shade500
+                                  : Colors.grey.shade400),
                       ),
                       const Gap(10),
                       Expanded(
@@ -468,9 +468,7 @@ class _KhatamPlannerModalState extends State<KhatamPlannerModal> {
                           vertical: 2,
                         ),
                         decoration: BoxDecoration(
-                          color: primary.withValues(
-                            alpha: isDark ? 0.2 : 0.1,
-                          ),
+                          color: primary.withValues(alpha: isDark ? 0.2 : 0.1),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
@@ -535,8 +533,9 @@ class _KhatamPlannerModalState extends State<KhatamPlannerModal> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color:
-            isDark ? Colors.white.withValues(alpha: 0.04) : Colors.grey.shade50,
+        color: isDark
+            ? Colors.white.withValues(alpha: 0.04)
+            : Colors.grey.shade50,
         borderRadius: BorderRadius.circular(14),
         border: Border.all(
           color: isDark
@@ -563,10 +562,7 @@ class _KhatamPlannerModalState extends State<KhatamPlannerModal> {
           const Gap(6),
           Text(
             value,
-            style: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
+            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
           ),
           Text(
             subtitle,

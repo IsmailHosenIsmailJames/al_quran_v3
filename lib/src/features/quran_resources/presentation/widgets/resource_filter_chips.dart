@@ -1,5 +1,5 @@
 import 'package:al_quran_v3/src/core/theme/controller/theme_cubit.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 enum ResourceFilterType { all, downloaded, selected }
@@ -52,8 +52,9 @@ class ResourceFilterChips extends StatelessWidget {
                 : (isDark ? Colors.grey.shade300 : Colors.grey.shade800),
           ),
         ),
-        backgroundColor:
-            isDark ? const Color(0xFF1E1E1E) : Colors.grey.shade100,
+        backgroundColor: isDark
+            ? const Color(0xFF1E1E1E)
+            : Colors.grey.shade100,
         selectedColor: themeState.primary,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
@@ -61,8 +62,8 @@ class ResourceFilterChips extends StatelessWidget {
             color: isSelected
                 ? themeState.primary
                 : (isDark
-                    ? Colors.white.withValues(alpha: 0.08)
-                    : Colors.grey.shade300),
+                      ? Colors.white.withValues(alpha: 0.08)
+                      : Colors.grey.shade300),
             width: 1,
           ),
         ),

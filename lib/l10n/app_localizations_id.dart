@@ -61,6 +61,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get saveAndDownload => 'Simpan & Unduh';
 
   @override
+  String get appSetup => 'App Setup';
+
+  @override
   String get appLanguage => 'Bahasa Aplikasi';
 
   @override

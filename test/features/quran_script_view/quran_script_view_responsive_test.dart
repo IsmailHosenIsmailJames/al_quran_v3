@@ -21,7 +21,7 @@ import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/ay
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/quran_view_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/cubit/word_playing_state_cubit.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/quran_script_view.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:hive_ce_flutter/hive_flutter.dart";
@@ -32,7 +32,11 @@ class FakeHistoryRepo implements IHistoryRepository {
   @override
   List<HistoryElementEntity> getHistory() => List.unmodifiable(_storage);
   @override
-  Future<void> addHistory({required int surahNumber, int? ayahNumber, int? pageNumber}) async {}
+  Future<void> addHistory({
+    required int surahNumber,
+    int? ayahNumber,
+    int? pageNumber,
+  }) async {}
   @override
   Future<void> clearHistory() async {}
 }
@@ -122,10 +126,7 @@ void main() {
           buildWrapper(
             ayahToHighlight: ayahToHighlight,
             ayahScrollInfoCubit: ayahScrollInfoCubit,
-            child: const QuranScriptView(
-              startKey: "1:1",
-              endKey: "1:7",
-            ),
+            child: const QuranScriptView(startKey: "1:1", endKey: "1:7"),
           ),
         );
         await tester.pumpAndSettle();
@@ -141,8 +142,7 @@ void main() {
         // 3. Reading content should have BoxConstraints with maxWidth 960
         final constrainedBoxFinder = find.byWidgetPredicate(
           (widget) =>
-              widget is ConstrainedBox &&
-              widget.constraints.maxWidth == 960,
+              widget is ConstrainedBox && widget.constraints.maxWidth == 960,
         );
         expect(constrainedBoxFinder, findsWidgets);
 
@@ -167,72 +167,62 @@ void main() {
       },
     );
 
-    testWidgets(
-      "Narrow mobile screen (400px) shows top AppBar and no sidebar",
-      (tester) async {
-        tester.view.physicalSize = const Size(400, 800);
-        tester.view.devicePixelRatio = 1.0;
-        addTearDown(() {
-          tester.view.resetPhysicalSize();
-          tester.view.resetDevicePixelRatio();
-        });
+    testWidgets("Narrow mobile screen (400px) shows top AppBar and no sidebar", (
+      tester,
+    ) async {
+      tester.view.physicalSize = const Size(400, 800);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
 
-        final ayahToHighlight = AyahToHighlight();
-        final ayahScrollInfoCubit = AyahByAyahInScrollInfoCubit();
+      final ayahToHighlight = AyahToHighlight();
+      final ayahScrollInfoCubit = AyahByAyahInScrollInfoCubit();
 
-        await tester.pumpWidget(
-          buildWrapper(
-            ayahToHighlight: ayahToHighlight,
-            ayahScrollInfoCubit: ayahScrollInfoCubit,
-            child: const QuranScriptView(
-              startKey: "1:1",
-              endKey: "1:7",
-            ),
-          ),
-        );
-        await tester.pumpAndSettle();
+      await tester.pumpWidget(
+        buildWrapper(
+          ayahToHighlight: ayahToHighlight,
+          ayahScrollInfoCubit: ayahScrollInfoCubit,
+          child: const QuranScriptView(startKey: "1:1", endKey: "1:7"),
+        ),
+      );
+      await tester.pumpAndSettle();
 
-        // On mobile, AppBar is shown and sidebar collapse/expand toggle is absent
-        expect(find.byType(AppBar), findsOneWidget);
-        expect(find.byTooltip("Hide sidebar (Ctrl+B)"), findsNothing);
-        expect(find.byTooltip("Show sidebar (Ctrl+B)"), findsNothing);
-      },
-    );
+      // On mobile, AppBar is shown and sidebar collapse/expand toggle is absent
+      expect(find.byType(AppBar), findsOneWidget);
+      expect(find.byTooltip("Hide sidebar (Ctrl+B)"), findsNothing);
+      expect(find.byTooltip("Show sidebar (Ctrl+B)"), findsNothing);
+    });
 
-    testWidgets(
-      "Sidebar search field filters Surahs properly",
-      (tester) async {
-        tester.view.physicalSize = const Size(1200, 800);
-        tester.view.devicePixelRatio = 1.0;
-        addTearDown(() {
-          tester.view.resetPhysicalSize();
-          tester.view.resetDevicePixelRatio();
-        });
+    testWidgets("Sidebar search field filters Surahs properly", (tester) async {
+      tester.view.physicalSize = const Size(1200, 800);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
 
-        final ayahToHighlight = AyahToHighlight();
-        final ayahScrollInfoCubit = AyahByAyahInScrollInfoCubit();
+      final ayahToHighlight = AyahToHighlight();
+      final ayahScrollInfoCubit = AyahByAyahInScrollInfoCubit();
 
-        await tester.pumpWidget(
-          buildWrapper(
-            ayahToHighlight: ayahToHighlight,
-            ayahScrollInfoCubit: ayahScrollInfoCubit,
-            child: const QuranScriptView(
-              startKey: "1:1",
-              endKey: "1:7",
-            ),
-          ),
-        );
-        await tester.pumpAndSettle();
+      await tester.pumpWidget(
+        buildWrapper(
+          ayahToHighlight: ayahToHighlight,
+          ayahScrollInfoCubit: ayahScrollInfoCubit,
+          child: const QuranScriptView(startKey: "1:1", endKey: "1:7"),
+        ),
+      );
+      await tester.pumpAndSettle();
 
-        // Search for "18" (Al-Kahf)
-        await tester.enterText(find.byType(TextField), "18");
-        await tester.pumpAndSettle();
+      // Search for "18" (Al-Kahf)
+      await tester.enterText(find.byType(TextField), "18");
+      await tester.pumpAndSettle();
 
-        expect(find.text("18. "), findsOneWidget);
-        // Surah 1 should not be listed in filtered results
-        expect(find.text("1. "), findsNothing);
-      },
-    );
+      expect(find.text("18. "), findsOneWidget);
+      // Surah 1 should not be listed in filtered results
+      expect(find.text("1. "), findsNothing);
+    });
 
     testWidgets(
       "Sidebar search supports English meanings, aliases, and Ayah format via SurahSearchEngine",
@@ -251,10 +241,7 @@ void main() {
           buildWrapper(
             ayahToHighlight: ayahToHighlight,
             ayahScrollInfoCubit: ayahScrollInfoCubit,
-            child: const QuranScriptView(
-              startKey: "1:1",
-              endKey: "1:7",
-            ),
+            child: const QuranScriptView(startKey: "1:1", endKey: "1:7"),
           ),
         );
         await tester.pumpAndSettle();

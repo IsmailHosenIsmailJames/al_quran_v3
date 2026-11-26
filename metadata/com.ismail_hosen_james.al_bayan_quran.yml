@@ -12,9 +12,9 @@ RepoType: git
 Repo: https://github.com/IsmailHosenIsmailJames/al_quran_v3.git
 
 Builds:
-  - versionName: 4.4.1
-    versionCode: 105
-    commit: v4.4.1-foss
+  - versionName: 4.4.2
+    versionCode: 106
+    commit: v4.4.2-foss
     output: build/app/outputs/flutter-apk/app-release.apk
     srclibs:
       - flutter@3.50.1
@@ -37,5 +37,5 @@ Builds:
 AutoUpdateMode: Version
 UpdateCheckMode: Tags ^v[0-9.]+-foss$
 UpdateCheckData: pubspec.yaml|version:\s.+\+(\d+)|.|version:\s(.+)\+
-CurrentVersion: 4.4.1
-CurrentVersionCode: 105
+CurrentVersion: 4.4.2
+CurrentVersionCode: 106

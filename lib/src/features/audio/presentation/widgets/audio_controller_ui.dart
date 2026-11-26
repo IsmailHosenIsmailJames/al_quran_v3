@@ -20,7 +20,7 @@ import "package:al_quran_v3/src/features/audio/presentation/widgets/popup_ayah_r
 import "package:al_quran_v3/src/features/audio/presentation/widgets/sleep_timer_sheet.dart";
 import "package:audio_video_progress_bar/audio_video_progress_bar.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 import "package:just_audio/just_audio.dart" as just_audio;
@@ -69,7 +69,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                 builder: (context, playerState) {
                   final isLoading =
                       playerState.state == just_audio.ProcessingState.loading ||
-                          playerState.state == just_audio.ProcessingState.buffering;
+                      playerState.state == just_audio.ProcessingState.buffering;
 
                   if (isLoading) {
                     return const Padding(
@@ -194,7 +194,9 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                 return IconButton(
                   visualDensity: VisualDensity.compact,
                   iconSize: 18,
-                  tooltip: sleepState.isActive ? "Sleep Timer Active" : "Sleep Timer",
+                  tooltip: sleepState.isActive
+                      ? "Sleep Timer Active"
+                      : "Sleep Timer",
                   onPressed: () => showSleepTimerSheet(context),
                   icon: Icon(
                     sleepState.isActive
@@ -282,8 +284,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
             int.tryParse(ayahKeyState.current.split(":")[0]) ?? 1;
         final ayahNumber =
             int.tryParse(ayahKeyState.current.split(":")[1]) ?? 1;
-        final playlistIdx =
-            ayahKeyState.ayahList.indexOf(ayahKeyState.current);
+        final playlistIdx = ayahKeyState.ayahList.indexOf(ayahKeyState.current);
         final hasPrev = playlistIdx > 0;
         final hasNext =
             playlistIdx != -1 && playlistIdx < ayahKeyState.ayahList.length - 1;
@@ -304,8 +305,9 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                   switch (loopState.loopMode) {
                     case just_audio.LoopMode.off:
                       loopIcon = Icons.repeat_rounded;
-                      loopColor =
-                          isDark ? Colors.grey.shade600 : Colors.grey.shade400;
+                      loopColor = isDark
+                          ? Colors.grey.shade600
+                          : Colors.grey.shade400;
                       tooltip = "Loop: Off";
                       break;
                     case just_audio.LoopMode.all:
@@ -335,8 +337,9 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                 iconSize: 22,
                 visualDensity: VisualDensity.compact,
                 tooltip: "Previous",
-                onPressed:
-                    hasPrev ? () => AudioPlayerManager.seekToPreviousAyah() : null,
+                onPressed: hasPrev
+                    ? () => AudioPlayerManager.seekToPreviousAyah()
+                    : null,
                 icon: const Icon(Icons.skip_previous_rounded),
               ),
               const Gap(2),
@@ -349,8 +352,8 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                     tooltip: "Replay 5s",
                     onPressed: AudioPlayerManager.hasActivePlayer
                         ? () => AudioPlayerManager.seekRelative(
-                              const Duration(seconds: -5),
-                            )
+                            const Duration(seconds: -5),
+                          )
                         : null,
                     icon: const Icon(Icons.replay_5_rounded),
                   );
@@ -362,7 +365,7 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                 builder: (context, state) {
                   final isLoading =
                       state.state == just_audio.ProcessingState.loading ||
-                          state.state == just_audio.ProcessingState.buffering;
+                      state.state == just_audio.ProcessingState.buffering;
 
                   return Container(
                     width: 44,
@@ -419,8 +422,8 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                     tooltip: "Forward 5s",
                     onPressed: AudioPlayerManager.hasActivePlayer
                         ? () => AudioPlayerManager.seekRelative(
-                              const Duration(seconds: 5),
-                            )
+                            const Duration(seconds: 5),
+                          )
                         : null,
                     icon: const Icon(Icons.forward_5_rounded),
                   );
@@ -432,8 +435,9 @@ class _AudioControllerUiState extends State<AudioControllerUi> {
                 iconSize: 22,
                 visualDensity: VisualDensity.compact,
                 tooltip: "Next",
-                onPressed:
-                    hasNext ? () => AudioPlayerManager.seekToNextAyah() : null,
+                onPressed: hasNext
+                    ? () => AudioPlayerManager.seekToNextAyah()
+                    : null,
                 icon: const Icon(Icons.skip_next_rounded),
               ),
 

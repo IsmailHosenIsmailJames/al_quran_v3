@@ -1,7 +1,7 @@
 import "dart:ui";
 
 import "package:al_quran_v3/src/core/theme/controller/theme_state.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter/services.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
@@ -20,12 +20,9 @@ class ThemeFunctions {
   static ThemeMode loadThemeMode() {
     assert(preferences != null, "Theme Function need to be init first");
     final String? savedThemeName = preferences!.getString("app_theme_mode");
-    ThemeMode themeMode =
-        savedThemeName == null
-            ? ThemeMode.system
-            : ThemeMode.values.firstWhere(
-              (e) => e.toString() == savedThemeName,
-            );
+    ThemeMode themeMode = savedThemeName == null
+        ? ThemeMode.system
+        : ThemeMode.values.firstWhere((e) => e.toString() == savedThemeName);
     systemChromeSetting(themeMode);
     return themeMode;
   }

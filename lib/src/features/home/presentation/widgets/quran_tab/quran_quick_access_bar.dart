@@ -11,7 +11,7 @@ import "package:al_quran_v3/src/features/quran_script_view/presentation/screens/
 import "package:al_quran_v3/src/features/surah_info/presentation/widgets/surah_info_header_builder.dart";
 import "package:al_quran_v3/src/features/surah_list/data/models/surah_info_model.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -36,8 +36,7 @@ class _QuranQuickAccessBarState extends State<QuranQuickAccessBar> {
       builder: (context, quickAccessList) {
         return BlocBuilder<QuranHistoryCubit, QuranHistoryState>(
           builder: (context, historyState) {
-            final recentItems =
-                historyState.history.reversed.take(10).toList();
+            final recentItems = historyState.history.reversed.take(10).toList();
 
             final hasShortcuts = quickAccessList.isNotEmpty;
             final hasRecent = recentItems.isNotEmpty;
@@ -250,16 +249,18 @@ class _QuranQuickAccessBarState extends State<QuranQuickAccessBar> {
       itemBuilder: (context, index) {
         final model = list[index];
         final surahData = metaDataSurah[model.surahNumber.toString()];
-        final surahInfo =
-            surahData != null ? SurahInfoModel.fromMap(surahData) : null;
+        final surahInfo = surahData != null
+            ? SurahInfoModel.fromMap(surahData)
+            : null;
         final surahName = getSurahName(context, model.surahNumber);
 
         final String? scrollTo =
             ((model.scrollIndex != null) && (model.scrollIndex! > 1))
-                ? "${model.surahNumber}:${model.scrollIndex}"
-                : null;
+            ? "${model.surahNumber}:${model.scrollIndex}"
+            : null;
 
-        final label = surahName +
+        final label =
+            surahName +
             (scrollTo != null
                 ? " • ${localizedNumber(context, model.scrollIndex)}"
                 : "");

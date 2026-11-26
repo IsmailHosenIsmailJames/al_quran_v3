@@ -17,7 +17,7 @@ import "package:al_quran_v3/src/features/surah_list/presentation/screens/juz_lis
 import "package:al_quran_v3/src/features/surah_list/presentation/screens/page_list_view.dart";
 import "package:al_quran_v3/src/features/surah_list/presentation/screens/ruku_list_view.dart";
 import "package:al_quran_v3/src/features/surah_list/presentation/screens/surah_list_view.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 /// The modernized Home Page Quran Tab.
 class QuranPage extends StatefulWidget {

@@ -6,7 +6,7 @@ import "package:al_quran_v3/src/features/mushaf/presentation/screens/kfgqpc_v4_l
 import "package:al_quran_v3/src/features/quran_resources/presentation/screens/quran_resources_screen.dart";
 import "package:al_quran_v3/src/features/quran_script_view/presentation/widgets/jump_to_ayah/popup_jump_to_ayah.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:gap/gap.dart";
 
@@ -117,9 +117,7 @@ class _ActionTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 4),
         decoration: BoxDecoration(
-          color: isDark
-              ? Colors.white.withValues(alpha: 0.04)
-              : Colors.white,
+          color: isDark ? Colors.white.withValues(alpha: 0.04) : Colors.white,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
             color: isDark
@@ -142,14 +140,12 @@ class _ActionTile extends StatelessWidget {
               height: 36,
               width: 36,
               decoration: BoxDecoration(
-                color: themeState.primary.withValues(alpha: isDark ? 0.2 : 0.12),
+                color: themeState.primary.withValues(
+                  alpha: isDark ? 0.2 : 0.12,
+                ),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Icon(
-                icon,
-                size: 19,
-                color: themeState.primary,
-              ),
+              child: Icon(icon, size: 19, color: themeState.primary),
             ),
             const Gap(6),
             Text(

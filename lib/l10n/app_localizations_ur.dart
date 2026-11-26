@@ -61,6 +61,9 @@ class AppLocalizationsUr extends AppLocalizations {
   String get saveAndDownload => 'محفوظ اور ڈاؤن لوڈ کریں';
 
   @override
+  String get appSetup => 'App Setup';
+
+  @override
   String get appLanguage => 'ایپ کی زبان';
 
   @override

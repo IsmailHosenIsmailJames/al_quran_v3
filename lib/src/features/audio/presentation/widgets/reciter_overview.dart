@@ -10,7 +10,7 @@ import "package:al_quran_v3/src/features/audio/presentation/cubit/reciter_cubit.
 import "package:al_quran_v3/src/features/audio/presentation/widgets/popup_change_reciter.dart";
 import "package:cached_network_image/cached_network_image.dart";
 import "package:fluentui_system_icons/fluentui_system_icons.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:fluttertoast/fluttertoast.dart";
 import "package:gap/gap.dart";
@@ -41,8 +41,9 @@ Widget getReciterWidget({
               (ReciterInfoModel reciterInfoModel) async {
                 Navigator.pop(context);
                 final reciterCubit = context.read<ReciterCubit>();
-                final bool segmentsReady =
-                    await reciterCubit.changeReciter(reciterInfoModel);
+                final bool segmentsReady = await reciterCubit.changeReciter(
+                  reciterInfoModel,
+                );
                 if (!segmentsReady && reciterInfoModel.hasWordSegments) {
                   Fluttertoast.showToast(
                     msg:
@@ -130,16 +131,16 @@ Widget getReciterWidget({
                         ),
                         progressIndicatorBuilder: (context, url, progress) =>
                             Center(
-                          child: SizedBox(
-                            height: 24,
-                            width: 24,
-                            child: CircularProgressIndicator(
-                              value: progress.progress,
-                              strokeWidth: 2,
-                              color: themeState.primary,
+                              child: SizedBox(
+                                height: 24,
+                                width: 24,
+                                child: CircularProgressIndicator(
+                                  value: progress.progress,
+                                  strokeWidth: 2,
+                                  color: themeState.primary,
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
                       )
                     : Container(
                         color: isDark
@@ -271,14 +272,14 @@ Widget _buildBadge(
   final bgColor = isAccent
       ? themeState.primary.withValues(alpha: isDark ? 0.25 : 0.15)
       : isDark
-          ? Colors.white.withValues(alpha: 0.08)
-          : Colors.black.withValues(alpha: 0.05);
+      ? Colors.white.withValues(alpha: 0.08)
+      : Colors.black.withValues(alpha: 0.05);
 
   final fgColor = isAccent
       ? themeState.primary
       : isDark
-          ? Colors.grey.shade300
-          : Colors.grey.shade800;
+      ? Colors.grey.shade300
+      : Colors.grey.shade800;
 
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),

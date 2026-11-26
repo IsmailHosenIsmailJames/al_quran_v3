@@ -1,4 +1,4 @@
-import "package:flutter/cupertino.dart";
+import "package:cupertino_ui/cupertino_ui.dart";
 import "package:al_quran_v3/l10n/app_localizations.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 
