@@ -1,0 +1,4 @@
+• Migrated Material and Cupertino imports for Flutter 3.50.1 compatibility
+• Polished responsive setup UI and fixed prayer notification initialization on desktop
+• Tightened Android transport security by disabling cleartext HTTP traffic
+• Aligned F-Droid SDK 37 build scripts and fastlane release metadata
